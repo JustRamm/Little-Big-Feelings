@@ -11,6 +11,7 @@
 
 import * as Splash from './screens/Splash.js';
 import * as NameEntry from './screens/NameEntry.js';
+import * as EmotionSelect from './screens/EmotionSelect.js';
 import * as LevelSelect from './screens/LevelSelect.js';
 import * as Tutorial from './screens/Tutorial.js';
 import * as Game from './screens/Game.js';
@@ -24,7 +25,7 @@ const app = document.getElementById('app');
 
 app.insertAdjacentHTML('beforeend', /* html */`
     <div class="game-background">
-        <img src="/assets/background/game_bg.svg" alt="" aria-hidden="true">
+        <img src="assets/background/game_bg.svg" alt="" aria-hidden="true">
     </div>
 `);
 
@@ -32,6 +33,7 @@ app.insertAdjacentHTML('beforeend', /* html */`
 [
     Splash,
     NameEntry,
+    EmotionSelect,
     LevelSelect,
     Tutorial,
     Game,
@@ -46,6 +48,7 @@ app.insertAdjacentHTML('beforeend', /* html */`
 const SCREEN_MAP = {
     splash: document.getElementById('screen-splash'),
     nameEntry: document.getElementById('screen-name'),
+    emotionSelect: document.getElementById('screen-emotion'),
     levelSelect: document.getElementById('screen-level'),
     tutorial: document.getElementById('screen-tutorial'),
     game: document.getElementById('screen-game'),
@@ -56,6 +59,7 @@ const SCREEN_MAP = {
 // Maps logical key → module (for onShow hook)
 const SCREEN_MODULES = {
     nameEntry: NameEntry,
+    emotionSelect: EmotionSelect,
     levelSelect: LevelSelect,
     settings: Settings,
 };
@@ -92,6 +96,8 @@ function onMatchContinue() {
 Splash.init({ navigate });
 
 NameEntry.init({ navigate });
+
+EmotionSelect.init({ navigate });
 
 LevelSelect.init({ navigate });
 

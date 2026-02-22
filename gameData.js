@@ -1,280 +1,274 @@
 // ============================================================
-//  gameData.js — Card Definitions based on "Recharge Without Charge" (Mind Empowered)
+//  gameData.js — Structured Emotion Data (v3)
 //
 //  Content sourced entirely from the PDF:
 //  "Recharge Without Charge.pptx (1).pdf" by Mind Empowered
-//
-//  Card pairs = EMOTION (feeling card) matched with COPING ACTION (strategy card)
-//  All 12 pairs cover the full content of the source material.
 // ============================================================
 
-/**
- * Full card pool — 12 pairs (24 cards).
- * Content sourced from "Recharge Without Charge" by Mind Empowered.
- *
- * Match pattern: emotion/trigger cards ↔ coping/action cards
+/** 
+ * Level configuration 
+ * Pairs count determines how many pairs are picked from the emotion's pool.
  */
-export const ALL_CARDS = [
-
-    // ── PAIR 1: Anger → Walk Away & Cool Down ──────────────────
-    // Source: Page 4 (I'm Angry! bubbles) + Page 6 (Feeling Angry checklist)
-    {
-        id: 'emotion-anger',
-        matchId: 'action-walk-away',
-        image: '/assets/emotion/angry_monster_card.svg',
-        type: 'emotion',
-        name: 'Feeling Angry',
-        label: 'Emotion',
-        description: "Anger is here to fight against problems. It's okay to feel angry — but do not hurt yourself, others, or property."
-    },
-    {
-        id: 'action-walk-away',
-        matchId: 'emotion-anger',
-        image: '/assets/action_match/calm_child_card.svg',
-        type: 'action',
-        name: 'Walk Away & Breathe',
-        label: 'Coping Action',
-        description: "Walk away and cool down. Take steady breaths, focus on exhaling slowly. Count to 20 until you feel calmer."
-    },
-
-    // ── PAIR 2: Sadness → Write & Express ──────────────────────
-    // Source: Page 8 (I'm Sad! bubbles) + Page 10 (When You Feel Sad)
-    {
-        id: 'emotion-sadness',
-        matchId: 'action-write-express',
-        image: '/assets/emotion_match/sad_child_card.svg',
-        type: 'emotion',
-        name: 'Feeling Sad',
-        label: 'Emotion',
-        description: "Sadness connects us with those we love. Acknowledge your feelings — it's okay to say 'I am sad' without shame."
-    },
-    {
-        id: 'action-write-express',
-        matchId: 'emotion-sadness',
-        image: '/assets/action_match/talk_adult_card.svg',
-        type: 'action',
-        name: 'Write & Express',
-        label: 'Coping Action',
-        description: "Write yourself a letter. Call up a friend. Listen to happy songs. Look at the big picture — you will be okay!"
-    },
-
-    // ── PAIR 3: Fear / Anxiety → Brave Affirmations ────────────
-    // Source: Page 11 (Anxiety Presents Itself) + Page 12 (What to Tell Myself When Anxious)
-    {
-        id: 'emotion-anxiety',
-        matchId: 'action-affirmations',
-        image: '/assets/trigger/scared_dark_card.svg',
-        type: 'emotion',
-        name: 'Feeling Anxious',
-        label: 'Emotion',
-        description: "Fear protects us from danger. Anxiety can show up as difficulty sleeping, avoiding activities, or feeling worried. These feelings are normal."
-    },
-    {
-        id: 'action-affirmations',
-        matchId: 'emotion-anxiety',
-        image: '/assets/action_match/brave_lion_card.svg',
-        type: 'action',
-        name: 'Brave Affirmations',
-        label: 'Coping Action',
-        description: "Tell yourself: 'This feeling won't last forever.' 'I have survived tough times before.' 'My bravery is stronger than my fear.' I GOT THIS!"
-    },
-
-    // ── PAIR 4: Loneliness → Connect & Self-Care ───────────────
-    // Source: Page 14 (10 Signs You Are Lonely) + Page 15 (Dealing with Loneliness)
-    {
-        id: 'emotion-loneliness',
-        matchId: 'action-connect',
-        image: '/assets/trigger/lonely_card.svg',
-        type: 'emotion',
-        name: 'Feeling Lonely',
-        label: 'Emotion',
-        description: "Signs of loneliness: feeling tired all the time, avoiding activities, feeling hopeless. You are not alone — it's okay to reach out!"
-    },
-    {
-        id: 'action-connect',
-        matchId: 'emotion-loneliness',
-        image: '/assets/action_match/hug_card.svg',
-        type: 'action',
-        name: 'Connect & Self-Care',
-        label: 'Coping Action',
-        description: "Practice self-care. Talk to someone. Keep busy with fun activities. Volunteer. Adopt a pet. Create a support system."
-    },
-
-    // ── PAIR 5: Stress → Positive Coping ───────────────────────
-    // Source: Page 3 (Dealing with Stress) + Page 13 (Stressful Day To-Do List)
-    {
-        id: 'emotion-stress',
-        matchId: 'action-positive-coping',
-        image: '/assets/emotion/worried_child_card.svg',
-        type: 'emotion',
-        name: 'Feeling Stressed',
-        label: 'Emotion',
-        description: "Stress is real! There are two ways to cope: Positive coping makes you feel better for a LONGER time. Choose wisely!"
-    },
-    {
-        id: 'action-positive-coping',
-        matchId: 'emotion-stress',
-        image: '/assets/action_match/celebrate_dance_card.svg',
-        type: 'action',
-        name: 'Positive Coping',
-        label: 'Coping Action',
-        description: "Call a friend. Go outside. Listen to happy tunes. Slow down. Eat something healthy. Be your own cheerleader. Don't overbook yourself!"
-    },
-
-    // ── PAIR 6: Frustration → Take a Break ─────────────────────
-    // Source: Page 4 (Anger triggers: 'I lose at a game') + Page 6 (Take a Break)
-    {
-        id: 'emotion-frustration',
-        matchId: 'action-take-break',
-        image: '/assets/emotion/frustrated_face_card.svg',
-        type: 'emotion',
-        name: 'Feeling Frustrated',
-        label: 'Emotion',
-        description: "Frustration happens when things go wrong or feel unfair. Maybe you lost a game, got a bad grade, or couldn't finish something. Pause — it's okay."
-    },
-    {
-        id: 'action-take-break',
-        matchId: 'emotion-frustration',
-        image: '/assets/action_match/take_break_card.svg',
-        type: 'action',
-        name: 'Take a Break',
-        label: 'Coping Action',
-        description: "Take a time out. Scribble on paper, then rip it up. Push against the wall then relax. Move, exercise, stretch or play a sport."
-    },
-
-    // ── PAIR 7: Joy / Pride → Celebrate ────────────────────────
-    // Source: Page 2 (8 Basic Emotions: Joy = 'to remind what is important') + Page 10
-    {
-        id: 'emotion-joy',
-        matchId: 'action-celebrate',
-        image: '/assets/trigger/pride_trophy_card.svg',
-        type: 'emotion',
-        name: 'Feeling Joyful',
-        label: 'Emotion',
-        description: "Joy reminds us what is important! It's one of the 8 basic emotions. When you feel joyful, cherish and share it — joy grows when you spread it!"
-    },
-    {
-        id: 'action-celebrate',
-        matchId: 'emotion-joy',
-        image: '/assets/action_match/cheer_clap_card.svg',
-        type: 'action',
-        name: 'Celebrate!',
-        label: 'Coping Action',
-        description: "Celebrate what's working! Compliment yourself. Treat yourself. Wear something comfy. Remember how far you have come. Be your own cheerleader!"
-    },
-
-    // ── PAIR 8: Being Overwhelmed → Circle of Control ──────────
-    // Source: Page 7 (Reactive vs Proactive / Circle of Concern vs Circle of Control)
-    {
-        id: 'emotion-overwhelmed',
-        matchId: 'action-circle-control',
-        image: '/assets/trigger/happy_letter_card.svg',
-        type: 'emotion',
-        name: 'Feeling Overwhelmed',
-        label: 'Emotion',
-        description: "When everything feels too much, we spend time on things we can't control. This drains our energy and makes us reactive."
-    },
-    {
-        id: 'action-circle-control',
-        matchId: 'emotion-overwhelmed',
-        image: '/assets/action_match/calm_child_card.svg',
-        type: 'action',
-        name: 'Focus on Your Circle',
-        label: 'Coping Action',
-        description: "Focus only on your Circle of Control: what you eat, how you act, where you learn, how you react. Let go of things outside your control."
-    },
-
-    // ── PAIR 9: Shame / Guilt → Accept Your Feelings ───────────
-    // Source: Page 18 (It's OK to Feel: Ashamed, Guilty) + Page 9 (How to Accept Sadness)
-    {
-        id: 'emotion-shame',
-        matchId: 'action-accept-feelings',
-        image: '/assets/trigger/broken_robot_card.svg',
-        type: 'emotion',
-        name: 'Feeling Ashamed',
-        label: 'Emotion',
-        description: "Feeling ashamed or guilty is human. Everybody feels this way sometimes. It doesn't make you weak — it makes you human."
-    },
-    {
-        id: 'action-accept-feelings',
-        matchId: 'emotion-shame',
-        image: '/assets/emotion_match/sad_child_card.svg',
-        type: 'action',
-        name: 'Accept Your Feelings',
-        label: 'Coping Action',
-        description: "Step 1: Acknowledge your feelings. Step 2: Accept they are normal. Step 3: Recognize that feelings pass with time. 'I will be okay. I can make this better!'"
-    },
-
-    // ── PAIR 10: Anger at Others → Use I-Messages ──────────────
-    // Source: Page 6 (USE I-MESSAGES) + Page 4 (anger trigger: being treated disrespectfully)
-    {
-        id: 'emotion-disrespect',
-        matchId: 'action-i-messages',
-        image: '/assets/emotion/angry_monster_card.svg',
-        type: 'emotion',
-        name: 'Feeling Disrespected',
-        label: 'Emotion',
-        description: "It's hard when someone is mean, interrupts you, yells, or breaks a promise. These are real triggers of anger and hurt."
-    },
-    {
-        id: 'action-i-messages',
-        matchId: 'emotion-disrespect',
-        image: '/assets/action_match/talk_adult_card.svg',
-        type: 'action',
-        name: 'Use I-Messages',
-        label: 'Coping Action',
-        description: "Use I-Messages: say what you need and how you want to be treated. Example: 'I feel hurt when... I need...' This is calm, clear communication."
-    },
-
-    // ── PAIR 11: Envy / Jealousy → Mindful Observation ─────────
-    // Source: Page 18 (It's OK to Feel: Jealous, Envious) + Page 17 (A-Z: Observe, Meditate)
-    {
-        id: 'emotion-jealousy',
-        matchId: 'action-mindfulness',
-        image: '/assets/trigger/worried_feeling_card.svg',
-        type: 'emotion',
-        name: 'Feeling Jealous',
-        label: 'Emotion',
-        description: "Jealousy and envy are normal emotions. It's okay to feel them. Name the emotion — just saying 'I feel jealous' can reduce its power."
-    },
-    {
-        id: 'action-mindfulness',
-        matchId: 'emotion-jealousy',
-        image: '/assets/action_match/mindfulness_card.svg',
-        type: 'action',
-        name: 'Mindful Observation',
-        label: 'Coping Action',
-        description: "Use mindfulness techniques. Observe your feelings. Meditate. Question your thoughts — thoughts and emotions aren't facts. 'I am safe right now.'"
-    },
-
-    // ── PAIR 12: Low Self-Worth → Positive Affirmations ─────────
-    // Source: Page 19 (You are Braver/Stronger/Smarter) + Page 12 (Anxious affirmations)
-    {
-        id: 'emotion-low-worth',
-        matchId: 'action-self-affirmation',
-        image: '/assets/trigger/scared_dark_card.svg',
-        type: 'emotion',
-        name: 'Feeling Not Enough',
-        label: 'Emotion',
-        description: "Sometimes we feel like we're not good enough, not smart enough, or not loved enough. Anticipation and trust are also emotions — look forward with hope!"
-    },
-    {
-        id: 'action-self-affirmation',
-        matchId: 'emotion-low-worth',
-        image: '/assets/action_match/self_affirmation_card.svg',
-        type: 'action',
-        name: 'You Are Enough',
-        label: 'Coping Action',
-        description: "Remember: You are BRAVER than you believe. STRONGER than you seem. SMARTER than you think. AND LOVED more than you know. — Mind Empowered"
-    },
-];
-
-/** Level configuration — sourced from "Recharge Without Charge" pedagogy structure */
 export const LEVELS = {
-    // Easy: 3 pairs — core 3 emotions (Anger, Sadness, Anxiety)
-    1: { pairs: 3, time: 99999, label: 'Easy', peekDuration: 3000, peekUses: 3 },
-    // Medium: 6 pairs — adds Loneliness, Stress, Frustration
-    2: { pairs: 6, time: 99999, label: 'Medium', peekDuration: 2000, peekUses: 2 },
-    // Hard: all 12 pairs — full "Recharge Without Charge" content
-    3: { pairs: 12, time: 99999, label: 'Hard', peekDuration: 1000, peekUses: 1 },
+    1: { pairs: 3, time: 99999, label: 'Beginner', peekDuration: 3000, peekUses: 3, icon: 'assets/ui/level_1.svg' },
+    2: { pairs: 6, time: 99999, label: 'Intermediate', peekDuration: 2000, peekUses: 2, icon: 'assets/ui/level_2.svg' },
+    3: { pairs: 10, time: 99999, label: 'Expert', peekDuration: 1000, peekUses: 1, icon: 'assets/ui/level_3.svg' },
 };
+
+/**
+ * Emotion Definitions and their specific card pools.
+ * Each pool contains up to 12 pairs.
+ */
+export const EMOTIONS_DATA = {
+    anger: {
+        id: 'anger',
+        name: 'Anger',
+        color: '#FF5252',
+        icon: 'assets/emotion/angry_monster_card.svg',
+        description: 'Anger helps us fight against problems. It is okay to feel angry, but do not hurt yourself or others.',
+        pairs: [
+            {
+                emotion: { id: 'a1-e', name: 'Feeling Angry', desc: 'Anger is a signal to fight problems.', img: 'assets/emotion/angry_monster_card.svg' },
+                action: { id: 'a1-a', name: 'Walk Away', desc: 'Step away to cool down your fire.', img: 'assets/action_match/calm_child_card.svg' }
+            },
+            {
+                emotion: { id: 'a2-e', name: 'Losing a Game', desc: 'It feels unfair when you dont win.', img: 'assets/emotion/frustrated_face_card.svg' },
+                action: { id: 'a2-a', name: 'Take a Break', desc: 'Use a stress ball to stay calm.', img: 'assets/action_match/take_break_card.svg' }
+            },
+            {
+                emotion: { id: 'a3-e', name: 'Being Interrupted', desc: 'It is hard when people dont listen.', img: 'assets/trigger/worried_feeling_card.svg' },
+                action: { id: 'a3-a', name: 'Count to 20', desc: 'Count slowly until you feel calmer.', img: 'assets/ui/level_1.svg' }
+            },
+            {
+                emotion: { id: 'a4-e', name: 'Feeling Exploded', desc: 'When anger feels like too much.', img: 'assets/emotion/angry_monster_card.svg' },
+                action: { id: 'a4-a', name: 'Push the Wall', desc: 'Push a wall or floor, then relax.', img: 'assets/action_match/take_break_card.svg' }
+            },
+            {
+                emotion: { id: 'a5-e', name: 'Treated Unfairly', desc: 'Adults or friends being unfair.', img: 'assets/trigger/worried_feeling_card.svg' },
+                action: { id: 'a5-a', name: 'Use I-Messages', desc: "Say: 'I feel hurt when you...'", img: 'assets/action_match/talk_adult_card.svg' }
+            },
+            {
+                emotion: { id: 'a6-e', name: 'Physical Tension', desc: 'Your body feels tight and hot.', img: 'assets/emotion/angry_monster_card.svg' },
+                action: { id: 'a6-a', name: 'Scribble & Rip', desc: 'Scribble on paper, then rip it up!', img: 'assets/action_match/take_break_card.svg' }
+            },
+            {
+                emotion: { id: 'a7-e', name: 'People Yelling', desc: 'Loud noises can trigger anger.', img: 'assets/trigger/worried_feeling_card.svg' },
+                action: { id: 'a7-a', name: 'Steady Breaths', desc: 'Focus on exhaling slowly.', img: 'assets/action_match/calm_child_card.svg' }
+            },
+            {
+                emotion: { id: 'a8-e', name: 'Waiting Your Turn', desc: 'Impatence can lead to anger.', img: 'assets/trigger/worried_feeling_card.svg' },
+                action: { id: 'a8-a', name: 'Move & Exercise', desc: 'Stretch or play a quick sport.', img: 'assets/action_match/celebrate_dance_card.svg' }
+            },
+            {
+                emotion: { id: 'a9-e', name: 'Broken Promise', desc: 'When someone lies or fails you.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 'a9-a', name: 'Talk it Out', desc: 'Express your hurt with words.', img: 'assets/action_match/talk_adult_card.svg' }
+            },
+            {
+                emotion: { id: 'a10-e', name: 'Angry Rule', desc: 'Never hurt property or things.', img: 'assets/ui/level_2.svg' },
+                action: { id: 'a10-a', name: 'Keep it Safe', desc: 'Protect your surroundings.', img: 'assets/action_match/calm_child_card.svg' }
+            }
+        ]
+    },
+    sadness: {
+        id: 'sadness',
+        name: 'Sadness',
+        color: '#42A5F5',
+        icon: 'assets/emotion_match/sad_child_card.svg',
+        description: 'Sadness connects us with those we love. Acknowledge your feelings — it is okay to be sad.',
+        pairs: [
+            {
+                emotion: { id: 's1-e', name: 'Feeling Sad', desc: 'Connecting with our loved ones.', img: 'assets/emotion_match/sad_child_card.svg' },
+                action: { id: 's1-a', name: 'Write a Letter', desc: 'Write a letter to yourself.', img: 'assets/trigger/happy_letter_card.svg' }
+            },
+            {
+                emotion: { id: 's2-e', name: 'Family Arguing', desc: 'When family members fight.', img: 'assets/trigger/worried_feeling_card.svg' },
+                action: { id: 's2-a', name: 'Call a Friend', desc: 'Talking to a friend helps.', img: 'assets/action_match/talk_adult_card.svg' }
+            },
+            {
+                emotion: { id: 's3-e', name: 'Left Out', desc: 'When people ignore you.', img: 'assets/trigger/lonely_card.svg' },
+                action: { id: 's3-a', name: 'Happy Songs', desc: 'Listen to tunes that cheer you.', img: 'assets/action_match/celebrate_dance_card.svg' }
+            },
+            {
+                emotion: { id: 's4-e', name: 'Something Wrong', desc: 'When plans dont go right.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 's4-a', name: 'Smile at Mirror', desc: 'Give yourself a little smile.', img: 'assets/action_match/brave_lion_card.svg' }
+            },
+            {
+                emotion: { id: 's5-e', name: 'Feeling Unloved', desc: 'Feeling alone or unwanted.', img: 'assets/trigger/lonely_card.svg' },
+                action: { id: 's5-a', name: 'Treat Yourself', desc: 'Do something nice for YOU.', img: 'assets/action_match/self_affirmation_card.svg' }
+            },
+            {
+                emotion: { id: 's6-e', name: 'Losing Something', desc: 'Losing a toy or a friend.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 's6-a', name: 'Take a Nap', desc: 'Resting helps your heart heal.', img: 'assets/action_match/calm_child_card.svg' }
+            },
+            {
+                emotion: { id: 's7-e', name: 'Acknowledge', desc: "Say 'Okay, I am sad'.", img: 'assets/emotion_match/sad_child_card.svg' },
+                action: { id: 's7-a', name: 'Accept it', desc: 'Its normal to feel this way.', img: 'assets/action_match/brave_lion_card.svg' }
+            },
+            {
+                emotion: { id: 's8-e', name: 'Hidden Feelings', desc: 'Dont be ashamed of sadness.', img: 'assets/trigger/worried_feeling_card.svg' },
+                action: { id: 's8-a', name: 'Speak Up', desc: 'Express what you feel.', img: 'assets/action_match/talk_adult_card.svg' }
+            },
+            {
+                emotion: { id: 's9-e', name: 'Big Problems', desc: 'When things feel too huge.', img: 'assets/ui/level_3.svg' },
+                action: { id: 's9-a', name: 'Big Picture', desc: 'Look at the whole world.', img: 'assets/ui/level_1.svg' }
+            },
+            {
+                emotion: { id: 's10-e', name: 'Future Sadness', desc: 'Will I ever be happy?', img: 'assets/trigger/scared_dark_card.svg' },
+                action: { id: 's10-a', name: 'I Will Be Okay', desc: 'This feeling will soon pass.', img: 'assets/action_match/brave_lion_card.svg' }
+            }
+        ]
+    },
+    anxiety: {
+        id: 'anxiety',
+        name: 'Anxiety',
+        color: '#9C27B0',
+        icon: 'assets/trigger/scared_dark_card.svg',
+        description: 'Fear protects us from danger. Anxiety is the body telling us to slow down and stay safe.',
+        pairs: [
+            {
+                emotion: { id: 'x1-e', name: 'Feeling Anxious', desc: 'Fear protecting us from danger.', img: 'assets/trigger/scared_dark_card.svg' },
+                action: { id: 'x1-a', name: 'Self-Talk', desc: 'This wont last forever.', img: 'assets/action_match/brave_lion_card.svg' }
+            },
+            {
+                emotion: { id: 'x2-e', name: 'Avoiding Things', desc: 'Avoiding school or sports.', img: 'assets/trigger/lonely_card.svg' },
+                action: { id: 'x2-a', name: 'Trust Process', desc: 'I dont have to know everything.', img: 'assets/action_match/mindfulness_card.svg' }
+            },
+            {
+                emotion: { id: 'x3-e', name: 'Tummy Ache', desc: 'Pain from feeling worried.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 'x3-a', name: 'Slow Breathing', desc: 'Calm your body down slowly.', img: 'assets/action_match/calm_child_card.svg' }
+            },
+            {
+                emotion: { id: 'x4-e', name: 'Difficulty Sleeping', desc: 'Minds racing at night.', img: 'assets/trigger/scared_dark_card.svg' },
+                action: { id: 'x4-a', name: 'I Am Safe', desc: 'You are safe right now.', img: 'assets/action_match/brave_lion_card.svg' }
+            },
+            {
+                emotion: { id: 'x5-e', name: 'High Expectations', desc: 'Trying to be too perfect.', img: 'assets/trigger/pride_trophy_card.svg' },
+                action: { id: 'x5-a', name: 'Courage', desc: 'My bravery is stronger.', img: 'assets/action_match/brave_lion_card.svg' }
+            },
+            {
+                emotion: { id: 'x6-e', name: 'Feeling Agitated', desc: 'Feeling angry or stuck.', img: 'assets/emotion/angry_monster_card.svg' },
+                action: { id: 'x6-a', name: 'I Got This', desc: 'I can handle this feeling.', img: 'assets/action_match/self_affirmation_card.svg' }
+            },
+            {
+                emotion: { id: 'x7-e', name: 'Worrying Ahead', desc: 'Thinking about what-ifs.', img: 'assets/trigger/worried_feeling_card.svg' },
+                action: { id: 'x7-a', name: 'Mindfulness', desc: 'Thoughts are not facts.', img: 'assets/action_match/mindfulness_card.svg' }
+            },
+            {
+                emotion: { id: 'x8-e', name: 'Cant Focus', desc: 'Struggling to pay attention.', img: 'assets/ui/level_2.svg' },
+                action: { id: 'x8-a', name: 'Slow Down', desc: 'Take it one step at a time.', img: 'assets/action_match/calm_child_card.svg' }
+            },
+            {
+                emotion: { id: 'x9-e', name: 'Uncertainty', desc: 'Not knowing what happens.', img: 'assets/trigger/scared_dark_card.svg' },
+                action: { id: 'x9-a', name: 'Trust Mirror', desc: 'I have survived tough times.', img: 'assets/action_match/brave_lion_card.svg' }
+            },
+            {
+                emotion: { id: 'x10-e', name: 'Heavy Heart', desc: 'Anxiety feels so heavy.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 'x10-a', name: 'Compassion', desc: 'Be kind to your feelings.', img: 'assets/action_match/talk_adult_card.svg' }
+            }
+        ]
+    },
+    loneliness: {
+        id: 'loneliness',
+        name: 'Loneliness',
+        color: '#FFB74D',
+        icon: 'assets/trigger/lonely_card.svg',
+        description: 'You are never truly alone. Loneliness is a sign to connect and practice self-care.',
+        pairs: [
+            {
+                emotion: { id: 'l1-e', name: 'Feeling Lonely', desc: 'Missing a connection.', img: 'assets/trigger/lonely_card.svg' },
+                action: { id: 'l1-a', name: 'Talk to Someone', desc: 'Reach out to a friend.', img: 'assets/action_match/talk_adult_card.svg' }
+            },
+            {
+                emotion: { id: 'l2-e', name: 'Feeling Tired', desc: 'Signs of being too lonely.', img: 'assets/trigger/lonely_card.svg' },
+                action: { id: 'l2-a', name: 'Keep Busy', desc: 'Do something fun you love.', img: 'assets/action_match/celebrate_dance_card.svg' }
+            },
+            {
+                emotion: { id: 'l3-e', name: 'Binge Watching', desc: 'Hiding in screens too long.', img: 'assets/ui/level_2.svg' },
+                action: { id: 'l3-a', name: 'Go Outside', desc: 'See the world and nature.', img: 'assets/background/game_bg.svg' }
+            },
+            {
+                emotion: { id: 'l4-e', name: 'Buying Things', desc: 'Buying stuff wont fill it.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 'l4-a', name: 'Self-Care', desc: 'Take care of your inner self.', img: 'assets/action_match/self_affirmation_card.svg' }
+            },
+            {
+                emotion: { id: 'l5-e', name: 'Feeling Sick', desc: 'Loneliness can hurt bodies.', img: 'assets/trigger/worried_feeling_card.svg' },
+                action: { id: 'l5-a', name: 'Warm Bath', desc: 'A warm bath can help you.', img: 'assets/action_match/calm_child_card.svg' }
+            },
+            {
+                emotion: { id: 'l6-e', name: 'Hopelessness', desc: 'Feeling like it wont end.', img: 'assets/trigger/scared_dark_card.svg' },
+                action: { id: 'l6-a', name: 'Adopt a Pet', desc: 'Pets give great company.', img: 'assets/action_match/hug_card.svg' }
+            },
+            {
+                emotion: { id: 'l7-e', name: 'Inner Critic', desc: 'Mean thoughts in your head.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 'l7-a', name: 'Silence Critic', desc: 'Be your own cheerleader.', img: 'assets/action_match/self_affirmation_card.svg' }
+            },
+            {
+                emotion: { id: 'l8-e', name: 'Staying Alone', desc: 'Afraid of new people.', img: 'assets/trigger/lonely_card.svg' },
+                action: { id: 'l8-a', name: 'Volunteer', desc: 'Help others to feel connected.', img: 'assets/action_match/talk_adult_card.svg' }
+            },
+            {
+                emotion: { id: 'l9-e', name: 'Lack of Contact', desc: 'Missing human touch.', img: 'assets/trigger/lonely_card.svg' },
+                action: { id: 'l9-a', name: 'Support System', desc: 'Create a team of supporters.', img: 'assets/action_match/hug_card.svg' }
+            },
+            {
+                emotion: { id: 'l10-e', name: 'Isolated', desc: 'Staying in your room.', img: 'assets/trigger/lonely_card.svg' },
+                action: { id: 'l10-a', name: 'Comfort Zone', desc: 'Step out and say Hello.', img: 'assets/action_match/talk_adult_card.svg' }
+            }
+        ]
+    },
+    stress: {
+        id: 'stress',
+        name: 'Stress',
+        color: '#66BB6A',
+        icon: 'assets/emotion/worried_child_card.svg',
+        description: 'Stress is real. Positive coping helps you feel better for a longer time!',
+        pairs: [
+            {
+                emotion: { id: 'st1-e', name: 'Feeling Stressed', desc: 'Stress is a part of life.', img: 'assets/emotion/worried_child_card.svg' },
+                action: { id: 'st1-a', name: 'Positive Coping', desc: 'Choose what helps long-term.', img: 'assets/action_match/self_affirmation_card.svg' }
+            },
+            {
+                emotion: { id: 'st2-e', name: 'Feeling Awful', desc: 'Negative coping feels bad.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 'st2-a', name: 'Choose Wise', desc: 'Pick the better path today.', img: 'assets/action_match/brave_lion_card.svg' }
+            },
+            {
+                emotion: { id: 'st3-e', name: 'Overbooked', desc: 'Doing too much at once.', img: 'assets/ui/level_2.svg' },
+                action: { id: 'st3-a', name: 'Slow Down', desc: 'Drop one thing and rest.', img: 'assets/action_match/calm_child_card.svg' }
+            },
+            {
+                emotion: { id: 'st4-e', name: 'Negative Paths', desc: 'Tired and overwhelmed.', img: 'assets/trigger/scared_dark_card.svg' },
+                action: { id: 'st4-a', name: 'Trash Thoughts', desc: 'Throw away bad ideas!', img: 'assets/action_match/take_break_card.svg' }
+            },
+            {
+                emotion: { id: 'st5-e', name: 'Unhealthy Body', desc: 'Stress makes you hungry.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 'st5-a', name: 'Eat Healthy', desc: 'Fuel your body with good.', img: 'assets/ui/level_1.svg' }
+            },
+            {
+                emotion: { id: 'st6-e', name: 'Long Day', desc: 'When you are so busy.', img: 'assets/ui/level_3.svg' },
+                action: { id: 'st6-a', name: 'Wear Comfy', desc: 'Wear your favorite clothes.', img: 'assets/action_match/celebrate_dance_card.svg' }
+            },
+            {
+                emotion: { id: 'st7-e', name: 'Success Check', desc: 'Am I doing enough?', img: 'assets/trigger/pride_trophy_card.svg' },
+                action: { id: 'st7-a', name: 'Celebrate You', desc: 'Celebrate what is working.', img: 'assets/action_match/self_affirmation_card.svg' }
+            },
+            {
+                emotion: { id: 'st8-e', name: 'Small World', desc: 'Feeling so tiny.', img: 'assets/ui/level_1.svg' },
+                action: { id: 'st8-a', name: 'Compliment', desc: 'Give yourself a nice word.', img: 'assets/action_match/self_affirmation_card.svg' }
+            },
+            {
+                emotion: { id: 'st9-e', name: 'Heavy Mind', desc: 'Too many thoughts.', img: 'assets/trigger/worried_feeling_card.svg' },
+                action: { id: 'st9-a', name: 'Drink Tea', desc: 'Warm tea helps you relax.', img: 'assets/action_match/calm_child_card.svg' }
+            },
+            {
+                emotion: { id: 'st10-e', name: 'Feeling Stuck', desc: 'Cant move forward.', img: 'assets/trigger/broken_robot_card.svg' },
+                action: { id: 'st10-a', name: 'Go Outside', desc: 'Fresh air is your friend.', img: 'assets/background/game_bg.svg' }
+            }
+        ]
+    }
+};
+
+/**
+ * Legacy support / fallback pool.
+ * (Will remain for any general logic or testing)
+ */
+export const ALL_CARDS = []; // We populate this if needed or rely on EMOTIONS_DATA

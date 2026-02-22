@@ -6,18 +6,18 @@ import { state } from '../gameState.js';
 import { sounds } from '../utils/sounds.js';
 
 const AVATARS = [
-    '/assets/avatars/avatar_1.svg',
-    '/assets/avatars/avatar_2.svg',
-    '/assets/avatars/avatar_3.svg',
-    '/assets/avatars/avatar_4.svg',
-    '/assets/avatars/avatar_5.svg',
-    '/assets/avatars/avatar_6.svg',
-    '/assets/avatars/avatar_7.svg',
-    '/assets/avatars/avatar_8.svg',
-    '/assets/avatars/avatar_9.svg',
-    '/assets/avatars/avatar_10.svg',
-    '/assets/avatars/avatar_11.svg',
-    '/assets/avatars/avatar_12.svg',
+    'assets/avatars/avatar_1.svg',
+    'assets/avatars/avatar_2.svg',
+    'assets/avatars/avatar_3.svg',
+    'assets/avatars/avatar_4.svg',
+    'assets/avatars/avatar_5.svg',
+    'assets/avatars/avatar_6.svg',
+    'assets/avatars/avatar_7.svg',
+    'assets/avatars/avatar_8.svg',
+    'assets/avatars/avatar_9.svg',
+    'assets/avatars/avatar_10.svg',
+    'assets/avatars/avatar_11.svg',
+    'assets/avatars/avatar_12.svg',
 ];
 
 export function template() {
@@ -140,7 +140,7 @@ export function init({ navigate }) {
         savePlayer(player);
         state.playerName = name;
         state.playerAvatar = selectedAvatar;
-        navigate('levelSelect');
+        navigate('emotionSelect');
     });
 
     // Back (only visible when editing)

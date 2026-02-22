@@ -29,6 +29,118 @@
     --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
     --transition: all 0.3s var(--spring);
+    --emo-color: var(--pink);
+}
+
+/* ============================================================
+   SCREEN: EMOTION SELECT
+   ============================================================ */
+.emotion-select-container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1rem;
+}
+
+.emotion-header h2 {
+    color: var(--pink);
+    margin-bottom: 0.5rem;
+}
+
+.emotion-header p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.emotion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+.emotion-card {
+    position: relative;
+    background: white;
+    border-radius: var(--r-xl);
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 12px 24px var(--shadow);
+    transition: var(--transition);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    height: 100%;
+}
+
+.emotion-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.emotion-card-inner {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.emotion-icon-circle {
+    width: 120px;
+    height: 120px;
+    background: var(--emo-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.emotion-card:hover .emotion-icon-circle {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.emotion-icon-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.emotion-card h3 {
+    margin: 0;
+    color: var(--text);
+    font-size: 2rem;
+}
+
+.emotion-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #666;
+    margin: 0;
+}
+
+.emotion-selection-border {
+    position: absolute;
+    inset: 0;
+    border: 8px solid transparent;
+    border-radius: var(--r-xl);
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.emotion-card:hover .emotion-selection-border {
+    border-color: var(--emo-color);
 }
 
 /* ============================================================
@@ -1330,6 +1442,15 @@ p {
     gap: 1.2rem;
     max-width: 500px;
     width: 100%;
+}
+
+.settings-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .settings-card {

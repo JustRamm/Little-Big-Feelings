@@ -22,6 +22,7 @@ export const state = {
 
     // ── App preferences ───────────────────────────────────────
     soundEnabled: true,
+    selectedEmotion: null, // e.g., 'anger', 'sadness', 'anxiety', etc.
 };
 
 /** Reset all per-round fields. Preserves level, player info, and settings. */

@@ -10,7 +10,7 @@ export function template() {
             
             <div class="breathing-oops-row">
                 <div class="breathing-oops-icon">
-                    <img src="/assets/ui/question.svg" alt="Oops" style="width: 50px;">
+                    <img src="assets/ui/question.svg" alt="Oops" style="width: 50px;">
                 </div>
                 <div class="breathing-header-text">
                     <h2 class="breathing-title">Not a match this time!</h2>
@@ -20,7 +20,7 @@ export function template() {
 
             <div class="breathing-circle-wrap">
                 <div class="breathing-circle" id="breathing-circle">
-                    <img src="/assets/ui/breathe_in.svg" id="breathing-icon" class="breathing-emoji" alt="">
+                    <img src="assets/ui/breathe_in.svg" id="breathing-icon" class="breathing-emoji" alt="">
                 </div>
                 <p class="breathing-phase-text" id="breathing-text">Ready?</p>
             </div>
@@ -47,7 +47,7 @@ export function show(onDone) {
     ctrlBtn.classList.add('breathing-done-hidden');
     text.textContent = "Ready?";
     circle.className = "breathing-circle phase-idle";
-    icon.src = '/assets/ui/breathe_in.svg';
+    icon.src = 'assets/ui/breathe_in.svg';
 
     // Start cycle after a short delay
     setTimeout(() => {
@@ -73,19 +73,19 @@ function startBreatheCycle(circle, text, icon, onCycleDone) {
 
     text.textContent = "Breathe In...";
     circle.className = "breathing-circle phase-expand";
-    icon.src = '/assets/ui/breathe_in.svg';
+    icon.src = 'assets/ui/breathe_in.svg';
 
     setTimeout(() => {
         // 2. HOLD (2s)
         text.textContent = "Hold...";
         circle.className = "breathing-circle phase-hold";
-        icon.src = '/assets/ui/breathe_hold.svg';
+        icon.src = 'assets/ui/breathe_hold.svg';
 
         setTimeout(() => {
             // 3. OUT (4s)
             text.textContent = "Slowly Out...";
             circle.className = "breathing-circle phase-shrink";
-            icon.src = '/assets/ui/breathe_out.svg';
+            icon.src = 'assets/ui/breathe_out.svg';
 
             setTimeout(() => {
                 onCycleDone();

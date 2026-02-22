@@ -2,7 +2,7 @@
 //  screens/Game.js — Screen 4: Game Board + All Card Logic
 // ============================================================
 import { state, resetRound } from '../gameState.js';
-import { ALL_CARDS, LEVELS } from '../gameData.js';
+import { EMOTIONS_DATA, LEVELS } from '../gameData.js';
 import { show as showMatch } from './OverlayMatch.js';
 import { show as showBreathing } from './BreathingBuddy.js';
 import { sounds } from '../utils/sounds.js';
@@ -22,14 +22,19 @@ export function template() {
         <!-- HUD bar -->
         <div class="game-header">
             <button id="btn-home"  class="btn-icon" aria-label="Back to home"  title="Home" type="button">
-                <img src="/assets/ui/home.svg" alt="Home">
+                <img src="assets/ui/home.svg" alt="Home">
             </button>
 
             <div class="hud-stats">
                 <div class="stat-item">
+                    <span class="stat-label">Feeling</span>
+                    <span id="stat-emotion-name" class="stat-value">Anger</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
                     <span class="stat-label">Level</span>
                     <span id="stat-level-wrap" class="stat-value">
-                        <img src="/assets/ui/level_1.svg" alt="" id="stat-level-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 4px;">
+                        <img src="assets/ui/level_1.svg" alt="" id="stat-level-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 4px;">
                         <span id="stat-level-text">Easy</span>
                     </span>
                 </div>
@@ -40,31 +45,26 @@ export function template() {
                         <span id="stat-matched">0</span>/<span id="stat-total">0</span>
                     </span>
                 </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-label">Tries</span>
-                    <span id="stat-attempts" class="stat-value">0</span>
-                </div>
             </div>
 
             <div id="timer-wrap" class="timer-wrap timer-hidden" aria-live="polite">
                 <span class="timer-icon" aria-hidden="true">
-                    <img src="/assets/ui/timer.svg" alt="Timer">
+                    <img src="assets/ui/timer.svg" alt="Timer">
                 </span>
                 <span id="timer-display" class="timer-display">02:00</span>
             </div>
 
             <div class="hud-right-actions">
                 <button id="btn-peek"  class="btn-icon peek-btn" aria-label="Peek at all cards" title="Peek" type="button">
-                    <img src="/assets/ui/peek.svg" alt="Peek">
+                    <img src="assets/ui/peek.svg" alt="Peek">
                     <span class="btn-badge" id="peek-count-badge">0</span>
                 </button>
                 <button id="btn-hint"  class="btn-icon hint-btn" aria-label="Get a hint" title="Hint (max 3)" type="button">
-                    <img src="/assets/ui/hint.svg" alt="Hint">
+                    <img src="assets/ui/hint.svg" alt="Hint">
                     <span class="btn-badge" id="hint-count-badge">3</span>
                 </button>
                 <button id="btn-reset" class="btn-icon" aria-label="Reset game" title="Reset" type="button">
-                    <img src="/assets/ui/reset.svg" alt="Reset">
+                    <img src="assets/ui/reset.svg" alt="Reset">
                 </button>
             </div>
         </div>
@@ -99,15 +99,22 @@ function updateHUD() {
     const total = state.gameCards.length / 2;
     const pct = total > 0 ? Math.round((pairs / total) * 100) : 0;
 
-    document.getElementById('stat-attempts').textContent = state.totalAttempts;
     document.getElementById('stat-matched').textContent = pairs;
     document.getElementById('stat-total').textContent = total;
 
-    // Level label
+    // Emotion and Level label
+    const emoNameEl = document.getElementById('stat-emotion-name');
     const lvlText = document.getElementById('stat-level-text');
     const lvlIcon = document.getElementById('stat-level-icon');
+
+    const emoData = EMOTIONS_DATA[state.selectedEmotion] || EMOTIONS_DATA.anger;
+    if (emoNameEl) {
+        emoNameEl.textContent = emoData.name;
+        emoNameEl.style.color = emoData.color;
+    }
+
     if (lvlText) lvlText.textContent = LEVELS[state.currentLevel].label;
-    if (lvlIcon) lvlIcon.src = `/assets/ui/level_${state.currentLevel}.svg`;
+    if (lvlIcon) lvlIcon.src = `assets/ui/level_${state.currentLevel}.svg`;
 
     // Progress bar
     const fill = document.getElementById('progress-bar-fill');
@@ -125,7 +132,6 @@ function updateHUD() {
         const left = maxPeeks - state.peeksUsed;
         peekBtn.disabled = left <= 0;
         if (peekBadge) peekBadge.textContent = left;
-        peekBtn.title = left <= 0 ? 'No more peeks!' : `Peek (${left} left)`;
     }
 
     // Disable hint after 3 uses
@@ -135,7 +141,6 @@ function updateHUD() {
         const left = 3 - state.hintsUsed;
         hintBtn.disabled = left <= 0;
         if (hintBadge) hintBadge.textContent = left;
-        hintBtn.title = left <= 0 ? 'No more hints!' : `Hint (${left} left)`;
     }
 }
 
@@ -177,13 +182,13 @@ function createCardEl(cardData) {
     card.dataset.id = cardData.id;
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', 'Hidden emotion card — click to flip');
+    card.setAttribute('aria-label', `Emotion card: ${cardData.name}`);
 
     card.innerHTML = /* html */`
         <div class="card-inner">
             <div class="card-face card-back">
                 <div class="card-back-pattern">
-                    <img src="/assets/ui/question.svg" alt="Hidden">
+                    <img src="assets/ui/question.svg" alt="Hidden">
                 </div>
             </div>
             <div class="card-face card-front">
@@ -284,7 +289,6 @@ function _giveHint() {
     [el1, el2].forEach(el => el?.classList.add('hint-glow'));
 
     state.hintsUsed++;
-    state.totalAttempts++; // counts as an extra attempt (mild penalty)
     sounds.click();
     updateHUD();
 
@@ -300,7 +304,6 @@ function _peekAll() {
 
     sounds.click();
     state.peeksUsed++;
-    state.totalAttempts += 2; // heavier penalty for peeking
     state.isLocked = true; // prevent interaction while peeking
     updateHUD();
 
@@ -333,6 +336,7 @@ export function startGame() {
 
     const cfg = LEVELS[state.currentLevel];
     const board = document.getElementById('game-board');
+    if (!board) return;
     board.innerHTML = '';
 
     // Remove any previous grid-col class and set the right one
@@ -340,14 +344,32 @@ export function startGame() {
     const cols = cfg.pairs <= 3 ? 3 : cfg.pairs <= 6 ? 4 : 6;
     board.classList.add(GRID_COLS[cols]);
 
-    // Pick random pairs
-    const evens = ALL_CARDS.filter((_, i) => i % 2 === 0);
-    const selected = shuffle(evens).slice(0, cfg.pairs);
-    selected.forEach(base => {
-        state.gameCards.push(base);
-        const partner = ALL_CARDS.find(c => c.id === base.matchId);
-        if (partner) state.gameCards.push(partner);
+    // Pick pairs from the selected emotion's pool
+    const emoData = EMOTIONS_DATA[state.selectedEmotion] || EMOTIONS_DATA.anger;
+    const availablePairs = shuffle(emoData.pairs).slice(0, cfg.pairs);
+
+    state.gameCards = [];
+    availablePairs.forEach(pair => {
+        state.gameCards.push({
+            id: pair.emotion.id,
+            matchId: pair.action.id,
+            image: pair.emotion.img,
+            type: 'emotion',
+            name: pair.emotion.name,
+            label: 'Emotion',
+            description: pair.emotion.desc
+        });
+        state.gameCards.push({
+            id: pair.action.id,
+            matchId: pair.emotion.id,
+            image: pair.action.img,
+            type: 'action',
+            name: pair.action.name,
+            label: 'Coping Action',
+            description: pair.action.desc
+        });
     });
+
     state.gameCards = shuffle(state.gameCards);
 
     state.gameCards.forEach(card => board.appendChild(createCardEl(card)));
@@ -364,7 +386,7 @@ export function init({ navigate, onVictory }) {
     document.getElementById('btn-home').addEventListener('click', () => {
         sounds.click();
         clearInterval(state.timerInterval);
-        navigate('splash');
+        navigate('emotionSelect');
     });
 
     document.getElementById('btn-reset').addEventListener('click', () => {

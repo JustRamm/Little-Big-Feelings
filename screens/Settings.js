@@ -1,7 +1,7 @@
 // ============================================================
 //  screens/Settings.js — Screen: App Settings
 // ============================================================
-import { loadSettings, saveSettings, loadPlayer, clearAll } from '../utils/storage.js';
+import { loadSettings, saveSettings, loadPlayer, clearAll, resetScores } from '../utils/storage.js';
 import { sounds } from '../utils/sounds.js';
 import { state } from '../gameState.js';
 
@@ -10,11 +10,12 @@ export function template() {
     <section id="screen-settings" class="screen" aria-label="Settings">
         
         <div class="settings-container">
-            <button id="btn-settings-back" class="btn-icon settings-back-btn" aria-label="Back">
-                <img src="/assets/ui/arrow_next.svg" alt="Back" style="transform: rotate(180deg)">
-            </button>
-
-            <h2>Settings</h2>
+            <div class="settings-header">
+                <button id="btn-settings-back" class="btn-icon settings-back-btn" aria-label="Back" type="button">
+                    <img src="assets/ui/arrow_next.svg" alt="Back" style="transform: rotate(180deg); width: 24px;">
+                </button>
+                <h2 style="margin: 0;">Settings</h2>
+            </div>
 
             <!-- Player Profile Card -->
             <div class="settings-card">
@@ -32,7 +33,7 @@ export function template() {
                 <div class="settings-row">
                     <div class="settings-label">
                         <span class="settings-icon">
-                            <img src="/assets/ui/sound_on.svg" alt="" id="sound-icon-preview">
+                            <img src="assets/ui/sound_on.svg" alt="" id="sound-icon-preview">
                         </span>
                         <div class="settings-label-text">
                             <div class="settings-label-title">Sound Effects</div>
@@ -50,7 +51,7 @@ export function template() {
                 <div class="settings-row">
                     <div class="settings-label">
                         <span class="settings-icon">
-                            <img src="/assets/ui/delete.svg" alt="">
+                            <img src="assets/ui/delete.svg" alt="">
                         </span>
                         <div class="settings-label-text">
                             <div class="settings-label-title">Reset Progress</div>
@@ -73,7 +74,7 @@ export function onShow() {
     const nameEl = document.getElementById('settings-name');
 
     if (avatarEl) {
-        const avatar = player?.avatar || '/assets/avatars/avatar_1.svg';
+        const avatar = player?.avatar || 'assets/avatars/avatar_1.svg';
         avatarEl.innerHTML = `<img src="${avatar}" alt="" style="width: 100%; height: 100%;">`;
     }
     if (nameEl) nameEl.textContent = player?.name ?? 'Player';
@@ -116,6 +117,7 @@ export function init({ navigate }) {
     document.getElementById('btn-clear-data').addEventListener('click', () => {
         if (!confirm('This will delete your name, avatar, and all level scores. Sure?')) return;
         clearAll();
+        resetScores();
         state.playerName = 'Player';
         state.playerAvatar = '🐱';
         sounds.setEnabled(true);
@@ -131,6 +133,6 @@ function _updateSoundUI(on) {
         btn.setAttribute('aria-checked', on);
     }
     if (iconPreview) {
-        iconPreview.src = on ? '/assets/ui/sound_on.svg' : '/assets/ui/sound_off.svg';
+        iconPreview.src = on ? 'assets/ui/sound_on.svg' : 'assets/ui/sound_off.svg';
     }
 }

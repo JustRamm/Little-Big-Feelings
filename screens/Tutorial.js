@@ -15,7 +15,7 @@ export function template() {
                 <div class="tutorial-step">
                     <div class="step-num">1</div>
                     <div class="step-icon">
-                        <img src="/assets/ui/question.svg" alt="">
+                        <img src="assets/ui/question.svg" alt="">
                     </div>
                     <p>Flip a card to reveal an <strong>Emotion</strong> — like Anger, Sadness, or Anxiety.</p>
                 </div>
@@ -23,7 +23,7 @@ export function template() {
                 <div class="tutorial-step">
                     <div class="step-num">2</div>
                     <div class="step-icon">
-                        <img src="/assets/ui/stat_pairs.svg" alt="">
+                        <img src="assets/ui/stat_pairs.svg" alt="">
                     </div>
                     <p>Find its matching <strong>Coping Action</strong> — a healthy tool to handle that feeling!</p>
                 </div>
@@ -31,7 +31,7 @@ export function template() {
                 <div class="tutorial-step">
                     <div class="step-num">3</div>
                     <div class="step-icon">
-                        <img src="/assets/ui/star_gold.svg" alt="">
+                        <img src="assets/ui/star_gold.svg" alt="">
                     </div>
                     <p>Match them all to earn <strong>Stars</strong> and discover your emotional toolkit!</p>
                 </div>

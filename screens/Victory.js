@@ -16,7 +16,7 @@ const MESSAGES = {
 function renderStars(count) {
     let html = '';
     for (let i = 0; i < 3; i++) {
-        const src = i < count ? '/assets/ui/star_gold.svg' : '/assets/ui/star_grey.svg';
+        const src = i < count ? 'assets/ui/star_gold.svg' : 'assets/ui/star_grey.svg';
         html += `<img src="${src}" class="ui-star" alt="Star">`;
     }
     return html;
@@ -38,21 +38,21 @@ export function template() {
             <div class="victory-stats-grid">
                 <div class="victory-stat">
                     <div class="victory-stat-icon">
-                        <img src="/assets/ui/stat_pairs.svg" alt="Pairs">
+                        <img src="assets/ui/stat_pairs.svg" alt="Pairs">
                     </div>
                     <div class="victory-stat-value" id="victory-pairs">0</div>
                     <div class="victory-stat-label">Pairs Found</div>
                 </div>
                 <div class="victory-stat">
                     <div class="victory-stat-icon">
-                        <img src="/assets/ui/stat_tries.svg" alt="Tries">
+                        <img src="assets/ui/stat_tries.svg" alt="Tries">
                     </div>
                     <div class="victory-stat-value" id="victory-attempts">0</div>
                     <div class="victory-stat-label">Total Tries</div>
                 </div>
                 <div class="victory-stat">
                     <div class="victory-stat-icon">
-                        <img src="/assets/ui/stat_level.svg" alt="Level">
+                        <img src="assets/ui/stat_level.svg" alt="Level">
                     </div>
                     <div class="victory-stat-value" id="victory-level">Easy</div>
                     <div class="victory-stat-label">Level</div>
@@ -66,11 +66,13 @@ export function template() {
             <div class="victory-buttons">
                 <button id="btn-next-level" class="btn-primary"   type="button">
                     <span>Next Level</span>
-                    <img src="/assets/ui/arrow_next.svg" alt="" class="btn-img-icon">
+                    <img src="assets/ui/arrow_next.svg" alt="" class="btn-img-icon">
                 </button>
-                <button id="btn-play-again" class="btn-secondary" type="button">
-                    <span>Choose Level</span>
-                    <img src="/assets/ui/folder.svg" alt="" class="btn-img-icon">
+                <button id="btn-change-level" class="btn-secondary" type="button">
+                    <span>Try Another Level</span>
+                </button>
+                <button id="btn-change-emotion" class="btn-secondary" type="button">
+                    <span>New Emotion</span>
                 </button>
             </div>
         </div>
@@ -143,8 +145,13 @@ export function init({ navigate, startGame }) {
         }
     });
 
-    document.getElementById('btn-play-again').addEventListener('click', () => {
+    document.getElementById('btn-change-level').addEventListener('click', () => {
         sounds.click();
         navigate('levelSelect');
+    });
+
+    document.getElementById('btn-change-emotion').addEventListener('click', () => {
+        sounds.click();
+        navigate('emotionSelect');
     });
 }

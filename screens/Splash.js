@@ -10,7 +10,7 @@ export function template() {
     <section id="screen-splash" class="screen active" aria-label="Splash Screen">
         <div class="splash-content">
             <div class="logo-container">
-                <img src="/assets/brand/logo.svg" alt="Emo Charge Logo" class="game-logo bounce-anim">
+                <img src="assets/brand/logo.svg" alt="Emo Charge Logo" class="game-logo bounce-anim">
             </div>
             <h1 class="game-title">Emo<br><span>Charge</span></h1>
             <button id="btn-play" class="btn-primary" type="button">Start Your Journey</button>

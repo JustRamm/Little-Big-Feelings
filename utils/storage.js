@@ -4,31 +4,33 @@
 
 const PFX = 'emotion-match-';
 
-function set(key, val) {
-    localStorage.setItem(PFX + key, JSON.stringify(val));
+function set(key, val, persistent = true) {
+    const storage = persistent ? localStorage : sessionStorage;
+    storage.setItem(PFX + key, JSON.stringify(val));
 }
-function get(key) {
-    try { return JSON.parse(localStorage.getItem(PFX + key)); }
+function get(key, persistent = true) {
+    const storage = persistent ? localStorage : sessionStorage;
+    try { return JSON.parse(storage.getItem(PFX + key)); }
     catch { return null; }
 }
 
 // ── Player profile ───────────────────────────────────────────
-export function savePlayer(data) { set('player', data); }
-export function loadPlayer() { return get('player'); }
+export function savePlayer(data) { set('player', data, false); }
+export function loadPlayer() { return get('player', false); }
 
-// ── Per-level best scores ────────────────────────────────────
+// ── Per-level best scores (In-memory only, lost on refresh) ───
+let memoryScores = {};
+
 /** @param {number} level  @param {{ stars:number, attempts:number }} data */
 export function saveScore(level, data) {
-    const all = loadScores();
-    // Only overwrite if the new score is better (more stars, or same stars fewer attempts)
-    const prev = all[level];
+    const prev = memoryScores[level];
     if (!prev || data.stars > prev.stars ||
         (data.stars === prev.stars && data.attempts < prev.attempts)) {
-        all[level] = data;
-        set('scores', all);
+        memoryScores[level] = data;
     }
 }
-export function loadScores() { return get('scores') ?? {}; }
+export function loadScores() { return memoryScores; }
+export function resetScores() { memoryScores = {}; }
 
 // ── App settings ─────────────────────────────────────────────
 export function saveSettings(data) { set('settings', data); }

@@ -12,7 +12,7 @@ export function template() {
             <div class="match-visuals">
                 <div class="matched-pair">
                     <img id="match-img-1" src="" alt="First matched card">
-                    <img src="/assets/ui/heart.svg" alt="" class="plus-icon-img">
+                    <img src="assets/ui/heart.svg" alt="" class="plus-icon-img">
                     <img id="match-img-2" src="" alt="Second matched card">
                 </div>
             </div>
