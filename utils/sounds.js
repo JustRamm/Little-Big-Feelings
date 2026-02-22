@@ -62,11 +62,15 @@ export const sounds = {
             _musicAudio.loop = true;
             _musicAudio.volume = 0.4;
 
+            // Silently catch 404 (file not found) and fall back to synth
+            _musicAudio.onerror = () => {
+                this._startSynthBGM();
+            };
+
             const playPromise = _musicAudio.play();
             if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log("Audio file not found or blocked, using synthesized backup.");
-                    // Priority 2: Synthesized "Chill Loop"
+                playPromise.catch(_error => {
+                    // Autoplay blocked or file missing — use synthesized backup
                     this._startSynthBGM();
                 });
             }
