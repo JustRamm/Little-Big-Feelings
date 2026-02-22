@@ -1,77 +1,85 @@
 // ============================================================
-//  main.js — App Orchestrator
+//  main.js — App Orchestrator  (v2)
 //
 //  Responsibilities:
 //    1. Import every screen module
 //    2. Inject each screen's HTML into #app
-//    3. Wire navigate() so screens can switch each other
-//    4. Call each screen's init() with its required deps
-//    5. Start on the Splash screen
+//    3. Own the navigate() function + onShow hook pattern
+//    4. Wire every screen's init() with the deps it needs
+//    5. Boot: splash screen
 // ============================================================
 
 import * as Splash from './screens/Splash.js';
+import * as NameEntry from './screens/NameEntry.js';
 import * as LevelSelect from './screens/LevelSelect.js';
 import * as Tutorial from './screens/Tutorial.js';
 import * as Game from './screens/Game.js';
 import * as OverlayMatch from './screens/OverlayMatch.js';
-import * as OverlayWrong from './screens/OverlayWrong.js';
+import * as BreathingBuddy from './screens/BreathingBuddy.js';
 import * as Victory from './screens/Victory.js';
+import * as Settings from './screens/Settings.js';
 
-// ── 1. Mount all screen templates into #app ──────────────────
+// ── 1. Mount all templates into #app ─────────────────────────
 const app = document.getElementById('app');
 
-// Static background (not a screen module — just markup)
 app.insertAdjacentHTML('beforeend', /* html */`
     <div class="game-background">
         <img src="/assets/background/game_bg.svg" alt="" aria-hidden="true">
     </div>
 `);
 
-// Screens & overlays in DOM order
+// Screens in DOM order (overlays last so they layer on top)
 [
     Splash,
+    NameEntry,
     LevelSelect,
     Tutorial,
     Game,
-    OverlayMatch,   // overlays come after screens so they sit on top
-    OverlayWrong,
+    Settings,
+    OverlayMatch,
+    BreathingBuddy,
     Victory,
-].forEach(module => {
-    app.insertAdjacentHTML('beforeend', module.template());
-});
+].forEach(m => app.insertAdjacentHTML('beforeend', m.template()));
 
-// ── 2. Screen registry (id → element) ───────────────────────
+// ── 2. Screen registry ────────────────────────────────────────
+// Maps logical key → DOM element
 const SCREEN_MAP = {
     splash: document.getElementById('screen-splash'),
+    nameEntry: document.getElementById('screen-name'),
     levelSelect: document.getElementById('screen-level'),
     tutorial: document.getElementById('screen-tutorial'),
     game: document.getElementById('screen-game'),
+    settings: document.getElementById('screen-settings'),
     victory: document.getElementById('screen-victory'),
 };
 
-// ── 3. Navigate function ─────────────────────────────────────
+// Maps logical key → module (for onShow hook)
+const SCREEN_MODULES = {
+    nameEntry: NameEntry,
+    levelSelect: LevelSelect,
+    settings: Settings,
+};
+
+// ── 3. navigate() ─────────────────────────────────────────────
 /**
- * Deactivates all screens, then activates the requested one.
- * Overlays are NOT managed here; they manage themselves.
- * @param {keyof SCREEN_MAP} screenKey
+ * Deactivates all screens, activates the target, and runs its onShow() hook.
+ * Overlays (OverlayMatch, BreathingBuddy) manage themselves separately.
+ * @param {string} key - must be a key in SCREEN_MAP
  */
-function navigate(screenKey) {
+function navigate(key) {
     Object.values(SCREEN_MAP).forEach(el => el?.classList.remove('active'));
-    SCREEN_MAP[screenKey]?.classList.add('active');
+    SCREEN_MAP[key]?.classList.add('active');
+
+    // Run screen's onShow() if it exports one
+    SCREEN_MODULES[key]?.onShow?.();
 }
 
 // ── 4. Shared callbacks ───────────────────────────────────────
-/**
- * Called by Tutorial and Victory screens to (re)start the board.
- */
 function startGame() {
     Game.startGame();
 }
 
-/**
- * Called by Game.js after every successful match to check if
- * all pairs are done — and trigger victory if so.
- */
+/** Called by OverlayMatch "Keep Going!" — triggers victory if all pairs done */
 function onMatchContinue() {
     if (Game.isComplete()) {
         const stars = Game.calcStars();
@@ -80,26 +88,31 @@ function onMatchContinue() {
     }
 }
 
-// ── 5. Initialise every screen with its deps ─────────────────
+// ── 5. Wire every screen ─────────────────────────────────────
 Splash.init({ navigate });
+
+NameEntry.init({ navigate });
 
 LevelSelect.init({ navigate });
 
 Tutorial.init({ navigate, startGame });
 
 Game.init({
-    navigate, onVictory: () => {
+    navigate,
+    onVictory: () => {
         const stars = Game.calcStars();
         Victory.populate({ stars });
         navigate('victory');
-    }
+    },
 });
+
+Settings.init({ navigate });
 
 OverlayMatch.init({ onContinue: onMatchContinue });
 
-OverlayWrong.init();
+BreathingBuddy.init();
 
 Victory.init({ navigate, startGame });
 
-// ── 6. Boot ──────────────────────────────────────────────────
+// ── 6. Boot ───────────────────────────────────────────────────
 navigate('splash');

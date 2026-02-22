@@ -11,26 +11,32 @@ export function template() {
 
                 <div class="tutorial-step">
                     <div class="step-num">1</div>
-                    <div class="step-icon">🃏</div>
+                    <div class="step-icon">
+                        <img src="/assets/ui/question.svg" alt="">
+                    </div>
                     <p>Flip a card to see a <strong>Trigger</strong>,
                        <strong>Feeling</strong> or <strong>Action</strong>.</p>
                 </div>
 
                 <div class="tutorial-step">
                     <div class="step-num">2</div>
-                    <div class="step-icon">🔍</div>
+                    <div class="step-icon">
+                        <img src="/assets/ui/stat_pairs.svg" alt="">
+                    </div>
                     <p>Find the <strong>Match</strong> that connects to it!</p>
                 </div>
 
                 <div class="tutorial-step">
                     <div class="step-num">3</div>
-                    <div class="step-icon">⭐</div>
+                    <div class="step-icon">
+                        <img src="/assets/ui/star_gold.svg" alt="">
+                    </div>
                     <p>Match them all to earn <strong>Stars</strong>.
                        Fewer tries = more stars!</p>
                 </div>
 
             </div>
-            <button id="btn-tutorial-ok" class="btn-primary">Got it! Let's Play! 🚀</button>
+            <button id="btn-tutorial-ok" class="btn-primary">Got it! Let's Play!</button>
         </div>
     </section>`;
 }

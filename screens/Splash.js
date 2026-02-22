@@ -1,11 +1,10 @@
 // ============================================================
 //  screens/Splash.js — Screen 1: Title / Splash
 // ============================================================
+import { loadPlayer, loadSettings } from '../utils/storage.js';
+import { sounds } from '../utils/sounds.js';
+import { state } from '../gameState.js';
 
-/**
- * Returns the HTML markup for the Splash screen.
- * Called once by main.js to inject into #app.
- */
 export function template() {
     return /* html */`
     <section id="screen-splash" class="screen active" aria-label="Splash Screen">
@@ -18,17 +17,34 @@ export function template() {
                     alt="Friendly emotion monster"
                 >
             </div>
-            <button id="btn-start" class="btn-primary">Play Now! 🎮</button>
+            <button id="btn-play" class="btn-primary" type="button">Play Now</button>
             <p class="tagline">Learn about feelings in a fun way!</p>
         </div>
     </section>`;
 }
 
 /**
- * Wires up the Splash screen's button.
  * @param {{ navigate: (screen: string) => void }} deps
  */
 export function init({ navigate }) {
-    document.getElementById('btn-start')
-        .addEventListener('click', () => navigate('levelSelect'));
+    document.getElementById('btn-play').addEventListener('click', () => {
+        sounds.click();
+
+        // Restore saved settings
+        const settings = loadSettings();
+        if (settings) {
+            state.soundEnabled = settings.soundEnabled !== false;
+            sounds.setEnabled(state.soundEnabled);
+        }
+
+        // Route based on whether a profile exists
+        const player = loadPlayer();
+        if (player) {
+            state.playerName = player.name;
+            state.playerAvatar = player.avatar;
+            navigate('levelSelect');
+        } else {
+            navigate('nameEntry');
+        }
+    });
 }

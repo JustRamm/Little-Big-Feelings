@@ -3,45 +3,75 @@
 // ============================================================
 import { state } from '../gameState.js';
 import { LEVELS } from '../gameData.js';
+import { saveScore } from '../utils/storage.js';
+import { sounds } from '../utils/sounds.js';
+
+// Star-based message variations
+const MESSAGES = {
+    3: "Perfect! You're a feelings genius!",
+    2: "Well done! Great emotional detective work!",
+    1: "Good try! Keep practising — you've got this!",
+};
+
+function renderStars(count) {
+    let html = '';
+    for (let i = 0; i < 3; i++) {
+        const src = i < count ? '/assets/ui/star_gold.svg' : '/assets/ui/star_grey.svg';
+        html += `<img src="${src}" class="ui-star" alt="Star">`;
+    }
+    return html;
+}
 
 export function template() {
     return /* html */`
     <section id="screen-victory" class="screen" aria-label="Victory Screen">
         <div class="victory-content">
 
-            <!-- Confetti is spawned here by spawnConfetti() -->
             <div class="confetti-container" aria-hidden="true"></div>
 
-            <h2 class="victory-title">🎊 Amazing Job! 🎊</h2>
+            <h2 class="victory-title">Amazing Job!</h2>
 
-            <!-- Star rating (filled by populate()) -->
-            <div class="victory-stars-display" id="victory-stars" aria-label="Stars earned">⭐⭐⭐</div>
+            <div class="victory-stars-display" id="victory-stars" aria-label="Stars earned"></div>
+
+            <p class="victory-star-message" id="victory-star-msg"></p>
 
             <div class="victory-stats-grid">
                 <div class="victory-stat">
-                    <div class="victory-stat-icon">🎯</div>
+                    <div class="victory-stat-icon">
+                        <img src="/assets/ui/stat_pairs.svg" alt="Pairs">
+                    </div>
                     <div class="victory-stat-value" id="victory-pairs">0</div>
                     <div class="victory-stat-label">Pairs Found</div>
                 </div>
                 <div class="victory-stat">
-                    <div class="victory-stat-icon">🔢</div>
+                    <div class="victory-stat-icon">
+                        <img src="/assets/ui/stat_tries.svg" alt="Tries">
+                    </div>
                     <div class="victory-stat-value" id="victory-attempts">0</div>
                     <div class="victory-stat-label">Total Tries</div>
                 </div>
                 <div class="victory-stat">
-                    <div class="victory-stat-icon">🏆</div>
+                    <div class="victory-stat-icon">
+                        <img src="/assets/ui/stat_level.svg" alt="Level">
+                    </div>
                     <div class="victory-stat-value" id="victory-level">Easy</div>
                     <div class="victory-stat-label">Level</div>
                 </div>
             </div>
 
             <p class="victory-message">
-                You learned all about emotions today! Amazing work! 🌈
+                You learned all about emotions today! Amazing work!
             </p>
 
             <div class="victory-buttons">
-                <button id="btn-next-level"  class="btn-primary">Next Level ➡️</button>
-                <button id="btn-play-again"  class="btn-secondary">Choose Level 🗂️</button>
+                <button id="btn-next-level" class="btn-primary"   type="button">
+                    <span>Next Level</span>
+                    <img src="/assets/ui/arrow_next.svg" alt="" class="btn-img-icon">
+                </button>
+                <button id="btn-play-again" class="btn-secondary" type="button">
+                    <span>Choose Level</span>
+                    <img src="/assets/ui/folder.svg" alt="" class="btn-img-icon">
+                </button>
             </div>
         </div>
     </section>`;
@@ -72,30 +102,38 @@ function spawnConfetti() {
 }
 
 /**
- * Populate the victory screen with results and trigger confetti.
+ * Fill in results + trigger celebratory effects.
  * @param {{ stars: number }} results
  */
 export function populate({ stars }) {
-    document.getElementById('victory-stars').textContent =
-        '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
+    // Save to localStorage (only if better score)
+    saveScore(state.currentLevel, { stars, attempts: state.totalAttempts });
+
+    // Stars display
+    document.getElementById('victory-stars').innerHTML = renderStars(stars);
+
+    // Dynamic message
+    document.getElementById('victory-star-msg').textContent = MESSAGES[stars] ?? MESSAGES[1];
+
+    // Stats
     document.getElementById('victory-pairs').textContent = state.matchedCount / 2;
     document.getElementById('victory-attempts').textContent = state.totalAttempts;
     document.getElementById('victory-level').textContent = LEVELS[state.currentLevel].label;
 
+    // Show/hide Next Level button via class (no inline style)
     const nextBtn = document.getElementById('btn-next-level');
-    nextBtn.style.display = state.currentLevel < 3 ? 'inline-block' : 'none';
+    nextBtn.classList.toggle('btn-hidden', state.currentLevel >= 3);
 
     spawnConfetti();
+    sounds.victory();
 }
 
 /**
- * @param {{
- *   navigate:   (screen: string) => void,
- *   startGame:  () => void
- * }} deps
+ * @param {{ navigate: (screen: string) => void, startGame: () => void }} deps
  */
 export function init({ navigate, startGame }) {
     document.getElementById('btn-next-level').addEventListener('click', () => {
+        sounds.click();
         if (state.currentLevel < 3) {
             state.currentLevel++;
             navigate('game');
@@ -106,6 +144,7 @@ export function init({ navigate, startGame }) {
     });
 
     document.getElementById('btn-play-again').addEventListener('click', () => {
+        sounds.click();
         navigate('levelSelect');
     });
 }

@@ -6,13 +6,13 @@ export function template() {
     return /* html */`
     <div id="overlay-match" class="overlay" role="dialog" aria-modal="true" aria-label="Match Found">
         <div class="overlay-card match-overlay-card">
-            <div class="match-badge">✨ Great Connection!</div>
+            <div class="match-badge">Great Connection!</div>
             <h3 id="match-pair-title" class="match-title">Pair Name</h3>
 
             <div class="match-visuals">
                 <div class="matched-pair">
                     <img id="match-img-1" src="" alt="First matched card">
-                    <span class="plus-icon">💞</span>
+                    <img src="/assets/ui/heart.svg" alt="" class="plus-icon-img">
                     <img id="match-img-2" src="" alt="Second matched card">
                 </div>
             </div>
@@ -22,7 +22,7 @@ export function template() {
                 <p id="match-fact"        class="match-desc-secondary"></p>
             </div>
 
-            <button id="btn-match-continue" class="btn-primary">Keep Going! 🎉</button>
+            <button id="btn-match-continue" class="btn-primary">Keep Going!</button>
         </div>
     </div>`;
 }
