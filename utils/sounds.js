@@ -40,11 +40,64 @@ function tone({ freq = 440, type = 'sine', dur = 0.15, vol = 0.2, delay = 0 } = 
 }
 
 // ── Public API ───────────────────────────────────────────────
+// ── Music ────────────────────────────────────────────────────
+let _musicAudio = null;
+let _musicStarted = false;
+
 export const sounds = {
-    setEnabled(v) { _enabled = !!v; },
+    setEnabled(v) {
+        _enabled = !!v;
+        if (!_enabled) this.stopMusic();
+    },
     isEnabled() { return _enabled; },
 
-    /** Short tick when flipping a card */
+    /** Start background music — handles both file-based and synthesized backup */
+    startMusic() {
+        if (!_enabled || _musicStarted) return;
+        _musicStarted = true;
+
+        try {
+            // Priority 1: Use the user's song if it exists
+            _musicAudio = new Audio('assets/sounds/MeSong.mpeg');
+            _musicAudio.loop = true;
+            _musicAudio.volume = 0.4;
+
+            const playPromise = _musicAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Audio file not found or blocked, using synthesized backup.");
+                    // Priority 2: Synthesized "Chill Loop"
+                    this._startSynthBGM();
+                });
+            }
+        } catch (e) {
+            this._startSynthBGM();
+        }
+    },
+
+    stopMusic() {
+        if (_musicAudio) {
+            _musicAudio.pause();
+            _musicAudio.currentTime = 0;
+        }
+        _musicStarted = false;
+        // Also stop any synth loops if implemented
+    },
+
+    /** A gentle, airy synthesized background loop (as fallback) */
+    _startSynthBGM() {
+        const playNote = (freq, vol, dur, delay) => {
+            if (!_musicStarted || !_enabled) return;
+            tone({ freq, type: 'sine', dur, vol, delay });
+            setTimeout(() => playNote(freq, vol, dur, delay), 8000); // Loop every 8s
+        };
+
+        // Gentle Cmaj7 arpeggio
+        [261.63, 329.63, 392.00, 493.88].forEach((f, i) => {
+            setTimeout(() => playNote(f, 0.05, 4, 0), i * 2000);
+        });
+    },
+
     flip() {
         tone({ freq: 750, type: 'sine', dur: 0.07, vol: 0.15 });
     },

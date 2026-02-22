@@ -109,7 +109,10 @@ export function init({ navigate }) {
         saveSettings({ soundEnabled: newVal });
         sounds.setEnabled(newVal);
 
-        sounds.click();
+        if (newVal) {
+            sounds.click();
+            sounds.startMusic();
+        }
         _updateSoundUI(newVal);
     });
 
