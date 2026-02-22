@@ -1,14 +1,46 @@
 <svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card frame -->
   <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
   <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
-  <rect x="22" y="22" width="356" height="456" rx="28" fill="#FFF9C4"/>
-  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#FFD54F"/>
-  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Being Brave</text>
-  
-  <rect x="120" y="140" width="160" height="160" rx="80" fill="#FF8F00"/>
-  <circle cx="200" cy="220" r="60" fill="#FFCA28"/>
-  <circle cx="180" cy="200" r="6" fill="#5D4037"/>
-  <circle cx="220" cy="200" r="6" fill="#5D4037"/>
-  <path d="M185 240 Q200 255 215 240" stroke="#5D4037" stroke-width="5" fill="none" stroke-linecap="round"/>
-  <path d="M160 160 L140 130 M240 160 L260 130" stroke="#FF8F00" stroke-width="10" stroke-linecap="round"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#E8F5E9"/>
+
+  <!-- Label bar -->
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#AED581"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="18" font-weight="bold" fill="#33691E" text-anchor="middle">Brave Affirmations</text>
+
+  <!-- Lion face (brave lion from page 19 affirmations) -->
+  <!-- Mane -->
+  <circle cx="200" cy="220" r="105" fill="#FFCA28"/>
+  <!-- Mane detail -->
+  <circle cx="200" cy="220" r="88" fill="#FF8F00" opacity="0.3"/>
+  <!-- Face -->
+  <ellipse cx="200" cy="220" rx="72" ry="68" fill="#FFCC80" stroke="#EF6C00" stroke-width="4"/>
+
+  <!-- Eyes -->
+  <ellipse cx="174" cy="205" rx="14" ry="16" fill="white"/>
+  <ellipse cx="226" cy="205" rx="14" ry="16" fill="white"/>
+  <circle cx="177" cy="208" r="8" fill="#3E2723"/>
+  <circle cx="229" cy="208" r="8" fill="#3E2723"/>
+  <circle cx="180" cy="205" r="3" fill="white"/>
+  <circle cx="232" cy="205" r="3" fill="white"/>
+
+  <!-- Nose -->
+  <ellipse cx="200" cy="233" rx="12" ry="8" fill="#EF6C00"/>
+
+  <!-- Big smile -->
+  <path d="M172 250 Q200 272 228 250" stroke="#BF360C" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <line x1="200" y1="241" x2="200" y2="250" stroke="#EF6C00" stroke-width="4"/>
+
+  <!-- Whiskers -->
+  <line x1="130" y1="235" x2="180" y2="240" stroke="#BF360C" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <line x1="130" y1="248" x2="180" y2="248" stroke="#BF360C" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <line x1="220" y1="240" x2="270" y2="235" stroke="#BF360C" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <line x1="220" y1="248" x2="270" y2="248" stroke="#BF360C" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Crown -->
+  <path d="M152 155 L162 120 L185 140 L200 108 L215 140 L238 120 L248 155 Z" fill="#FFD54F" stroke="#F57F17" stroke-width="3"/>
+  <!-- Crown jewels -->
+  <circle cx="200" cy="120" r="7" fill="#EF5350"/>
+  <circle cx="170" cy="132" r="5" fill="#7986CB"/>
+  <circle cx="230" cy="132" r="5" fill="#66BB6A"/>
 </svg>

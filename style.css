@@ -258,6 +258,14 @@ p {
     margin-top: 0.5rem;
 }
 
+.splash-credit {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: #9E9E9E;
+    margin-top: 0.2rem;
+    letter-spacing: 0.02em;
+}
+
 /* ============================================================
    SCREEN 2 — LEVEL SELECT
    ============================================================ */
@@ -1039,6 +1047,28 @@ p {
 
 .grid-cols-4 {
     grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-cols-6 {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+/* Hard level (24 cards) — extra-small cards to fit without scrolling */
+.grid-cols-6 .card {
+    --card-w: 13vmin;
+    --card-h: 17vmin;
+    max-width: 120px;
+    max-height: 155px;
+    min-width: 65px;
+    min-height: 85px;
+}
+
+/* Medium level (12 cards) — slightly smaller cards */
+.grid-cols-4 .card {
+    --card-w: 17vmin;
+    --card-h: 23vmin;
+    max-width: 145px;
+    max-height: 190px;
 }
 
 /* ============================================================

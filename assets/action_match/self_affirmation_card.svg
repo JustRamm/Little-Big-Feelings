@@ -1,0 +1,25 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card frame -->
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#FFFDE7"/>
+
+  <!-- Label bar -->
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#FFD54F"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="20" font-weight="bold" fill="#5D4037" text-anchor="middle">You Are Enough</text>
+
+  <!-- Illustration: Mirror or shining heart -->
+  <path d="M200 280 Q250 210 200 140 Q150 210 200 280Z" fill="#F06292" stroke="#C2185B" stroke-width="6"/>
+  <circle cx="200" cy="210" r="80" fill="#FF80AB" opacity="0.4"/>
+  
+  <!-- "Loved" text from page 19 -->
+  <text x="200" y="220" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" font-weight="bold">LOVED</text>
+  
+  <!-- Sparkles -->
+  <text x="120" y="150" font-size="30" fill="#FFD54F">✦</text>
+  <text x="280" y="150" font-size="30" fill="#FFD54F">✦</text>
+  <text x="200" y="100" font-size="24" fill="#FFD54F">✦</text>
+
+  <!-- Grounding hand -->
+  <path d="M150 380 Q200 360 250 380" stroke="#FFD54F" stroke-width="10" fill="none" stroke-linecap="round"/>
+</svg>

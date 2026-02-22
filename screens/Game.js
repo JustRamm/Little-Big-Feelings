@@ -11,6 +11,7 @@ import { sounds } from '../utils/sounds.js';
 const GRID_COLS = {
     3: 'grid-cols-3',
     4: 'grid-cols-4',
+    6: 'grid-cols-6',
 };
 
 // ── Template ────────────────────────────────────────────────
@@ -336,7 +337,7 @@ export function startGame() {
 
     // Remove any previous grid-col class and set the right one
     Object.values(GRID_COLS).forEach(c => board.classList.remove(c));
-    const cols = cfg.pairs <= 3 ? 3 : 4;
+    const cols = cfg.pairs <= 3 ? 3 : cfg.pairs <= 6 ? 4 : 6;
     board.classList.add(GRID_COLS[cols]);
 
     // Pick random pairs

@@ -9,16 +9,17 @@ export function template() {
     return /* html */`
     <section id="screen-splash" class="screen active" aria-label="Splash Screen">
         <div class="splash-content">
-            <h1 class="game-title">Emotion<br><span>Match-Up!</span></h1>
+            <h1 class="game-title">Recharge<br><span>Without Charge</span></h1>
             <div class="character-preview">
                 <img
                     src="/assets/emotion/angry_monster_card.svg"
                     class="bounce-anim"
-                    alt="Friendly emotion monster"
+                    alt="Friendly emotion character"
                 >
             </div>
-            <button id="btn-play" class="btn-primary" type="button">Play Now</button>
-            <p class="tagline">Learn about feelings in a fun way!</p>
+            <button id="btn-play" class="btn-primary" type="button">Start Your Journey</button>
+            <p class="tagline">Discover your emotions. Build your coping toolkit.</p>
+            <p class="splash-credit">Based on <strong>Recharge Without Charge</strong> by Mind Empowered</p>
         </div>
     </section>`;
 }

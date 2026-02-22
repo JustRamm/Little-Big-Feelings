@@ -1,0 +1,37 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card frame -->
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#FFF9C4"/>
+
+  <!-- Label bar -->
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#FFD54F"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Jealous</text>
+
+  <!-- Face: scrunched brows, wide eyes, downturned mouth -->
+  <!-- Head -->
+  <ellipse cx="200" cy="215" rx="90" ry="95" fill="#FFE082" stroke="#F9A825" stroke-width="6"/>
+
+  <!-- Eyes -->
+  <ellipse cx="165" cy="200" rx="18" ry="20" fill="white"/>
+  <ellipse cx="235" cy="200" rx="18" ry="20" fill="white"/>
+  <circle cx="168" cy="203" r="10" fill="#795548"/>
+  <circle cx="238" cy="203" r="10" fill="#795548"/>
+  <circle cx="172" cy="199" r="4" fill="white"/>
+  <circle cx="242" cy="199" r="4" fill="white"/>
+
+  <!-- Furrowed brows -->
+  <path d="M148 178 Q165 168 182 176" stroke="#8D6E63" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M218 176 Q235 168 252 178" stroke="#8D6E63" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+  <!-- Downturned mouth -->
+  <path d="M168 265 Q200 248 232 265" stroke="#8D6E63" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+  <!-- Sweat drop (envy) -->
+  <path d="M265 155 Q270 140 275 155 Q275 165 265 165 Z" fill="#64B5F6"/>
+
+  <!-- Stars (comparison / wanting what others have) -->
+  <text x="115" y="180" font-size="28" fill="#FFF176" stroke="#F9A825" stroke-width="1.5">★</text>
+  <text x="268" y="340" font-size="22" fill="#FFF176" stroke="#F9A825" stroke-width="1.5">★</text>
+  <text x="98" y="320" font-size="18" fill="#FFF176" stroke="#F9A825" stroke-width="1.5">★</text>
+</svg>

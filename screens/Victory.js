@@ -6,11 +6,11 @@ import { LEVELS } from '../gameData.js';
 import { saveScore } from '../utils/storage.js';
 import { sounds } from '../utils/sounds.js';
 
-// Star-based message variations
+// Star-based message variations — from "Recharge Without Charge" by Mind Empowered
 const MESSAGES = {
-    3: "Perfect! You're a feelings genius!",
-    2: "Well done! Great emotional detective work!",
-    1: "Good try! Keep practising — you've got this!",
+    3: "You are BRAVER than you believe, STRONGER than you seem, and SMARTER than you think!",
+    2: "This feeling won't last forever — and neither will challenges. You handled it well!",
+    1: "I have survived other tough times before and I will be resilient this time too. Keep going!",
 };
 
 function renderStars(count) {

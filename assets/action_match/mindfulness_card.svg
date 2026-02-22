@@ -1,0 +1,27 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card frame -->
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#F3E5F5"/>
+
+  <!-- Label bar -->
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#CE93D8"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="18" font-weight="bold" fill="#4A148C" text-anchor="middle">Mindful Observation</text>
+
+  <!-- Illustration: Observing an emotion like a bubble -->
+  <circle cx="200" cy="200" r="100" fill="#E1BEE7" opacity="0.3" stroke="#9C27B0" stroke-width="2" stroke-dasharray="8 8"/>
+  
+  <!-- The "Emotion Bubble" being observed -->
+  <circle cx="200" cy="200" r="50" fill="#BA68C8" stroke="#7B1FA2" stroke-width="4"/>
+  <text x="200" y="208" font-family="Arial" font-size="24" fill="white" text-anchor="middle" font-weight="bold">?</text>
+  
+  <!-- Magnifying glass / Observation eye -->
+  <circle cx="260" cy="140" r="40" fill="white" stroke="#4A148C" stroke-width="5"/>
+  <circle cx="260" cy="140" r="25" fill="#E1BEE7"/>
+  <circle cx="260" cy="140" r="12" fill="#4A148C"/>
+  <line x1="288" y1="168" x2="310" y2="190" stroke="#4A148C" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Peaceful character -->
+  <path d="M160 380 Q200 370 240 380" stroke="#4A148C" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <text x="200" y="340" font-size="14" fill="#4A148C" text-anchor="middle" font-weight="600">"I am observing my feelings"</text>
+</svg>

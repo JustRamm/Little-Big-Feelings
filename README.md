@@ -1,100 +1,168 @@
-# Emotion Match-Up
+# Recharge Without Charge — The Game
 
-Emotion Match-Up is a professional, educational memory card game designed to help children develop emotional intelligence and self-regulation skills. Through interactive gameplay, children learn to identify emotional triggers, recognize feelings, and discover healthy coping strategies.
-
----
-
-## Key Features
-
-### Educational Matching System
-The core mechanic connects three vital aspects of emotional development:
-- **Triggers**: Identifying situations that cause strong feelings.
-- **Emotions**: Building vocabulary for feelings like sadness, anger, fear, and pride.
-- **Actions**: Discovering constructive ways to handle emotions, such as deep breathing or talking to a trusted adult.
-
-### Professional Illustration System
-The game features a completely custom, high-quality vector illustration library. Every asset is a hand-crafted SVG, ensuring crisp visuals on any screen size.
-- **12 Unique Avatars**: Players can choose a character that represents them.
-- **16 Educational Cards**: Balanced 8-pair sets covering a wide emotional spectrum.
-- **Animated UI**: Smooth transitions, 3D card flips, and playful micro-animations.
-
-### Dynamic Difficulty & Tools
-- **Three Skill Levels**: Easy (6 cards), Medium (10 cards), and Hard (16 cards).
-- **Peek Power-Up**: A unique tool that temporarily reveals all cards. Duration and uses are balanced per difficulty level.
-- **Smart Hints**: A supportive hint system that guides players toward their next connection.
-- **Breathing Buddy**: A built-in calming exercise that activates when players hit an "oops" moment, teaching resilience through deep breathing.
+> An interactive emotional intelligence card-matching game based on the **"Recharge Without Charge"** resource by [Mind Empowered](https://www.mind-empowered.org).
+>
+> *You are BRAVER than you believe. STRONGER than you seem. SMARTER than you think. AND LOVED more than you know.*
 
 ---
 
-## Technical Architecture
+## About This Game
 
-The project is built with a focus on modularity and performance, utilizing a modern SPA (Single Page Application) approach with vanishingly small overhead.
+**Recharge Without Charge** is a browser-based memory matching game that transforms the educational content of the Mind Empowered resource into an engaging, interactive experience.
 
-### Tech Stack
-- **Frontend**: Vanilla HTML5, CSS3, and JavaScript (ES Modules).
-- **Asset Pipeline**: Scalable Vector Graphics (SVG) for all visual elements.
-- **State Management**: Centralized reactive state for round tracking and player progress.
-- **Storage**: Persistent local storage for player profiles, settings, and high scores.
-- **Tooling**: Vite for optimized development and bundling.
+Children and young people match **Emotion cards** with their corresponding **Coping Action cards** — building a practical emotional toolkit along the way. Every successful match surfaces a real insight from the original resource, teaching children how to handle their feelings in healthy ways.
 
-### Directory Structure
+---
+
+## Content Source
+
+All game content is derived directly from the **"Recharge Without Charge"** PDF by Mind Empowered. The original material covers:
+
+| Source Page | Topic Used In Game |
+|---|---|
+| Page 2 | 8 Basic Emotions (Anger, Sadness, Joy, Fear, Trust, Disgust, Anticipation, Surprise) |
+| Page 3 | Positive vs Negative Coping Mechanisms |
+| Pages 4–5 | Anger Triggers & Rules of Feeling Angry |
+| Page 6 | Anger Coping Checklist (Walk Away, Breathe, Count, I-Messages) |
+| Page 7 | Reactive vs Proactive — Circle of Control vs Circle of Concern |
+| Pages 8–9 | Sadness Triggers & How to Accept Sadness |
+| Page 10 | What to Do When You Feel Sad |
+| Pages 11–12 | How Anxiety Presents Itself & What to Tell Yourself When Anxious |
+| Page 13 | Stressful Day To-Do List |
+| Pages 14–16 | 10 Signs of Loneliness & Dealing with Loneliness |
+| Page 17 | A to Z of Coping Skills |
+| Page 18 | It's OK to Feel (Scared, Ashamed, Sad, Frustrated, Angry, Lonely, Jealous, Guilty...) |
+| Page 19 | Closing Affirmation: Braver / Stronger / Smarter / Loved |
+
+---
+
+## Game Card Pairs
+
+There are **12 pairs** in the game, one for each major theme of the source material:
+
+| Emotion Card | Coping Action Card | Source Pages |
+|---|---|---|
+| Feeling Angry | Walk Away & Breathe | Pages 4, 5, 6 |
+| Feeling Sad | Write & Express | Pages 8, 9, 10 |
+| Feeling Anxious | Brave Affirmations | Pages 11, 12 |
+| Feeling Lonely | Connect & Self-Care | Pages 14, 15, 16 |
+| Feeling Stressed | Positive Coping | Pages 3, 13 |
+| Feeling Frustrated | Take a Break | Pages 4, 6 |
+| Feeling Joyful | Celebrate! | Pages 2, 10 |
+| Feeling Overwhelmed | Focus on Your Circle | Page 7 |
+| Feeling Ashamed | Accept Your Feelings | Pages 9, 18 |
+| Feeling Disrespected | Use I-Messages | Pages 4, 6 |
+| Feeling Jealous | Mindful Observation | Pages 12, 17, 18 |
+| Feeling Not Enough | You Are Enough | Pages 12, 19 |
+
+---
+
+## Difficulty Levels
+
+| Level | Name | Coverage |
+|---|---|---|
+| 1 | Beginner | 3 pairs — Core Emotions (Anger, Sadness, Anxiety) |
+| 2 | Intermediate | 6 pairs — Deeper Feelings (adds Loneliness, Stress, Frustration) |
+| 3 | Full Journey | 12 pairs — Complete resource coverage |
+
+---
+
+## Game Mechanics
+
+### Match System
+Players flip cards to find an Emotion card and its matching Coping Action card. Each successful match reveals an educational insight sourced directly from the PDF.
+
+### Power-Up Tools
+- **Peek**: Briefly reveals all face-down cards. Duration and uses decrease with difficulty level.
+- **Hint**: Highlights a matching pair. Costs an extra attempt (mild penalty to encourage skill).
+- **Breathing Buddy**: A calming deep-breathing exercise activates on repeated incorrect matches, mirroring the PDF's emphasis on emotional regulation.
+
+### Affirmation-Based Feedback
+- **3 Stars**: "You are BRAVER than you believe, STRONGER than you seem, and SMARTER than you think!"
+- **2 Stars**: "This feeling won't last forever — and neither will challenges. You handled it well!"
+- **1 Star**: "I have survived other tough times before and I will be resilient this time too. Keep going!"
+
+### Scoring
+Stars are awarded based on efficiency — fewer attempts and fewer power-up uses means more stars. This encourages active recall and emotional learning, not just luck.
+
+---
+
+## Project Architecture
+
 ```text
 /assets/
-  ├── avatars/        # Custom player characters
-  ├── background/     # Thematic game environments
-  ├── trigger/        # Situation cards
-  ├── emotion/        # Feeling cards
-  ├── action_match/   # Coping strategy cards
-  └── ui/             # Interface icons and feedback elements
-/screens/             # Modular SPA screen components
-/utils/               # LocalStorage and Audio management
-/main.js              # Application orchestrator
-/gameState.js         # Reactive state container
-/gameData.js          # Card definitions and level balance
-/style.css            # Enterprise-grade CSS design system
+  ├── avatars/              # Custom player characters (12 SVG avatars)
+  ├── background/           # Thematic game environments
+  ├── emotion/              # Emotion cards (Anger, Worry, Frustration...)
+  ├── emotion_match/        # Emotion match cards (Sadness, Shame...)
+  ├── trigger/              # Trigger/situation cards (Lonely, Not Enough...)
+  ├── action_match/         # Coping strategy cards (Breathe, Celebrate...)
+  └── ui/                   # Interface icons, stars, buttons
+
+/screens/
+  ├── Splash.js             # Title screen with Mind Empowered attribution
+  ├── NameEntry.js          # Player profile creation
+  ├── LevelSelect.js        # Difficulty selection
+  ├── Tutorial.js           # How to play instructions
+  ├── Game.js               # Main game engine
+  ├── BreathingBuddy.js     # Calming overlay (Page 6 content)
+  ├── OverlayMatch.js       # Match success overlay
+  ├── OverlayWrong.js       # Incorrect match overlay
+  ├── Victory.js            # Victory screen with PDF affirmations
+  └── Settings.js           # Sound and profile management
+
+/utils/
+  ├── sounds.js             # Audio management
+  └── storage.js            # LocalStorage for player profiles & scores
+
+gameData.js                 # All 12 card pairs from the PDF
+gameState.js                # Centralized reactive game state
+main.js                     # Application orchestrator & SPA router
+style.css                   # Full design system with custom animations
 ```
+
+---
+
+## Technical Stack
+
+- **Frontend**: Vanilla HTML5, CSS3, and JavaScript (ES Modules) — zero framework overhead
+- **Assets**: Scalable Vector Graphics (SVG) for all illustrations — crisp at any resolution
+- **State**: Centralized reactive state container for round tracking and player progress
+- **Storage**: Persistent LocalStorage for player profiles, settings, and high scores
+- **Tooling**: Vite for fast development and production bundling
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js (Version 18.0 or higher)
+- Node.js v18 or higher
 - npm
 
 ### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/JustRamm/Emo-Match.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd Emo-Match
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Launch the development server:
-   ```bash
-   npm run dev
-   ```
+
+```bash
+git clone https://github.com/JustRamm/Emo-Match.git
+cd Emo-Match
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173/` in your browser.
 
 ---
 
-## Development Roadmap
-- [x] Full SVG asset integration
-- [x] Dynamic level difficulty system
-- [x] Multi-use power-up tools (Peek/Hint)
-- [x] Persistent player profile system
-- [x] Breathing Buddy regulation module
-- [ ] Multi-language support (ESN/FRN)
-- [ ] Offline-first PWA support
-- [ ] Enhanced accessibility (ARIA-Live region support)
+## Attribution
+
+All educational content in this game is based on:
+
+**"Recharge Without Charge"**
+by [Mind Empowered](https://www.mind-empowered.org)
+
+This game is designed for educational and child development purposes.
 
 ---
 
-## Repository
-Maintained at: [github.com/JustRamm/Emo-Match](https://github.com/JustRamm/Emo-Match)
+**Repository**: [github.com/JustRamm/Emo-Match](https://github.com/JustRamm/Emo-Match)
 
-© 2026 JustRamm. Dedicated to child development and emotional literacy.
+© 2026 JustRamm. Dedicated to child emotional wellbeing and literacy.

@@ -7,6 +7,9 @@ export function template() {
     <section id="screen-tutorial" class="screen" aria-label="How to Play">
         <div class="container">
             <h2>How to Play</h2>
+            <p style="margin-bottom: 1.5rem; font-size: 0.95rem; color: #757575; font-weight: 600;">
+                Based on <strong>Recharge Without Charge</strong> by Mind Empowered
+            </p>
             <div class="tutorial-grid">
 
                 <div class="tutorial-step">
@@ -14,8 +17,7 @@ export function template() {
                     <div class="step-icon">
                         <img src="/assets/ui/question.svg" alt="">
                     </div>
-                    <p>Flip a card to see a <strong>Trigger</strong>,
-                       <strong>Feeling</strong> or <strong>Action</strong>.</p>
+                    <p>Flip a card to reveal an <strong>Emotion</strong> — like Anger, Sadness, or Anxiety.</p>
                 </div>
 
                 <div class="tutorial-step">
@@ -23,7 +25,7 @@ export function template() {
                     <div class="step-icon">
                         <img src="/assets/ui/stat_pairs.svg" alt="">
                     </div>
-                    <p>Find the <strong>Match</strong> that connects to it!</p>
+                    <p>Find its matching <strong>Coping Action</strong> — a healthy tool to handle that feeling!</p>
                 </div>
 
                 <div class="tutorial-step">
@@ -31,8 +33,7 @@ export function template() {
                     <div class="step-icon">
                         <img src="/assets/ui/star_gold.svg" alt="">
                     </div>
-                    <p>Match them all to earn <strong>Stars</strong>.
-                       Fewer tries = more stars!</p>
+                    <p>Match them all to earn <strong>Stars</strong> and discover your emotional toolkit!</p>
                 </div>
 
             </div>

@@ -31,8 +31,8 @@ export function template() {
                     <div class="level-icon">
                         <img src="/assets/ui/level_1.svg" alt="Easy">
                     </div>
-                    <div class="level-name">Easy</div>
-                    <div class="level-detail">3 Pairs · No Timer</div>
+                    <div class="level-name">Beginner</div>
+                    <div class="level-detail">3 Pairs · Core Emotions</div>
                     <div class="level-best" id="level-best-1">-</div>
                 </button>
 
@@ -41,8 +41,8 @@ export function template() {
                     <div class="level-icon">
                         <img src="/assets/ui/level_2.svg" alt="Medium">
                     </div>
-                    <div class="level-name">Medium</div>
-                    <div class="level-detail">5 Pairs · No Timer</div>
+                    <div class="level-name">Intermediate</div>
+                    <div class="level-detail">6 Pairs · Deeper Feelings</div>
                     <div class="level-best" id="level-best-2">-</div>
                 </button>
 
@@ -51,8 +51,8 @@ export function template() {
                     <div class="level-icon">
                         <img src="/assets/ui/level_3.svg" alt="Hard">
                     </div>
-                    <div class="level-name">Hard</div>
-                    <div class="level-detail">8 Pairs · No Timer</div>
+                    <div class="level-name">Full Journey</div>
+                    <div class="level-detail">12 Pairs · Complete Guide</div>
                     <div class="level-best" id="level-best-3">-</div>
                 </button>
 

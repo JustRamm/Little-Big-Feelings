@@ -1,11 +1,29 @@
 <svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card frame -->
   <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
   <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
   <rect x="22" y="22" width="356" height="456" rx="28" fill="#D7CCC8"/>
+
+  <!-- Label bar -->
   <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#A1887F"/>
-  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Take a Break</text>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="20" font-weight="bold" fill="#3E2723" text-anchor="middle">Take a Break</text>
+
+  <!-- Illustration: Relaxing child in a beanbag or chair -->
+  <path d="M110 350 Q110 280 200 280 Q290 280 290 350 Z" fill="#FF8A65" stroke="#E64A19" stroke-width="4"/>
   
-  <rect x="120" y="160" width="40" height="120" rx="10" fill="#795548"/>
-  <rect x="240" y="160" width="40" height="120" rx="10" fill="#795548"/>
-  <path d="M100 320 H300" stroke="#795548" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="200" cy="240" rx="65" ry="70" fill="#FFCC80" stroke="#EF6C00" stroke-width="5"/>
+  
+  <path d="M145 220 Q145 150 200 150 Q255 150 255 220" fill="#5D4037"/>
+  
+  <!-- Eyes closed and peaceful -->
+  <path d="M175 235 Q185 225 195 235" stroke="#3E2723" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M205 235 Q215 225 225 235" stroke="#3E2723" stroke-width="4" fill="none" stroke-linecap="round"/>
+  
+  <!-- Contented smile -->
+  <path d="M185 265 Q200 275 215 265" stroke="#BF360C" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Zzz's showing rest -->
+  <text x="280" y="150" font-size="30" fill="#A1887F" font-weight="bold">Z</text>
+  <text x="310" y="120" font-size="20" fill="#A1887F" font-weight="bold">z</text>
+  <text x="330" y="100" font-size="14" fill="#A1887F" font-weight="bold">z</text>
 </svg>
