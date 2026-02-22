@@ -113,12 +113,14 @@ export function template() {
     return /* html */`
     <section id="screen-emotion" class="screen" aria-label="Emotion Select">
         <div class="emotion-select-container">
-            <header class="emotion-header">
-                <button id="btn-emotion-back" class="btn-icon back-arrow" aria-label="Go back to name entry" type="button" style="position: absolute; left: 1rem; top: 1rem;">
+            <header class="emotion-header" style="position: relative;">
+                <button id="btn-emotion-back" class="btn-icon back-arrow" aria-label="Go back to name entry" type="button" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);">
                     <i data-lucide="arrow-left"></i>
                 </button>
-                <h2 class="premium-title">Which feeling shall we explore?</h2>
-                <p class="premium-subtitle">Pick an emotion character to begin your journey!</p>
+                <div style="padding: 0 4rem;">
+                    <h2 class="premium-title">Which feeling shall we explore?</h2>
+                    <p class="premium-subtitle">Pick an emotion character to begin your journey!</p>
+                </div>
             </header>
 
             <div class="emotion-illustrative-grid">
@@ -140,6 +142,10 @@ export function init({ navigate }) {
     if (!screen) return;
 
     screen.querySelectorAll('.emotion-illustrative-btn').forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            sounds.hover();
+        });
+
         btn.addEventListener('click', () => {
             sounds.click();
             state.selectedEmotion = btn.dataset.emotion;

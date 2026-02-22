@@ -40,102 +40,132 @@
    ============================================================ */
 .emotion-select-container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(1rem, 3vh, 2rem);
-    padding: 1rem 0;
+    gap: clamp(1rem, 4vh, 3rem);
+    padding: 1.5rem 0;
     overflow: hidden;
 }
 
 .emotion-header {
     text-align: center;
     padding: 0 2rem;
+    animation: fadeSlideDown 0.8s var(--ease) both;
 }
 
 .premium-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2.2rem, 6vw, 4rem);
     color: var(--pink-dark);
     margin-bottom: 0.5rem;
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(135deg, var(--pink-dark), var(--orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .premium-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--text);
-    opacity: 0.8;
+    opacity: 0.7;
+    letter-spacing: 0.01em;
 }
 
 .emotion-illustrative-grid {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 1.5rem;
-    padding: 2rem 1.5rem;
+    /* Single straight line as requested */
+    justify-content: center;
+    align-items: stretch;
+    gap: clamp(0.5rem, 1.5vw, 1.5rem);
+    /* Tighter gap to fit more */
+    padding: 1rem 1rem 2rem;
     width: 100%;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* Custom scrollbar for horizontal scroll */
+/* Premium Scrollbar */
 .emotion-illustrative-grid::-webkit-scrollbar {
-    height: 12px;
+    height: 8px;
 }
 
 .emotion-illustrative-grid::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    margin: 0 4rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 20px;
+    margin: 0 15%;
 }
 
 .emotion-illustrative-grid::-webkit-scrollbar-thumb {
-    background: var(--pink);
-    border-radius: 10px;
-    border: 3px solid transparent;
-    background-clip: content-box;
+    background: linear-gradient(to right, var(--pink), var(--orange));
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(255, 128, 171, 0.3);
 }
 
 .emotion-illustrative-btn {
     position: relative;
     background: var(--white);
     border: none;
-    border-radius: var(--r-xl);
-    padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
+    border-radius: 20px;
+    padding: clamp(0.8rem, 2vh, 1.5rem) 0.8rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0.8rem;
     cursor: pointer;
-    transition: all 0.4s var(--spring);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s var(--spring);
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.02),
+        0 8px 24px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    height: 100%;
-    flex: 0 0 clamp(260px, 80vw, 400px);
-    scroll-snap-align: center;
+    height: auto;
+    flex: 1 1 0;
+    /* Allow equal shrinking to fit the line */
+    min-width: 0;
+    /* Allow cards to shrink below their content size */
+    max-width: 260px;
+    /* Cap growth but allow shrinking */
+    animation: cardEntrance 0.8s var(--spring) both;
+}
+
+.emotion-illustrative-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, var(--emo-color), transparent 70%);
+    opacity: 0.03;
+    transition: opacity 0.4s ease;
 }
 
 .emotion-illustrative-btn:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    transform: translateY(-20px) scale(1.03);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.12),
+        0 0 0 4px var(--emo-color);
+}
+
+.emotion-illustrative-btn:hover::before {
+    opacity: 0.08;
 }
 
 .emo-illustration-wrap {
-    width: 160px;
-    height: 160px;
+    width: clamp(60px, 10vw, 120px);
+    height: clamp(60px, 10vw, 120px);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.4s var(--spring);
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    transition: transform 0.6s var(--spring);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.1));
+    animation: idleFloat 6s ease-in-out infinite;
 }
 
 .emotion-illustrative-btn:hover .emo-illustration-wrap {
-    transform: scale(1.15) rotate(8deg);
+    transform: scale(1.2) rotate(5deg);
+    animation-play-state: paused;
 }
 
 .emo-illustration-wrap svg {
@@ -147,31 +177,40 @@
 .emo-info {
     text-align: center;
     z-index: 2;
+    max-width: 90%;
 }
 
 .emo-info h3 {
-    font-size: 2.2rem;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
     color: var(--text);
-    margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
+    margin-bottom: 0.4rem;
+    transition: all 0.4s ease;
+    background: linear-gradient(135deg, var(--text), var(--emo-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: var(--text);
 }
 
 .emotion-illustrative-btn:hover .emo-info h3 {
-    color: var(--emo-color);
+    -webkit-text-fill-color: transparent;
+    transform: scale(1.1);
 }
 
 .emo-info p {
-    font-size: 1.1rem;
-    color: #777;
-    line-height: 1.6;
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.4;
+    font-weight: 500;
+    opacity: 0.9;
 }
 
 .emo-pulse {
     position: absolute;
     inset: 0;
-    border: 12px solid transparent;
-    border-radius: var(--r-xl);
+    border: 3px solid transparent;
+    border-radius: 35px;
     transition: border-color 0.4s ease;
+    pointer-events: none;
 }
 
 .emotion-illustrative-btn:hover .emo-pulse {
@@ -179,20 +218,39 @@
     animation: pulseBorder 2s infinite;
 }
 
-@keyframes pulseBorder {
-    0% {
-        opacity: 0.8;
-        border-width: 12px;
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes idleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0);
     }
 
     50% {
-        opacity: 0.4;
-        border-width: 16px;
+        transform: translateY(-10px) rotate(2deg);
+    }
+}
+
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
     }
 
-    100% {
-        opacity: 0.8;
-        border-width: 12px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -1604,8 +1662,14 @@ p {
     }
 
     .emotion-illustrative-grid {
-        gap: 1.2rem;
-        padding: 1.5rem 1rem;
+        gap: 0.8rem;
+        /* Reduced gap */
+        padding: 1rem 0.5rem;
+        /* Reduced padding */
+        flex-wrap: wrap;
+        /* Allow wrapping */
+        justify-content: center;
+        /* Center cards */
     }
 
     .emotion-illustrative-btn {

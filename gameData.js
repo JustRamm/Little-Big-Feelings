@@ -10,9 +10,9 @@
  * Pairs count determines how many pairs are picked from the emotion's pool.
  */
 export const LEVELS = {
-    1: { pairs: 3, time: 99999, label: 'Beginner', peekDuration: 3000, peekUses: 3, icon: 'assets/ui/level_1.svg' },
-    2: { pairs: 6, time: 99999, label: 'Intermediate', peekDuration: 2000, peekUses: 2, icon: 'assets/ui/level_2.svg' },
-    3: { pairs: 10, time: 99999, label: 'Expert', peekDuration: 1000, peekUses: 1, icon: 'assets/ui/level_3.svg' },
+    1: { pairs: 3, time: 99999, label: 'Beginner', peekDuration: 3000, peekUses: 3, icon: 'assets/action_match/calm_child_card.svg' },
+    2: { pairs: 6, time: 99999, label: 'Intermediate', peekDuration: 2000, peekUses: 2, icon: 'assets/action_match/mindfulness_card.svg' },
+    3: { pairs: 10, time: 99999, label: 'Expert', peekDuration: 1000, peekUses: 1, icon: 'assets/action_match/brave_lion_card.svg' },
 };
 
 /**
@@ -37,7 +37,7 @@ export const EMOTIONS_DATA = {
             },
             {
                 emotion: { id: 'a3-e', name: 'Being Interrupted', desc: 'It is hard when people dont listen.', img: 'assets/trigger/worried_feeling_card.svg' },
-                action: { id: 'a3-a', name: 'Count to 20', desc: 'Count slowly until you feel calmer.', img: 'assets/ui/level_1.svg' }
+                action: { id: 'a3-a', name: 'Count to 20', desc: 'Count slowly until you feel calmer.', img: 'assets/action_match/calm_child_card.svg' }
             },
             {
                 emotion: { id: 'a4-e', name: 'Feeling Exploded', desc: 'When anger feels like too much.', img: 'assets/emotion/angry_monster_card.svg' },
@@ -64,7 +64,7 @@ export const EMOTIONS_DATA = {
                 action: { id: 'a9-a', name: 'Talk it Out', desc: 'Express your hurt with words.', img: 'assets/action_match/talk_adult_card.svg' }
             },
             {
-                emotion: { id: 'a10-e', name: 'Angry Rule', desc: 'Never hurt property or things.', img: 'assets/ui/level_2.svg' },
+                emotion: { id: 'a10-e', name: 'Angry Rule', desc: 'Never hurt property or things.', img: 'assets/emotion/angry_monster_card.svg' },
                 action: { id: 'a10-a', name: 'Keep it Safe', desc: 'Protect your surroundings.', img: 'assets/action_match/calm_child_card.svg' }
             }
         ]
@@ -109,8 +109,8 @@ export const EMOTIONS_DATA = {
                 action: { id: 's8-a', name: 'Speak Up', desc: 'Express what you feel.', img: 'assets/action_match/talk_adult_card.svg' }
             },
             {
-                emotion: { id: 's9-e', name: 'Big Problems', desc: 'When things feel too huge.', img: 'assets/ui/level_3.svg' },
-                action: { id: 's9-a', name: 'Big Picture', desc: 'Look at the whole world.', img: 'assets/ui/level_1.svg' }
+                emotion: { id: 's9-e', name: 'Big Problems', desc: 'When things feel too huge.', img: 'assets/emotion_match/sad_child_card.svg' },
+                action: { id: 's9-a', name: 'Big Picture', desc: 'Look at the whole world.', img: 'assets/action_match/mindfulness_card.svg' }
             },
             {
                 emotion: { id: 's10-e', name: 'Future Sadness', desc: 'Will I ever be happy?', img: 'assets/trigger/scared_dark_card.svg' },
@@ -154,7 +154,7 @@ export const EMOTIONS_DATA = {
                 action: { id: 'x7-a', name: 'Mindfulness', desc: 'Thoughts are not facts.', img: 'assets/action_match/mindfulness_card.svg' }
             },
             {
-                emotion: { id: 'x8-e', name: 'Cant Focus', desc: 'Struggling to pay attention.', img: 'assets/ui/level_2.svg' },
+                emotion: { id: 'x8-e', name: 'Cant Focus', desc: 'Struggling to pay attention.', img: 'assets/trigger/worried_feeling_card.svg' },
                 action: { id: 'x8-a', name: 'Slow Down', desc: 'Take it one step at a time.', img: 'assets/action_match/calm_child_card.svg' }
             },
             {
@@ -183,8 +183,8 @@ export const EMOTIONS_DATA = {
                 action: { id: 'l2-a', name: 'Keep Busy', desc: 'Do something fun you love.', img: 'assets/action_match/celebrate_dance_card.svg' }
             },
             {
-                emotion: { id: 'l3-e', name: 'Binge Watching', desc: 'Hiding in screens too long.', img: 'assets/ui/level_2.svg' },
-                action: { id: 'l3-a', name: 'Go Outside', desc: 'See the world and nature.', img: 'assets/background/game_bg.svg' }
+                emotion: { id: 'l3-e', name: 'Binge Watching', desc: 'Hiding in screens too long.', img: 'assets/trigger/lonely_card.svg' },
+                action: { id: 'l3-a', name: 'Go Outside', desc: 'See the world and nature.', img: 'assets/action_match/celebrate_dance_card.svg' }
             },
             {
                 emotion: { id: 'l4-e', name: 'Buying Things', desc: 'Buying stuff wont fill it.', img: 'assets/trigger/broken_robot_card.svg' },
@@ -232,7 +232,7 @@ export const EMOTIONS_DATA = {
                 action: { id: 'st2-a', name: 'Choose Wise', desc: 'Pick the better path today.', img: 'assets/action_match/brave_lion_card.svg' }
             },
             {
-                emotion: { id: 'st3-e', name: 'Overbooked', desc: 'Doing too much at once.', img: 'assets/ui/level_2.svg' },
+                emotion: { id: 'st3-e', name: 'Overbooked', desc: 'Doing too much at once.', img: 'assets/emotion/worried_child_card.svg' },
                 action: { id: 'st3-a', name: 'Slow Down', desc: 'Drop one thing and rest.', img: 'assets/action_match/calm_child_card.svg' }
             },
             {
@@ -241,10 +241,10 @@ export const EMOTIONS_DATA = {
             },
             {
                 emotion: { id: 'st5-e', name: 'Unhealthy Body', desc: 'Stress makes you hungry.', img: 'assets/trigger/broken_robot_card.svg' },
-                action: { id: 'st5-a', name: 'Eat Healthy', desc: 'Fuel your body with good.', img: 'assets/ui/level_1.svg' }
+                action: { id: 'st5-a', name: 'Eat Healthy', desc: 'Fuel your body with good.', img: 'assets/action_match/self_affirmation_card.svg' }
             },
             {
-                emotion: { id: 'st6-e', name: 'Long Day', desc: 'When you are so busy.', img: 'assets/ui/level_3.svg' },
+                emotion: { id: 'st6-e', name: 'Long Day', desc: 'When you are so busy.', img: 'assets/emotion/worried_child_card.svg' },
                 action: { id: 'st6-a', name: 'Wear Comfy', desc: 'Wear your favorite clothes.', img: 'assets/action_match/celebrate_dance_card.svg' }
             },
             {
@@ -252,7 +252,7 @@ export const EMOTIONS_DATA = {
                 action: { id: 'st7-a', name: 'Celebrate You', desc: 'Celebrate what is working.', img: 'assets/action_match/self_affirmation_card.svg' }
             },
             {
-                emotion: { id: 'st8-e', name: 'Small World', desc: 'Feeling so tiny.', img: 'assets/ui/level_1.svg' },
+                emotion: { id: 'st8-e', name: 'Small World', desc: 'Feeling so tiny.', img: 'assets/trigger/worried_feeling_card.svg' },
                 action: { id: 'st8-a', name: 'Compliment', desc: 'Give yourself a nice word.', img: 'assets/action_match/self_affirmation_card.svg' }
             },
             {
@@ -261,7 +261,7 @@ export const EMOTIONS_DATA = {
             },
             {
                 emotion: { id: 'st10-e', name: 'Feeling Stuck', desc: 'Cant move forward.', img: 'assets/trigger/broken_robot_card.svg' },
-                action: { id: 'st10-a', name: 'Go Outside', desc: 'Fresh air is your friend.', img: 'assets/background/game_bg.svg' }
+                action: { id: 'st10-a', name: 'Go Outside', desc: 'Fresh air is your friend.', img: 'assets/action_match/take_break_card.svg' }
             }
         ]
     }
