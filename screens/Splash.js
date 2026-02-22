@@ -39,7 +39,7 @@ export function init({ navigate }) {
         if (player) {
             state.playerName = player.name;
             state.playerAvatar = player.avatar;
-            navigate('levelSelect');
+            navigate('emotionSelect');
         } else {
             navigate('nameEntry');
         }

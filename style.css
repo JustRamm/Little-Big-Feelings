@@ -35,112 +35,134 @@
 /* ============================================================
    SCREEN: EMOTION SELECT
    ============================================================ */
+/* ============================================================
+   SCREEN: EMOTION SELECT (PREMIUM ILLUSTRATIVE)
+   ============================================================ */
 .emotion-select-container {
     max-width: 1100px;
     width: 100%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    padding: 2rem 1rem;
+    align-items: center;
+    gap: 3rem;
+    padding: 4rem 1.5rem;
 }
 
-.emotion-header h2 {
-    color: var(--pink);
+.premium-title {
+    font-size: 3rem;
+    color: var(--pink-dark);
     margin-bottom: 0.5rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.emotion-header p {
-    font-size: 1.2rem;
+.premium-subtitle {
+    font-size: 1.4rem;
     font-weight: 600;
-    opacity: 0.7;
+    color: var(--text);
+    opacity: 0.8;
 }
 
-.emotion-grid {
+.emotion-illustrative-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    padding: 2rem;
     width: 100%;
 }
 
-.emotion-card {
+.emotion-illustrative-btn {
     position: relative;
-    background: white;
+    background: var(--white);
+    border: none;
     border-radius: var(--r-xl);
-    padding: 2.5rem 1.5rem;
+    padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
-    box-shadow: 0 12px 24px var(--shadow);
-    transition: var(--transition);
-    overflow: hidden;
+    gap: 2rem;
     cursor: pointer;
-    border: none;
+    transition: all 0.4s var(--spring);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
     height: 100%;
 }
 
-.emotion-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+.emotion-illustrative-btn:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
-.emotion-card-inner {
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-}
-
-.emotion-icon-circle {
-    width: 120px;
-    height: 120px;
-    background: var(--emo-color);
-    border-radius: 50%;
+.emo-illustration-wrap {
+    width: 160px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
-    transition: var(--transition);
+    transition: transform 0.4s var(--spring);
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
 }
 
-.emotion-card:hover .emotion-icon-circle {
-    transform: scale(1.1) rotate(5deg);
+.emotion-illustrative-btn:hover .emo-illustration-wrap {
+    transform: scale(1.15) rotate(8deg);
 }
 
-.emotion-icon-circle img {
+.emo-illustration-wrap svg {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
-.emotion-card h3 {
-    margin: 0;
+.emo-info {
+    text-align: center;
+    z-index: 2;
+}
+
+.emo-info h3 {
+    font-size: 2.2rem;
     color: var(--text);
-    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
 }
 
-.emotion-card p {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #666;
-    margin: 0;
+.emotion-illustrative-btn:hover .emo-info h3 {
+    color: var(--emo-color);
 }
 
-.emotion-selection-border {
+.emo-info p {
+    font-size: 1.1rem;
+    color: #777;
+    line-height: 1.6;
+}
+
+.emo-pulse {
     position: absolute;
     inset: 0;
-    border: 8px solid transparent;
+    border: 12px solid transparent;
     border-radius: var(--r-xl);
-    transition: var(--transition);
-    pointer-events: none;
+    transition: border-color 0.4s ease;
 }
 
-.emotion-card:hover .emotion-selection-border {
+.emotion-illustrative-btn:hover .emo-pulse {
     border-color: var(--emo-color);
+    animation: pulseBorder 2s infinite;
+}
+
+@keyframes pulseBorder {
+    0% {
+        opacity: 0.8;
+        border-width: 12px;
+    }
+
+    50% {
+        opacity: 0.4;
+        border-width: 16px;
+    }
+
+    100% {
+        opacity: 0.8;
+        border-width: 12px;
+    }
 }
 
 /* ============================================================
