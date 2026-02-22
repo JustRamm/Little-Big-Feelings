@@ -9,6 +9,8 @@ export const state = {
     flippedCards: [],    // at most 2 face-up cards
     matchedCount: 0,     // individual cards matched
     totalAttempts: 0,     // pair-flip attempts
+    mistakes: 0,         // wrong match count
+    maxMistakes: 3,      // allowed mistakes before breathing break
     hintsUsed: 0,     // hint button presses
     peeksUsed: 0,     // peek button presses
     stars: 0,     // stars earned (set at victory)
@@ -22,6 +24,7 @@ export const state = {
 
     // ── App preferences ───────────────────────────────────────
     soundEnabled: true,
+    speechEnabled: true,
     selectedEmotion: null, // e.g., 'anger', 'sadness', 'anxiety', etc.
 };
 
@@ -31,6 +34,7 @@ export function resetRound() {
     state.flippedCards = [];
     state.matchedCount = 0;
     state.totalAttempts = 0;
+    state.mistakes = 0;
     state.hintsUsed = 0;
     state.peeksUsed = 0;
     state.stars = 0;

@@ -6,6 +6,7 @@ import { EMOTIONS_DATA, LEVELS } from '../gameData.js';
 import { show as showMatch } from './OverlayMatch.js';
 import { show as showBreathing } from './BreathingBuddy.js';
 import { sounds } from '../utils/sounds.js';
+import { spawnSparkles, spawnConfetti } from '../utils/effects.js';
 
 // Grid column classes (avoids inline styles)
 const GRID_COLS = {
@@ -44,6 +45,11 @@ export function template() {
                     <span class="stat-value">
                         <span id="stat-matched">0</span>/<span id="stat-total">0</span>
                     </span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-label">Chances</span>
+                    <span id="stat-mistakes" class="stat-value">❤️❤️❤️</span>
                 </div>
             </div>
 
@@ -123,6 +129,13 @@ function updateHUD() {
     if (fill) fill.style.width = `${pct}%`;
     if (label) label.textContent = `${pct}%`;
     if (wrap) wrap.setAttribute('aria-valuenow', pct);
+
+    // Mistakes HUD
+    const mistakesEl = document.getElementById('stat-mistakes');
+    if (mistakesEl) {
+        const remaining = Math.max(0, state.maxMistakes - state.mistakes);
+        mistakesEl.textContent = '❤️'.repeat(remaining) + '🖤'.repeat(state.maxMistakes - remaining);
+    }
 
     // Peak button
     const peekBtn = document.getElementById('btn-peek');
@@ -237,10 +250,17 @@ function _checkMatch() {
     }
 }
 
+
+
 function _handleMatch(c1, c2) {
     sounds.match();
     c1.el.classList.add('matched');
     c2.el.classList.add('matched');
+
+    spawnSparkles(c1.el);
+    spawnSparkles(c2.el);
+    if (state.matchedCount % 4 === 0) spawnConfetti();
+
     state.matchedCount += 2;
     state.flippedCards = [];
     state.isLocked = false;
@@ -250,22 +270,39 @@ function _handleMatch(c1, c2) {
 
 function _handleNoMatch(c1, c2) {
     sounds.wrong();
+    state.mistakes++;
+    updateHUD();
+
     c1.el.classList.add('shake');
     c2.el.classList.add('shake');
 
-    // Remove shake after animation, but keep cards face-up until breathing done
+    // Remove shake after animation
     setTimeout(() => {
         c1.el.classList.remove('shake');
         c2.el.classList.remove('shake');
     }, 600);
 
-    // Show BreathingBuddy — unflip cards only AFTER the child finishes
-    showBreathing(() => {
-        c1.el.classList.remove('flipped');
-        c2.el.classList.remove('flipped');
-        state.flippedCards = [];
-        state.isLocked = false;
-    });
+    if (state.mistakes >= state.maxMistakes) {
+        // Reset mistakes for next cycle
+        state.mistakes = 0;
+
+        // Show BreathingBuddy ONLY when chances are out
+        showBreathing(() => {
+            c1.el.classList.remove('flipped');
+            c2.el.classList.remove('flipped');
+            state.flippedCards = [];
+            state.isLocked = false;
+            updateHUD(); // Show hearts again
+        });
+    } else {
+        // Normal fast-paced unflip
+        setTimeout(() => {
+            c1.el.classList.remove('flipped');
+            c2.el.classList.remove('flipped');
+            state.flippedCards = [];
+            state.isLocked = false;
+        }, 800);
+    }
 }
 
 // ── Hint ─────────────────────────────────────────────────────

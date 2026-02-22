@@ -39,36 +39,64 @@
    SCREEN: EMOTION SELECT (PREMIUM ILLUSTRATIVE)
    ============================================================ */
 .emotion-select-container {
-    max-width: 1100px;
     width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
-    padding: 4rem 1.5rem;
+    gap: 2rem;
+    padding: 2rem 0;
+    overflow: hidden;
+}
+
+.emotion-header {
+    text-align: center;
+    padding: 0 2rem;
 }
 
 .premium-title {
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     color: var(--pink-dark);
     margin-bottom: 0.5rem;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .premium-subtitle {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--text);
     opacity: 0.8;
 }
 
 .emotion-illustrative-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 3rem;
-    padding: 2rem;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
     width: 100%;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Custom scrollbar for horizontal scroll */
+.emotion-illustrative-grid::-webkit-scrollbar {
+    height: 12px;
+}
+
+.emotion-illustrative-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin: 0 4rem;
+}
+
+.emotion-illustrative-grid::-webkit-scrollbar-thumb {
+    background: var(--pink);
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: content-box;
 }
 
 .emotion-illustrative-btn {
@@ -76,16 +104,18 @@
     background: var(--white);
     border: none;
     border-radius: var(--r-xl);
-    padding: 3rem 2rem;
+    padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     cursor: pointer;
     transition: all 0.4s var(--spring);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     height: 100%;
+    flex: 0 0 clamp(260px, 80vw, 400px);
+    scroll-snap-align: center;
 }
 
 .emotion-illustrative-btn:hover {
@@ -182,9 +212,11 @@ body {
     background: var(--bg);
     overflow: hidden;
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
     -webkit-user-select: none;
     user-select: none;
+    touch-action: manipulation;
 }
 
 img {
@@ -227,20 +259,32 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Better for scrolling content */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
     transform: translateY(20px) scale(0.97);
-    padding: 2rem;
+    padding: 1.5rem;
     text-align: center;
     overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
+/* For screens that should be centered when content is small */
 .screen.active {
     opacity: 1;
     pointer-events: all;
     transform: translateY(0) scale(1);
+}
+
+.screen>*:first-child:not(.emotion-select-container) {
+    margin-top: auto;
+}
+
+.screen>*:last-child:not(.emotion-select-container) {
+    margin-bottom: auto;
 }
 
 /* Overlay base */
@@ -618,11 +662,17 @@ p {
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-height: calc(100vh - 180px);
-    /* Leave space for header and progress bar */
-    padding: 1rem;
-    overflow: hidden;
-    /* Prevent scrolling */
+    max-height: calc(100dvh - 200px);
+    padding: 0.5rem;
+    overflow: visible;
+    /* Allow overflow if absolutely necessary, but cards should scale */
+}
+
+@media (max-width: 768px) {
+    .game-board-container {
+        max-height: calc(100dvh - 160px);
+        padding: 0.2rem;
+    }
 }
 
 .game-grid {
@@ -756,24 +806,41 @@ p {
 .card.matched .card-inner {
     box-shadow: 0 0 0 3px #AED581, 0 0 20px rgba(174, 213, 129, 0.5);
     border-radius: var(--r-lg);
+    animation: match-pop 0.6s var(--spring) forwards;
+}
+
+@keyframes match-pop {
+    0% {
+        transform: rotateY(180deg) scale(1);
+    }
+
+    50% {
+        transform: rotateY(180deg) scale(1.15);
+    }
+
+    100% {
+        transform: rotateY(180deg) scale(1.05);
+    }
 }
 
 .card.matched::after {
     content: '✓';
     position: absolute;
-    top: 6px;
-    right: 6px;
+    top: -10px;
+    right: -10px;
     background: #66BB6A;
     color: white;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 800;
-    line-height: 24px;
+    line-height: 32px;
     text-align: center;
     z-index: 10;
-    animation: pop-in 0.3s var(--spring) forwards;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: pop-in 0.4s 0.2s var(--spring) forwards;
 }
 
 /* ============================================================
@@ -788,12 +855,14 @@ p {
     width: 100%;
     border: 8px solid white;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
-    transform: scale(0.85) translateY(20px);
-    transition: transform 0.4s var(--spring);
+    transform: scale(0.6) translateY(100px) rotate(-15deg);
+    transition: transform 0.6s var(--spring), opacity 0.4s ease;
+    opacity: 0;
 }
 
 .overlay.active .overlay-card {
-    transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
 }
 
 /* Match Overlay */
@@ -830,6 +899,15 @@ p {
     background: white;
     object-fit: contain;
     box-shadow: 0 6px 16px var(--shadow);
+    transition: transform 0.3s var(--spring);
+}
+
+.matched-pair img:first-child {
+    transform: rotate(-8deg);
+}
+
+.matched-pair img:last-child {
+    transform: rotate(8deg);
 }
 
 .plus-icon {
@@ -979,13 +1057,13 @@ p {
 }
 
 /* ============================================================
-   CONFETTI
+   CONFETTI & SPARKLES
    ============================================================ */
 .confetti-container {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 50;
+    z-index: 1000;
     overflow: hidden;
 }
 
@@ -995,6 +1073,7 @@ p {
     animation: confetti-fall linear forwards;
     opacity: 0;
     display: inline-block;
+    border-radius: 2px;
 }
 
 @keyframes confetti-fall {
@@ -1009,6 +1088,32 @@ p {
 
     100% {
         transform: translateY(105vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.sparkle {
+    position: fixed;
+    width: 10px;
+    height: 100px;
+    /* actually we'll use a star or dot */
+    width: 8px;
+    height: 8px;
+    background: var(--yellow);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000;
+    animation: sparkle-fly 0.8s ease-out forwards;
+}
+
+@keyframes sparkle-fly {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
         opacity: 0;
     }
 }
@@ -1135,36 +1240,89 @@ p {
     .tutorial-grid {
         grid-template-columns: 1fr;
         max-width: 380px;
+        gap: 1rem;
     }
 
     .level-grid {
         grid-template-columns: 1fr;
         max-width: 300px;
         margin-inline: auto;
+        gap: 1rem;
     }
 
     .game-header {
-        padding: 0.5rem 0.8rem;
+        padding: 0.4rem 0.6rem;
         border-radius: 30px;
+        margin: 0.2rem auto 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .hud-stats {
-        gap: 0.5rem;
+        gap: 0.4rem;
+        order: 2;
+        width: 100%;
+        margin-top: 0.2rem;
     }
 
     .stat-value {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+    }
+
+    .stat-label {
+        font-size: 0.55rem;
     }
 
     .matched-pair img {
         width: 80px;
         height: 105px;
     }
+
+    .premium-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+
+    .premium-subtitle {
+        font-size: 1rem;
+    }
+
+    .emotion-illustrative-grid {
+        gap: 1.2rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .emotion-illustrative-btn {
+        flex: 0 0 85vw;
+        max-width: 320px;
+        padding: 2rem 1.5rem;
+    }
+
+    .emo-illustration-wrap {
+        width: 120px;
+        height: 120px;
+    }
+
+    .emo-info h3 {
+        font-size: 1.8rem;
+    }
 }
 
-@media (max-width: 768px) {
-    .game-header {
-        margin: 0.2rem auto 0.5rem;
+@media (max-width: 480px) {
+    .game-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+    }
+
+    .level-top-bar {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .overlay-card {
+        padding: 1.2rem;
+    }
+
+    .avatar-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -1190,20 +1348,40 @@ p {
 
 /* Hard level (24 cards) — extra-small cards to fit without scrolling */
 .grid-cols-6 .card {
-    --card-w: 13vmin;
-    --card-h: 17vmin;
-    max-width: 120px;
-    max-height: 155px;
-    min-width: 65px;
-    min-height: 85px;
+    --card-w: clamp(10vmin, 13vmin, 120px);
+    --card-h: clamp(14vmin, 17vmin, 155px);
+    min-width: 50px;
+    min-height: 70px;
 }
 
 /* Medium level (12 cards) — slightly smaller cards */
 .grid-cols-4 .card {
-    --card-w: 17vmin;
-    --card-h: 23vmin;
-    max-width: 145px;
-    max-height: 190px;
+    --card-w: clamp(14vmin, 17vmin, 145px);
+    --card-h: clamp(18vmin, 23vmin, 190px);
+    min-width: 70px;
+    min-height: 95px;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+    .grid-cols-6 {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+
+    .grid-cols-6 .card {
+        --card-w: 20vw;
+        --card-h: 28vw;
+    }
+}
+
+@media (max-width: 400px) and (orientation: portrait) {
+    .grid-cols-4 {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .grid-cols-4 .card {
+        --card-w: 28vw;
+        --card-h: 38vw;
+    }
 }
 
 /* ============================================================

@@ -74,6 +74,24 @@ export const sounds = {
         tone({ freq: 620, type: 'sine', dur: 0.06, vol: 0.1 });
     },
 
+    /** Soft hover sound for children's feedback */
+    hover() {
+        tone({ freq: 440, type: 'sine', dur: 0.04, vol: 0.05 });
+    },
+
+    /** Magical shimmer for matches or success */
+    shimmer() {
+        for (let i = 0; i < 8; i++) {
+            tone({
+                freq: 880 + (i * 120),
+                type: 'sine',
+                dur: 0.15,
+                vol: 0.08,
+                delay: i * 0.04
+            });
+        }
+    },
+
     /** Soft breathing-phase bell */
     breathBell() {
         tone({ freq: 880, type: 'sine', dur: 0.6, vol: 0.18 });

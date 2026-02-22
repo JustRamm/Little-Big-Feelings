@@ -128,6 +128,15 @@ export function populate({ stars }) {
 
     spawnConfetti();
     sounds.victory();
+
+    // Narrate for children
+    if ('speechSynthesis' in window && state.speechEnabled) {
+        const text = `Amazing Job! You earned ${stars} stars. ${MESSAGES[stars] ?? MESSAGES[1]}`;
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.rate = 1.1;
+        msg.pitch = 1.1;
+        window.speechSynthesis.speak(msg);
+    }
 }
 
 /**

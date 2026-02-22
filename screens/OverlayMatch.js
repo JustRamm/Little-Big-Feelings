@@ -31,17 +31,45 @@ export function template() {
  * Populates and shows the overlay with pair data.
  * @param {{ d1: object, d2: object }} pair
  */
+import { sounds } from '../utils/sounds.js';
+import { state } from '../gameState.js';
+
+let autoDismissTimer = null;
+
 export function show({ d1, d2 }) {
+    sounds.shimmer();
+
     document.getElementById('match-img-1').src = d1.image;
     document.getElementById('match-img-2').src = d2.image;
     document.getElementById('match-pair-title').textContent = `${d1.name} + ${d2.name}`;
     document.getElementById('match-description').textContent = d1.description;
     document.getElementById('match-fact').textContent = d2.description;
     document.getElementById('overlay-match').classList.add('active');
+
+    // Narrate for children
+    if ('speechSynthesis' in window && state.speechEnabled) {
+        window.speechSynthesis.cancel(); // stop previous
+        const text = `Great job! You matched ${d1.name} with ${d2.name}. ${d1.description}`;
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.rate = 1.1;
+        msg.pitch = 1.1;
+        window.speechSynthesis.speak(msg);
+    }
+
+    // Auto-dismiss after 6 seconds to make it "easier for player to play"
+    clearTimeout(autoDismissTimer);
+    autoDismissTimer = setTimeout(() => {
+        const btn = document.getElementById('btn-match-continue');
+        if (document.getElementById('overlay-match').classList.contains('active')) {
+            btn.click();
+        }
+    }, 6000);
 }
 
 export function hide() {
     document.getElementById('overlay-match').classList.remove('active');
+    clearTimeout(autoDismissTimer);
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 }
 
 /**
