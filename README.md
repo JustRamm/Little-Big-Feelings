@@ -1,4 +1,4 @@
-# Recharge Without Charge — The Game
+# Emo Charge — The Game
 
 > An interactive emotional intelligence card-matching game based on the **"Recharge Without Charge"** resource by [Mind Empowered](https://www.mind-empowered.org).
 >
@@ -8,7 +8,7 @@
 
 ## About This Game
 
-**Recharge Without Charge** is a browser-based memory matching game that transforms the educational content of the Mind Empowered resource into an engaging, interactive experience.
+**Emo Charge** is a browser-based memory matching game that transforms the educational content of the Mind Empowered resource into an engaging, interactive experience.
 
 Children and young people match **Emotion cards** with their corresponding **Coping Action cards** — building a practical emotional toolkit along the way. Every successful match surfaces a real insight from the original resource, teaching children how to handle their feelings in healthy ways.
 
@@ -45,7 +45,7 @@ There are **12 pairs** in the game, one for each major theme of the source mater
 | Feeling Angry | Walk Away & Breathe | Pages 4, 5, 6 |
 | Feeling Sad | Write & Express | Pages 8, 9, 10 |
 | Feeling Anxious | Brave Affirmations | Pages 11, 12 |
-| Feeling Lonely | Connect & Self-Care | Pages 14, 15, 16 |
+| Feeling Loneliness | Connect & Self-Care | Pages 14, 15, 16 |
 | Feeling Stressed | Positive Coping | Pages 3, 13 |
 | Feeling Frustrated | Take a Break | Pages 4, 6 |
 | Feeling Joyful | Celebrate! | Pages 2, 10 |
@@ -91,6 +91,7 @@ Stars are awarded based on efficiency — fewer attempts and fewer power-up uses
 
 ```text
 /assets/
+  ├── brand/                # Emo Charge logo and branding
   ├── avatars/              # Custom player characters (12 SVG avatars)
   ├── background/           # Thematic game environments
   ├── emotion/              # Emotion cards (Anger, Worry, Frustration...)
@@ -100,7 +101,7 @@ Stars are awarded based on efficiency — fewer attempts and fewer power-up uses
   └── ui/                   # Interface icons, stars, buttons
 
 /screens/
-  ├── Splash.js             # Title screen with Mind Empowered attribution
+  ├── Splash.js             # Title screen with Emo Charge branding
   ├── NameEntry.js          # Player profile creation
   ├── LevelSelect.js        # Difficulty selection
   ├── Tutorial.js           # How to play instructions

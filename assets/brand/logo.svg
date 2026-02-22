@@ -1,0 +1,41 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Glow -->
+  <defs>
+    <radialGradient id="glow" cx="256" cy="256" r="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF80AB" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FF80AB" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="batteryGrad" x1="120" y1="256" x2="392" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="100%" stop-color="#F06292"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="256" fill="url(#glow)"/>
+
+  <!-- Battery Outer Frame -->
+  <rect x="100" y="160" width="280" height="192" rx="30" stroke="#333" stroke-width="12" fill="white"/>
+  <rect x="380" y="216" width="32" height="80" rx="10" fill="#333"/>
+
+  <!-- Battery Charge Level (Liquid/Pulse) -->
+  <rect x="112" y="172" width="220" height="168" rx="22" fill="url(#batteryGrad)"/>
+  
+  <!-- Heart Icon (The 'Emo' part) -->
+  <path d="M252 300 Q260 290 280 270 Q305 245 305 215 Q305 185 280 185 Q262 185 252 205 Q242 185 224 185 Q199 185 199 215 Q199 245 224 270 Q244 290 252 300Z" fill="white" opacity="0.9"/>
+  
+  <!-- Charging Bolt (The 'Charge' part) -->
+  <path d="M265 190 L230 250 L260 250 L240 310 L275 250 L245 250 Z" fill="#FFEB3B" stroke="#F57F17" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Floating Emotion Dots -->
+  <circle cx="150" cy="120" r="15" fill="#FFD54F">
+    <animate attributeName="cy" values="120;110;120" dur="3s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="360" cy="140" r="12" fill="#81C784">
+    <animate attributeName="cy" values="140;150;140" dur="4s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="120" cy="400" r="18" fill="#4FC3F7">
+    <animate attributeName="cy" values="400;390;400" dur="3.5s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="380" cy="380" r="14" fill="#CE93D8">
+    <animate attributeName="cy" values="380;390;380" dur="2.5s" repeatCount="indefinite" />
+  </circle>
+</svg>

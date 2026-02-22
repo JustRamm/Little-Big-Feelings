@@ -242,13 +242,14 @@ p {
     display: block;
 }
 
-.character-preview {
+.logo-container {
     margin: 1rem 0;
+    position: relative;
 }
 
-.character-preview img {
-    width: clamp(150px, 30vw, 250px);
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+.game-logo {
+    width: clamp(180px, 40vw, 320px);
+    filter: drop-shadow(0 15px 30px rgba(240, 98, 146, 0.3));
 }
 
 .tagline {
