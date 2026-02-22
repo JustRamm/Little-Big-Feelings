@@ -102,6 +102,10 @@ export function onShow() {
  */
 export function init({ navigate }) {
     document.querySelectorAll('.level-btn').forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            sounds.hover();
+        });
+
         btn.addEventListener('click', () => {
             sounds.click();
             state.currentLevel = parseInt(btn.dataset.level, 10);
