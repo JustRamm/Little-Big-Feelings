@@ -1,0 +1,13 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#C8E6C9"/>
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#81C784"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Celebrate You!</text>
+  
+  <path d="M150 250 Q130 200 160 150 M250 250 Q270 200 240 150" stroke="#2E7D32" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <circle cx="200" cy="180" r="15" fill="#FFF176" stroke="#F57F17" stroke-width="4">
+    <animate attributeName="r" values="15;20;15" dur="1s" repeatCount="indefinite" />
+  </circle>
+  <path d="M180 120 L200 100 M220 120 L240 100" stroke="#FFD54F" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#DCEDC8"/>
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#AED581"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Good News!</text>
+  
+  <rect x="100" y="160" width="200" height="140" rx="10" fill="white" stroke="#558B2F" stroke-width="6"/>
+  <path d="M100 160 L200 230 L300 160" stroke="#558B2F" stroke-width="6" fill="none"/>
+  <path d="M220 250 L250 280 L280 250" fill="#FF5252"/>
+  <circle cx="150" cy="200" r="10" fill="#AED581" opacity="0.4"/>
+</svg>

@@ -1,132 +1,100 @@
-# Emo-Match
+# Emotion Match-Up
 
-> A vibrant, educational memory card game for children that teaches emotional intelligence — matching triggers, feelings, and healthy coping actions.
-
----
-
-## Overview
-
-**Emo-Match** is a browser-based memory card game designed for young children (ages 4–9). Players flip cards to match emotional **triggers** with **feelings** and discover **healthy actions** to cope with those feelings. Every match reveals a short, supportive educational message that helps children build emotional vocabulary and self-regulation skills.
-
-The art style is inspired by high-quality children's apps like **Toca Boca** and **Bluey** — vibrant, rounded, and full of personality.
+Emotion Match-Up is a professional, educational memory card game designed to help children develop emotional intelligence and self-regulation skills. Through interactive gameplay, children learn to identify emotional triggers, recognize feelings, and discover healthy coping strategies.
 
 ---
 
-## Screens
+## Key Features
 
-| # | Screen | Description |
-|---|--------|-------------|
-| 1 | **Splash / Title** | Animated entry screen with the game title and a bouncing character |
-| 2 | **How to Play** | 3-step visual tutorial explaining the matching mechanic |
-| 3 | **Game Board** | The interactive 2x2 card grid with star counter and reset button |
-| 4 | **Match Discovery Overlay** | Pops up on every successful match with an educational message |
-| 5 | **Victory Screen** | Celebrates completing the game with a "Play Again" option |
+### Educational Matching System
+The core mechanic connects three vital aspects of emotional development:
+- **Triggers**: Identifying situations that cause strong feelings.
+- **Emotions**: Building vocabulary for feelings like sadness, anger, fear, and pride.
+- **Actions**: Discovering constructive ways to handle emotions, such as deep breathing or talking to a trusted adult.
 
----
+### Professional Illustration System
+The game features a completely custom, high-quality vector illustration library. Every asset is a hand-crafted SVG, ensuring crisp visuals on any screen size.
+- **12 Unique Avatars**: Players can choose a character that represents them.
+- **16 Educational Cards**: Balanced 8-pair sets covering a wide emotional spectrum.
+- **Animated UI**: Smooth transitions, 3D card flips, and playful micro-animations.
 
-## Game Cards
-
-All card illustrations are hand-crafted SVGs stored in the `assets/` folder:
-
-| Card | Type | File |
-|------|------|------|
-| Broken toy robot (sad frown) | Trigger | `assets/trigger/broken_robot_card.svg` |
-| Child with watery eyes & raincloud | Emotion Match | `assets/emotion_match/sad_child_card.svg` |
-| Fluffy red monster puffing steam | Emotion | `assets/emotion/angry_monster_card.svg` |
-| Child sitting cross-legged blowing bubbles | Action Match | `assets/action_match/calm_child_card.svg` |
+### Dynamic Difficulty & Tools
+- **Three Skill Levels**: Easy (6 cards), Medium (10 cards), and Hard (16 cards).
+- **Peek Power-Up**: A unique tool that temporarily reveals all cards. Duration and uses are balanced per difficulty level.
+- **Smart Hints**: A supportive hint system that guides players toward their next connection.
+- **Breathing Buddy**: A built-in calming exercise that activates when players hit an "oops" moment, teaching resilience through deep breathing.
 
 ---
 
-## Project Structure
+## Technical Architecture
 
+The project is built with a focus on modularity and performance, utilizing a modern SPA (Single Page Application) approach with vanishingly small overhead.
+
+### Tech Stack
+- **Frontend**: Vanilla HTML5, CSS3, and JavaScript (ES Modules).
+- **Asset Pipeline**: Scalable Vector Graphics (SVG) for all visual elements.
+- **State Management**: Centralized reactive state for round tracking and player progress.
+- **Storage**: Persistent local storage for player profiles, settings, and high scores.
+- **Tooling**: Vite for optimized development and bundling.
+
+### Directory Structure
+```text
+/assets/
+  ├── avatars/        # Custom player characters
+  ├── background/     # Thematic game environments
+  ├── trigger/        # Situation cards
+  ├── emotion/        # Feeling cards
+  ├── action_match/   # Coping strategy cards
+  └── ui/             # Interface icons and feedback elements
+/screens/             # Modular SPA screen components
+/utils/               # LocalStorage and Audio management
+/main.js              # Application orchestrator
+/gameState.js         # Reactive state container
+/gameData.js          # Card definitions and level balance
+/style.css            # Enterprise-grade CSS design system
 ```
-Emo-Match/
-├── assets/
-│   ├── background/
-│   │   └── game_bg.svg              # Animated background
-│   ├── trigger/
-│   │   └── broken_robot_card.svg    # Card 1 — Trigger
-│   ├── emotion_match/
-│   │   └── sad_child_card.svg       # Card 2 — Emotion Match
-│   ├── emotion/
-│   │   └── angry_monster_card.svg   # Card 3 — Emotion
-│   └── action_match/
-│       └── calm_child_card.svg      # Card 4 — Healthy Action
-├── index.html                       # SPA shell with all 5 screen structures
-├── style.css                        # Full design system & animations
-├── main.js                          # Game engine, card logic, screen management
-├── package.json                     # Vite dev server config
-└── README.md
-```
-
----
-
-## Tech Stack
-
-- **HTML5** — Semantic SPA structure
-- **Vanilla CSS3** — Custom design system, 3D card flip animations, keyframe effects
-- **Vanilla JavaScript (ES Modules)** — Game logic, screen transitions, match detection
-- **Vite** — Lightning-fast local dev server
-- **Google Fonts** — Outfit (800, 600, 400) for the rounded, friendly typography
-- **SVG** — All game illustrations are scalable vector graphics
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js v18+
+- Node.js (Version 18.0 or higher)
 - npm
 
-### Install & Run
-
-```bash
-# Clone the repo
-git clone https://github.com/JustRamm/Emo-Match.git
-cd Emo-Match
-
-# Install dependencies
-npm install
-
-# Start the dev server
-npm run dev
-```
-
-Then open `http://localhost:5173/` in your browser.
-
----
-
-## How to Play
-
-1. **Flip** any card to reveal it — it could be a Story (trigger), a Feeling, or a Healthy Action.
-2. **Flip a second card** to try and find its matching pair.
-3. If the cards **match**, a pop-up explains the emotional connection.
-4. Match **all pairs** to win stars and reach the Victory screen!
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/JustRamm/Emo-Match.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Emo-Match
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Launch the development server:
+   ```bash
+   npm run dev
+   ```
 
 ---
 
-## Design
-
-- **Color Palette:** Highly saturated pastels — bubblegum pink (`#FF80AB`), sunny yellow (`#FFD54F`), sky blue (`#4FC3F7`), lime green (`#A5D6A7`)
-- **Typography:** [Outfit](https://fonts.google.com/specimen/Outfit) — rounded and friendly
-- **Card Style:** Thick white borders, soft 3D drop shadow, 180° flip animation
-- **Background:** Layered SVG blobs, stars, and wavy stripes for a playful atmosphere
-
----
-
-## Roadmap
-
-- [ ] Confetti animation on Victory screen
-- [ ] Sound effects and background music toggle
-- [ ] Level select (Easy 4-card / Medium 8-card / Hard 12-card grids)
-- [ ] More emotion card sets (jealousy, excitement, worry)
-- [ ] Lesson summary card at end of game
-- [ ] Accessibility improvements (keyboard navigation, screen reader support)
+## Development Roadmap
+- [x] Full SVG asset integration
+- [x] Dynamic level difficulty system
+- [x] Multi-use power-up tools (Peek/Hint)
+- [x] Persistent player profile system
+- [x] Breathing Buddy regulation module
+- [ ] Multi-language support (ESN/FRN)
+- [ ] Offline-first PWA support
+- [ ] Enhanced accessibility (ARIA-Live region support)
 
 ---
 
-## Author
+## Repository
+Maintained at: [github.com/JustRamm/Emo-Match](https://github.com/JustRamm/Emo-Match)
 
-Built with love for children's emotional wellbeing.
-
-**Repository:** [github.com/JustRamm/Emo-Match](https://github.com/JustRamm/Emo-Match)
+© 2026 JustRamm. Dedicated to child development and emotional literacy.

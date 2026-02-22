@@ -1,0 +1,13 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#FFE0B2"/>
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#FFB74D"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Dance It Out</text>
+  
+  <path d="M200 150 V300 M200 200 L150 150 M200 200 L250 150 M200 300 L150 350 M200 300 L250 350" stroke="#E65100" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="200" cy="130" r="30" fill="#FFE0B2" stroke="#E65100" stroke-width="6"/>
+  <path d="M100 120 L120 100 M280 120 L300 100" stroke="#FFD54F" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="100" cy="120" r="5" fill="#FFD54F"/>
+  <circle cx="300" cy="100" r="5" fill="#FFD54F"/>
+</svg>

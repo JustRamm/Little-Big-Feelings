@@ -1,0 +1,14 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#FFF9C4"/>
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#FFD54F"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Being Brave</text>
+  
+  <rect x="120" y="140" width="160" height="160" rx="80" fill="#FF8F00"/>
+  <circle cx="200" cy="220" r="60" fill="#FFCA28"/>
+  <circle cx="180" cy="200" r="6" fill="#5D4037"/>
+  <circle cx="220" cy="200" r="6" fill="#5D4037"/>
+  <path d="M185 240 Q200 255 215 240" stroke="#5D4037" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M160 160 L140 130 M240 160 L260 130" stroke="#FF8F00" stroke-width="10" stroke-linecap="round"/>
+</svg>

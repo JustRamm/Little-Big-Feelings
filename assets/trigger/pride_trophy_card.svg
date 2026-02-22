@@ -1,0 +1,12 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#FFF176"/>
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#FBC02D"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">I Did It!</text>
+  
+  <path d="M120 150 H280 V220 Q280 280 200 280 Q120 280 120 220 V150Z" fill="#FFD54F" stroke="#F57F17" stroke-width="8"/>
+  <path d="M120 180 H90 V210 H120 M280 180 H310 V210 H280" stroke="#F57F17" stroke-width="6" fill="none"/>
+  <rect x="170" y="280" width="60" height="60" fill="#FBC02D"/>
+  <rect x="140" y="340" width="120" height="20" rx="5" fill="#F57F17"/>
+</svg>

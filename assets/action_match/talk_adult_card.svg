@@ -1,0 +1,13 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#B2EBF2"/>
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#4DD0E1"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Talk About It</text>
+  
+  <path d="M150 150 Q120 150 120 180 V220 H180 V180 Q180 150 150 150Z" fill="white" stroke="#00838F" stroke-width="5"/>
+  <path d="M250 150 Q280 150 280 180 V220 H220 V180 Q220 150 250 150Z" fill="white" stroke="#00838F" stroke-width="5"/>
+  <circle cx="150" cy="180" r="3" fill="#00838F"/>
+  <circle cx="250" cy="180" r="3" fill="#00838F"/>
+  <path d="M190 200 H210 M195 210 H205" stroke="#00838F" stroke-width="3" stroke-linecap="round"/>
+</svg>

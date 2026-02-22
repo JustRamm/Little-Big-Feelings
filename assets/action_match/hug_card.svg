@@ -1,0 +1,13 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#F3E5F5"/>
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#CE93D8"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Warm Hug</text>
+  
+  <!-- Illustration: Two friendly shapes hugging -->
+  <circle cx="170" cy="220" r="60" fill="#BA68C8" stroke="#7B1FA2" stroke-width="6"/>
+  <circle cx="230" cy="220" r="60" fill="#E1BEE7" stroke="#7B1FA2" stroke-width="6"/>
+  <path d="M140 220 Q120 180 160 180 M260 220 Q280 180 240 180" stroke="#7B1FA2" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M185 220 Q200 230 215 220" stroke="#7B1FA2" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>

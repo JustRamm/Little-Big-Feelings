@@ -1,0 +1,12 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#CFD8DC"/>
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#90A4AE"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Worried</text>
+  
+  <rect x="130" y="150" width="140" height="140" rx="70" fill="#ECEFF1" stroke="#455A64" stroke-width="7"/>
+  <path d="M170 190 Q180 170 190 190 M210 190 Q220 170 230 190" stroke="#455A64" stroke-width="5" fill="none"/>
+  <path d="M180 240 Q200 220 220 240" stroke="#455A64" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M150 140 Q130 130 140 110 M250 140 Q270 130 260 110" stroke="#90A4AE" stroke-width="4" fill="none" opacity="0.6"/>
+</svg>
