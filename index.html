@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Match-Up! | Educational Game for Kids</title>
+    <meta name="description"
+        content="A fun and educational memory game to help children understand triggers, emotions, and healthy coping actions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Background Layer -->
+        <div class="game-background">
+            <img src="/assets/background/game_bg.svg" alt="" aria-hidden="true">
+        </div>
+
+        <!-- 1. Splash Screen -->
+        <section id="screen-splash" class="screen active">
+            <div class="splash-content">
+                <h1 class="game-title">Emotion<br><span>Match-Up!</span></h1>
+                <div class="character-preview">
+                    <img src="/assets/emotion/angry_monster_card.svg" class="bounce-anim" alt="Happy Monster">
+                </div>
+                <button id="btn-start" class="btn-primary">Play Now!</button>
+                <p class="tagline">Learn about feelings in a fun way!</p>
+            </div>
+        </section>
+
+        <!-- 2. How to Play Screen -->
+        <section id="screen-tutorial" class="screen">
+            <div class="container">
+                <h2>How to Play</h2>
+                <div class="tutorial-grid">
+                    <div class="tutorial-step">
+                        <div class="step-num">1</div>
+                        <p>Flip a card to see a <strong>Story</strong> or <strong>Feeling</strong>.</p>
+                    </div>
+                    <div class="tutorial-step">
+                        <div class="step-num">2</div>
+                        <p>Find the <strong>Match</strong> that fits the feeling!</p>
+                    </div>
+                    <div class="tutorial-step">
+                        <div class="step-num">3</div>
+                        <p>Match them all to win <strong>Stars</strong>!</p>
+                    </div>
+                </div>
+                <button id="btn-tutorial-ok" class="btn-primary">Got it!</button>
+            </div>
+        </section>
+
+        <!-- 3. The Play Screen -->
+        <section id="screen-game" class="screen">
+            <div class="game-header">
+                <div class="stat-item">Stars: <span id="star-count">0</span></div>
+                <button id="btn-reset" class="btn-secondary">Reset</button>
+            </div>
+            <div class="game-board-container">
+                <div id="game-board" class="game-grid">
+                    <!-- Cards will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Match Discovery Overlay -->
+        <div id="overlay-match" class="overlay">
+            <div class="overlay-card">
+                <h3 id="match-message">It's a Match!</h3>
+                <div class="match-visuals">
+                    <div class="matched-pair">
+                        <img id="match-img-1" src="" alt="">
+                        <span class="plus-icon">+</span>
+                        <img id="match-img-2" src="" alt="">
+                    </div>
+                </div>
+                <p id="match-description"></p>
+                <button id="btn-match-continue" class="btn-primary">Keep Going!</button>
+            </div>
+        </div>
+
+        <!-- 5. Victory Screen -->
+        <section id="screen-victory" class="screen">
+            <div class="victory-content">
+                <div class="confetti-container"></div>
+                <h2 class="victory-title">Amazing Job!</h2>
+                <div class="victory-stats">
+                    <p>You matched all the emotions!</p>
+                    <div class="star-display big-stars">⭐⭐⭐</div>
+                </div>
+                <button id="btn-play-again" class="btn-primary">Play Again</button>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+</body>
+
+</html>

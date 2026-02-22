@@ -1,0 +1,60 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Drop shadow -->
+  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
+  <!-- Card base white border -->
+  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
+  <!-- Card inner background - warm yellow -->
+  <rect x="22" y="22" width="356" height="456" rx="28" fill="#FFFDE7"/>
+
+  <!-- LABEL -->
+  <rect x="22" y="430" width="356" height="48" rx="0" fill="#FFF9C4"/>
+  <rect x="22" y="430" width="356" height="48" rx="0" ry="0" fill="#FFF9C4"/>
+  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#FFD54F"/>
+  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="22" font-weight="bold" fill="#5D4037" text-anchor="middle">Broken Toy</text>
+
+  <!-- Floor -->
+  <ellipse cx="200" cy="390" rx="120" ry="18" fill="#FFECB3" opacity="0.8"/>
+
+  <!-- Robot Body -->
+  <rect x="130" y="220" width="140" height="120" rx="18" fill="#90CAF9" stroke="#1565C0" stroke-width="7"/>
+  <!-- Body panel detail -->
+  <rect x="155" y="240" width="40" height="25" rx="6" fill="#BBDEFB" stroke="#1976D2" stroke-width="3"/>
+  <rect x="210" y="240" width="40" height="25" rx="6" fill="#BBDEFB" stroke="#1976D2" stroke-width="3"/>
+  <circle cx="200" cy="295" r="15" fill="#42A5F5" stroke="#1565C0" stroke-width="4"/>
+  <circle cx="200" cy="295" r="7" fill="#1565C0"/>
+
+  <!-- Robot Head -->
+  <rect x="145" y="140" width="110" height="80" rx="16" fill="#90CAF9" stroke="#1565C0" stroke-width="7"/>
+  <!-- Antenna -->
+  <line x1="200" y1="140" x2="200" y2="110" stroke="#1565C0" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="200" cy="104" r="11" fill="#FF5252" stroke="#B71C1C" stroke-width="3"/>
+
+  <!-- Eyes -->
+  <rect x="162" y="158" width="24" height="18" rx="5" fill="#1565C0"/>
+  <rect x="166" y="161" width="8" height="8" rx="2" fill="white" opacity="0.5"/>
+  <rect x="214" y="158" width="24" height="18" rx="5" fill="#1565C0"/>
+  <rect x="218" y="161" width="8" height="8" rx="2" fill="white" opacity="0.5"/>
+
+  <!-- Sad mouth -->
+  <path d="M180 195 Q200 185 220 195" stroke="#1565C0" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- Tear drop -->
+  <path d="M170 180 Q166 190 170 196 Q174 190 170 180Z" fill="#42A5F5"/>
+
+  <!-- Right arm (attached) -->
+  <rect x="270" y="228" width="28" height="80" rx="14" fill="#64B5F6" stroke="#1565C0" stroke-width="6"/>
+
+  <!-- LEFT ARM — BROKEN, on the floor -->
+  <g transform="rotate(-65, 80, 360)">
+    <rect x="55" y="300" width="28" height="80" rx="14" fill="#64B5F6" stroke="#1565C0" stroke-width="6"/>
+  </g>
+  <!-- Break mark on body where arm was -->
+  <path d="M128 240 L104 255 L118 262 L100 275" stroke="#E53935" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- Legs -->
+  <rect x="148" y="338" width="38" height="50" rx="12" fill="#64B5F6" stroke="#1565C0" stroke-width="6"/>
+  <rect x="214" y="338" width="38" height="50" rx="12" fill="#64B5F6" stroke="#1565C0" stroke-width="6"/>
+  <!-- Feet -->
+  <ellipse cx="167" cy="392" rx="22" ry="10" fill="#42A5F5" stroke="#1565C0" stroke-width="5"/>
+  <ellipse cx="233" cy="392" rx="22" ry="10" fill="#42A5F5" stroke="#1565C0" stroke-width="5"/>
+</svg>
