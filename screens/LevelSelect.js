@@ -12,14 +12,13 @@ export function template() {
         <!-- Top bar: back button + settings gear -->
         <div class="level-top-bar">
             <button id="btn-level-back" class="btn-icon back-arrow" aria-label="Go back to emotion select" type="button">
-                <img src="assets/ui/back.svg" alt="Back" style="width: 24px;">
+                <i data-lucide="arrow-left"></i>
             </button>
             <div class="player-badge" id="player-badge">
-                <span id="ls-avatar" class="player-badge-avatar">🐱</span>
-                <span id="ls-name"   class="player-badge-name">Player</span>
+                <span id="ls-avatar" class="player-badge-avatar"></span>
             </div>
             <button id="btn-settings" class="btn-icon settings-gear" aria-label="Open settings" type="button">
-                <img src="assets/ui/settings.svg" alt="Settings">
+                <i data-lucide="settings"></i>
             </button>
         </div>
 
@@ -32,7 +31,7 @@ export function template() {
                 <!-- Easy -->
                 <button class="level-btn" data-level="1" id="level-btn-1" type="button">
                     <div class="level-icon">
-                        <img src="assets/ui/level_1.svg" alt="Easy">
+                        <i data-lucide="sprout" style="color: var(--green); width: 48px; height: 48px;"></i>
                     </div>
                     <div class="level-name">Beginner</div>
                     <div class="level-detail">3 Pairs · Core Emotions</div>
@@ -42,7 +41,7 @@ export function template() {
                 <!-- Medium -->
                 <button class="level-btn" data-level="2" id="level-btn-2" type="button">
                     <div class="level-icon">
-                        <img src="assets/ui/level_2.svg" alt="Medium">
+                        <i data-lucide="flower" style="color: var(--yellow); width: 48px; height: 48px;"></i>
                     </div>
                     <div class="level-name">Intermediate</div>
                     <div class="level-detail">6 Pairs · Deeper Feelings</div>
@@ -52,7 +51,7 @@ export function template() {
                 <!-- Hard -->
                 <button class="level-btn" data-level="3" id="level-btn-3" type="button">
                     <div class="level-icon">
-                        <img src="assets/ui/level_3.svg" alt="Hard">
+                        <i data-lucide="tree-pine" style="color: var(--orange); width: 48px; height: 48px;"></i>
                     </div>
                     <div class="level-name">Full Journey</div>
                     <div class="level-detail">12 Pairs · Complete Guide</div>
@@ -67,8 +66,8 @@ export function template() {
 function renderStars(count) {
     let html = '';
     for (let i = 0; i < 3; i++) {
-        const src = i < count ? 'assets/ui/star_gold.svg' : 'assets/ui/star_grey.svg';
-        html += `<img src="${src}" class="ui-star" alt="Star">`;
+        const activeClass = i < count ? 'star-active' : 'star-inactive';
+        html += `<i data-lucide="star" class="ui-star ${activeClass}"></i>`;
     }
     return html;
 }
@@ -81,8 +80,6 @@ export function onShow() {
         const avatar = state.playerAvatar || 'assets/avatars/avatar_1.svg';
         avatarContainer.innerHTML = `<img src="${avatar}" alt="" style="width: 100%; height: 100%;">`;
     }
-
-    document.getElementById('ls-name').textContent = state.playerName || 'Player';
 
     // Best scores
     const scores = loadScores();

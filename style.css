@@ -677,11 +677,10 @@ p {
 
 .game-grid {
     display: grid;
-    gap: 1.5vmin;
+    gap: 20px;
     perspective: 1200px;
-    width: 100%;
-    height: 100%;
-    max-width: 1400px;
+    width: fit-content;
+    margin: 0 auto;
     align-content: center;
     justify-content: center;
 }
@@ -1335,15 +1334,15 @@ p {
 
 /* CSS grid-col classes (replaces inline grid-template-columns) */
 .grid-cols-3 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
 }
 
 .grid-cols-4 {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, auto);
 }
 
 .grid-cols-6 {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, auto);
 }
 
 /* Hard level (24 cards) — extra-small cards to fit without scrolling */
@@ -1919,20 +1918,46 @@ p {
 }
 
 /* ============================================================
-   SVG ICON UTILS
+   LUCIDE ICON STYLING
    ============================================================ */
+.lucide {
+    width: 1.5em;
+    height: 1.5em;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vertical-align: middle;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.btn-icon:hover .lucide {
+    transform: scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
 .ui-star {
-    width: 28px;
-    height: 28px;
-    margin: 0 2px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    width: 32px;
+    height: 32px;
+    margin: 0 4px;
+    stroke-width: 2.5;
+}
+
+.star-active {
+    color: var(--yellow);
+    fill: var(--yellow);
+    filter: drop-shadow(0 0 12px rgba(255, 213, 79, 0.5));
+}
+
+.star-inactive {
+    color: #E0E0E0;
+    fill: #F5F5F5;
 }
 
 .btn-img-icon {
-    width: 20px;
-    height: 20px;
+    width: 20px !important;
+    height: 20px !important;
     margin-left: 8px;
-    vertical-align: middle;
 }
 
 .plus-icon-img {
@@ -1966,10 +1991,10 @@ p {
     object-fit: contain;
 }
 
-.breathing-emoji img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
+.breathing-emoji {
+    width: 80px !important;
+    height: 80px !important;
+    color: white;
 }
 
 .ui-btn-icon {

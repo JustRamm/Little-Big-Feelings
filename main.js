@@ -76,6 +76,11 @@ function navigate(key) {
 
     // Run screen's onShow() if it exports one
     SCREEN_MODULES[key]?.onShow?.();
+
+    // Re-initialize Lucide icons for the new content
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
 }
 
 // ── 4. Shared callbacks ───────────────────────────────────────

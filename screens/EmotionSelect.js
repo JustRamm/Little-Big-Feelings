@@ -114,6 +114,9 @@ export function template() {
     <section id="screen-emotion" class="screen" aria-label="Emotion Select">
         <div class="emotion-select-container">
             <header class="emotion-header">
+                <button id="btn-emotion-back" class="btn-icon back-arrow" aria-label="Go back to name entry" type="button" style="position: absolute; left: 1rem; top: 1rem;">
+                    <i data-lucide="arrow-left"></i>
+                </button>
                 <h2 class="premium-title">Which feeling shall we explore?</h2>
                 <p class="premium-subtitle">Pick an emotion character to begin your journey!</p>
             </header>
@@ -142,6 +145,11 @@ export function init({ navigate }) {
             state.selectedEmotion = btn.dataset.emotion;
             navigate('levelSelect');
         });
+    });
+
+    document.getElementById('btn-emotion-back').addEventListener('click', () => {
+        sounds.click();
+        navigate('nameEntry');
     });
 }
 

@@ -12,7 +12,7 @@ export function template() {
         <div class="settings-container">
             <div class="settings-header">
                 <button id="btn-settings-back" class="btn-icon settings-back-btn" aria-label="Back" type="button">
-                    <img src="assets/ui/arrow_next.svg" alt="Back" style="transform: rotate(180deg); width: 24px;">
+                    <i data-lucide="arrow-left"></i>
                 </button>
                 <h2 style="margin: 0;">Settings</h2>
             </div>
@@ -20,7 +20,7 @@ export function template() {
             <!-- Player Profile Card -->
             <div class="settings-card">
                 <div class="settings-player-preview">
-                    <div id="settings-avatar" class="settings-big-avatar">🐱</div>
+                    <div id="settings-avatar" class="settings-big-avatar"></div>
                     <div id="settings-name"   class="settings-player-name">Player</div>
                 </div>
                 <button id="btn-edit-profile" class="btn-secondary" type="button">
@@ -33,7 +33,7 @@ export function template() {
                 <div class="settings-row">
                     <div class="settings-label">
                         <span class="settings-icon">
-                            <img src="assets/ui/sound_on.svg" alt="" id="sound-icon-preview">
+                            <i id="sound-icon-preview" data-lucide="volume-2"></i>
                         </span>
                         <div class="settings-label-text">
                             <div class="settings-label-title">Sound Effects</div>
@@ -51,7 +51,7 @@ export function template() {
                 <div class="settings-row">
                     <div class="settings-label">
                         <span class="settings-icon">
-                            <img src="assets/ui/delete.svg" alt="">
+                            <i data-lucide="trash-2" style="color: #EF5350;"></i>
                         </span>
                         <div class="settings-label-text">
                             <div class="settings-label-title">Reset Progress</div>
@@ -119,7 +119,7 @@ export function init({ navigate }) {
         clearAll();
         resetScores();
         state.playerName = 'Player';
-        state.playerAvatar = '🐱';
+        state.playerAvatar = 'assets/avatars/avatar_1.svg';
         sounds.setEnabled(true);
         navigate('nameEntry');
     });
@@ -133,6 +133,7 @@ function _updateSoundUI(on) {
         btn.setAttribute('aria-checked', on);
     }
     if (iconPreview) {
-        iconPreview.src = on ? 'assets/ui/sound_on.svg' : 'assets/ui/sound_off.svg';
+        iconPreview.setAttribute('data-lucide', on ? 'volume-2' : 'volume-x');
+        if (window.lucide) window.lucide.createIcons();
     }
 }

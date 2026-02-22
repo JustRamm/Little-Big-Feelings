@@ -10,7 +10,7 @@ export function template() {
             
             <div class="breathing-oops-row">
                 <div class="breathing-oops-icon">
-                    <img src="assets/ui/question.svg" alt="Oops" style="width: 50px;">
+                    <i data-lucide="help-circle" style="width: 48px; height: 48px; color: var(--orange);"></i>
                 </div>
                 <div class="breathing-header-text">
                     <h2 class="breathing-title">Not a match this time!</h2>
@@ -20,7 +20,7 @@ export function template() {
 
             <div class="breathing-circle-wrap">
                 <div class="breathing-circle" id="breathing-circle">
-                    <img src="assets/ui/breathe_in.svg" id="breathing-icon" class="breathing-emoji" alt="">
+                    <i id="breathing-icon" data-lucide="wind" class="breathing-emoji"></i>
                 </div>
                 <p class="breathing-phase-text" id="breathing-text">Ready?</p>
             </div>
@@ -47,7 +47,9 @@ export function show(onDone) {
     ctrlBtn.classList.add('breathing-done-hidden');
     text.textContent = "Ready?";
     circle.className = "breathing-circle phase-idle";
-    icon.src = 'assets/ui/breathe_in.svg';
+
+    icon.setAttribute('data-lucide', 'wind');
+    if (window.lucide) window.lucide.createIcons();
 
     // Start cycle after a short delay
     setTimeout(() => {
@@ -73,19 +75,22 @@ function startBreatheCycle(circle, text, icon, onCycleDone) {
 
     text.textContent = "Breathe In...";
     circle.className = "breathing-circle phase-expand";
-    icon.src = 'assets/ui/breathe_in.svg';
+    icon.setAttribute('data-lucide', 'wind');
+    if (window.lucide) window.lucide.createIcons();
 
     setTimeout(() => {
         // 2. HOLD (2s)
         text.textContent = "Hold...";
         circle.className = "breathing-circle phase-hold";
-        icon.src = 'assets/ui/breathe_hold.svg';
+        icon.setAttribute('data-lucide', 'pause');
+        if (window.lucide) window.lucide.createIcons();
 
         setTimeout(() => {
             // 3. OUT (4s)
             text.textContent = "Slowly Out...";
             circle.className = "breathing-circle phase-shrink";
-            icon.src = 'assets/ui/breathe_out.svg';
+            icon.setAttribute('data-lucide', 'wind');
+            if (window.lucide) window.lucide.createIcons();
 
             setTimeout(() => {
                 onCycleDone();

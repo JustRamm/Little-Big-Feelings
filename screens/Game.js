@@ -22,8 +22,8 @@ export function template() {
 
         <!-- HUD bar -->
         <div class="game-header">
-            <button id="btn-home"  class="btn-icon" aria-label="Back to home"  title="Home" type="button">
-                <img src="assets/ui/home.svg" alt="Home">
+            <button id="btn-game-back" class="btn-icon" aria-label="Back to level selection" title="Back to Levels" type="button">
+                <i data-lucide="arrow-left"></i>
             </button>
 
             <div class="hud-stats">
@@ -34,8 +34,8 @@ export function template() {
                 <div class="stat-divider"></div>
                 <div class="stat-item">
                     <span class="stat-label">Level</span>
-                    <span id="stat-level-wrap" class="stat-value">
-                        <img src="assets/ui/level_1.svg" alt="" id="stat-level-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 4px;">
+                    <span id="stat-level-wrap" class="stat-value" style="display: flex; align-items: center; gap: 4px;">
+                        <i id="stat-level-icon" style="width: 18px; height: 18px;"></i>
                         <span id="stat-level-text">Easy</span>
                     </span>
                 </div>
@@ -55,22 +55,22 @@ export function template() {
 
             <div id="timer-wrap" class="timer-wrap timer-hidden" aria-live="polite">
                 <span class="timer-icon" aria-hidden="true">
-                    <img src="assets/ui/timer.svg" alt="Timer">
+                    <i data-lucide="timer" style="width: 20px; height: 20px;"></i>
                 </span>
                 <span id="timer-display" class="timer-display">02:00</span>
             </div>
 
             <div class="hud-right-actions">
                 <button id="btn-peek"  class="btn-icon peek-btn" aria-label="Peek at all cards" title="Peek" type="button">
-                    <img src="assets/ui/peek.svg" alt="Peek">
+                    <i data-lucide="eye"></i>
                     <span class="btn-badge" id="peek-count-badge">0</span>
                 </button>
                 <button id="btn-hint"  class="btn-icon hint-btn" aria-label="Get a hint" title="Hint (max 3)" type="button">
-                    <img src="assets/ui/hint.svg" alt="Hint">
+                    <i data-lucide="sparkles"></i>
                     <span class="btn-badge" id="hint-count-badge">3</span>
                 </button>
                 <button id="btn-reset" class="btn-icon" aria-label="Reset game" title="Reset" type="button">
-                    <img src="assets/ui/reset.svg" alt="Reset">
+                    <i data-lucide="rotate-ccw"></i>
                 </button>
             </div>
         </div>
@@ -120,7 +120,13 @@ function updateHUD() {
     }
 
     if (lvlText) lvlText.textContent = LEVELS[state.currentLevel].label;
-    if (lvlIcon) lvlIcon.src = `assets/ui/level_${state.currentLevel}.svg`;
+    if (lvlIcon) {
+        const iconName = state.currentLevel === 1 ? 'sprout' : state.currentLevel === 2 ? 'flower' : 'tree-pine';
+        const iconColor = state.currentLevel === 1 ? 'var(--green)' : state.currentLevel === 2 ? 'var(--yellow)' : 'var(--orange)';
+        lvlIcon.setAttribute('data-lucide', iconName);
+        lvlIcon.style.color = iconColor;
+        // Re-run lucide for just this element if needed, but navigate() handles it
+    }
 
     // Progress bar
     const fill = document.getElementById('progress-bar-fill');
@@ -201,7 +207,7 @@ function createCardEl(cardData) {
         <div class="card-inner">
             <div class="card-face card-back">
                 <div class="card-back-pattern">
-                    <img src="assets/ui/question.svg" alt="Hidden">
+                    <i data-lucide="help-circle" style="width: 64px; height: 64px; color: white; opacity: 0.8;"></i>
                 </div>
             </div>
             <div class="card-face card-front">
@@ -420,11 +426,14 @@ export function startGame() {
 export function init({ navigate, onVictory }) {
     _onVictory = onVictory;
 
-    document.getElementById('btn-home').addEventListener('click', () => {
-        sounds.click();
-        clearInterval(state.timerInterval);
-        navigate('emotionSelect');
-    });
+    const backBtn = document.getElementById('btn-game-back');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            sounds.click();
+            clearInterval(state.timerInterval);
+            navigate('levelSelect');
+        });
+    }
 
     document.getElementById('btn-reset').addEventListener('click', () => {
         sounds.click();

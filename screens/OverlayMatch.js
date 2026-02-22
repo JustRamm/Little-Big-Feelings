@@ -12,7 +12,7 @@ export function template() {
             <div class="match-visuals">
                 <div class="matched-pair">
                     <img id="match-img-1" src="" alt="First matched card">
-                    <img src="assets/ui/heart.svg" alt="" class="plus-icon-img">
+                    <i data-lucide="heart" class="plus-icon-img" style="color: var(--pink); fill: var(--pink);"></i>
                     <img id="match-img-2" src="" alt="Second matched card">
                 </div>
             </div>
