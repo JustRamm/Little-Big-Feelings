@@ -1,4 +1,4 @@
-# <img src="public/assets/brand/logo.svg" width="48" height="48" valign="middle"> Little Big Feelings — Emotional Intelligence Game
+# <img src="public/assets/brand/nextlogo.svg" width="48" height="48" valign="middle"> Little Big Feelings — Emotional Intelligence Game
 
 [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -59,7 +59,7 @@ This project is built with a **Vanilla JavaScript SPA (Single Page Application)*
 
 ---
 
-## <img src="public/assets/brand/logo.svg" width="32" height="32" valign="middle"> Getting Started
+## <img src="public/assets/brand/nextlogo.svg" width="32" height="32" valign="middle"> Getting Started
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+)
@@ -69,8 +69,8 @@ This project is built with a **Vanilla JavaScript SPA (Single Page Application)*
 
 1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/JustRamm/Emo-Match.git
-    cd Emo-Match
+    git clone https://github.com/JustRamm/Little-Big-Feelings.git
+    cd Little-Big-Feelings
     ```
 
 2.  **Install Dependencies**
