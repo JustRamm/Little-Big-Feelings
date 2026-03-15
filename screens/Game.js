@@ -427,6 +427,7 @@ export function startGame() {
     if (cfg.pairs === 6) cols = 4; // 4x3
     if (cfg.pairs === 10) cols = 5; // 5x4
     
+    state.maxMistakes = cfg.chances || 3;
     board.classList.add(GRID_COLS[cols] || 'grid-cols-4');
 
     // Pick pairs from the selected emotion's pool (or all if level 4)
