@@ -22,6 +22,7 @@ import * as Settings from './screens/Settings.js';
 import * as OverlayWrong from './screens/OverlayWrong.js';
 import * as Journal from './screens/Journal.js';
 import * as MoodBattery from './screens/MoodBattery.js';
+import * as CopingAlphabet from './screens/CopingAlphabet.js';
 
 // ── 1. Mount all templates into #app ─────────────────────────
 const app = document.getElementById('app');
@@ -47,6 +48,7 @@ app.insertAdjacentHTML('beforeend', /* html */`
     BreathingBuddy,
     Victory,
     MoodBattery,
+    CopingAlphabet,
 ].forEach(m => app.insertAdjacentHTML('beforeend', m.template()));
 
 // ── 2. Screen registry ────────────────────────────────────────
@@ -62,6 +64,7 @@ const SCREEN_MAP = {
     journal: document.getElementById('screen-journal'),
     victory: document.getElementById('screen-victory'),
     moodBattery: document.getElementById('screen-mood-battery'),
+    alphabetGame: document.getElementById('screen-alphabet-game'),
 };
 
 // Maps logical key → module (for onShow hook)
@@ -139,6 +142,8 @@ BreathingBuddy.init();
 Victory.init({ navigate, startGame });
 
 MoodBattery.init({ navigate });
+
+CopingAlphabet.init({ navigate });
 
 // ── 6. Boot ───────────────────────────────────────────────────
 navigate('splash');

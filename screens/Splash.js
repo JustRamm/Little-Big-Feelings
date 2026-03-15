@@ -42,10 +42,16 @@ export function template() {
                     <span>Start Your Journey</span>
                     <i data-lucide="play" class="btn-icon-inline"></i>
                 </button>
-                <button id="btn-mb-game" class="btn-secondary hidden" type="button" style="margin-top: 1rem; width: 100%;">
-                    <span>The Recovery Arcade</span>
-                    <i data-lucide="zap" class="btn-icon-inline"></i>
-                </button>
+                <div class="arcade-buttons hidden" id="arcade-buttons" style="display: flex; gap: 0.8rem; width: 100%; margin-top: 1rem;">
+                    <button id="btn-mb-game" class="btn-secondary" type="button" style="flex: 1;">
+                        <span>Mood Battery</span>
+                        <i data-lucide="zap" class="btn-icon-inline"></i>
+                    </button>
+                    <button id="btn-az-game" class="btn-secondary" type="button" style="flex: 1; background: var(--purple); border-color: #7B1FA2;">
+                        <span>A-Z Rush</span>
+                        <i data-lucide="type" class="btn-icon-inline"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="splash-footer">
@@ -93,6 +99,11 @@ export function init({ navigate }) {
         navigate('moodBattery');
     });
 
+    document.getElementById('btn-az-game').addEventListener('click', () => {
+        sounds.click();
+        navigate('alphabetGame');
+    });
+
     _startPreloading();
 }
 
@@ -134,7 +145,7 @@ async function _startPreloading() {
             setTimeout(() => {
                 loader?.classList.add('hidden');
                 btn?.classList.remove('hidden');
-                document.getElementById('btn-mb-game')?.classList.remove('hidden');
+                document.getElementById('arcade-buttons')?.classList.remove('hidden');
             }, 500);
         }
     };
