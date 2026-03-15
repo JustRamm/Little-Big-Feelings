@@ -771,7 +771,7 @@ p {
    ============================================================ */
 .level-top-bar {
     width: 100%;
-    max-width: 1400px;
+    max-width: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -2046,7 +2046,7 @@ p {
    ============================================================ */
 .level-top-bar {
     width: 100%;
-    max-width: 900px;
+    max-width: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
