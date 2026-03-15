@@ -123,11 +123,24 @@ export function template() {
                 </div>
                 <!-- Mini-game Shortcuts -->
                 <div class="mini-game-shortcuts">
-                    <button id="btn-mb-shortcut" class="mini-game-icon-btn mb-shortcut" title="Mood Battery" type="button">
-                        <i data-lucide="zap"></i>
+                    <button id="btn-mb-shortcut" class="mini-game-badge mb-badge" title="Mood Buddy Game" type="button">
+                        <svg viewBox="0 0 100 100" class="game-badge-svg">
+                            <circle cx="50" cy="50" r="45" fill="#FFD54F" />
+                            <circle cx="50" cy="50" r="38" fill="white" opacity="0.3" />
+                            <path d="M50 20 L60 45 L85 45 L65 60 L75 85 L50 70 L25 85 L35 60 L15 45 L40 45 Z" fill="#F57C00" />
+                            <path d="M45 45 L50 30 L55 45 Z" fill="white" opacity="0.6" />
+                        </svg>
+                        <span>Mood Buddy</span>
                     </button>
-                    <button id="btn-az-shortcut" class="mini-game-icon-btn az-shortcut" title="A-Z Rush" type="button">
-                        <i data-lucide="type"></i>
+                    <button id="btn-az-shortcut" class="mini-game-badge az-badge" title="A-Z Rush Game" type="button">
+                        <svg viewBox="0 0 100 100" class="game-badge-svg">
+                            <rect x="10" y="25" width="80" height="50" rx="15" fill="#4FC3F7" />
+                            <circle cx="25" cy="50" r="8" fill="white" opacity="0.5" />
+                            <rect x="60" y="42" width="20" height="6" rx="3" fill="white" />
+                            <rect x="67" y="35" width="6" height="20" rx="3" fill="white" />
+                            <text x="50" y="90" text-anchor="middle" font-family="Outfit" font-weight="800" font-size="20" fill="#0288D1">A-Z</text>
+                        </svg>
+                        <span>A-Z Rush</span>
                     </button>
                 </div>
             </header>
