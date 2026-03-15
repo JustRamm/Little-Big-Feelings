@@ -56,12 +56,6 @@ export function template() {
                 </div>
             </div>
 
-            <div id="timer-wrap" class="timer-wrap timer-hidden" aria-live="polite">
-                <span class="timer-icon" aria-hidden="true">
-                    <i data-lucide="timer" style="width: 20px; height: 20px;"></i>
-                </span>
-                <span id="timer-display" class="timer-display">02:00</span>
-            </div>
 
             <div class="hud-right-actions">
                 <button id="btn-peek"  class="btn-icon peek-btn" aria-label="Peek at all cards" title="Peek" type="button">
@@ -190,37 +184,6 @@ function updateHUD() {
         hintBtn.disabled = left <= 0;
         if (hintBadge) hintBadge.textContent = left;
     }
-}
-
-// ── Timer ────────────────────────────────────────────────────
-function startTimer(seconds) {
-    const wrap = document.getElementById('timer-wrap');
-    const display = document.getElementById('timer-display');
-
-    if (seconds >= 99999) {
-        wrap.classList.add('timer-hidden');
-        return;
-    }
-
-    wrap.classList.remove('timer-hidden');
-    state.timeLeft = seconds;
-    _renderTimer(display, seconds);
-
-    state.timerInterval = setInterval(() => {
-        state.timeLeft--;
-        _renderTimer(display, state.timeLeft);
-        if (state.timeLeft <= 10) display.classList.add('timer-warning');
-        if (state.timeLeft <= 0) {
-            clearInterval(state.timerInterval);
-            if (state.matchedCount > 0) _onVictory(); // only call if at least 1 match
-        }
-    }, 1000);
-}
-
-function _renderTimer(el, t) {
-    const m = Math.floor(t / 60).toString().padStart(2, '0');
-    const s = (t % 60).toString().padStart(2, '0');
-    el.textContent = `${m}:${s}`;
 }
 
 // ── Card creation ─────────────────────────────────────────────
@@ -422,10 +385,10 @@ export function startGame() {
     if (totalCards >= 20) cols = 5; // 5x4 or similar
     
     // Actually, let's keep it simple based on pairs
-    if (cfg.pairs === 3) cols = 3; // 3x2
-    if (cfg.pairs === 4) cols = 4; // 4x2 (Requested)
-    if (cfg.pairs === 6) cols = 4; // 4x3
-    if (cfg.pairs === 10) cols = 5; // 5x4
+    if (cfg.pairs === 3) cols = 3; // 3x2 (Beginner)
+    if (cfg.pairs === 4) cols = 4; // 4x2 (Intermediate)
+    if (cfg.pairs === 6) cols = 6; // 6x2 (Full Journey)
+    if (cfg.pairs === 10) cols = 5; // 5x4 (Grand Master)
     
     state.maxMistakes = cfg.chances || 3;
     board.classList.add(GRID_COLS[cols] || 'grid-cols-4');
@@ -467,7 +430,6 @@ export function startGame() {
 
     state.gameCards.forEach(card => board.appendChild(createCardEl(card)));
     updateHUD();
-    startTimer(cfg.time);
 }
 
 /**
@@ -501,14 +463,12 @@ export function init({ navigate, onVictory }) {
         exitYes.addEventListener('click', () => {
             sounds.click();
             exitOverlay.classList.remove('active');
-            clearInterval(state.timerInterval);
             navigate('levelSelect');
         });
     }
 
     document.getElementById('btn-reset').addEventListener('click', () => {
         sounds.click();
-        clearInterval(state.timerInterval);
         startGame();
     });
 

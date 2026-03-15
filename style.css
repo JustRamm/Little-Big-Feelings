@@ -794,15 +794,17 @@ p {
 }
 
 .level-select-container {
-    max-width: 1400px;
     width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    /* Center cards in the middle */
-    gap: 2rem;
-    flex: 1;
+    gap: clamp(1rem, 3vh, 2rem);
+    padding: 1rem 0 3rem;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .level-select-container h2 {
@@ -826,10 +828,13 @@ p {
 
 .level-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1rem, 3vw, 2.5rem);
-    width: 100%;
-    padding: 0 1rem;
+    /* Level grid: switch to 2 cols on tablet, 1 on mobile, or 4 for specific desktop views */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 2rem;
+    width: 90%;
+    max-width: 1100px;
+    padding: 1rem;
+    margin: 0 auto;
 }
 
 .level-btn {
@@ -1301,12 +1306,21 @@ p {
     justify-content: center;
 }
 
+.game-grid.grid-cols-4 {
+    gap: clamp(20px, 6vw, 80px); /* Significant increase for Intermediate */
+}
+
+.game-grid.grid-cols-6 {
+    gap: clamp(10px, 3vw, 40px); /* Exactly half of Intermediate for Full Journey */
+}
+
 /* ============================================================
    CARD STYLES
    ============================================================ */
+/* Standardized Large Sizes for Visibility */
 .card {
-    --card-w: clamp(70px, 11vw, 160px);
-    --card-h: clamp(95px, 15vw, 220px);
+    --card-w: clamp(100px, 18vw, 240px);
+    --card-h: clamp(140px, 25vw, 330px);
     width: var(--card-w);
     height: var(--card-h);
     position: relative;
@@ -1315,25 +1329,44 @@ p {
     border-radius: 20px;
 }
 
-/* Reduced card sizes for different levels */
-.grid-cols-6 .card {
-    --card-w: clamp(50px, 8vw, 100px);
-    --card-h: clamp(70px, 11vw, 140px);
+/* Giant size for Beginner (3 columns) */
+.grid-cols-3 .card {
+    --card-w: clamp(110px, 20vw, 260px);
+    --card-h: clamp(155px, 28vw, 360px);
+}
+
+/* Slightly smaller for Intermediate (4 columns) to balance the wide gap */
+.grid-cols-4 .card {
+    --card-w: clamp(95px, 17vw, 210px);
+    --card-h: clamp(135px, 24vw, 290px);
 }
 
 .grid-cols-5 .card {
-    --card-w: clamp(60px, 9vw, 120px);
-    --card-h: clamp(82px, 13vw, 170px);
+    --card-w: clamp(55px, 9vw, 110px);
+    --card-h: clamp(75px, 12vw, 150px);
 }
 
-.grid-cols-4 .card {
-    --card-w: clamp(75px, 12vw, 150px);
-    --card-h: clamp(105px, 16vw, 210px);
+.grid-cols-6 .card {
+    --card-w: clamp(48px, 8.5vw, 105px); /* Half of Intermediate */
+    --card-h: clamp(68px, 12vw, 145px);  /* Half of Intermediate */
 }
 
-.grid-cols-3 .card {
-    --card-w: clamp(90px, 15vw, 210px);
-    --card-h: clamp(125px, 22vw, 290px);
+/* Proportional scaling for dense grids */
+.grid-cols-5 .card-name,
+.grid-cols-6 .card-name {
+    font-size: 0.7rem;
+    margin-top: 2px;
+}
+
+.grid-cols-5 .card-label,
+.grid-cols-6 .card-label {
+    font-size: 0.5rem;
+    padding: 2px 6px;
+}
+
+.grid-cols-5 .card-front img,
+.grid-cols-6 .card-front img {
+    width: 65%;
 }
 
 .card:hover:not(.flipped):not(.matched) {
@@ -2022,6 +2055,7 @@ p {
 
 .grid-cols-4 {
     grid-template-columns: repeat(4, auto);
+    gap: 1.5rem; /* Increased gap for Intermediate grid */
 }
 
 .grid-cols-5 {
@@ -2032,21 +2066,7 @@ p {
     grid-template-columns: repeat(6, auto);
 }
 
-/* Hard level (24 cards) Ã¢â‚¬â€ extra-small cards to fit without scrolling */
-.grid-cols-6 .card {
-    --card-w: clamp(10vmin, 13vmin, 120px);
-    --card-h: clamp(14vmin, 17vmin, 155px);
-    min-width: 50px;
-    min-height: 70px;
-}
-
-/* Medium level (12 cards) Ã¢â‚¬â€ slightly smaller cards */
-.grid-cols-4 .card {
-    --card-w: clamp(14vmin, 17vmin, 145px);
-    --card-h: clamp(18vmin, 23vmin, 190px);
-    min-width: 70px;
-    min-height: 95px;
-}
+/* Legacy overrides removed to prevent conflicts with modern responsive system */
 
 @media (max-width: 600px) and (orientation: portrait) {
     .grid-cols-6 {
