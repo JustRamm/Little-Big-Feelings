@@ -42,6 +42,10 @@ export function template() {
                     <span>Start Your Journey</span>
                     <i data-lucide="play" class="btn-icon-inline"></i>
                 </button>
+                <button id="btn-mb-game" class="btn-secondary hidden" type="button" style="margin-top: 1rem; width: 100%;">
+                    <span>The Recovery Arcade</span>
+                    <i data-lucide="zap" class="btn-icon-inline"></i>
+                </button>
             </div>
 
             <div class="splash-footer">
@@ -82,6 +86,11 @@ export function init({ navigate }) {
             state.playerAvatar = player.avatar;
         }
         navigate('nameEntry');
+    });
+
+    document.getElementById('btn-mb-game').addEventListener('click', () => {
+        sounds.click();
+        navigate('moodBattery');
     });
 
     _startPreloading();
@@ -125,6 +134,7 @@ async function _startPreloading() {
             setTimeout(() => {
                 loader?.classList.add('hidden');
                 btn?.classList.remove('hidden');
+                document.getElementById('btn-mb-game')?.classList.remove('hidden');
             }, 500);
         }
     };

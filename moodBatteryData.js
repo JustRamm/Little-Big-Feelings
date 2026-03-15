@@ -1,0 +1,22 @@
+export const MOOD_BATTERY_ACTIONS = [
+    { id: 'mb-1', action: 'Call up a friend', trigger: "I'm feeling alone.", icon: 'phone' },
+    { id: 'mb-2', action: 'Tell someone "I LOVE YOU"', trigger: "I don't feel loved.", icon: 'heart' },
+    { id: 'mb-3', action: 'Write about how you feel', trigger: "I have big feelings inside.", icon: 'pen-tool' },
+    { id: 'mb-4', action: 'Celebrate what\'s working', trigger: "Everything is going wrong.", icon: 'party-popper' },
+    { id: 'mb-5', action: 'Eat something healthy', trigger: "I feel weak and hungry.", icon: 'apple' },
+    { id: 'mb-6', action: 'Find a dog', trigger: "I need a furry friend.", icon: 'dog' },
+    { id: 'mb-7', action: 'Take a time out', trigger: "Everything is too much!", icon: 'timer' },
+    { id: 'mb-8', action: 'Go outside', trigger: "I've been inside too long.", icon: 'sun' },
+    { id: 'mb-9', action: 'Look at pretty art', trigger: "The world looks gray today.", icon: 'image' },
+    { id: 'mb-10', action: 'Trash negative thoughts', trigger: "I'm not good at anything.", icon: 'trash' },
+    { id: 'mb-11', action: 'Drink warm tea', trigger: "My body feels cold and tense.", icon: 'coffee' },
+    { id: 'mb-12', action: 'Remember how far you have come', trigger: "I'll never get this right.", icon: 'trending-up' },
+    { id: 'mb-13', action: 'Wear something comfy', trigger: "My clothes are too tight.", icon: 'shirt' },
+    { id: 'mb-14', action: 'Remember you\'re small', trigger: "Problems feel like giants.", icon: 'globe' },
+    { id: 'mb-15', action: 'Compliment yourself', trigger: "I'm being too hard on myself.", icon: 'star' },
+    { id: 'mb-16', action: 'Don\'t overbook', trigger: "I have too much to do today.", icon: 'calendar-off' },
+    { id: 'mb-17', action: 'Consider how you\'re lucky', trigger: "Why does this happen to me?", icon: 'clover' },
+    { id: 'mb-18', action: 'Listen to happy tunes', trigger: "It's too quiet and sad.", icon: 'music' },
+    { id: 'mb-19', action: 'Slow down', trigger: "I'm rushing too fast!", icon: 'traffic-light' },
+    { id: 'mb-20', action: 'Be your own cheerleader', trigger: "I feel like giving up.", icon: 'megaphone' }
+];
