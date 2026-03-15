@@ -44,6 +44,21 @@ export function template() {
                         <div class="toggle-thumb"></div>
                     </button>
                 </div>
+
+                <div class="settings-row">
+                    <div class="settings-label">
+                        <span class="settings-icon">
+                            <i id="speech-icon-preview" data-lucide="message-square"></i>
+                        </span>
+                        <div class="settings-label-text">
+                            <div class="settings-label-title">Voice Narration</div>
+                            <div class="settings-label-sub">Read matches out loud</div>
+                        </div>
+                    </div>
+                    <button id="btn-speech-toggle" class="toggle-btn" aria-label="Toggle narration">
+                        <div class="toggle-thumb"></div>
+                    </button>
+                </div>
             </div>
 
             <!-- Danger Zone -->
@@ -81,6 +96,7 @@ export function onShow() {
 
     // Sound toggle position
     _updateSoundUI(state.soundEnabled);
+    _updateSpeechUI(state.speechEnabled);
 }
 
 /**
@@ -116,6 +132,19 @@ export function init({ navigate }) {
         _updateSoundUI(newVal);
     });
 
+    // Speech toggle
+    const speechBtn = document.getElementById('btn-speech-toggle');
+    speechBtn.addEventListener('click', () => {
+        const newVal = !state.speechEnabled;
+        state.speechEnabled = newVal;
+        saveSettings({ 
+            soundEnabled: state.soundEnabled,
+            speechEnabled: newVal 
+        });
+        if (newVal) sounds.click();
+        _updateSpeechUI(newVal);
+    });
+
     // Reset all data
     document.getElementById('btn-clear-data').addEventListener('click', () => {
         if (!confirm('This will delete your name, avatar, and all level scores. Sure?')) return;
@@ -137,6 +166,19 @@ function _updateSoundUI(on) {
     }
     if (iconPreview) {
         iconPreview.setAttribute('data-lucide', on ? 'volume-2' : 'volume-x');
+        if (window.lucide) window.lucide.createIcons();
+    }
+}
+
+function _updateSpeechUI(on) {
+    const btn = document.getElementById('btn-speech-toggle');
+    const iconPreview = document.getElementById('speech-icon-preview');
+    if (btn) {
+        btn.classList.toggle('toggle-on', on);
+        btn.setAttribute('aria-checked', on);
+    }
+    if (iconPreview) {
+        iconPreview.setAttribute('data-lucide', on ? 'message-square' : 'message-square-off');
         if (window.lucide) window.lucide.createIcons();
     }
 }

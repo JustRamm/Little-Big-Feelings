@@ -20,11 +20,12 @@ export const state = {
 
     // ── Player profile ────────────────────────────────────────
     playerName: 'Player',
-    playerAvatar: '🐱',
+    playerAvatar: 'assets/avatars/avatar_1.svg',
 
     // ── App preferences ───────────────────────────────────────
     soundEnabled: true,
     speechEnabled: true,
+    unlockedInsights: [], // Array of emotion/action pair IDs
     selectedEmotion: null, // e.g., 'anger', 'sadness', 'anxiety', etc.
 };
 

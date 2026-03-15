@@ -12,7 +12,8 @@
 export const LEVELS = {
     1: { pairs: 3, time: 99999, label: 'Beginner', peekDuration: 3000, peekUses: 3, icon: 'assets/action_match/calm_child_card.svg' },
     2: { pairs: 6, time: 99999, label: 'Intermediate', peekDuration: 2000, peekUses: 2, icon: 'assets/action_match/mindfulness_card.svg' },
-    3: { pairs: 10, time: 99999, label: 'Expert', peekDuration: 1000, peekUses: 1, icon: 'assets/action_match/brave_lion_card.svg' },
+    3: { pairs: 10, time: 99999, label: 'Full Journey', peekDuration: 1000, peekUses: 1, icon: 'assets/action_match/brave_lion_card.svg' },
+    4: { pairs: 15, time: 99999, label: 'Grand Master', peekDuration: 500, peekUses: 0, icon: 'assets/brand/logo.svg' },
 };
 
 /**

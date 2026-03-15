@@ -5,40 +5,59 @@
 const PFX = 'emotion-match-';
 
 function set(key, val, persistent = true) {
-    const storage = persistent ? localStorage : sessionStorage;
-    storage.setItem(PFX + key, JSON.stringify(val));
+    try {
+        const storage = persistent ? localStorage : sessionStorage;
+        storage.setItem(PFX + key, JSON.stringify(val));
+    } catch (e) {
+        console.warn('Storage blocked or failed:', e);
+    }
 }
 function get(key, persistent = true) {
-    const storage = persistent ? localStorage : sessionStorage;
-    try { return JSON.parse(storage.getItem(PFX + key)); }
-    catch { return null; }
+    try {
+        const storage = persistent ? localStorage : sessionStorage;
+        const item = storage.getItem(PFX + key);
+        return item ? JSON.parse(item) : null;
+    } catch (e) {
+        console.warn('Storage read blocked or failed:', e);
+        return null;
+    }
 }
 
 // ── Player profile ───────────────────────────────────────────
-export function savePlayer(data) { set('player', data, false); }
-export function loadPlayer() { return get('player', false); }
+export function savePlayer(data) { set('player', data); }
+export function loadPlayer() { return get('player'); }
 
-// ── Per-level best scores (In-memory only, lost on refresh) ───
-let memoryScores = {};
-
+// ── Per-level best scores ────────────────────────────────────
 /** @param {number} level  @param {{ stars:number, attempts:number }} data */
 export function saveScore(level, data) {
-    const prev = memoryScores[level];
+    const scores = get('scores') || {};
+    const prev = scores[level];
     if (!prev || data.stars > prev.stars ||
         (data.stars === prev.stars && data.attempts < prev.attempts)) {
-        memoryScores[level] = data;
+        scores[level] = data;
+        set('scores', scores);
     }
 }
-export function loadScores() { return memoryScores; }
-export function resetScores() { memoryScores = {}; }
+export function loadScores() { return get('scores') || {}; }
+export function resetScores() { set('scores', {}); }
+
+// ── Unlocked Insights ─────────────────────────────────────────
+export function saveUnlockedInsights(ids) { set('insights', ids); }
+export function loadUnlockedInsights() { return get('insights') || []; }
 
 // ── App settings ─────────────────────────────────────────────
 export function saveSettings(data) { set('settings', data); }
-export function loadSettings() { return get('settings') ?? { soundEnabled: true }; }
+export function loadSettings() { 
+    return get('settings') ?? { soundEnabled: true, speechEnabled: true }; 
+}
 
 // ── Nuclear option ───────────────────────────────────────────
 export function clearAll() {
-    Object.keys(localStorage)
-        .filter(k => k.startsWith(PFX))
-        .forEach(k => localStorage.removeItem(k));
+    try {
+        Object.keys(localStorage)
+            .filter(k => k.startsWith(PFX))
+            .forEach(k => localStorage.removeItem(k));
+    } catch (e) {
+        console.warn('Storage clear failed:', e);
+    }
 }

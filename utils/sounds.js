@@ -107,16 +107,35 @@ export const sounds = {
     },
 
     /** Happy ascending arpeggio on a correct match */
-    match() {
-        [523, 659, 784, 1047].forEach((freq, i) =>
-            tone({ freq, type: 'sine', dur: 0.28, vol: 0.2, delay: i * 0.09 })
+    match(emotionId = 'stress') {
+        const baseFreq = this._getEmotionFrequency(emotionId);
+        [1, 1.25, 1.5, 2].forEach((mult, i) =>
+            tone({ 
+                freq: baseFreq * mult, 
+                type: emotionId === 'anger' ? 'sawtooth' : 'sine', 
+                dur: 0.28, 
+                vol: 0.15, 
+                delay: i * 0.09 
+            })
         );
     },
 
     /** Low descending tones — gentle, not harsh — on a wrong match */
-    wrong() {
-        tone({ freq: 300, type: 'triangle', dur: 0.18, vol: 0.15 });
-        tone({ freq: 230, type: 'triangle', dur: 0.2, vol: 0.12, delay: 0.14 });
+    wrong(emotionId = 'stress') {
+        const baseFreq = emotionId === 'anger' ? 200 : 300;
+        tone({ freq: baseFreq, type: 'triangle', dur: 0.18, vol: 0.15 });
+        tone({ freq: baseFreq * 0.75, type: 'triangle', dur: 0.2, vol: 0.12, delay: 0.14 });
+    },
+
+    _getEmotionFrequency(id) {
+        const freqs = {
+            anger: 300,      // Heavy/Low
+            sadness: 440,    // Pure/Standard
+            anxiety: 600,    // High/Tense
+            loneliness: 350, // Mellow
+            stress: 523      // Energetic (Default)
+        };
+        return freqs[id] || 523;
     },
 
     /** Full fanfare on victory */

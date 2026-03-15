@@ -19,6 +19,8 @@ import * as OverlayMatch from './screens/OverlayMatch.js';
 import * as BreathingBuddy from './screens/BreathingBuddy.js';
 import * as Victory from './screens/Victory.js';
 import * as Settings from './screens/Settings.js';
+import * as OverlayWrong from './screens/OverlayWrong.js';
+import * as Journal from './screens/Journal.js';
 
 // ── 1. Mount all templates into #app ─────────────────────────
 const app = document.getElementById('app');
@@ -39,6 +41,8 @@ app.insertAdjacentHTML('beforeend', /* html */`
     Game,
     Settings,
     OverlayMatch,
+    OverlayWrong,
+    Journal,
     BreathingBuddy,
     Victory,
 ].forEach(m => app.insertAdjacentHTML('beforeend', m.template()));
@@ -53,6 +57,7 @@ const SCREEN_MAP = {
     tutorial: document.getElementById('screen-tutorial'),
     game: document.getElementById('screen-game'),
     settings: document.getElementById('screen-settings'),
+    journal: document.getElementById('screen-journal'),
     victory: document.getElementById('screen-victory'),
 };
 
@@ -62,6 +67,7 @@ const SCREEN_MODULES = {
     emotionSelect: EmotionSelect,
     levelSelect: LevelSelect,
     settings: Settings,
+    journal: Journal,
 };
 
 // ── 3. navigate() ─────────────────────────────────────────────
@@ -119,7 +125,11 @@ Game.init({
 
 Settings.init({ navigate });
 
+Journal.init({ navigate });
+
 OverlayMatch.init({ onContinue: onMatchContinue });
+
+OverlayWrong.init();
 
 BreathingBuddy.init();
 

@@ -16,10 +16,16 @@ export function template() {
             </button>
             <div class="player-badge" id="player-badge">
                 <span id="ls-avatar" class="player-badge-avatar"></span>
+                <span id="ls-name" class="player-badge-name"></span>
             </div>
-            <button id="btn-settings" class="btn-icon settings-gear" aria-label="Open settings" type="button">
-                <i data-lucide="settings"></i>
-            </button>
+            <div class="level-top-right">
+                <button id="btn-journal" class="btn-icon journal-book" aria-label="Open journal" title="Collection" type="button">
+                    <i data-lucide="book-open"></i>
+                </button>
+                <button id="btn-settings" class="btn-icon settings-gear" aria-label="Open settings" type="button">
+                    <i data-lucide="settings"></i>
+                </button>
+            </div>
         </div>
 
         <div class="level-select-container">
@@ -48,14 +54,24 @@ export function template() {
                     <div class="level-best" id="level-best-2">-</div>
                 </button>
 
-                <!-- Hard -->
+                <!-- Expert / Grand Master -->
                 <button class="level-btn" data-level="3" id="level-btn-3" type="button">
                     <div class="level-icon">
                         <i data-lucide="tree-pine" style="color: var(--orange); width: 48px; height: 48px;"></i>
                     </div>
                     <div class="level-name">Full Journey</div>
-                    <div class="level-detail">12 Pairs · Complete Guide</div>
+                    <div class="level-detail">10 Pairs · Complete Guide</div>
                     <div class="level-best" id="level-best-3">-</div>
+                </button>
+
+                <!-- Mastery -->
+                <button class="level-btn mastery-btn" data-level="4" id="level-btn-4" type="button">
+                    <div class="level-icon">
+                        <i data-lucide="trophy" style="color: #FFD700; width: 48px; height: 48px;"></i>
+                    </div>
+                    <div class="level-name">Grand Master</div>
+                    <div class="level-detail">15 Mixed Pairs · Final Challenge</div>
+                    <div class="level-best" id="level-best-4">-</div>
                 </button>
 
             </div>
@@ -76,14 +92,19 @@ function renderStars(count) {
 export function onShow() {
     // Player badge
     const avatarContainer = document.getElementById('ls-avatar');
+    const nameContainer = document.getElementById('ls-name');
+    
     if (avatarContainer) {
         const avatar = state.playerAvatar || 'assets/avatars/avatar_1.svg';
         avatarContainer.innerHTML = `<img src="${avatar}" alt="" style="width: 100%; height: 100%;">`;
     }
+    if (nameContainer) {
+        nameContainer.textContent = state.playerName || 'Player';
+    }
 
     // Best scores
     const scores = loadScores();
-    [1, 2, 3].forEach(lvl => {
+    [1, 2, 3, 4].forEach(lvl => {
         const el = document.getElementById(`level-best-${lvl}`);
         if (!el) return;
         const s = scores[lvl];
@@ -116,6 +137,11 @@ export function init({ navigate }) {
     document.getElementById('btn-settings').addEventListener('click', () => {
         sounds.click();
         navigate('settings');
+    });
+
+    document.getElementById('btn-journal').addEventListener('click', () => {
+        sounds.click();
+        navigate('journal');
     });
 
     document.getElementById('btn-level-back').addEventListener('click', () => {

@@ -4,6 +4,7 @@
 import { state, resetRound } from '../gameState.js';
 import { EMOTIONS_DATA, LEVELS } from '../gameData.js';
 import { show as showMatch } from './OverlayMatch.js';
+import { show as showWrong } from './OverlayWrong.js';
 import { show as showBreathing } from './BreathingBuddy.js';
 import { sounds } from '../utils/sounds.js';
 import { spawnSparkles, spawnConfetti } from '../utils/effects.js';
@@ -259,7 +260,7 @@ function _checkMatch() {
 
 
 function _handleMatch(c1, c2) {
-    sounds.match();
+    sounds.match(state.selectedEmotion);
     c1.el.classList.add('matched');
     c2.el.classList.add('matched');
 
@@ -275,7 +276,7 @@ function _handleMatch(c1, c2) {
 }
 
 function _handleNoMatch(c1, c2) {
-    sounds.wrong();
+    sounds.wrong(state.selectedEmotion);
     state.mistakes++;
     updateHUD();
 
@@ -301,13 +302,14 @@ function _handleNoMatch(c1, c2) {
             updateHUD(); // Show hearts again
         });
     } else {
+        showWrong();
         // Normal fast-paced unflip
         setTimeout(() => {
             c1.el.classList.remove('flipped');
             c2.el.classList.remove('flipped');
             state.flippedCards = [];
             state.isLocked = false;
-        }, 800);
+        }, 1200); // Slightly longer to allow feedback
     }
 }
 
@@ -387,9 +389,16 @@ export function startGame() {
     const cols = cfg.pairs <= 3 ? 3 : cfg.pairs <= 6 ? 4 : 6;
     board.classList.add(GRID_COLS[cols]);
 
-    // Pick pairs from the selected emotion's pool
-    const emoData = EMOTIONS_DATA[state.selectedEmotion] || EMOTIONS_DATA.anger;
-    const availablePairs = shuffle(emoData.pairs).slice(0, cfg.pairs);
+    // Pick pairs from the selected emotion's pool (or all if level 4)
+    let availablePairs = [];
+    if (state.currentLevel === 4) {
+        // Grand Master: Shuffle ALL available pairs from all emotions
+        const allPossible = Object.values(EMOTIONS_DATA).flatMap(emo => emo.pairs);
+        availablePairs = shuffle(allPossible).slice(0, cfg.pairs);
+    } else {
+        const emoData = EMOTIONS_DATA[state.selectedEmotion] || EMOTIONS_DATA.anger;
+        availablePairs = shuffle(emoData.pairs).slice(0, cfg.pairs);
+    }
 
     state.gameCards = [];
     availablePairs.forEach(pair => {

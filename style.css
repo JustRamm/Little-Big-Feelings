@@ -1,5 +1,5 @@
 /* ============================================================
-   EMOTION MATCH-UP — Full Stylesheet
+   EMOTION MATCH-UP Ã¢â‚¬â€ Full Stylesheet
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
@@ -452,10 +452,10 @@ p {
 }
 
 /* ============================================================
-   SCREEN 1 — SPLASH
+   SCREEN 1 Ã¢â‚¬â€ SPLASH
    ============================================================ */
 /* ============================================================
-   SCREEN 1 — SPLASH (PREMIUM ENHANCED)
+   SCREEN 1 Ã¢â‚¬â€ SPLASH (PREMIUM ENHANCED)
    ============================================================ */
 #screen-splash {
     justify-content: center;
@@ -761,10 +761,10 @@ p {
 }
 
 /* ============================================================
-   SCREEN 2 — LEVEL SELECT
+   SCREEN 2 Ã¢â‚¬â€ LEVEL SELECT
    ============================================================ */
 /* ============================================================
-   SCREEN 2 — LEVEL SELECT (PREMIUM)
+   SCREEN 2 Ã¢â‚¬â€ LEVEL SELECT (PREMIUM)
    ============================================================ */
 .level-top-bar {
     width: 100%;
@@ -936,7 +936,7 @@ p {
 }
 
 /* ============================================================
-   SCREEN 3 — TUTORIAL (PREMIUM)
+   SCREEN 3 Ã¢â‚¬â€ TUTORIAL (PREMIUM)
    ============================================================ */
 .tutorial-container {
     max-width: 1400px;
@@ -1150,7 +1150,7 @@ p {
 }
 
 /* ============================================================
-   SCREEN 4 — GAME BOARD
+   SCREEN 4 Ã¢â‚¬â€ GAME BOARD
    ============================================================ */
 .game-header {
     width: 100%;
@@ -1397,7 +1397,7 @@ p {
 }
 
 .card.matched::after {
-    content: '✓';
+    content: 'Ã¢Å“â€œ';
     position: absolute;
     top: -10px;
     right: -10px;
@@ -1537,7 +1537,7 @@ p {
 }
 
 /* ============================================================
-   SCREEN 5 — VICTORY
+   SCREEN 5 Ã¢â‚¬â€ VICTORY
    ============================================================ */
 .victory-content {
     display: flex;
@@ -1925,7 +1925,7 @@ p {
     grid-template-columns: repeat(6, auto);
 }
 
-/* Hard level (24 cards) — extra-small cards to fit without scrolling */
+/* Hard level (24 cards) Ã¢â‚¬â€ extra-small cards to fit without scrolling */
 .grid-cols-6 .card {
     --card-w: clamp(10vmin, 13vmin, 120px);
     --card-h: clamp(14vmin, 17vmin, 155px);
@@ -1933,7 +1933,7 @@ p {
     min-height: 70px;
 }
 
-/* Medium level (12 cards) — slightly smaller cards */
+/* Medium level (12 cards) Ã¢â‚¬â€ slightly smaller cards */
 .grid-cols-4 .card {
     --card-w: clamp(14vmin, 17vmin, 145px);
     --card-h: clamp(18vmin, 23vmin, 190px);
@@ -2040,7 +2040,7 @@ p {
 }
 
 /* ============================================================
-   LEVEL SELECT — Player Badge & Settings Gear
+   LEVEL SELECT Ã¢â‚¬â€ Player Badge & Settings Gear
    ============================================================ */
 .level-top-bar {
     width: 100%;
@@ -2486,7 +2486,7 @@ p {
 }
 
 /* ============================================================
-   VICTORY — Star message + btn-hidden
+   VICTORY Ã¢â‚¬â€ Star message + btn-hidden
    ============================================================ */
 .victory-content {
     display: flex;
@@ -2658,4 +2658,306 @@ p {
 
 .btn-icon:disabled .btn-badge {
     background: #ccc;
+}
+/* ============================================================
+   LEVEL SELECT ENHANCEMENTS
+   ============================================================ */
+.level-top-right {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ============================================================
+   SCREEN: JOURNAL
+   ============================================================ */
+.journal-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.journal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.journal-stat-badge {
+    background: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 800;
+    color: var(--pink-dark);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.journal-tabs {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem;
+    scrollbar-width: none;
+}
+
+.journal-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.journal-tab {
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    background: var(--white);
+    color: var(--text);
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.journal-tab.active {
+    background: var(--tab-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.journal-grid-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 2rem;
+}
+
+.journal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.journal-card {
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.3s var(--spring);
+}
+
+.journal-card.unlocked:hover {
+    transform: translateY(-8px);
+}
+
+.journal-card-inner {
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.journal-card-img {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.02);
+    border-radius: 16px;
+    margin-bottom: 1rem;
+}
+
+.journal-card-img img {
+    height: 80%;
+    object-fit: contain;
+}
+
+.journal-card-content h3 {
+    margin-bottom: 0.5rem;
+    color: var(--card-color);
+}
+
+.journal-divider {
+    height: 2px;
+    background: rgba(0,0,0,0.05);
+    margin: 1rem 0;
+}
+
+.journal-action {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.journal-insight {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.journal-card.locked {
+    background: rgba(0,0,0,0.05);
+    border: 2px dashed rgba(0,0,0,0.1);
+}
+
+.journal-card-locked-state {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    gap: 1rem;
+}
+
+.lock-icon {
+    width: 48px;
+    height: 48px;
+    opacity: 0.3;
+}
+
+/* ============================================================
+   SPLASH PRELOADER
+   ============================================================ */
+.splash-preloader {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.preloader-bar {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preloader-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--yellow);
+    box-shadow: 0 0 15px var(--yellow);
+    transition: width 0.3s ease;
+}
+
+#preloader-status {
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.hidden {
+    display: none !important;
+}
+/* Grand Master Button */
+.mastery-btn {
+    border: 3px solid #FFD700 !important;
+    background: linear-gradient(135deg, #FFF9C4 0%, #FFFDE7 100%) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.mastery-btn::after {
+    content: '👑';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 1.2rem;
+}
+
+.mastery-btn:hover {
+    box-shadow: 0 12px 24px rgba(255, 215, 0, 0.3) !important;
+    transform: translateY(-8px) scale(1.05) !important;
+}
+
+/* Mastery Certificate */
+.mastery-certificate {
+    background: white;
+    padding: 3rem;
+    border-radius: var(--r-lg);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    animation: slide-up 0.8s var(--spring) both;
+}
+
+.cert-border {
+    border: 8px double #FFD700;
+    padding: 2rem;
+    position: relative;
+}
+
+.cert-content {
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+}
+
+.cert-main-icon {
+    width: 80px;
+    height: 80px;
+    color: #FFD700;
+    margin-bottom: 1.5rem;
+}
+
+.cert-content h3 {
+    font-size: 2.5rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.cert-name-line {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+}
+
+.cert-name-line strong {
+    border-bottom: 2px solid var(--text);
+    padding: 0 1rem;
+    color: var(--pink-dark);
+}
+
+.cert-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.cert-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 2rem;
+}
+
+.cert-seal img {
+    width: 100px;
+    height: 100px;
+    filter: sepia(1) saturate(5) hue-rotate(5deg);
+}
+
+.cert-sig {
+    text-align: center;
+}
+
+.sig-line {
+    display: block;
+    width: 200px;
+    height: 1px;
+    background: #ccc;
+    margin-top: 0.5rem;
+}
+
+@keyframes slide-up {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }

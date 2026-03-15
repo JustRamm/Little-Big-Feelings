@@ -143,9 +143,9 @@ export function init({ navigate }) {
         navigate('emotionSelect');
     });
 
-    // Back (only visible when editing)
+    // Back (only visible when a profile exists)
     document.getElementById('btn-name-back').addEventListener('click', () => {
         sounds.click();
-        navigate('settings');
+        navigate('splash');
     });
 }

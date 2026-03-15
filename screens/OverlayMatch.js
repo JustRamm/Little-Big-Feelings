@@ -33,6 +33,7 @@ export function template() {
  */
 import { sounds } from '../utils/sounds.js';
 import { state } from '../gameState.js';
+import { saveUnlockedInsights } from '../utils/storage.js';
 
 let autoDismissTimer = null;
 
@@ -45,6 +46,13 @@ export function show({ d1, d2 }) {
     document.getElementById('match-description').textContent = d1.description;
     document.getElementById('match-fact').textContent = d2.description;
     document.getElementById('overlay-match').classList.add('active');
+
+    // Unlock insight (save the emotion ID part)
+    const insightId = d1.type === 'emotion' ? d1.id : d2.id;
+    if (!state.unlockedInsights.includes(insightId)) {
+        state.unlockedInsights.push(insightId);
+        saveUnlockedInsights(state.unlockedInsights);
+    }
 
     // Narrate for children
     if ('speechSynthesis' in window && state.speechEnabled) {

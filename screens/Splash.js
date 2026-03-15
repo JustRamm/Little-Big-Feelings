@@ -1,9 +1,10 @@
 // ============================================================
 //  screens/Splash.js — Screen 1: Title / Splash
 // ============================================================
-import { loadPlayer, loadSettings } from '../utils/storage.js';
+import { loadPlayer, loadSettings, loadUnlockedInsights } from '../utils/storage.js';
 import { sounds } from '../utils/sounds.js';
 import { state } from '../gameState.js';
+import { EMOTIONS_DATA, LEVELS } from '../gameData.js';
 
 export function template() {
     return /* html */`
@@ -31,7 +32,13 @@ export function template() {
             </div>
 
             <div class="splash-actions">
-                <button id="btn-play" class="btn-primary pulse-btn" type="button">
+                <div id="splash-preloader" class="splash-preloader">
+                    <div class="preloader-bar">
+                        <div id="preloader-fill" class="preloader-fill"></div>
+                    </div>
+                    <p id="preloader-status">Charging Emotions...</p>
+                </div>
+                <button id="btn-play" class="btn-primary pulse-btn hidden" type="button">
                     <span>Start Your Journey</span>
                     <i data-lucide="play" class="btn-icon-inline"></i>
                 </button>
@@ -61,17 +68,71 @@ export function init({ navigate }) {
         const settings = loadSettings();
         if (settings) {
             state.soundEnabled = settings.soundEnabled !== false;
+            state.speechEnabled = settings.speechEnabled !== false;
             sounds.setEnabled(state.soundEnabled);
         }
 
-        // Route based on whether a profile exists
+        // Restore insights
+        state.unlockedInsights = loadUnlockedInsights();
+
+        // Always go to name entry so player can confirm/change identity
         const player = loadPlayer();
         if (player) {
             state.playerName = player.name;
             state.playerAvatar = player.avatar;
-            navigate('emotionSelect');
-        } else {
-            navigate('nameEntry');
         }
+        navigate('nameEntry');
+    });
+
+    _startPreloading();
+}
+
+/** 
+ * Gathers all unique image assets from gameData and preloads them.
+ */
+async function _startPreloading() {
+    const assets = new Set([
+        'assets/brand/logo.svg',
+        'assets/background/game_bg.svg',
+    ]);
+
+    // Extract all image paths from EMOTIONS_DATA
+    Object.values(EMOTIONS_DATA).forEach(emo => {
+        assets.add(emo.icon);
+        emo.pairs.forEach(pair => {
+            assets.add(pair.emotion.img);
+            assets.add(pair.action.img);
+        });
+    });
+
+    // Extract from LEVELS
+    Object.values(LEVELS).forEach(lvl => assets.add(lvl.icon));
+
+    const assetArray = Array.from(assets);
+    let loaded = 0;
+    const fill = document.getElementById('preloader-fill');
+    const status = document.getElementById('preloader-status');
+    const btn = document.getElementById('btn-play');
+    const loader = document.getElementById('splash-preloader');
+
+    const updateProgress = () => {
+        loaded++;
+        const pct = Math.round((loaded / assetArray.length) * 100);
+        if (fill) fill.style.width = `${pct}%`;
+        if (status) status.textContent = `Charging: ${pct}%`;
+
+        if (loaded >= assetArray.length) {
+            setTimeout(() => {
+                loader?.classList.add('hidden');
+                btn?.classList.remove('hidden');
+            }, 500);
+        }
+    };
+
+    assetArray.forEach(path => {
+        const img = new Image();
+        img.onload = updateProgress;
+        img.onerror = updateProgress; // Don't block if one fails
+        img.src = path;
     });
 }
