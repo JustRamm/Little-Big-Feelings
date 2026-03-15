@@ -23,8 +23,9 @@ export function template() {
 
         <!-- HUD bar -->
         <div class="game-header">
-            <button id="btn-game-back" class="btn-icon" aria-label="Back to level selection" title="Back to Levels" type="button">
-                <i data-lucide="arrow-left"></i>
+            <button id="btn-game-exit" class="btn-icon exit-btn" aria-label="Exit game" title="Exit" type="button">
+                <i data-lucide="log-out"></i>
+                <span class="btn-text-label">EXIT</span>
             </button>
 
             <div class="hud-stats">
@@ -35,8 +36,8 @@ export function template() {
                 <div class="stat-divider"></div>
                 <div class="stat-item">
                     <span class="stat-label">Level</span>
-                    <span id="stat-level-wrap" class="stat-value" style="display: flex; align-items: center; gap: 4px;">
-                        <i id="stat-level-icon" style="width: 18px; height: 18px;"></i>
+                    <span id="stat-level-wrap" class="stat-value">
+                        <i id="stat-level-icon"></i>
                         <span id="stat-level-text">Easy</span>
                     </span>
                 </div>
@@ -48,9 +49,9 @@ export function template() {
                     </span>
                 </div>
                 <div class="stat-divider"></div>
-                <div class="stat-item">
+                <div id="stat-chances-wrap" class="stat-item">
                     <span class="stat-label">Chances</span>
-                    <span id="stat-mistakes" class="stat-value">❤️❤️❤️</span>
+                    <span id="stat-mistakes" class="stat-value"></span>
                 </div>
             </div>
 
@@ -86,6 +87,21 @@ export function template() {
         <!-- Card grid (populated by JS) -->
         <div class="game-board-container">
             <div id="game-board" class="game-grid"></div>
+        </div>
+
+        <!-- Exit Confirmation Overlay -->
+        <div id="overlay-exit" class="overlay">
+            <div class="overlay-card exit-confirm-card">
+                <div class="exit-icon-wrap">
+                    <i data-lucide="help-circle"></i>
+                </div>
+                <h3>Exit Game?</h3>
+                <p>Are you sure you want to stop playing? You'll lose your current progress!</p>
+                <div class="overlay-actions exit-actions">
+                    <button id="btn-exit-yes" class="btn-primary exit-yes">YES, EXIT</button>
+                    <button id="btn-exit-no" class="btn-secondary exit-no">NO, STAY</button>
+                </div>
+            </div>
         </div>
 
     </section>`;
@@ -141,7 +157,18 @@ function updateHUD() {
     const mistakesEl = document.getElementById('stat-mistakes');
     if (mistakesEl) {
         const remaining = Math.max(0, state.maxMistakes - state.mistakes);
-        mistakesEl.textContent = '❤️'.repeat(remaining) + '🖤'.repeat(state.maxMistakes - remaining);
+        // Using heart icons for better child appeal
+        mistakesEl.innerHTML = '';
+        for (let i = 0; i < state.maxMistakes; i++) {
+            const heart = document.createElement('i');
+            heart.setAttribute('data-lucide', 'heart');
+            heart.style.width = '18px';
+            heart.style.height = '18px';
+            heart.style.fill = i < remaining ? 'var(--pink)' : 'transparent';
+            heart.style.color = i < remaining ? 'var(--pink)' : '#CBD5E0';
+            mistakesEl.appendChild(heart);
+        }
+        if (window.lucide) window.lucide.createIcons();
     }
 
     // Peak button
@@ -208,7 +235,7 @@ function createCardEl(cardData) {
         <div class="card-inner">
             <div class="card-face card-back">
                 <div class="card-back-pattern">
-                    <i data-lucide="help-circle" style="width: 64px; height: 64px; color: white; opacity: 0.8;"></i>
+                    <img src="assets/brand/nextlogo.svg" alt="" style="width: 80%; height: 80%; opacity: 0.9;">
                 </div>
             </div>
             <div class="card-face card-front">
@@ -435,10 +462,31 @@ export function startGame() {
 export function init({ navigate, onVictory }) {
     _onVictory = onVictory;
 
-    const backBtn = document.getElementById('btn-game-back');
-    if (backBtn) {
-        backBtn.addEventListener('click', () => {
+    const exitBtn = document.getElementById('btn-game-exit');
+    const exitOverlay = document.getElementById('overlay-exit');
+    const exitYes = document.getElementById('btn-exit-yes');
+    const exitNo = document.getElementById('btn-exit-no');
+
+    if (exitBtn) {
+        exitBtn.addEventListener('click', () => {
             sounds.click();
+            exitOverlay.classList.add('active');
+            state.isLocked = true; // Pause interaction
+        });
+    }
+
+    if (exitNo) {
+        exitNo.addEventListener('click', () => {
+            sounds.click();
+            exitOverlay.classList.remove('active');
+            state.isLocked = false;
+        });
+    }
+
+    if (exitYes) {
+        exitYes.addEventListener('click', () => {
+            sounds.click();
+            exitOverlay.classList.remove('active');
             clearInterval(state.timerInterval);
             navigate('levelSelect');
         });

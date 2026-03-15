@@ -321,10 +321,9 @@ button {
     pointer-events: none;
     transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
     transform: translateY(20px) scale(0.97);
-    padding: clamp(1.5rem, 5vh, 4rem) clamp(1rem, 2vw, 5rem);
+    padding: clamp(1rem, 3vh, 3rem) clamp(0.5rem, 2vw, 2rem);
     text-align: center;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 #screen-emotion {
@@ -1155,27 +1154,53 @@ p {
 /* ============================================================
    SCREEN 4 Ã¢â‚¬â€ GAME BOARD
    ============================================================ */
+/* ============================================================
+   SCREEN 4 — GAME BOARD (CHILD FRIENDLY ENHANCED)
+   ============================================================ */
 .game-header {
-    width: 100%;
-    max-width: 1000px;
+    width: 96%;
+    max-width: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    margin: 1rem auto;
+    padding: 0.8rem 1.5rem;
+    background: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    border: 4px solid white;
+    z-index: 100;
+}
+
+/* Exit Button Styling */
+.exit-btn {
+    width: auto !important;
+    padding: 0 1rem;
+    border-radius: 25px !important;
     gap: 0.5rem;
-    margin: 0.2rem auto 0.5rem;
-    padding: 0.3rem 1rem;
-    background: var(--glass);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    border-radius: 40px;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    box-shadow: 0 8px 24px var(--shadow);
+    color: var(--pink-dark);
+    font-weight: 800;
+    font-size: 0.9rem;
+    border: 3px solid #FFCDD2 !important;
+}
+
+.btn-text-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.exit-btn:hover {
+    background: #FFEBEE !important;
+    border-color: var(--pink) !important;
+    color: var(--pink-dark);
 }
 
 .hud-stats {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1.5rem;
     flex: 1;
     justify-content: center;
 }
@@ -1184,52 +1209,59 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .stat-label {
-    font-size: 0.65rem;
-    font-weight: 600;
+    font-size: 0.7rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #9E9E9E;
+    letter-spacing: 0.1em;
+    color: #8D6E63;
+    margin-bottom: 2px;
 }
 
 .stat-value {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .stat-divider {
-    width: 2px;
-    height: 30px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+    width: 3px;
+    height: 35px;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.08), transparent);
+    border-radius: 10px;
 }
 
 .timer-wrap {
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    background: var(--yellow);
-    padding: 0.3rem 0.8rem;
-    border-radius: 30px;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--yellow), #FFEB3B);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(255, 213, 79, 0.3);
 }
 
 .timer-display {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: var(--text);
     font-variant-numeric: tabular-nums;
 }
 
-.timer-hidden {
-    display: none;
+.timer-warning {
+    background: var(--pink) !important;
+    color: white !important;
+    animation: pulse 0.5s alternate infinite;
 }
 
-.timer-warning {
-    color: #D32F2F !important;
-    animation: pulse 0.5s alternate infinite;
+.timer-warning .timer-display {
+    color: white !important;
 }
 
 .game-board-container {
@@ -1238,23 +1270,18 @@ p {
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-height: calc(100dvh - 160px);
-    padding: 0.5rem;
+    max-height: calc(100dvh - 200px); /* Adjusted for larger header */
+    padding: 1rem;
     overflow: hidden;
-}
-
-@media (max-width: 768px) {
-    .game-board-container {
-        max-height: calc(100dvh - 160px);
-        padding: 0.2rem;
-    }
+    position: relative;
 }
 
 .game-grid {
     display: grid;
-    gap: 20px;
-    perspective: 1200px;
+    gap: clamp(10px, 2.5vmin, 25px);
+    perspective: 1500px;
     width: fit-content;
+    height: fit-content;
     margin: 0 auto;
     align-content: center;
     justify-content: center;
@@ -1264,27 +1291,29 @@ p {
    CARD STYLES
    ============================================================ */
 .card {
-    --card-w: 22vmin;
-    --card-h: 30vmin;
+    --card-w: clamp(80px, 15vw, 160px);
+    --card-h: clamp(110px, 20vw, 220px);
     width: var(--card-w);
     height: var(--card-h);
-    max-width: 160px;
-    max-height: 220px;
-    min-width: 80px;
-    min-height: 110px;
     position: relative;
     cursor: pointer;
-    transition: transform 0.25s var(--spring);
+    transition: transform 0.4s var(--spring);
+    border-radius: 20px;
 }
 
-/* Adjust card size for 8 pairs (Hard Level) to ensure they all fit */
+/* Adjust card size for different levels */
+.grid-cols-6 .card {
+    --card-w: clamp(50px, 9vw, 110px);
+    --card-h: clamp(70px, 13vw, 150px);
+}
+
 .grid-cols-4 .card {
-    --card-w: 18vmin;
-    --card-h: 24vmin;
+    --card-w: clamp(70px, 14vw, 140px);
+    --card-h: clamp(95px, 19vw, 190px);
 }
 
 .card:hover:not(.flipped):not(.matched) {
-    transform: translateY(-4px) scale(1.03);
+    transform: translateY(-8px) scale(1.05) rotate(2deg);
 }
 
 .card-inner {
@@ -1292,14 +1321,12 @@ p {
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.55s var(--ease);
-    border-radius: var(--r-lg);
+    transition: transform 0.6s var(--spring);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.card.flipped .card-inner {
-    transform: rotateY(180deg);
-}
-
+.card.flipped .card-inner,
 .card.matched .card-inner {
     transform: rotateY(180deg);
 }
@@ -1309,114 +1336,118 @@ p {
     inset: 0;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-radius: var(--r-lg);
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    /* Spread items to top/bottom */
-    padding: clamp(1.5rem, 5vh, 3.5rem) clamp(1rem, 5vw, 4rem);
-    background: transparent;
-    border: 5px solid white;
-    box-shadow: 0 8px 24px var(--shadow);
+    justify-content: center;
+    padding: 10px;
+    border: 6px solid white;
     overflow: hidden;
 }
 
-/* Card Back */
+/* Card Back — Fun Pattern */
 .card-back {
-    background: linear-gradient(145deg, #F06292, #BA68C8, #7E57C2);
+    background: linear-gradient(135deg, #FF80AB, #BA68C8, #4FC3F7);
+    background-size: 200% 200%;
+    animation: flowBG 6s ease infinite;
+}
+
+.card-back::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 0);
+    background-size: 15px 15px;
+}
+
+@keyframes flowBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .card-back-pattern {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    opacity: 0.85;
-    animation: float-gentle 3s ease-in-out infinite;
+    width: 70%;
+    height: 70%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    animation: float-gentle 4s ease-in-out infinite;
 }
 
 /* Card Front */
 .card-front {
-    background: white;
+    background: #FFFFFF;
     transform: rotateY(180deg);
-    padding: 6px;
-    gap: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px 8px;
 }
 
 .card-label {
-    font-size: clamp(0.55rem, 1vw, 0.75rem);
-    font-weight: 700;
+    font-size: 0.65rem;
+    font-weight: 800;
     background: var(--pink);
     color: white;
-    border-radius: 20px;
-    padding: 2px 8px;
+    border-radius: 12px;
+    padding: 4px 10px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    flex-shrink: 0;
-    align-self: center;
+    letter-spacing: 0.1em;
+    box-shadow: 0 4px 0 var(--pink-dark);
 }
 
 .card-front img {
     flex: 1;
-    width: 100%;
+    width: 85%;
     object-fit: contain;
-    min-height: 0;
+    margin: 5px 0;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.05));
 }
 
 .card-name {
-    font-size: clamp(0.6rem, 1.1vw, 0.8rem);
+    font-size: 0.85rem;
     font-weight: 800;
     color: var(--text);
     text-align: center;
-    flex-shrink: 0;
+    line-height: 1.1;
 }
 
-/* Matched card state */
-.card.matched .card-face {
-    border-color: #AED581;
-}
-
+/* Matched State */
 .card.matched .card-inner {
-    box-shadow: 0 0 0 3px #AED581, 0 0 20px rgba(174, 213, 129, 0.5);
-    border-radius: var(--r-lg);
-    animation: match-pop 0.6s var(--spring) forwards;
+    border: 4px solid var(--green);
+    box-shadow: 0 0 30px rgba(174, 213, 129, 0.5);
+    animation: match-celebrate 0.6s var(--spring) forwards;
 }
 
-@keyframes match-pop {
-    0% {
-        transform: rotateY(180deg) scale(1);
-    }
-
-    50% {
-        transform: rotateY(180deg) scale(1.15);
-    }
-
-    100% {
-        transform: rotateY(180deg) scale(1.05);
-    }
+@keyframes match-celebrate {
+    0% { transform: rotateY(180deg) scale(1); }
+    50% { transform: rotateY(180deg) scale(1.1) rotate(5deg); }
+    100% { transform: rotateY(180deg) scale(1); }
 }
 
 .card.matched::after {
-    content: 'Ã¢Å“â€œ';
+    content: '⭐';
     position: absolute;
-    top: -10px;
-    right: -10px;
-    background: #66BB6A;
-    color: white;
-    width: 32px;
-    height: 32px;
+    top: -15px;
+    right: -15px;
+    background: var(--yellow);
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    font-size: 1.2rem;
-    font-weight: 800;
-    line-height: 32px;
-    text-align: center;
-    z-index: 10;
-    border: 3px solid white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    animation: pop-in 0.4s 0.2s var(--spring) forwards;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 20;
+    animation: pop-in 0.5s var(--spring) both;
 }
 
 /* ============================================================
@@ -1506,10 +1537,47 @@ p {
     border-radius: var(--r-md);
 }
 
-.match-desc-secondary {
-    font-size: 0.9rem;
-    color: #757575;
-    padding: 0.4rem 0.8rem;
+/* Exit Confirmation Card */
+.exit-confirm-card {
+    max-width: 420px;
+}
+
+.exit-icon-wrap {
+    width: 80px;
+    height: 80px;
+    background: #E3F2FD;
+    color: var(--blue-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.exit-icon-wrap i {
+    width: 50px;
+    height: 50px;
+}
+
+.exit-confirm-card h3 {
+    color: var(--text);
+    margin-bottom: 0.8rem;
+}
+
+.exit-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+.exit-yes {
+    background: #EF5350 !important;
+    border-bottom-color: #C62828 !important;
+}
+
+.exit-no {
+    padding: 0.8rem 1.8rem;
 }
 
 /* Wrong Match Overlay */
@@ -1826,19 +1894,35 @@ p {
         gap: 1rem;
     }
 
+    .game-header {
+        flex-direction: column;
+        padding: 0.6rem;
+        border-radius: 20px;
+        margin: 0.5rem auto;
+        gap: 0.5rem;
+    }
+
     .hud-stats {
-        gap: 0.4rem;
-        order: 2;
-        width: 100%;
-        margin-top: 0.2rem;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .stat-divider {
+        display: none;
     }
 
     .stat-value {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
 
     .stat-label {
-        font-size: 0.55rem;
+        font-size: 0.6rem;
+    }
+
+    .hud-right-actions {
+        order: -1;
+        width: 100%;
+        justify-content: space-between;
     }
 
     .matched-pair img {
@@ -1986,36 +2070,44 @@ p {
    PROGRESS BAR (Game screen)
    ============================================================ */
 .progress-bar-wrap {
-    width: 100%;
-    max-width: 1000px;
-    height: 10px;
+    width: 90%;
+    max-width: 800px;
+    height: 24px;
     background: rgba(255, 255, 255, 0.5);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    border-radius: 20px;
-    margin-bottom: 0.5rem;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    margin: 0 auto 0.5rem;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 4px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
 .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--green), var(--blue));
-    border-radius: 20px;
+    background: linear-gradient(90deg, #81C784, #4FC3F7, #BA68C8);
+    background-size: 200% 100%;
+    animation: progressShine 3s linear infinite;
+    border-radius: 8px;
     width: 0%;
-    transition: width 0.5s var(--ease);
+    transition: width 0.6s var(--spring);
+}
+
+@keyframes progressShine {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
 }
 
 .progress-bar-label {
     position: absolute;
-    right: 8px;
+    left: 50%;
     top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.65rem;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
     font-weight: 800;
     color: var(--text);
-    opacity: 0.7;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
 }
 
 /* HUD right actions group */
@@ -3574,8 +3666,8 @@ p {
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
