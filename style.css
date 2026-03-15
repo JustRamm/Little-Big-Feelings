@@ -84,7 +84,7 @@
     justify-content: flex-start;
     align-items: stretch;
     gap: clamp(1rem, 2vw, 2rem);
-    padding: 2.5rem 2.2rem 4rem; /* Increased top padding from 1.5rem to 2.5rem */
+    padding: 5rem 2.2rem 4rem; /* Pushed cards down for better child-friendly layout */
     width: 100%;
     margin: 0;
     scrollbar-width: none;
