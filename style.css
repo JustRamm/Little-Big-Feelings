@@ -45,11 +45,11 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: clamp(1rem, 4vh, 3rem);
-    padding: 1.5rem 0;
+    align-items: stretch; /* Allow grid to take full width */
+    gap: clamp(1rem, 2vh, 2rem);
+    padding: 1rem 0;
     overflow-y: auto;
-    overflow-x: visible;
+    overflow-x: hidden;
 }
 
 .emotion-header {
@@ -83,14 +83,21 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: stretch;
-    gap: clamp(0.5rem, 1.5vw, 1.5rem);
+    gap: clamp(1rem, 2vw, 2rem);
     padding: 1.5rem 2rem 3rem;
     width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
+    margin: 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+}
+
+/* Center cards if they fit on desktop */
+@media (min-width: 1600px) {
+    .emotion-illustrative-grid {
+        justify-content: center;
+    }
 }
 
 /* Premium Scrollbar */
@@ -127,10 +134,10 @@
         0 8px 24px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     height: auto;
-    flex: 0 0 300px;
-    /* Don't shrink or grow */
+    flex: 0 0 280px;
+    /* Fixed width for better scroll predictably */
     min-width: 250px;
-    max-width: 350px;
+    max-width: 320px;
     scroll-snap-align: center;
     animation: cardEntrance 0.8s var(--spring) both;
 }
@@ -327,9 +334,10 @@ button {
     pointer-events: none;
     transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
     transform: translateY(20px) scale(0.97);
-    padding: clamp(1.5rem, 5vh, 4rem) clamp(1rem, 5vw, 5rem);
+    padding: clamp(1.5rem, 5vh, 4rem) clamp(1rem, 2vw, 5rem);
     text-align: center;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #screen-emotion {
