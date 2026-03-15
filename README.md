@@ -49,7 +49,7 @@ This project is built with a **Vanilla JavaScript SPA (Single Page Application)*
   - `Python (pdfplumber)` for automated data extraction from source material.
 
 ### Directory Overview
-- [/assets](file:///c:/Users/abira/OneDrive/Desktop/MM/assets/README.md): High-quality SVG illustrations and brand assets.
+- [/assets](file:///c:/Users/abira/OneDrive/Desktop/MM/public/assets/README.md): High-quality SVG illustrations and brand assets.
 - [/screens](file:///c:/Users/abira/OneDrive/Desktop/MM/screens/README.md): Modular UI components and navigation logic.
 - [/utils](file:///c:/Users/abira/OneDrive/Desktop/MM/utils/README.md): Audio, storage, and visual effect helpers.
 
