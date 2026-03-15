@@ -22,13 +22,13 @@ export function template() {
             <div class="logo-wrapper">
                 <div class="logo-burst"></div>
                 <div class="logo-container">
-                    <img src="assets/brand/logo.svg" alt="Emo Charge Logo" class="game-logo bounce-anim">
+                    <img src="assets/brand/nextlogo.svg" alt="Little Big Feelings Logo" class="game-logo bounce-anim">
                 </div>
             </div>
             
             <div class="title-group">
-                <h1 class="game-title">Emo<br><span>Charge</span></h1>
-                <p class="tagline">Power Up Your Emotional Intelligence!</p>
+                <h1 class="game-title">Little Big<br><span>Feelings</span></h1>
+                <p class="tagline">Explore Your Wonderful Emotions!</p>
             </div>
 
             <div class="splash-actions">
@@ -36,22 +36,12 @@ export function template() {
                     <div class="preloader-bar">
                         <div id="preloader-fill" class="preloader-fill"></div>
                     </div>
-                    <p id="preloader-status">Charging Emotions...</p>
+                    <p id="preloader-status">Gathering Feelings...</p>
                 </div>
                 <button id="btn-play" class="btn-primary pulse-btn hidden" type="button">
                     <span>Start Your Journey</span>
                     <i data-lucide="play" class="btn-icon-inline"></i>
                 </button>
-                <div class="arcade-buttons hidden" id="arcade-buttons" style="display: flex; gap: 0.8rem; width: 100%; margin-top: 1rem;">
-                    <button id="btn-mb-game" class="btn-secondary" type="button" style="flex: 1;">
-                        <span>Mood Battery</span>
-                        <i data-lucide="zap" class="btn-icon-inline"></i>
-                    </button>
-                    <button id="btn-az-game" class="btn-secondary" type="button" style="flex: 1; background: var(--purple); border-color: #7B1FA2;">
-                        <span>A-Z Rush</span>
-                        <i data-lucide="type" class="btn-icon-inline"></i>
-                    </button>
-                </div>
             </div>
 
             <div class="splash-footer">
@@ -94,15 +84,6 @@ export function init({ navigate }) {
         navigate('nameEntry');
     });
 
-    document.getElementById('btn-mb-game').addEventListener('click', () => {
-        sounds.click();
-        navigate('moodBattery');
-    });
-
-    document.getElementById('btn-az-game').addEventListener('click', () => {
-        sounds.click();
-        navigate('alphabetGame');
-    });
 
     _startPreloading();
 }
@@ -112,7 +93,7 @@ export function init({ navigate }) {
  */
 async function _startPreloading() {
     const assets = new Set([
-        'assets/brand/logo.svg',
+        'assets/brand/nextlogo.svg',
         'assets/background/game_bg.svg',
     ]);
 
@@ -139,13 +120,12 @@ async function _startPreloading() {
         loaded++;
         const pct = Math.round((loaded / assetArray.length) * 100);
         if (fill) fill.style.width = `${pct}%`;
-        if (status) status.textContent = `Charging: ${pct}%`;
+        if (status) status.textContent = `Gathering: ${pct}%`;
 
         if (loaded >= assetArray.length) {
             setTimeout(() => {
                 loader?.classList.add('hidden');
                 btn?.classList.remove('hidden');
-                document.getElementById('arcade-buttons')?.classList.remove('hidden');
             }, 500);
         }
     };

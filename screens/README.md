@@ -1,6 +1,6 @@
 # Screens Architecture
 
-This directory contains the individual screens of the **Emo Charge** game. The application follows a modular "Template-Init" pattern to handle multi-screen navigation within a Single Page Application (SPA) container.
+This directory contains the individual screens of the **Little Big Feelings** game. The application follows a modular "Template-Init" pattern to handle multi-screen navigation within a Single Page Application (SPA) container.
 
 ## How it Works
 

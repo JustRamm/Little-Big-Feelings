@@ -1,4 +1,4 @@
-# <img src="public/assets/brand/logo.svg" width="48" height="48" valign="middle"> Emo Charge! — Emotional Intelligence Game
+# <img src="public/assets/brand/logo.svg" width="48" height="48" valign="middle"> Little Big Feelings — Emotional Intelligence Game
 
 [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -7,7 +7,7 @@
 
 > **"You are BRAVER than you believe. STRONGER than you seem. SMARTER than you think. AND LOVED more than you know."**
 
-**Emo Charge** is an interactive, browser-based memory matching game designed to help children and young people build emotional literacy. Based on the **"Recharge Without Charge"** curriculum by [Mind Empowered](https://www.mind-empowered.org), the game transforms educational psychiatric resources into an engaging, gamified experience.
+**Little Big Feelings** is an interactive, browser-based memory matching game designed to help children and young people build emotional literacy. Based on the **"Recharge Without Charge"** curriculum by [Mind Empowered](https://www.mind-empowered.org), the game transforms educational psychiatric resources into an engaging, gamified experience.
 
 ---
 

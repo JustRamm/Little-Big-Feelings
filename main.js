@@ -74,6 +74,8 @@ const SCREEN_MODULES = {
     levelSelect: LevelSelect,
     settings: Settings,
     journal: Journal,
+    moodBattery: MoodBattery,
+    alphabetGame: CopingAlphabet,
 };
 
 // ── 3. navigate() ─────────────────────────────────────────────

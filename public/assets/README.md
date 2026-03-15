@@ -1,6 +1,6 @@
 # Asset Library
 
-This directory contains all the visual and brand assets for the **Emo Charge** game. All illustrations are provided in **SVG (Scalable Vector Graphics)** format to ensure crisp rendering on all screen sizes and resolutions.
+This directory contains all the visual and brand assets for the **Little Big Feelings** game. All illustrations are provided in **SVG (Scalable Vector Graphics)** format to ensure crisp rendering on all screen sizes and resolutions.
 
 ## Asset Categories
 

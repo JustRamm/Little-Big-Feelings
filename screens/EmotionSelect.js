@@ -7,7 +7,7 @@ import { EMOTIONS_DATA } from '../gameData.js';
 
 /**
  * Custom SVG Illustrations for each emotion
- * Designed to be vibrant, expressive, and fit the "Emo Charge" theme.
+ * Designed to be vibrant, expressive, and fit the "Little Big Feelings" theme.
  */
 const ILLUSTRATIONS = {
     anger: `
@@ -121,6 +121,15 @@ export function template() {
                     <h2 class="premium-title">Which feeling shall we explore?</h2>
                     <p class="premium-subtitle">Pick an emotion character to begin your journey!</p>
                 </div>
+                <!-- Mini-game Shortcuts -->
+                <div class="mini-game-shortcuts">
+                    <button id="btn-mb-shortcut" class="mini-game-icon-btn mb-shortcut" title="Mood Battery" type="button">
+                        <i data-lucide="zap"></i>
+                    </button>
+                    <button id="btn-az-shortcut" class="mini-game-icon-btn az-shortcut" title="A-Z Rush" type="button">
+                        <i data-lucide="type"></i>
+                    </button>
+                </div>
             </header>
 
             <div class="emotion-illustrative-grid">
@@ -156,6 +165,16 @@ export function init({ navigate }) {
     document.getElementById('btn-emotion-back').addEventListener('click', () => {
         sounds.click();
         navigate('nameEntry');
+    });
+
+    document.getElementById('btn-mb-shortcut').addEventListener('click', () => {
+        sounds.click();
+        navigate('moodBattery');
+    });
+
+    document.getElementById('btn-az-shortcut').addEventListener('click', () => {
+        sounds.click();
+        navigate('alphabetGame');
     });
 }
 
