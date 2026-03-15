@@ -218,8 +218,17 @@ function createCardEl(cardData) {
 // ── Flip / Match logic ────────────────────────────────────────
 function _flipCard(cardEl, cardData) {
     if (state.isLocked) return;
-    if (cardEl.classList.contains('flipped')) return;
     if (cardEl.classList.contains('matched')) return;
+    
+    // Child-friendly: allow un-flipping the first card by clicking it again
+    if (state.flippedCards.length === 1 && state.flippedCards[0].el === cardEl) {
+        sounds.flip();
+        cardEl.classList.remove('flipped');
+        state.flippedCards = [];
+        return;
+    }
+
+    if (cardEl.classList.contains('flipped')) return;
     if (state.flippedCards.length === 2) return;
 
     sounds.flip();
