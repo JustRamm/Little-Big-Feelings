@@ -87,10 +87,12 @@
     padding: 1.5rem 2rem 3rem;
     width: 100%;
     margin: 0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.emotion-illustrative-grid::-webkit-scrollbar {
+    display: none;
 }
 
 /* Center cards if they fit on desktop */
@@ -100,22 +102,7 @@
     }
 }
 
-/* Premium Scrollbar */
-.emotion-illustrative-grid::-webkit-scrollbar {
-    height: 8px;
-}
-
-.emotion-illustrative-grid::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.03);
-    border-radius: 20px;
-    margin: 0 5%;
-}
-
-.emotion-illustrative-grid::-webkit-scrollbar-thumb {
-    background: linear-gradient(to right, var(--pink), var(--orange));
-    border-radius: 20px;
-    box-shadow: 0 2px 10px rgba(255, 128, 171, 0.3);
-}
+/* Premium Scrollbar - Hidden by default as requested */
 
 .emotion-illustrative-btn {
     position: relative;
