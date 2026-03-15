@@ -148,21 +148,16 @@ function updateHUD() {
     if (label) label.textContent = `${pct}%`;
     if (wrap) wrap.setAttribute('aria-valuenow', pct);
 
-    // Mistakes HUD
+    // Mistakes HUD (Standardized: Heart Icon + Numerical Counter)
     const mistakesEl = document.getElementById('stat-mistakes');
     if (mistakesEl) {
         const remaining = Math.max(0, state.maxMistakes - state.mistakes);
-        // Using heart icons for better child appeal
-        mistakesEl.innerHTML = '';
-        for (let i = 0; i < state.maxMistakes; i++) {
-            const heart = document.createElement('i');
-            heart.setAttribute('data-lucide', 'heart');
-            heart.style.width = '18px';
-            heart.style.height = '18px';
-            heart.style.fill = i < remaining ? 'var(--pink)' : 'transparent';
-            heart.style.color = i < remaining ? 'var(--pink)' : '#CBD5E0';
-            mistakesEl.appendChild(heart);
-        }
+        
+        mistakesEl.innerHTML = `
+            <i data-lucide="heart" class="heart-indicator" style="fill: var(--pink); color: var(--pink);"></i>
+            <span class="chance-counter">${remaining} / ${state.maxMistakes}</span>
+        `;
+        
         if (window.lucide) window.lucide.createIcons();
     }
 
