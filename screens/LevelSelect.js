@@ -64,15 +64,6 @@ export function template() {
                     <div class="level-best" id="level-best-3">-</div>
                 </button>
 
-                <!-- Mastery -->
-                <button class="level-btn mastery-btn" data-level="4" id="level-btn-4" type="button">
-                    <div class="level-icon">
-                        <i data-lucide="trophy" style="color: #FFD700; width: 48px; height: 48px;"></i>
-                    </div>
-                    <div class="level-name">Grand Master</div>
-                    <div class="level-detail">15 Mixed Pairs · Final Challenge</div>
-                    <div class="level-best" id="level-best-4">-</div>
-                </button>
 
             </div>
         </div>
@@ -104,7 +95,7 @@ export function onShow() {
 
     // Best scores
     const scores = loadScores();
-    [1, 2, 3, 4].forEach(lvl => {
+    [1, 2, 3].forEach(lvl => {
         const el = document.getElementById(`level-best-${lvl}`);
         if (!el) return;
         const s = scores[lvl];

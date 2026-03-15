@@ -1311,7 +1311,7 @@ p {
 }
 
 .game-grid.grid-cols-6 {
-    gap: clamp(10px, 3vw, 40px); /* Exactly half of Intermediate for Full Journey */
+    gap: clamp(15px, 4vw, 55px); /* Increased for better separation */
 }
 
 /* ============================================================
@@ -1347,25 +1347,42 @@ p {
 }
 
 .grid-cols-6 .card {
-    --card-w: clamp(48px, 8.5vw, 105px); /* Half of Intermediate */
-    --card-h: clamp(68px, 12vw, 145px);  /* Half of Intermediate */
+    --card-w: clamp(82px, 14.2vw, 175px); 
+    --card-h: clamp(115px, 20vw, 245px);  
 }
 
-/* Proportional scaling for dense grids */
-.grid-cols-5 .card-name,
+/* Full Journey (6x2) Giant size increase */
 .grid-cols-6 .card-name {
+    font-size: 0.95rem;
+    margin-top: 3px;
+}
+
+.grid-cols-6 .card-label {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+}
+
+.grid-cols-6 .card-front img {
+    width: 70%;
+}
+
+/* Grand Master (5x4) - Keeping it compact and dense */
+.grid-cols-5 .card {
+    --card-w: clamp(55px, 9vw, 110px);
+    --card-h: clamp(75px, 12vw, 150px);
+}
+
+.grid-cols-5 .card-name {
     font-size: 0.7rem;
     margin-top: 2px;
 }
 
-.grid-cols-5 .card-label,
-.grid-cols-6 .card-label {
+.grid-cols-5 .card-label {
     font-size: 0.5rem;
-    padding: 2px 6px;
+    padding: 2px 5px;
 }
 
-.grid-cols-5 .card-front img,
-.grid-cols-6 .card-front img {
+.grid-cols-5 .card-front img {
     width: 65%;
 }
 
@@ -2068,14 +2085,11 @@ p {
 
 /* Legacy overrides removed to prevent conflicts with modern responsive system */
 
+/* Vertical grid overrides removed to allow for requested 6x2 layout across more devices */
 @media (max-width: 600px) and (orientation: portrait) {
-    .grid-cols-6 {
-        grid-template-columns: repeat(4, 1fr) !important;
-    }
-
     .grid-cols-6 .card {
-        --card-w: 20vw;
-        --card-h: 28vw;
+        --card-w: 15vw;
+        --card-h: 22vw;
     }
 }
 

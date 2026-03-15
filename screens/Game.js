@@ -393,16 +393,9 @@ export function startGame() {
     state.maxMistakes = cfg.chances || 3;
     board.classList.add(GRID_COLS[cols] || 'grid-cols-4');
 
-    // Pick pairs from the selected emotion's pool (or all if level 4)
-    let availablePairs = [];
-    if (state.currentLevel === 4) {
-        // Grand Master: Shuffle ALL available pairs from all emotions
-        const allPossible = Object.values(EMOTIONS_DATA).flatMap(emo => emo.pairs);
-        availablePairs = shuffle(allPossible).slice(0, cfg.pairs);
-    } else {
-        const emoData = EMOTIONS_DATA[state.selectedEmotion] || EMOTIONS_DATA.anger;
-        availablePairs = shuffle(emoData.pairs).slice(0, cfg.pairs);
-    }
+    // Pick pairs from the selected emotion's pool
+    const emoData = EMOTIONS_DATA[state.selectedEmotion] || EMOTIONS_DATA.anger;
+    let availablePairs = shuffle(emoData.pairs).slice(0, cfg.pairs);
 
     state.gameCards = [];
     availablePairs.forEach(pair => {
