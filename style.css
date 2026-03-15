@@ -48,12 +48,14 @@
     align-items: center;
     gap: clamp(1rem, 4vh, 3rem);
     padding: 1.5rem 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .emotion-header {
     text-align: center;
     padding: 0 2rem;
+    flex-shrink: 0;
     animation: fadeSlideDown 0.8s var(--ease) both;
 }
 
@@ -124,10 +126,11 @@
         0 8px 24px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     height: auto;
-    flex: 0 1 300px;
-    /* Original size, don't grow */
+    flex: 0 0 300px;
+    /* Don't shrink or grow */
     min-width: 250px;
     max-width: 350px;
+    scroll-snap-align: center;
     animation: cardEntrance 0.8s var(--spring) both;
 }
 
@@ -325,8 +328,7 @@ button {
     transform: translateY(20px) scale(0.97);
     padding: clamp(1.5rem, 5vh, 4rem) clamp(1rem, 5vw, 5rem);
     text-align: center;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    overflow: auto;
 }
 
 /* For screens that should be centered when content is small */
@@ -1860,20 +1862,17 @@ p {
     }
 
     .emotion-illustrative-grid {
-        gap: 0.8rem;
-        /* Reduced gap */
-        padding: 1rem 0.5rem;
-        /* Reduced padding */
-        flex-wrap: wrap;
-        /* Allow wrapping */
-        justify-content: center;
-        /* Center cards */
+        gap: 1rem;
+        padding: 1rem 1.5rem 3rem;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
     }
 
     .emotion-illustrative-btn {
-        flex: 0 0 85vw;
-        max-width: 320px;
-        padding: 2rem 1.5rem;
+        flex: 0 0 calc(90% - 1rem);
+        min-width: 280px;
+        max-width: none;
+        padding: 2.5rem 1.8rem;
     }
 
     .emo-illustration-wrap {
