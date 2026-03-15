@@ -1291,8 +1291,8 @@ p {
    CARD STYLES
    ============================================================ */
 .card {
-    --card-w: clamp(80px, 15vw, 160px);
-    --card-h: clamp(110px, 20vw, 220px);
+    --card-w: clamp(120px, 20vw, 240px);
+    --card-h: clamp(165px, 28vw, 330px);
     width: var(--card-w);
     height: var(--card-h);
     position: relative;
@@ -1301,15 +1301,20 @@ p {
     border-radius: 20px;
 }
 
-/* Adjust card size for different levels */
+/* Adjust card size for different levels to keep non-scrollable and LARGE */
 .grid-cols-6 .card {
-    --card-w: clamp(50px, 9vw, 110px);
-    --card-h: clamp(70px, 13vw, 150px);
+    --card-w: clamp(75px, 12vw, 140px);
+    --card-h: clamp(105px, 17vw, 195px);
+}
+
+.grid-cols-5 .card {
+    --card-w: clamp(90px, 15vw, 170px);
+    --card-h: clamp(125px, 21vw, 240px);
 }
 
 .grid-cols-4 .card {
-    --card-w: clamp(70px, 14vw, 140px);
-    --card-h: clamp(95px, 19vw, 190px);
+    --card-w: clamp(110px, 18vw, 210px);
+    --card-h: clamp(150px, 25vw, 290px);
 }
 
 .card:hover:not(.flipped):not(.matched) {
@@ -1391,12 +1396,12 @@ p {
 }
 
 .card-label {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     font-weight: 800;
     background: var(--pink);
     color: white;
     border-radius: 12px;
-    padding: 4px 10px;
+    padding: 6px 12px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     box-shadow: 0 4px 0 var(--pink-dark);
@@ -1411,11 +1416,12 @@ p {
 }
 
 .card-name {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: var(--text);
     text-align: center;
     line-height: 1.1;
+    margin-top: 4px;
 }
 
 /* Matched State */
@@ -1997,6 +2003,10 @@ p {
 
 .grid-cols-4 {
     grid-template-columns: repeat(4, auto);
+}
+
+.grid-cols-5 {
+    grid-template-columns: repeat(5, auto);
 }
 
 .grid-cols-6 {

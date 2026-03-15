@@ -13,6 +13,7 @@ import { spawnSparkles, spawnConfetti } from '../utils/effects.js';
 const GRID_COLS = {
     3: 'grid-cols-3',
     4: 'grid-cols-4',
+    5: 'grid-cols-5',
     6: 'grid-cols-6',
 };
 
@@ -413,8 +414,20 @@ export function startGame() {
 
     // Remove any previous grid-col class and set the right one
     Object.values(GRID_COLS).forEach(c => board.classList.remove(c));
-    const cols = cfg.pairs <= 3 ? 3 : cfg.pairs <= 6 ? 4 : 6;
-    board.classList.add(GRID_COLS[cols]);
+    // Determine optimal columns for wider landscape layout (bigger cards)
+    const totalCards = cfg.pairs * 2;
+    let cols = 3; 
+    if (totalCards === 8) cols = 4; // 4x2
+    if (totalCards === 12) cols = 4; // 4x3 (still 4 columns, but we could do 6x2)
+    if (totalCards >= 20) cols = 5; // 5x4 or similar
+    
+    // Actually, let's keep it simple based on pairs
+    if (cfg.pairs === 3) cols = 3; // 3x2
+    if (cfg.pairs === 4) cols = 4; // 4x2 (Requested)
+    if (cfg.pairs === 6) cols = 4; // 4x3
+    if (cfg.pairs === 10) cols = 5; // 5x4
+    
+    board.classList.add(GRID_COLS[cols] || 'grid-cols-4');
 
     // Pick pairs from the selected emotion's pool (or all if level 4)
     let availablePairs = [];
