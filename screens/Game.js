@@ -98,6 +98,13 @@ export function template() {
                 </div>
             </div>
         </div>
+        
+        <!-- Card Preview Overlay (Pop-up) -->
+        <div id="overlay-card-preview" class="overlay">
+            <div id="preview-content" class="preview-card-wrap">
+                <!-- Injected by _showCardPopup -->
+            </div>
+        </div>
 
     </section>`;
 }
@@ -215,6 +222,37 @@ function createCardEl(cardData) {
     return card;
 }
 
+function _showCardPopup(cardData, callback) {
+    const overlay = document.getElementById('overlay-card-preview');
+    const content = document.getElementById('preview-content');
+    if (!overlay || !content) return;
+
+    content.innerHTML = `
+        <div class="premium-preview-card ${cardData.type}">
+            <div class="preview-label">${cardData.label}</div>
+            <div class="preview-img-wrap">
+                <img src="${cardData.image}" alt="${cardData.name}">
+            </div>
+            <div class="preview-info">
+                <h2 class="preview-name">${cardData.name}</h2>
+                <p class="preview-desc">${cardData.description || ''}</p>
+            </div>
+            <button id="btn-close-preview" class="btn-primary">GOT IT!</button>
+        </div>
+    `;
+
+    overlay.classList.add('active');
+
+    const closeBtn = document.getElementById('btn-close-preview');
+    const close = () => {
+        overlay.classList.remove('active');
+        if (callback) callback();
+    };
+
+    closeBtn.onclick = close;
+    overlay.onclick = (e) => { if (e.target === overlay) close(); };
+}
+
 // ── Flip / Match logic ────────────────────────────────────────
 function _flipCard(cardEl, cardData) {
     if (state.isLocked) return;
@@ -231,15 +269,30 @@ function _flipCard(cardEl, cardData) {
     if (cardEl.classList.contains('flipped')) return;
     if (state.flippedCards.length === 2) return;
 
+    state.isLocked = true; // Lock during the "flip then enlarge" sequence
     sounds.flip();
     cardEl.classList.add('flipped');
     state.flippedCards.push({ el: cardEl, data: cardData });
 
+    const FLIP_DELAY = 450; // Wait for flip animation
+
     if (state.flippedCards.length === 2) {
-        state.isLocked = true;
         state.totalAttempts++;
         updateHUD();
-        setTimeout(_checkMatch, 700);
+        
+        // Show popup AFTER flip, THEN check match
+        setTimeout(() => {
+            _showCardPopup(cardData, () => {
+                setTimeout(_checkMatch, 300);
+            });
+        }, FLIP_DELAY);
+    } else {
+        // Show popup AFTER flip
+        setTimeout(() => {
+            _showCardPopup(cardData, () => {
+                state.isLocked = false; // Unlock after first card popup
+            });
+        }, FLIP_DELAY);
     }
 }
 

@@ -110,9 +110,9 @@ export function onShow() {
 }
 
 /**
- * @param {{ navigate: (screen: string) => void }} deps
+ * @param {{ navigate: (screen: string) => void, startGame: () => void }} deps
  */
-export function init({ navigate }) {
+export function init({ navigate, startGame }) {
     document.querySelectorAll('.level-btn').forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             sounds.hover();
@@ -121,7 +121,14 @@ export function init({ navigate }) {
         btn.addEventListener('click', () => {
             sounds.click();
             state.currentLevel = parseInt(btn.dataset.level, 10);
-            navigate('tutorial');
+            
+            // Only show tutorial for Beginner level (Level 1)
+            if (state.currentLevel === 1) {
+                navigate('tutorial');
+            } else {
+                navigate('game');
+                startGame();
+            }
         });
     });
 

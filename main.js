@@ -118,7 +118,7 @@ NameEntry.init({ navigate });
 
 EmotionSelect.init({ navigate });
 
-LevelSelect.init({ navigate });
+LevelSelect.init({ navigate, startGame });
 
 Tutorial.init({ navigate, startGame });
 
