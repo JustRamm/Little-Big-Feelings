@@ -1,4 +1,14 @@
 <svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        @keyframes revolve {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .revolve-container {
+            animation: revolve 15s linear infinite;
+            transform-origin: 148px 105px;
+        }
+    </style>
     <defs>
         <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style="stop-color:#FFFFFF" />
@@ -29,14 +39,17 @@
         </g>
     </g>
 
-    <!-- Small Vibrant Heart (The "Little") -->
-    <g transform="translate(180, 140) rotate(-10)" filter="url(#softGlow)">
-        <path d="M25,45 C15,35 5,25 5,15 C5,8 10,2 18,2 C22,2 25,5 28,10 C31,5 34,2 38,2 C46,2 51,8 51,15 C51,25 41,35 31,45 Z" fill="url(#heartGrad)" />
-    </g>
+    <!-- Revolving Wrapper for Heart and Sparkles -->
+    <g class="revolve-container">
+        <!-- Small Vibrant Heart (The "Little") -->
+        <g transform="translate(180, 140) rotate(-10)" filter="url(#softGlow)">
+            <path d="M25,45 C15,35 5,25 5,15 C5,8 10,2 18,2 C22,2 25,5 28,10 C31,5 34,2 38,2 C46,2 51,8 51,15 C51,25 41,35 31,45 Z" fill="url(#heartGrad)" />
+        </g>
 
-    <!-- Playful Sparkles -->
-    <g fill="#FFD54F">
-        <path d="M50,40 L54,48 L62,48 L56,54 L59,62 L50,57 L41,62 L44,54 L38,48 L46,48 Z" />
-        <path d="M210,50 L213,56 L220,56 L215,60 L217,66 L210,63 L203,66 L205,60 L200,56 L207,56 Z" transform="scale(0.7)" />
+        <!-- Playful Sparkles -->
+        <g fill="#FFD54F">
+            <path d="M50,40 L54,48 L62,48 L56,54 L59,62 L50,57 L41,62 L44,54 L38,48 L46,48 Z" />
+            <path d="M210,50 L213,56 L220,56 L215,60 L217,66 L210,63 L203,66 L205,60 L200,56 L207,56 Z" transform="scale(0.7)" />
+        </g>
     </g>
 </svg>
