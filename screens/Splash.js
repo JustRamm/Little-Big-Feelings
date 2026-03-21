@@ -109,6 +109,9 @@ async function _startPreloading() {
     // Extract from LEVELS
     Object.values(LEVELS).forEach(lvl => assets.add(lvl.icon));
 
+    // Preload potential avatars for Wrong overlay
+    [8, 9, 10, 11, 12].forEach(num => assets.add(`assets/avatars/avatar_${num}.svg`));
+
     const assetArray = Array.from(assets);
     let loaded = 0;
     const fill = document.getElementById('preloader-fill');

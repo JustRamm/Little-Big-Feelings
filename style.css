@@ -1351,10 +1351,10 @@ p {
     border-radius: 20px;
 }
 
-/* Giant size for Beginner (3 columns) */
+/* Giant size for Beginner (3 columns) - Slightly reduced as requested */
 .grid-cols-3 .card {
-    --card-w: clamp(110px, 20vw, 260px);
-    --card-h: clamp(155px, 28vw, 360px);
+    --card-w: clamp(95px, 16vw, 220px);
+    --card-h: clamp(135px, 23vw, 310px);
 }
 
 /* Slightly smaller for Intermediate (4 columns) to balance the wide gap */

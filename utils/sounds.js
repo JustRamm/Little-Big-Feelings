@@ -172,4 +172,55 @@ export const sounds = {
     breathBell() {
         tone({ freq: 880, type: 'sine', dur: 0.6, vol: 0.18 });
     },
+
+    /** Synthesized cheer sound using multiple tones and noise-like frequencies */
+    cheer() {
+        if (!_enabled) return;
+        const ac = getCtx();
+        // Multiple rising notes for "whoop" effect
+        [440, 554.37, 659.25, 880].forEach((f, i) => {
+            const osc = ac.createOscillator();
+            const g = ac.createGain();
+            osc.connect(g);
+            g.connect(ac.destination);
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(f, ac.currentTime + i * 0.05);
+            osc.frequency.exponentialRampToValueAtTime(f * 1.5, ac.currentTime + i * 0.05 + 0.5);
+            
+            g.gain.setValueAtTime(0, ac.currentTime + i * 0.05);
+            g.gain.linearRampToValueAtTime(0.1, ac.currentTime + i * 0.05 + 0.1);
+            g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + i * 0.05 + 0.6);
+            
+            osc.start(ac.currentTime + i * 0.05);
+            osc.stop(ac.currentTime + i * 0.05 + 0.7);
+        });
+        
+        // Add some noise bursts for "applause"
+        for (let j = 0; j < 15; j++) {
+            this.clap(ac.currentTime + Math.random() * 0.8);
+        }
+    },
+
+    /** Short noise burst for a clap */
+    clap(time = null) {
+        if (!_enabled) return;
+        const ac = getCtx();
+        const t = time || ac.currentTime;
+        
+        const osc = ac.createOscillator();
+        const g = ac.createGain();
+        osc.connect(g);
+        g.connect(ac.destination);
+        
+        // Use a high-frequency sawtooth/noise-ish sound
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(Math.random() * 500 + 1000, t);
+        
+        g.gain.setValueAtTime(0.08, t);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.08);
+        
+        osc.start(t);
+        osc.stop(t + 0.1);
+    }
 };

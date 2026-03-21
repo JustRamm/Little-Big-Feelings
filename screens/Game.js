@@ -5,7 +5,6 @@ import { state, resetRound } from '../gameState.js';
 import { EMOTIONS_DATA, LEVELS } from '../gameData.js';
 import { show as showMatch } from './OverlayMatch.js';
 import { show as showWrong } from './OverlayWrong.js';
-import { show as showBreathing } from './BreathingBuddy.js';
 import { sounds } from '../utils/sounds.js';
 import { spawnSparkles, spawnConfetti } from '../utils/effects.js';
 
@@ -258,7 +257,7 @@ function _flipCard(cardEl, cardData) {
     if (state.isLocked) return;
     if (cardEl.classList.contains('matched')) return;
     
-    // Child-friendly: allow un-flipping the first card by clicking it again
+    // allow un-flipping the first card
     if (state.flippedCards.length === 1 && state.flippedCards[0].el === cardEl) {
         sounds.flip();
         cardEl.classList.remove('flipped');
@@ -269,30 +268,21 @@ function _flipCard(cardEl, cardData) {
     if (cardEl.classList.contains('flipped')) return;
     if (state.flippedCards.length === 2) return;
 
-    state.isLocked = true; // Lock during the "flip then enlarge" sequence
     sounds.flip();
     cardEl.classList.add('flipped');
     state.flippedCards.push({ el: cardEl, data: cardData });
 
-    const FLIP_DELAY = 450; // Wait for flip animation
-
     if (state.flippedCards.length === 2) {
+        state.isLocked = true;
         state.totalAttempts++;
         updateHUD();
         
-        // Show popup AFTER flip, THEN check match
+        // Show the info popup for the SECOND card, then check match
         setTimeout(() => {
             _showCardPopup(cardData, () => {
                 setTimeout(_checkMatch, 300);
             });
-        }, FLIP_DELAY);
-    } else {
-        // Show popup AFTER flip
-        setTimeout(() => {
-            _showCardPopup(cardData, () => {
-                state.isLocked = false; // Unlock after first card popup
-            });
-        }, FLIP_DELAY);
+        }, 600);
     }
 }
 
@@ -304,8 +294,6 @@ function _checkMatch() {
         _handleNoMatch(c1, c2);
     }
 }
-
-
 
 function _handleMatch(c1, c2) {
     sounds.match(state.selectedEmotion);
@@ -331,34 +319,14 @@ function _handleNoMatch(c1, c2) {
     c1.el.classList.add('shake');
     c2.el.classList.add('shake');
 
-    // Remove shake after animation
+    showWrong();
+
     setTimeout(() => {
-        c1.el.classList.remove('shake');
-        c2.el.classList.remove('shake');
-    }, 600);
-
-    if (state.mistakes >= state.maxMistakes) {
-        // Reset mistakes for next cycle
-        state.mistakes = 0;
-
-        // Show BreathingBuddy ONLY when chances are out
-        showBreathing(() => {
-            c1.el.classList.remove('flipped');
-            c2.el.classList.remove('flipped');
-            state.flippedCards = [];
-            state.isLocked = false;
-            updateHUD(); // Show hearts again
-        });
-    } else {
-        showWrong();
-        // Normal fast-paced unflip
-        setTimeout(() => {
-            c1.el.classList.remove('flipped');
-            c2.el.classList.remove('flipped');
-            state.flippedCards = [];
-            state.isLocked = false;
-        }, 1200); // Slightly longer to allow feedback
-    }
+        c1.el.classList.remove('shake', 'flipped');
+        c2.el.classList.remove('shake', 'flipped');
+        state.flippedCards = [];
+        state.isLocked = false;
+    }, 1500); 
 }
 
 // ── Hint ─────────────────────────────────────────────────────

@@ -6,23 +6,26 @@ export function template() {
     return /* html */`
     <div id="overlay-match" class="overlay" role="dialog" aria-modal="true" aria-label="Match Found">
         <div class="overlay-card match-overlay-card">
-            <div class="match-badge">Great Connection!</div>
+            <div class="match-badge">You Found a Match!</div>
             <h3 id="match-pair-title" class="match-title">Pair Name</h3>
 
             <div class="match-visuals">
                 <div class="matched-pair">
                     <img id="match-img-1" src="" alt="First matched card">
-                    <i data-lucide="heart" class="plus-icon-img" style="color: var(--pink); fill: var(--pink);"></i>
+                    <i data-lucide="sparkles" class="sparkle-icon" style="color: var(--yellow); fill: var(--yellow); width: 40px; height: 40px;"></i>
                     <img id="match-img-2" src="" alt="Second matched card">
                 </div>
             </div>
 
-            <div class="match-descriptions">
-                <p id="match-description" class="match-desc-primary"></p>
-                <p id="match-fact"        class="match-desc-secondary"></p>
+            <div class="match-explanation">
+                <p id="match-full-explanation" class="match-desc-primary"></p>
             </div>
 
-            <button id="btn-match-continue" class="btn-primary">Keep Going!</button>
+            <div class="match-motivation-box">
+                <p id="match-motivational" class="match-motivational"></p>
+            </div>
+
+            <button id="btn-match-continue" class="btn-primary">Keep Exploring!</button>
         </div>
     </div>`;
 }
@@ -38,13 +41,29 @@ import { saveUnlockedInsights } from '../utils/storage.js';
 let autoDismissTimer = null;
 
 export function show({ d1, d2 }) {
-    sounds.shimmer();
+    sounds.cheer();
+
+    // Motivational phrases for correct matches
+    const motivations = [
+        "You're an emotional superstar!",
+        "Understanding feelings is your superpower!",
+        "Wow, you're learning so much about yourself!",
+        "Fantastic! Your brain is growing stronger!",
+        "You did it! Being kind to yourself is great!",
+        "Spot on! You're a true feelings explorer!"
+    ];
+
+    const randomMotive = motivations[Math.floor(Math.random() * motivations.length)];
 
     document.getElementById('match-img-1').src = d1.image;
     document.getElementById('match-img-2').src = d2.image;
     document.getElementById('match-pair-title').textContent = `${d1.name} + ${d2.name}`;
-    document.getElementById('match-description').textContent = d1.description;
-    document.getElementById('match-fact').textContent = d2.description;
+
+    // Combine trigger and action into a cohesive explanation
+    const fullExplanation = `When you feel like: "${d1.description}"... you can try to: "${d2.description}"`;
+    document.getElementById('match-full-explanation').textContent = fullExplanation;
+    document.getElementById('match-motivational').textContent = randomMotive;
+
     document.getElementById('overlay-match').classList.add('active');
 
     // Unlock insight (save the emotion ID part)
@@ -54,24 +73,26 @@ export function show({ d1, d2 }) {
         saveUnlockedInsights(state.unlockedInsights);
     }
 
-    // Narrate for children
+    // Narrate for children (DISABLED - User requested no reading out)
+    /*
     if ('speechSynthesis' in window && state.speechEnabled) {
-        window.speechSynthesis.cancel(); // stop previous
-        const text = `Great job! You matched ${d1.name} with ${d2.name}. ${d1.description}`;
+        window.speechSynthesis.cancel();
+        const text = `Brilliant! ${randomMotive}. ${fullExplanation}`;
         const msg = new SpeechSynthesisUtterance(text);
-        msg.rate = 1.1;
+        msg.rate = 1.0;
         msg.pitch = 1.1;
         window.speechSynthesis.speak(msg);
     }
+    */
 
-    // Auto-dismiss after 6 seconds to make it "easier for player to play"
+    // Auto-dismiss after 7 seconds for more reading time
     clearTimeout(autoDismissTimer);
     autoDismissTimer = setTimeout(() => {
         const btn = document.getElementById('btn-match-continue');
         if (document.getElementById('overlay-match').classList.contains('active')) {
             btn.click();
         }
-    }, 6000);
+    }, 7000);
 }
 
 export function hide() {

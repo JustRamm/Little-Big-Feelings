@@ -2,7 +2,7 @@
 //  screens/Victory.js — Screen 5: Victory / End of Round
 // ============================================================
 import { state } from '../gameState.js';
-import { LEVELS } from '../gameData.js';
+import { LEVELS, EMOTIONS_DATA } from '../gameData.js';
 import { saveScore } from '../utils/storage.js';
 import { sounds } from '../utils/sounds.js';
 
@@ -51,15 +51,15 @@ export function template() {
                     <div class="victory-stat-label">Total Tries</div>
                 </div>
                 <div class="victory-stat">
-                    <div class="victory-stat-icon" style="color: var(--orange);">
-                        <i data-lucide="trophy"></i>
+                    <div class="victory-stat-icon">
+                        <img id="victory-emotion-icon" src="" alt="Emotion Icon" style="width: 32px; height: 32px; object-fit: contain;">
                     </div>
                     <div class="victory-stat-value" id="victory-level">Easy</div>
                     <div class="victory-stat-label">Level</div>
                 </div>
             </div>
 
-            <p class="victory-message">
+            <p class="victory-mastery-text" id="victory-mastery-msg">
                 You learned all about emotions today! Amazing work!
             </p>
 
@@ -122,7 +122,14 @@ export function populate({ stars }) {
     document.getElementById('victory-attempts').textContent = state.totalAttempts;
     document.getElementById('victory-level').textContent = LEVELS[state.currentLevel].label;
 
-    // Show/hide Next Level button via class (no inline style)
+    // Mastery Message & Icon
+    const emotion = EMOTIONS_DATA[state.selectedEmotion];
+    if (emotion) {
+        document.getElementById('victory-mastery-msg').textContent = `You have mastered the little big emotion called ${emotion.name}!`;
+        document.getElementById('victory-emotion-icon').src = emotion.icon;
+    }
+
+    // Show/hide Next Level button
     const nextBtn = document.getElementById('btn-next-level');
     nextBtn.classList.toggle('btn-hidden', state.currentLevel >= 3);
 
