@@ -18,25 +18,29 @@ export function template() {
                 <button id="btn-az-back" class="btn-icon" aria-label="Back">
                     <i data-lucide="arrow-left"></i>
                 </button>
+                <div class="az-time-badge">
+                    <span id="az-timer-text">60s</span>
+                    <label>Time</label>
+                </div>
                 <div class="az-progress-rail">
-                    <div id="az-progress-fill" class="az-progress-fill" style="width: 0%;"></div>
+                    <div id="az-progress-fill" class="az-progress-fill" style="width: 100%;"></div>
                 </div>
                 <div class="az-score-badge">
-                    <span id="az-score">000</span>
-                    <label>Score</label>
+                    <span id="az-skills-count">0</span>
+                    <label>Skills Found</label>
                 </div>
             </header>
 
             <div class="az-game-main">
                 <div id="az-start-screen" class="az-overlay-screen">
-                    <h2 class="premium-title">A-Z Coping Rush</h2>
-                    <p>Can you find a coping skill for every letter of the alphabet? Let's learn A to Z!</p>
+                    <h2 class="premium-title">A-Z Feelings Explorer</h2>
+                    <p>Let's discover a fun way to feel better for every letter of the alphabet!</p>
                     <div class="az-tutorial-preview">
-                         <div class="tutorial-item"><i data-lucide="type"></i> <span>A to Z</span></div>
-                         <div class="tutorial-item"><i data-lucide="timer"></i> <span>Be Quick!</span></div>
+                         <div class="tutorial-item"><i data-lucide="sparkles"></i> <span>A to Z</span></div>
+                         <div class="tutorial-item"><i data-lucide="heart"></i> <span>Feel Good</span></div>
                     </div>
                     <button class="btn-primary" id="btn-az-tutorial">How to Play?</button>
-                    <button class="btn-secondary" id="btn-az-start" style="margin-top: 1rem;">Skip to Game</button>
+                    <button class="btn-secondary" id="btn-az-start" style="margin-top: 1rem;">Start Exploring</button>
                 </div>
 
                 <!-- Step-by-Step Tutorial -->
@@ -53,10 +57,6 @@ export function template() {
                 <div id="az-game-play" class="az-play-area hidden">
                     <div class="az-huge-letter" id="az-letter">A</div>
                     
-                    <div class="az-timer-bar">
-                        <div id="az-timer-fill" class="az-timer-fill"></div>
-                    </div>
-
                     <div class="az-options-grid" id="az-options">
                         <!-- 3 Options will be injected here -->
                     </div>
@@ -161,25 +161,33 @@ function startGame() {
     currentIndex = 0;
     score = 0;
     streak = 0;
+    timeLeft = 60; // 1 minute
     document.getElementById('az-start-screen').classList.add('hidden');
     document.getElementById('az-game-play').classList.remove('hidden');
     document.getElementById('az-victory').classList.add('hidden');
+    
+    // Start global 60s timer
+    startGlobalTimer();
     nextRound();
 }
 
 function nextRound() {
+    // Round loop: If we reach the end, go back to A to keep playing until time is up
     if (currentIndex >= COPING_ALPHABET.length) {
-        showVictory();
-        return;
+        currentIndex = 0; 
     }
 
     const currentData = COPING_ALPHABET[currentIndex];
     
-    // Update UI
-    document.getElementById('az-letter').textContent = currentData.letter;
-    const progress = (currentIndex / COPING_ALPHABET.length) * 100;
-    document.getElementById('az-progress-fill').style.width = `${progress}%`;
+    // Update UI with a fun random color
+    const letterEl = document.getElementById('az-letter');
+    letterEl.textContent = currentData.letter;
     
+    // Remove any existing color-X classes
+    letterEl.className = 'az-huge-letter'; 
+    const randomColor = Math.floor(Math.random() * 6) + 1;
+    letterEl.classList.add(`color-${randomColor}`);
+
     // Generate Options
     const options = generateOptions(currentData);
     const optionsGrid = document.getElementById('az-options');
@@ -192,11 +200,6 @@ function nextRound() {
 
     if (window.lucide) window.lucide.createIcons();
 
-    // Reset Timer
-    clearInterval(timer);
-    timeLeft = 10;
-    startTimer();
-
     // Event listeners
     optionsGrid.querySelectorAll('.az-option-card').forEach(card => {
         card.addEventListener('click', () => handleChoice(card));
@@ -206,12 +209,26 @@ function nextRound() {
 function generateOptions(correct) {
     let opts = [{ ...correct, isCorrect: true }];
     
-    // Pick 2 random wrong options
-    const pool = COPING_ALPHABET.filter(item => item.letter !== correct.letter);
-    while (opts.length < 3) {
-        const rand = pool[Math.floor(Math.random() * pool.length)];
-        if (!opts.find(o => o.letter === rand.letter)) {
-            opts.push({ ...rand, isCorrect: false });
+    // Use the fixed funny wrong options if available
+    if (correct.wrong && Array.isArray(correct.wrong)) {
+        correct.wrong.forEach(wAction => {
+            opts.push({
+                action: wAction,
+                icon: 'help-circle', // Generic funny icon for wrong ones
+                isCorrect: false,
+                letter: correct.letter
+            });
+        });
+    }
+
+    // Fallback in case something is missing
+    if (opts.length < 3) {
+        const pool = COPING_ALPHABET.filter(item => item.letter !== correct.letter);
+        while (opts.length < 3) {
+            const rand = pool[Math.floor(Math.random() * pool.length)];
+            if (!opts.find(o => o.action === rand.action)) {
+                opts.push({ ...rand, isCorrect: false });
+            }
         }
     }
 
@@ -224,44 +241,47 @@ function handleChoice(card) {
         sounds.match();
         card.classList.add('correct');
         streak++;
-        score += 100 + (streak * 20) + (timeLeft * 10);
+        score++; // We'll count skills found as the score
         updateScore();
         currentIndex++;
         
-        if (streak >= 2) {
+        if (streak >= 3) {
             const sb = document.getElementById('az-streak');
             sb.classList.remove('hidden');
             document.getElementById('az-streak-val').textContent = `${streak}x`;
         }
 
-        setTimeout(nextRound, 600);
+        setTimeout(nextRound, 400); // Shorter pause for "rush" feel
     } else {
         sounds.wrong();
         card.classList.add('wrong');
         streak = 0;
         document.getElementById('az-streak').classList.add('hidden');
-        timeLeft -= 2; // Penalty
+        timeLeft -= 1; // 1s penalty for wrong answer
     }
 }
 
 function updateScore() {
-    document.getElementById('az-score').textContent = score.toString().padStart(3, '0');
+    document.getElementById('az-skills-count').textContent = score;
 }
 
-function startTimer() {
-    const fill = document.getElementById('az-timer-fill');
+function startGlobalTimer() {
+    const fill = document.getElementById('az-progress-fill');
+    const text = document.getElementById('az-timer-text');
+    
+    clearInterval(timer);
     timer = setInterval(() => {
         timeLeft -= 0.1;
-        const pct = (timeLeft / 10) * 100;
+        if (timeLeft < 0) timeLeft = 0;
+
+        const pct = (timeLeft / 60) * 100;
         fill.style.width = `${pct}%`;
+        text.textContent = Math.ceil(timeLeft) + 's';
         
         if (timeLeft <= 0) {
             clearInterval(timer);
             sounds.wrong();
-            currentIndex++; // Move to next anyway but no score
-            streak = 0;
-            document.getElementById('az-streak').classList.add('hidden');
-            nextRound();
+            showVictory();
         }
     }, 100);
 }
@@ -270,10 +290,10 @@ function showVictory() {
     clearInterval(timer);
     document.getElementById('az-game-play').classList.add('hidden');
     document.getElementById('az-victory').classList.remove('hidden');
-    document.getElementById('az-final-score').textContent = `Final Score: ${score}`;
+    document.getElementById('az-final-score').textContent = `Coping Skills Found: ${score}`;
     
     const starsContainer = document.getElementById('az-final-stars');
-    const starCount = score > 3000 ? 3 : score > 1500 ? 2 : 1;
+    const starCount = score >= 20 ? 3 : score >= 10 ? 2 : 1;
     starsContainer.innerHTML = '';
     for(let i=0; i<3; i++) {
         const active = i < starCount ? 'star-active' : 'star-inactive';
