@@ -1,44 +1,9 @@
-<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Card frame -->
-  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
-  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
-  <rect x="22" y="22" width="356" height="456" rx="28" fill="#F3E5F5"/>
-
-  <!-- Label bar -->
-  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#CE93D8"/>
-  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A148C" text-anchor="middle">Connect &amp; Care</text>
-
-  <!-- Two figures hugging -->
-  <!-- Figure 1: left friend -->
-  <circle cx="158" cy="200" r="44" fill="#FF80AB" stroke="#F06292" stroke-width="4"/>
-  <!-- Face 1 -->
-  <circle cx="146" cy="195" r="7" fill="#333"/>
-  <circle cx="170" cy="195" r="7" fill="#333"/>
-  <circle cx="148" cy="193" r="3" fill="white"/>
-  <circle cx="172" cy="193" r="3" fill="white"/>
-  <path d="M144 215 Q158 227 172 215" stroke="#C2185B" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <!-- Body 1 -->
-  <rect x="118" y="244" width="70" height="80" rx="18" fill="#FF80AB"/>
-
-  <!-- Figure 2: right friend -->
-  <circle cx="242" cy="200" r="44" fill="#CE93D8" stroke="#AB47BC" stroke-width="4"/>
-  <!-- Face 2 -->
-  <circle cx="230" cy="195" r="7" fill="#333"/>
-  <circle cx="254" cy="195" r="7" fill="#333"/>
-  <circle cx="232" cy="193" r="3" fill="white"/>
-  <circle cx="256" cy="193" r="3" fill="white"/>
-  <path d="M228 215 Q242 227 256 215" stroke="#7B1FA2" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <!-- Body 2 -->
-  <rect x="212" y="244" width="70" height="80" rx="18" fill="#CE93D8"/>
-
-  <!-- Hug arms crossing in middle -->
-  <path d="M118 265 Q200 235 282 265" stroke="#F8BBD9" stroke-width="24" fill="none" stroke-linecap="round"/>
-  <path d="M118 280 Q200 310 282 280" stroke="#E1BEE7" stroke-width="24" fill="none" stroke-linecap="round"/>
-
-  <!-- Heart between them -->
-  <path d="M200 175 Q205 162 215 162 Q228 162 228 175 Q228 185 200 200 Q172 185 172 175 Q172 162 185 162 Q195 162 200 175Z" fill="#FF4081" stroke="#C2185B" stroke-width="2"/>
-
-  <!-- Little stars of warmth -->
-  <text x="88" y="170" font-size="22" fill="#FFD54F" opacity="0.9">✦</text>
-  <text x="295" y="165" font-size="18" fill="#FFD54F" opacity="0.9">✦</text>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card Base -->
+  <rect x="10" y="10" width="180" height="180" rx="30" fill="white" stroke="#FFCDD2" stroke-width="4" />
+  
+  <!-- Hug 🫂 - Arms hugging heart -->
+  <path d="M100 130 Q120 105 140 130 Q160 155 100 180 Q40 155 60 130 Q80 105 100 130 Z" fill="#EF5350" />
+  <path d="M50 80 Q65 150 100 150" stroke="#FFCC80" stroke-width="12" stroke-linecap="round" fill="none" />
+  <path d="M150 80 Q135 150 100 150" stroke="#FFCC80" stroke-width="12" stroke-linecap="round" fill="none" />
 </svg>

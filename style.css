@@ -3980,5 +3980,57 @@ p {
     margin-top: 1rem;
     width: 100%;
     padding: 1.2rem;
-    font-size: 1.3rem;
 }
+
+/* ============================================================
+   MOBILE SCROLL FIX (Enabling scroll only for mobile)
+   ============================================================ */
+@media (max-width: 768px) {
+    .screen {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4rem !important;
+    }
+
+    .screen > div:not(.game-background) {
+        height: auto !important;
+        min-height: 100%;
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    .overlay {
+        overflow-y: auto !important;
+        align-items: flex-start !important;
+        padding: 3rem 1.2rem !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .overlay-card {
+        margin: auto 0;
+        max-width: 95% !important;
+    }
+
+    /* Exceptions: Screens that have their own scroll or specific logic */
+    .emotion-illustrative-grid, 
+    .level-select-container,
+    .journal-grid-scroll {
+        overflow-y: visible !important;
+        height: auto !important;
+    }
+}
+
+/* Selection Screen Icons */
+.emo-illustration-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+
+

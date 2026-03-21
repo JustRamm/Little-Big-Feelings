@@ -1,31 +1,12 @@
-<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Card frame -->
-  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
-  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
-  <rect x="22" y="22" width="356" height="456" rx="28" fill="#FFEBEE"/>
-
-  <!-- Label bar -->
-  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#EF9A9A"/>
-  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="20" font-weight="bold" fill="#B71C1C" text-anchor="middle">Feeling Frustrated</text>
-
-  <!-- Illustration: Frustrated face -->
-  <ellipse cx="200" cy="240" rx="100" ry="105" fill="#EF9A9A" stroke="#C62828" stroke-width="7"/>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card Base -->
+  <rect x="10" y="10" width="180" height="180" rx="30" fill="white" stroke="#E1BEE7" stroke-width="4" />
   
-  <!-- Scrunched eyes -->
-  <path d="M150 210 L180 230 M150 230 L180 210" stroke="#B71C1C" stroke-width="8" stroke-linecap="round"/>
-  <path d="M220 210 L250 230 M220 230 L250 210" stroke="#B71C1C" stroke-width="8" stroke-linecap="round"/>
+  <!-- Frustrated Face ☁️ - Cute tangled cloud -->
+  <path d="M60 100 Q70 60 100 70 Q130 60 140 100 Q150 140 100 150 Q50 140 60 100" fill="#BA68C8" />
   
-  <!-- Furrowed brow -->
-  <path d="M185 200 Q200 185 215 200" stroke="#B71C1C" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M80 85 L95 100 M80 100 L95 85" stroke="white" stroke-width="4" stroke-linecap="round" />
+  <path d="M105 85 L120 100 M105 100 L120 85" stroke="white" stroke-width="4" stroke-linecap="round" />
   
-  <!-- Gritting teeth / Straight mouth -->
-  <rect x="160" y="270" width="80" height="30" rx="8" fill="white" stroke="#B71C1C" stroke-width="5"/>
-  <line x1="160" y1="285" x2="240" y2="285" stroke="#B71C1C" stroke-width="3"/>
-  <line x1="180" y1="270" x2="180" y2="300" stroke="#B71C1C" stroke-width="2"/>
-  <line x1="200" y1="270" x2="200" y2="300" stroke="#B71C1C" stroke-width="2"/>
-  <line x1="220" y1="270" x2="220" y2="300" stroke="#B71C1C" stroke-width="2"/>
-  
-  <!-- Steam clouds -->
-  <path d="M120 150 Q100 130 115 110" stroke="#90A4AE" stroke-width="4" fill="none" opacity="0.6"/>
-  <path d="M280 150 Q300 130 285 110" stroke="#90A4AE" stroke-width="4" fill="none" opacity="0.6"/>
+  <path d="M85 125 Q100 115 115 125 Q130 135 145 125" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" />
 </svg>

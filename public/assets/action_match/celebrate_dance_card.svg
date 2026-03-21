@@ -1,53 +1,10 @@
-<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Card frame -->
-  <rect x="18" y="26" width="370" height="460" rx="38" fill="#E0E0E0"/>
-  <rect x="8" y="8" width="384" height="484" rx="38" fill="white"/>
-  <rect x="22" y="22" width="356" height="456" rx="28" fill="#FFF8E1"/>
-
-  <!-- Label bar -->
-  <path d="M22 430 H378 V458 Q378 470 366 470 H34 Q22 470 22 458 Z" fill="#FFD54F"/>
-  <text x="200" y="456" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="19" font-weight="bold" fill="#5D4037" text-anchor="middle">Celebrate!</text>
-
-  <!-- Confetti background -->
-  <rect x="70" y="100" width="14" height="14" rx="2" fill="#FF80AB" transform="rotate(25, 77, 107)"/>
-  <rect x="280" y="120" width="12" height="12" rx="2" fill="#4FC3F7" transform="rotate(-15, 286, 126)"/>
-  <rect x="130" y="80" width="10" height="10" rx="2" fill="#A5D6A7" transform="rotate(40, 135, 85)"/>
-  <rect x="300" y="85" width="16" height="10" rx="2" fill="#FFD54F" transform="rotate(10, 308, 90)"/>
-  <rect x="60" y="350" width="12" height="12" rx="2" fill="#CE93D8" transform="rotate(-30, 66, 356)"/>
-  <rect x="320" y="340" width="10" height="14" rx="2" fill="#FF8A65" transform="rotate(20, 325, 347)"/>
-  <circle cx="100" cy="370" r="6" fill="#FF80AB"/>
-  <circle cx="315" cy="380" r="5" fill="#4FC3F7"/>
-  <circle cx="250" cy="70" r="7" fill="#A5D6A7"/>
-  <circle cx="155" cy="380" r="5" fill="#FFD54F"/>
-
-  <!-- Cheering child body -->
-  <!-- Torso -->
-  <rect x="160" y="285" width="80" height="90" rx="20" fill="#FF80AB"/>
-  <!-- Head -->
-  <circle cx="200" cy="245" r="58" fill="#FFCC80" stroke="#FFB74D" stroke-width="4"/>
-  <!-- Hair -->
-  <path d="M145 225 Q155 175 200 168 Q245 175 255 225" fill="#6D4C41"/>
-  <rect x="145" y="215" width="20" height="18" rx="8" fill="#6D4C41"/>
-  <rect x="235" y="215" width="20" height="18" rx="8" fill="#6D4C41"/>
-
-  <!-- Happy face -->
-  <ellipse cx="180" cy="240" rx="12" ry="14" fill="white"/>
-  <ellipse cx="220" cy="240" rx="12" ry="14" fill="white"/>
-  <circle cx="182" cy="243" r="7" fill="#333"/>
-  <circle cx="222" cy="243" r="7" fill="#333"/>
-  <circle cx="185" cy="241" r="3" fill="white"/>
-  <circle cx="225" cy="241" r="3" fill="white"/>
-  <!-- Big smile -->
-  <path d="M178 272 Q200 290 222 272" stroke="#E64A19" stroke-width="5" fill="none" stroke-linecap="round"/>
-
-  <!-- Arms raised -->
-  <path d="M160 300 Q120 270 100 240" stroke="#FFCC80" stroke-width="22" fill="none" stroke-linecap="round"/>
-  <path d="M240 300 Q280 270 300 240" stroke="#FFCC80" stroke-width="22" fill="none" stroke-linecap="round"/>
-  <!-- Hands -->
-  <circle cx="100" cy="238" r="16" fill="#FFCC80" stroke="#FFB74D" stroke-width="3"/>
-  <circle cx="300" cy="238" r="16" fill="#FFCC80" stroke="#FFB74D" stroke-width="3"/>
-
-  <!-- Stars being thrown -->
-  <text x="65" y="205" font-size="30" fill="#FFD54F">★</text>
-  <text x="305" y="205" font-size="25" fill="#FF80AB">★</text>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card Base -->
+  <rect x="10" y="10" width="180" height="180" rx="30" fill="white" stroke="#FFF59D" stroke-width="4" />
+  
+  <!-- Celebrate Dance 🥳 - Star person -->
+  <path d="M100 50 L110 85 L145 95 L115 120 L125 155 L100 135 L75 155 L85 120 L55 95 L90 85 Z" fill="#FFD54F" />
+  
+  <circle cx="140" cy="50" r="5" fill="#EF5350" />
+  <circle cx="50" cy="150" r="6" fill="#42A5F5" />
 </svg>

@@ -1,0 +1,7 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card Base -->
+  <rect x="10" y="10" width="180" height="180" rx="30" fill="white" stroke="#FFD54F" stroke-width="4" />
+  <!-- Joy Face -->
+  <circle cx="100" cy="100" r="70" fill="#FFD54F" />
+  <path d="M60 120 Q100 160 140 120" stroke="#5D4037" stroke-width="8" stroke-linecap="round" fill="none" />
+</svg>
