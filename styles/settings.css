@@ -1,0 +1,116 @@
+/* ============================================================
+   SETTINGS SCREEN
+   ============================================================ */
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    max-width: 500px;
+    width: 100%;
+}
+
+.settings-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.settings-card {
+    width: 100%;
+    background: white;
+    border-radius: var(--r-lg);
+    padding: 0.8rem 1.2rem;
+    box-shadow: 0 4px 0 #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.settings-label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.settings-icon { font-size: 1.6rem; flex-shrink: 0; }
+.settings-label-title { font-size: 1rem; font-weight: 800; color: var(--text); }
+.settings-label-sub { font-size: 0.75rem; font-weight: 600; color: #9E9E9E; }
+
+/* Player preview */
+.settings-player-preview {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.settings-big-avatar {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.settings-player-name { font-size: 1.4rem; font-weight: 800; color: var(--text); }
+
+/* Toggle switch */
+.toggle-btn {
+    width: 52px;
+    height: 28px;
+    border-radius: 14px;
+    background: #E0E0E0;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.25s var(--ease);
+    flex-shrink: 0;
+}
+
+.toggle-btn.toggle-on { background: var(--green); }
+
+.toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.25s var(--spring);
+}
+
+.toggle-btn.toggle-on .toggle-thumb { transform: translateX(24px); }
+
+/* Danger zone */
+.settings-danger { border: 2px solid #FFCDD2; }
+
+.btn-danger {
+    background: #EF5350;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--r-md);
+    border-bottom: 4px solid #B71C1C;
+    font-size: 0.9rem;
+    font-weight: 800;
+    font-family: var(--font);
+    cursor: pointer;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.btn-danger:hover { transform: translateY(-2px); }
+.settings-back-btn { align-self: flex-start; }
