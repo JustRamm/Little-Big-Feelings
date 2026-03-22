@@ -9,7 +9,11 @@
 //    5. Boot: splash screen
 // ============================================================
 
+import { registerSW } from 'virtual:pwa-register';
 import * as Splash from './screens/Splash.js';
+
+// Register the PWA service worker with auto-update
+registerSW({ immediate: true });
 import * as NameEntry from './screens/NameEntry.js';
 import * as EmotionSelect from './screens/EmotionSelect.js';
 import * as LevelSelect from './screens/LevelSelect.js';
