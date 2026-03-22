@@ -3,5 +3,12 @@
   <rect x="10" y="10" width="180" height="180" rx="30" fill="white" stroke="#F06292" stroke-width="4" />
   <!-- Surprise Face -->
   <circle cx="100" cy="100" r="70" fill="#F06292" />
-  <circle cx="100" cy="135" r="22" fill="white" />
+  <!-- Huge Wide Eyes -->
+  <circle cx="70" cy="90" r="20" fill="white" />
+  <circle cx="130" cy="90" r="20" fill="white" />
+  <!-- Tiny Pupils (Shocked) -->
+  <circle cx="70" cy="90" r="6" fill="#F06292" />
+  <circle cx="130" cy="90" r="6" fill="#F06292" />
+  <!-- Big O Mouth -->
+  <circle cx="100" cy="145" r="18" fill="white" />
 </svg>

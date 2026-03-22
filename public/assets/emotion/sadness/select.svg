@@ -3,7 +3,14 @@
   <rect x="10" y="10" width="180" height="180" rx="30" fill="white" stroke="#42A5F5" stroke-width="4" />
   <!-- Sadness Face -->
   <circle cx="100" cy="100" r="70" fill="#42A5F5" />
-  <circle cx="80" cy="95" r="8" fill="white" />
-  <circle cx="120" cy="95" r="8" fill="white" />
-  <path d="M70 110 Q70 125 80 125 Q90 125 90 110 Q80 100 70 110" fill="white" />
+  <!-- Eyes -->
+  <circle cx="80" cy="100" r="10" fill="white" />
+  <circle cx="120" cy="100" r="10" fill="white" />
+  <!-- Pupils -->
+  <circle cx="80" cy="100" r="4" fill="#42A5F5" />
+  <circle cx="120" cy="100" r="4" fill="#42A5F5" />
+  <!-- Tear -->
+  <path d="M128 105 Q135 125 128 140 Q121 125 128 105" fill="#E1F5FE" />
+  <!-- Mouth -->
+  <path d="M75 145 Q100 130 125 145" stroke="white" stroke-width="8" stroke-linecap="round" fill="none" />
 </svg>
