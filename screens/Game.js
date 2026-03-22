@@ -272,17 +272,21 @@ function _flipCard(cardEl, cardData) {
     cardEl.classList.add('flipped');
     state.flippedCards.push({ el: cardEl, data: cardData });
 
-    if (state.flippedCards.length === 2) {
+    if (state.flippedCards.length === 1) {
+        // Show the info popup for the FIRST card
+        state.isLocked = true;
+        setTimeout(() => {
+            _showCardPopup(cardData, () => {
+                state.isLocked = false;
+            });
+        }, 400); // Reduced delay for better feel
+    } else if (state.flippedCards.length === 2) {
         state.isLocked = true;
         state.totalAttempts++;
         updateHUD();
         
-        // Show the info popup for the SECOND card, then check match
-        setTimeout(() => {
-            _showCardPopup(cardData, () => {
-                setTimeout(_checkMatch, 300);
-            });
-        }, 600);
+        // No popup for 2nd card, just check match
+        setTimeout(_checkMatch, 600); // Reduced delay to show result faster
     }
 }
 
