@@ -38,14 +38,17 @@ export function template() {
                 </div>
                 <!-- Mini-game Shortcuts -->
                 <div class="mini-game-shortcuts">
-                    <button id="btn-mb-shortcut" class="mini-game-badge mb-badge" title="Mood Battery Game" type="button">
+                    <button id="btn-animo-shortcut" class="mini-game-badge mb-badge" title="Animo Adventure" type="button">
                         <svg viewBox="0 0 100 100" class="game-badge-svg">
-                            <circle cx="50" cy="50" r="45" fill="#FFD54F" />
-                            <circle cx="50" cy="50" r="38" fill="white" opacity="0.3" />
-                            <path d="M50 20 L60 45 L85 45 L65 60 L75 85 L50 70 L25 85 L35 60 L15 45 L40 45 Z" fill="#F57C00" />
-                            <path d="M45 45 L50 30 L55 45 Z" fill="white" opacity="0.6" />
+                            <circle cx="50" cy="50" r="48" fill="#FFF9E6" />
+                            <!-- Pet Paw (Kawaii Style) -->
+                            <circle cx="35" cy="40" r="10" fill="#FF80AB" />
+                            <circle cx="65" cy="40" r="10" fill="#FF80AB" />
+                            <circle cx="50" cy="30" r="10" fill="#FF80AB" />
+                            <path d="M50 85 Q20 85 20 60 Q20 45 50 45 Q80 45 80 60 Q80 85 50 85 Z" fill="#FF80AB" />
+                            <circle cx="50" cy="65" r="5" fill="white" /> <!-- Tiny heart center -->
                         </svg>
-                        <span>Mood Battery</span>
+                        <span>Animo Adventure</span>
                     </button>
                     <button id="btn-az-shortcut" class="mini-game-badge az-badge" title="A-Z Arcade Game" type="button">
                         <svg viewBox="0 0 100 100" class="game-badge-svg">
@@ -95,9 +98,9 @@ export function init({ navigate }) {
         navigate('nameEntry');
     });
 
-    document.getElementById('btn-mb-shortcut').addEventListener('click', () => {
+    document.getElementById('btn-animo-shortcut').addEventListener('click', () => {
         sounds.click();
-        navigate('moodBattery');
+        navigate('moodAnimo');
     });
 
     document.getElementById('btn-az-shortcut').addEventListener('click', () => {

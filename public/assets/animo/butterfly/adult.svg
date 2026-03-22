@@ -1,0 +1,21 @@
+<svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+    <!-- Majestic Adult Butterfly (Avatar 12 style with body) -->
+    <!-- Large Body (Based on Avatar 12) -->
+    <rect x="47" y="60" width="6" height="65" rx="3" fill="#4A148C" stroke="#9C27B0" stroke-width="2" />
+    
+    <!-- Large Majestic Split Wings (Based on Avatar 12) -->
+    <path d="M10 20 Q30 0 50 40 Q70 0 90 20 Q100 50 50 60 Q0 50 10 20 Z" fill="#E1BEE7" stroke="#9C27B0" stroke-width="3" />
+    <path d="M15 80 Q30 100 50 60 Q70 100 85 80 Q95 60 50 55 Q5 60 15 80 Z" fill="#F3E5F5" stroke="#9C27B0" stroke-width="3" />
+    
+    <!-- Head (Based on Avatar 12 style) -->
+    <circle cx="50" cy="50" r="35" fill="white" stroke="#9C27B0" stroke-width="2" />
+    <!-- Eyes -->
+    <circle cx="42" cy="45" r="4" fill="#4A148C" />
+    <circle cx="58" cy="45" r="4" fill="#4A148C" />
+    <!-- Antennae (Based on Avatar 12) -->
+    <path d="M48 30 Q40 10 35 15 M52 30 Q60 10 65 15" stroke="#4A148C" stroke-width="3" fill="none" stroke-linecap="round" />
+    
+    <!-- Sparkles on Wings -->
+    <circle cx="30" cy="40" r="4" fill="white" opacity="0.6" />
+    <circle cx="70" cy="40" r="4" fill="white" opacity="0.6" />
+</svg>

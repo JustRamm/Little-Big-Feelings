@@ -226,5 +226,115 @@ export const sounds = {
         
         osc.start(t);
         osc.stop(t + 0.1);
+    },
+
+    /** Ambiance state tracking */
+    _ambianceLoop: null,
+    _ambianceType: null,
+
+    stopAnimalAmbiance() {
+        if (this._ambianceLoop) {
+            clearTimeout(this._ambianceLoop);
+            this._ambianceLoop = null;
+        }
+        this._ambianceType = null;
+    },
+
+    startAnimalAmbiance(type) {
+        this.stopAnimalAmbiance();
+        this._ambianceType = type;
+        
+        const loop = () => {
+            if (this._ambianceType !== type || !_enabled) return;
+            
+            // Lower volume for ambiance
+            const volMod = (type === 'bee') ? 0.03 : 0.08;
+            this.animal(type, volMod);
+            
+            // Beekeepers love constant buzz; lions roar occasionally
+            const delay = (type === 'bee') ? 400 : 5000 + (Math.random() * 3000);
+            this._ambianceLoop = setTimeout(loop, delay);
+        };
+        
+        loop();
+    },
+
+    /** Synthesized Animal Sounds Engine (v1) — No TTS, just raw code textures */
+    animal(type, ambianceVol = null) {
+        if (!_enabled) return;
+        const ac = getCtx();
+        const t = ac.currentTime;
+
+        const p = (f, ty, dur, vol, del = 0, glide = 0) => {
+            const finalVol = ambianceVol || vol;
+            const o = ac.createOscillator();
+            const g = ac.createGain();
+            o.connect(g); g.connect(ac.destination);
+            o.type = ty;
+            o.frequency.setValueAtTime(f, t + del);
+            if (glide) o.frequency.exponentialRampToValueAtTime(f + glide, t + del + dur);
+            g.gain.setValueAtTime(finalVol, t + del);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + del + dur);
+            o.start(t + del); o.stop(t + del + dur + 0.05);
+        };
+
+        switch (type) {
+            case 'lion':
+                // Deep sawtooth roar
+                for (let i = 0; i < 3; i++) p(120 - i*10, 'sawtooth', 0.6, 0.15, i*0.05, -40);
+                break;
+            case 'elephant':
+                // High-freq trumpet blare
+                p(600, 'sawtooth', 0.4, 0.15, 0, 200);
+                p(800, 'sawtooth', 0.3, 0.1, 0.1, -100);
+                break;
+            case 'penguin':
+                // Nasal honk
+                p(300, 'triangle', 0.1, 0.2);
+                p(350, 'triangle', 0.15, 0.15, 0.12);
+                break;
+            case 'panda':
+                // Soft squeak
+                p(900, 'sine', 0.1, 0.1, 0, 300);
+                break;
+            case 'cat':
+                // Rising-falling meow
+                p(500, 'sine', 0.4, 0.15, 0, 200);
+                p(700, 'sine', 0.2, 0.1, 0.4, -200);
+                break;
+            case 'dog':
+                // Sharp bark
+                p(200, 'sawtooth', 0.15, 0.15, 0, -50);
+                p(220, 'sawtooth', 0.12, 0.12, 0.1, -40);
+                break;
+            case 'monkey':
+                // Repeating "ooh ooh"
+                for (let i = 0; i < 4; i++) p(600 + (i%2 ? 100 : 0), 'sine', 0.15, 0.12, i*0.18, 50);
+                break;
+            case 'rabbit':
+                // Soft twitch/sniff (quick sine blips)
+                p(1200, 'sine', 0.05, 0.1, 0);
+                p(1100, 'sine', 0.05, 0.08, 0.06);
+                break;
+            case 'frog':
+                // Deep croak pattern
+                for (let i = 0; i < 8; i++) p(150, 'sawtooth', 0.02, 0.1, i*0.03);
+                break;
+            case 'owl':
+                // "Hoot hoot" sliding sines
+                p(400, 'sine', 0.3, 0.15, 0, -50);
+                p(380, 'sine', 0.4, 0.12, 0.4, -60);
+                break;
+            case 'bee':
+                // Fast vibrating buzz
+                for (let i = 0; i < 15; i++) p(250 + Math.sin(i)*50, 'sawtooth', 0.02, 0.08, i*0.01);
+                break;
+            case 'butterfly':
+                // Delicate flutter (very quiet sparkles)
+                for (let i = 0; i < 5; i++) p(2000 - i*200, 'sine', 0.1, 0.05, i*0.08);
+                break;
+            default:
+                this.match(); // Fallback
+        }
     }
 };

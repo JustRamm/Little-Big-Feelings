@@ -1,0 +1,20 @@
+<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+    <!-- Magic Petal Sky (Butterfly Home) -->
+    <rect width="1000" height="1000" fill="#F3E5F5" />
+    
+    <!-- Lavender Mist Clouds -->
+    <circle cx="200" cy="150" r="250" fill="#E1BEE7" opacity="0.4" filter="blur(60px)" />
+    <circle cx="800" cy="250" r="300" fill="#E1BEE7" opacity="0.3" filter="blur(60px)" />
+    
+    <!-- Floating Petals (Soft Pink) -->
+    <ellipse cx="200" cy="500" rx="30" ry="20" fill="#FCE4EC" opacity="0.6" transform="rotate(30,200,500)" />
+    <ellipse cx="700" cy="400" rx="40" ry="25" fill="#FCE4EC" opacity="0.4" transform="rotate(-20,700,400)" />
+    <ellipse cx="450" cy="800" rx="25" ry="15" fill="#FCE4EC" opacity="0.5" transform="rotate(45,450,800)" />
+    
+    <!-- Large Radiant Sun (Cuter) -->
+    <circle cx="500" cy="500" r="600" fill="#FFEE58" opacity="0.1" filter="blur(80px)" />
+    
+    <!-- Soft Hills (Pastel Purple) -->
+    <path d="M-100 900 Q300 800 600 850 T1100 900" fill="#CE93D8" opacity="0.6" />
+    <path d="M-200 1000 Q400 850 700 950 T1200 1000" fill="#BA68C8" />
+</svg>

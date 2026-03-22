@@ -25,7 +25,7 @@ import * as Victory from './screens/Victory.js';
 import * as Settings from './screens/Settings.js';
 import * as OverlayWrong from './screens/OverlayWrong.js';
 import * as Journal from './screens/Journal.js';
-import * as MoodBattery from './screens/MoodBattery.js';
+import * as MoodAnimo from './screens/MoodAnimo.js';
 import * as CopingAlphabet from './screens/CopingAlphabet.js';
 
 // ── 1. Mount all templates into #app ─────────────────────────
@@ -51,7 +51,7 @@ app.insertAdjacentHTML('beforeend', /* html */`
     Journal,
     BreathingBuddy,
     Victory,
-    MoodBattery,
+    MoodAnimo,
     CopingAlphabet,
 ].forEach(m => app.insertAdjacentHTML('beforeend', m.template()));
 
@@ -67,7 +67,7 @@ const SCREEN_MAP = {
     settings: document.getElementById('screen-settings'),
     journal: document.getElementById('screen-journal'),
     victory: document.getElementById('screen-victory'),
-    moodBattery: document.getElementById('screen-mood-battery'),
+    moodAnimo: document.getElementById('screen-mood-battery'),
     alphabetGame: document.getElementById('screen-alphabet-game'),
 };
 
@@ -78,7 +78,7 @@ const SCREEN_MODULES = {
     levelSelect: LevelSelect,
     settings: Settings,
     journal: Journal,
-    moodBattery: MoodBattery,
+    moodAnimo: MoodAnimo,
     alphabetGame: CopingAlphabet,
 };
 
@@ -147,7 +147,7 @@ BreathingBuddy.init();
 
 Victory.init({ navigate, startGame });
 
-MoodBattery.init({ navigate });
+MoodAnimo.init({ navigate });
 
 CopingAlphabet.init({ navigate });
 

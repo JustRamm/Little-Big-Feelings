@@ -9,7 +9,9 @@
     gap: 1.4rem;
 }
 
-.name-entry-title { color: var(--orange); }
+.name-entry-title {
+    color: var(--orange);
+}
 
 .name-intro {
     font-size: 1.05rem;
@@ -107,5 +109,6 @@
 }
 
 .name-back-btn {
-    display: none; /* shown via JS when editing */
+    display: none;
+    /* shown via JS when editing */
 }

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <!-- Grooming Brush -->
+    <rect x="25" y="45" width="50" height="20" rx="5" fill="#BDBDBD" />
+    <path d="M75 50 Q105 50 105 55 Q105 60 75 60" fill="#E0E0E0" stroke="#757575" stroke-width="4" />
+    <!-- Bristles -->
+    <line x1="30" y1="45" x2="30" y2="30" stroke="#616161" stroke-width="3" />
+    <line x1="40" y1="45" x2="40" y2="30" stroke="#616161" stroke-width="3" />
+    <line x1="50" y1="45" x2="50" y2="30" stroke="#616161" stroke-width="3" />
+    <line x1="60" y1="45" x2="60" y2="30" stroke="#616161" stroke-width="3" />
+    <line x1="70" y1="45" x2="70" y2="30" stroke="#616161" stroke-width="3" />
+</svg>

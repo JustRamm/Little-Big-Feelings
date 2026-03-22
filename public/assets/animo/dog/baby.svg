@@ -1,0 +1,20 @@
+<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+    <!-- Tiny Baby Puppy (Avatar 6 style) -->
+    <!-- Small Round Body -->
+    <path d="M50 110 Q35 110 30 95 Q30 80 50 80 Q70 80 70 95 Q70 110 50 110 Z" fill="#A1887F" />
+    <path d="M50 110 Q42 110 40 100 Q40 90 50 90 Q60 90 60 100 Q60 110 50 110 Z" fill="white" opacity="0.3" /> <!-- belly -->
+    <!-- Tiny Ears -->
+    <rect x="25" y="45" width="12" height="25" rx="6" fill="#795548" />
+    <rect x="63" y="45" width="12" height="25" rx="6" fill="#795548" />
+    <!-- Head -->
+    <circle cx="50" cy="55" r="30" fill="#A1887F" />
+    <!-- Big Sparkly Eyes -->
+    <circle cx="42" cy="50" r="5" fill="#212121" />
+    <circle cx="58" cy="50" r="5" fill="#212121" />
+    <circle cx="44" cy="48" r="2" fill="white" />
+    <circle cx="60" cy="48" r="2" fill="white" />
+    <!-- Tiny Tongue -->
+    <path d="M47 58 L52 58 L50 63 Z" fill="#FF80AB" opacity="0.6" />
+    <!-- Tiny Tail -->
+    <path d="M70 105 Q85 105 85 95" fill="none" stroke="#A1887F" stroke-width="4" stroke-linecap="round" />
+</svg>

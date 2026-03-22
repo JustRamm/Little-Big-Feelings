@@ -1,0 +1,20 @@
+<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+    <!-- Tiny Baby Owl (Avatar 10 style) -->
+    <!-- Small Round Body -->
+    <path d="M50 110 Q35 110 30 95 Q30 80 50 80 Q70 80 70 95 Q70 110 50 110 Z" fill="#A1887F" />
+    <path d="M50 110 Q42 110 40 100 Q40 90 50 90 Q60 90 60 100 Q60 110 50 110 Z" fill="white" opacity="0.4" /> <!-- belly -->
+    <!-- Tiny Tufts -->
+    <path d="M40 35 L45 42 L35 45 Z" fill="#A1887F" />
+    <path d="M60 35 L55 42 L65 45 Z" fill="#A1887F" />
+    <!-- Head -->
+    <circle cx="50" cy="65" r="30" fill="#A1887F" />
+    <!-- Giant Sparkly Eyes (Owl Signature) -->
+    <circle cx="42" cy="62" r="10" fill="white" />
+    <circle cx="58" cy="62" r="10" fill="white" />
+    <circle cx="42" cy="62" r="5" fill="#212121" />
+    <circle cx="58" cy="62" r="5" fill="#212121" />
+    <circle cx="44" cy="60" r="2.5" fill="white" />
+    <circle cx="60" cy="60" r="2.5" fill="white" />
+    <!-- Tiny Beak -->
+    <path d="M48 68 L52 68 L50 72 Z" fill="#FFB300" />
+</svg>
