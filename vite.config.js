@@ -14,7 +14,7 @@ export default defineConfig({
                 theme_color: '#FF80AB',
                 background_color: '#FFF9E6',
                 display: 'standalone',
-                orientation: 'landscape',
+                orientation: 'portrait',
                 icons: [
                     {
                         src: 'assets/brand/nextlogo.svg',

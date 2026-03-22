@@ -151,5 +151,26 @@ MoodBattery.init({ navigate });
 
 CopingAlphabet.init({ navigate });
 
-// ── 6. Boot ───────────────────────────────────────────────────
+// ── 6. Orientation Lock ─────────────────────────────────────────
+/**
+ * Forces portrait mode on mobile devices if the Screen Orientation API is available.
+ * Usually only works when the PWA is installed and running in standalone/fullscreen.
+ */
+async function lockPortrait() {
+    try {
+        if (screen.orientation && screen.orientation.lock) {
+            await screen.orientation.lock('portrait').catch(err => {
+                console.warn("Orientation lock suppressed or failed:", err);
+            });
+        }
+    } catch (e) {
+        console.error("Orientation lock error:", e);
+    }
+}
+
+// Attempt lock on boot and when user interacts
+lockPortrait();
+window.addEventListener('click', lockPortrait, { once: true });
+
+// ── 7. Boot ───────────────────────────────────────────────────
 navigate('splash');
