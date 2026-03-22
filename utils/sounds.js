@@ -129,11 +129,15 @@ export const sounds = {
 
     _getEmotionFrequency(id) {
         const freqs = {
-            anger: 300,      // Heavy/Low
-            sadness: 440,    // Pure/Standard
-            anxiety: 600,    // High/Tense
-            loneliness: 350, // Mellow
-            stress: 523      // Energetic (Default)
+            anger: 300,        // Heavy/Low
+            sadness: 440,      // Pure/Standard
+            joy: 784,          // High/Bright
+            fear: 659,         // High/Tense
+            trust: 523,        // Balanced
+            disgust: 349,      // Low/Sharp
+            anticipation: 880, // Very High
+            surprise: 1047,    // Dynamic
+            stress: 523        // Energetic (Default)
         };
         return freqs[id] || 523;
     },

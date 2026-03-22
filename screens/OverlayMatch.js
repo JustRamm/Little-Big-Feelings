@@ -1,6 +1,9 @@
 // ============================================================
 //  screens/OverlayMatch.js — Overlay: Correct Match Found
 // ============================================================
+import { sounds } from '../utils/sounds.js';
+import { state } from '../gameState.js';
+import { saveUnlockedInsights } from '../utils/storage.js';
 
 export function template() {
     return /* html */`
@@ -29,14 +32,6 @@ export function template() {
         </div>
     </div>`;
 }
-
-/**
- * Populates and shows the overlay with pair data.
- * @param {{ d1: object, d2: object }} pair
- */
-import { sounds } from '../utils/sounds.js';
-import { state } from '../gameState.js';
-import { saveUnlockedInsights } from '../utils/storage.js';
 
 let autoDismissTimer = null;
 

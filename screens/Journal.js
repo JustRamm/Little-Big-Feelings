@@ -76,11 +76,13 @@ function updateProgress() {
     const cert = document.getElementById('mastery-certificate');
     const grid = document.querySelector('.journal-grid-scroll');
     const nameEl = document.getElementById('cert-player-name');
+    const certText = cert?.querySelector('.cert-text');
 
     if (unlocked >= total && total > 0) {
         if (cert) cert.classList.remove('hidden');
         if (grid) grid.classList.add('hidden');
         if (nameEl) nameEl.textContent = state.playerName || 'Player';
+        if (certText) certText.textContent = `For successfully uncovering ${total} emotional insights and mastering the recharge journey.`;
     } else {
         if (cert) cert.classList.add('hidden');
         if (grid) grid.classList.remove('hidden');

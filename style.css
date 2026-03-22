@@ -3921,6 +3921,200 @@ p {
     margin-bottom: 1rem;
     color: var(--pink-dark);
 }
+
+.az-modal-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    color: var(--yellow);
+}
+
+/* A-Z Gameplay Styles */
+.az-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.az-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--white);
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.az-time-badge, .az-score-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.az-time-badge span, .az-score-badge span {
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--blue-dark);
+}
+
+.az-time-badge label, .az-score-badge label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+.az-progress-rail {
+    flex: 1;
+    height: 16px;
+    background: #EEE;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.az-progress-fill {
+    height: 100%;
+    background: var(--orange);
+    transition: width 0.1s linear;
+}
+
+.az-game-main {
+    flex: 1;
+    position: relative;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.az-huge-letter {
+    font-size: clamp(8rem, 25vw, 15rem);
+    font-weight: 900;
+    line-height: 1;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    animation: bounce-float 3s ease-in-out infinite;
+    -webkit-text-stroke: 4px white;
+}
+
+/* Random background colors for letters */
+.az-huge-letter.color-1 { color: var(--pink); }
+.az-huge-letter.color-2 { color: var(--blue); }
+.az-huge-letter.color-3 { color: var(--yellow); }
+.az-huge-letter.color-4 { color: var(--green); }
+.az-huge-letter.color-5 { color: var(--orange); }
+.az-huge-letter.color-6 { color: var(--purple); }
+
+.az-play-area {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+}
+
+.az-options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 900px;
+}
+
+.az-option-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    border: 4px solid transparent;
+    transition: var(--transition);
+}
+
+.az-option-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-color: var(--blue);
+}
+
+.az-option-card.correct {
+    border-color: var(--green);
+    background: #F1F8E9;
+    animation: match-celebrate 0.5s var(--spring);
+}
+
+.az-option-card.wrong {
+    border-color: var(--pink);
+    background: #FFEBEE;
+    animation: shake 0.4s ease;
+}
+
+.az-opt-icon {
+    width: 60px;
+    height: 60px;
+    background: #F5F5F5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+}
+
+.az-option-card p {
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.az-streak-badge {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--yellow);
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 800;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.az-streak-badge span {
+    font-size: 1.4rem;
+    color: var(--orange);
+}
+
+.az-overlay-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3rem;
+    z-index: 50;
+}
+
+.az-tutorial-preview .tutorial-item i {
+    width: 60px;
+    height: 60px;
+    background: #FCE4EC;
+    padding: 15px;
+    border-radius: 12px;
+}
 /* ============================================================ 
    CARD PREVIEW POPUP (Premium Inspection)
    ============================================================ */

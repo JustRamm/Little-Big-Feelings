@@ -100,7 +100,8 @@ export function init({ navigate }) {
     const backBtn = document.getElementById('btn-mb-back');
     const startBtn = document.getElementById('btn-mb-start');
     const restartBtn = document.getElementById('btn-mb-restart');
-    const exitBtn = document.getElementById('btn-mb-exit');    const feedbackBtn = document.getElementById('btn-mb-feedback-next');
+    const exitBtn = document.getElementById('btn-mb-exit');
+    const feedbackBtn = document.getElementById('btn-mb-feedback-next');
 
     backBtn.addEventListener('click', () => {
         stopGame();

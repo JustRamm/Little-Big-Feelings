@@ -142,7 +142,7 @@ function updateTutorialUI() {
     const nextBtn = document.getElementById('btn-az-tut-next');
     
     content.innerHTML = `
-        <div class="mb-modal-icon"><i data-lucide="${slide.icon}"></i></div>
+        <div class="az-modal-icon"><i data-lucide="${slide.icon}"></i></div>
         <h3>${slide.title}</h3>
         <p>${slide.text}</p>
     `;
