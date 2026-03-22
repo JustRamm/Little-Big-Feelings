@@ -18,13 +18,21 @@ export default defineConfig({
                 icons: [
                     {
                         src: 'assets/brand/nextlogo.svg',
+                        sizes: '64x64',
+                        type: 'image/svg+xml',
+                        purpose: 'any'
+                    },
+                    {
+                        src: 'assets/brand/nextlogo.svg',
                         sizes: '192x192',
-                        type: 'image/svg+xml'
+                        type: 'image/svg+xml',
+                        purpose: 'any'
                     },
                     {
                         src: 'assets/brand/nextlogo.svg',
                         sizes: '512x512',
-                        type: 'image/svg+xml'
+                        type: 'image/svg+xml',
+                        purpose: 'any maskable'
                     }
                 ]
             },
