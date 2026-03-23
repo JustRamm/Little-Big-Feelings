@@ -6,22 +6,26 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['assets/**/*.svg', 'assets/**/*.png', 'assets/**/*.mpeg', 'vendor/*.js', 'favicon.svg', 'assets/brand/phone-icon.svg'],
+      injectRegister: 'auto',
+      includeAssets: [
+        'favicon.svg',
+        'assets/**/*.svg',
+        'assets/**/*.png',
+        'assets/**/*.jpg',
+        'assets/**/*.webp',
+        'assets/**/*.mp3',
+        'assets/**/*.mpeg',
+        'vendor/*.js'
+      ],
       manifest: {
         name: 'Little Big Feelings',
         short_name: 'Big Feelings',
-        description: 'Explore Your Wonderful Emotions',
+        description: 'A fun educational journey helping children understand and manage their emotions.',
         theme_color: '#FF80AB',
         background_color: '#FFF9E6',
         display: 'standalone',
         orientation: 'portrait',
         icons: [
-          {
-            src: 'assets/brand/phone-icon.svg',
-            sizes: '64x64',
-            type: 'image/svg+xml',
-            purpose: 'any'
-          },
           {
             src: 'assets/brand/phone-icon.svg',
             sizes: '192x192',
@@ -37,7 +41,10 @@ export default defineConfig({
         ]
       },
       workbox: {
-        // Cache Google Fonts
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -46,7 +53,7 @@ export default defineConfig({
               cacheName: 'google-fonts-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
+                maxAgeSeconds: 60 * 60 * 24 * 365
               },
               cacheableResponse: {
                 statuses: [0, 200]
@@ -60,7 +67,7 @@ export default defineConfig({
               cacheName: 'gstatic-fonts-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
+                maxAgeSeconds: 60 * 60 * 24 * 365
               },
               cacheableResponse: {
                 statuses: [0, 200]
