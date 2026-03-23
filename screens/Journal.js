@@ -5,6 +5,7 @@ import { state } from '../gameState.js';
 import { sounds } from '../utils/sounds.js';
 import { EMOTIONS_DATA } from '../gameData.js';
 import { MIXING_RECIPES } from '../moodMixerData.js';
+import { speakText } from '../utils/accessibility.js';
 import { loadUnlockedInsights, loadDiscoveredMixes } from '../utils/storage.js';
 
 export function template() {
@@ -218,4 +219,16 @@ export function init({ navigate }) {
         sounds.click();
         navigate(state.previousScreen || 'levelSelect');
     });
+
+    const grid = document.getElementById('journal-grid');
+    if (grid) {
+        grid.addEventListener('click', (e) => {
+            const card = e.target.closest('.journal-card.unlocked');
+            if (card) {
+                const title = card.querySelector('h3')?.textContent || '';
+                const desc = card.querySelector('.journal-insight')?.textContent || '';
+                speakText(title + ". " + desc);
+            }
+        });
+    }
 }

@@ -4,6 +4,7 @@
 import { state } from '../gameState.js';
 import { sounds } from '../utils/sounds.js';
 import { EMOTIONS_DATA } from '../gameData.js';
+import { speakText } from '../utils/accessibility.js';
 
 /**
  * Custom SVG Illustrations for each emotion
@@ -30,9 +31,7 @@ export function template() {
         <div class="emotion-select-container">
             <header class="emotion-header">
                 <div class="header-top-row">
-                    <button id="btn-emotion-back" class="btn-icon back-arrow" aria-label="Go back to name entry" type="button">
-                        <i data-lucide="arrow-left"></i>
-                    </button>
+                    <!-- Back button removed -->
                     
                     <div class="emotion-header-text">
                         <h2 class="premium-title">Which feeling shall we explore?</h2>
@@ -126,15 +125,14 @@ export function init({ navigate }) {
 
         btn.addEventListener('click', () => {
             sounds.click();
+            const emo = EMOTIONS_DATA[btn.dataset.emotion];
+            if (emo) speakText(emo.name);
             state.selectedEmotion = btn.dataset.emotion;
             navigate('levelSelect');
         });
     });
 
-    document.getElementById('btn-emotion-back').addEventListener('click', () => {
-        sounds.click();
-        navigate('nameEntry');
-    });
+    /* Back button listener removed */
 
     document.getElementById('btn-animo-shortcut').addEventListener('click', () => {
         sounds.click();

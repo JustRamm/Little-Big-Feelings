@@ -5,6 +5,7 @@ import { state } from '../gameState.js';
 import { sounds } from '../utils/sounds.js';
 import { EMOTIONS_DATA } from '../gameData.js';
 import { MIXING_RECIPES } from '../moodMixerData.js';
+import { speakText } from '../utils/accessibility.js';
 import { saveDiscoveredMixes } from '../utils/storage.js';
 
 let selectedSlot1 = null;
@@ -262,6 +263,8 @@ function showFusionResult(recipeOrResult) {
     resultName.textContent = result.name;
     resultName.style.color = result.color;
     resultDesc.textContent = result.description;
+
+    speakText("New discovery! " + result.name + ". " + result.description);
 
     if (isRecipe) {
         const emo1Name = EMOTIONS_DATA[recipeOrResult.e1]?.name || 'Unknown';

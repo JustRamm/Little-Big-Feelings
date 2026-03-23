@@ -1,30 +1,40 @@
 import { state } from '../gameState.js';
 
 /**
- * Applies global accessibility styles based on current state.
- * Targets: <html> or <body> to provide CSS hook context.
+ * Reads text aloud using the browser's Speech Synthesis.
+ * Useful for young children who cannot yet read.
+ */
+export function speakText(text) {
+    if (!state.speechEnabled) return;
+    
+    // Stop any current speaking
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    // Optional: Try to find a child-friendly or high-quality voice
+    const voices = window.speechSynthesis.getVoices();
+    // Default to a clear English voice if possible
+    const enVoice = voices.find(v => v.lang.includes('en') && v.name.includes('Google'));
+    if (enVoice) utterance.voice = enVoice;
+    
+    utterance.pitch = 1.2; // Slightly higher pitch for child-friendly feel
+    utterance.rate = 1.0;  // Normal speed
+    
+    window.speechSynthesis.speak(utterance);
+}
+
+/**
+ * Applies global accessibility styles and focus behavior.
  */
 export function applyAccessibilitySettings() {
     const root = document.documentElement;
 
     // 1. High Contrast
-    if (state.highContrast) {
-        root.classList.add('a11y-high-contrast');
-    } else {
-        root.classList.remove('a11y-high-contrast');
-    }
+    root.classList.toggle('a11y-high-contrast', !!state.highContrast);
 
     // 2. Dyslexic Font
-    if (state.dyslexicFont) {
-        root.classList.add('a11y-dyslexic-font');
-    } else {
-        root.classList.remove('a11y-dyslexic-font');
-    }
+    root.classList.toggle('a11y-dyslexic-font', !!state.dyslexicFont);
 
     // 3. Reduced Motion
-    if (state.reducedMotion) {
-        root.classList.add('a11y-reduced-motion');
-    } else {
-        root.classList.remove('a11y-reduced-motion');
-    }
+    root.classList.toggle('a11y-reduced-motion', !!state.reducedMotion);
 }

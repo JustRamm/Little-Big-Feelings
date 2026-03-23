@@ -42,20 +42,26 @@
     border: 3px solid #000000 !important;
 }
 
-:root.a11y-high-contrast .card-back {
-    background: #000000 !important;
-    border: 4px solid #000000 !important;
+/* 4. Focus States (Keyboard/Switch Access) */
+:focus-visible {
+    outline: 4px solid #0000FF !important;
+    outline-offset: 4px !important;
+    box-shadow: 0 0 0 8px rgba(0, 0, 255, 0.2) !important;
 }
 
-:root.a11y-high-contrast .card-front {
-    border: 4px solid #000000 !important;
+.a11y-high-contrast :focus-visible {
+    outline: 6px solid #000000 !important;
+    box-shadow: 0 0 0 10px #FFFFFF !important;
 }
 
-:root.a11y-high-contrast .hud-stats {
-    background: #000000 !important;
-    color: #FFFFFF !important;
+/* 5. Speaking Animation (A11y Visual Indicator) */
+@keyframes speaking-pulse {
+    0% { outline: 0px solid rgba(255,128,171,0.5); }
+    50% { outline: 10px solid rgba(255,128,171,0.2); }
+    100% { outline: 0px solid rgba(255,128,171,0.5); }
 }
-
-:root.a11y-high-contrast .stat-value {
-    color: #FFFFFF !important;
+.speaking {
+    animation: speaking-pulse 1.5s infinite;
+    position: relative;
+    z-index: 1000;
 }
