@@ -29,12 +29,24 @@ export function template() {
     <section id="screen-emotion" class="screen" aria-label="Emotion Select">
         <div class="emotion-select-container">
             <header class="emotion-header">
-                <button id="btn-emotion-back" class="btn-icon back-arrow" aria-label="Go back to name entry" type="button">
-                    <i data-lucide="arrow-left"></i>
-                </button>
-                <div class="emotion-header-text">
-                    <h2 class="premium-title">Which feeling shall we explore?</h2>
-                    <p class="premium-subtitle">Pick an emotion character to begin your journey!</p>
+                <div class="header-top-row">
+                    <button id="btn-emotion-back" class="btn-icon back-arrow" aria-label="Go back to name entry" type="button">
+                        <i data-lucide="arrow-left"></i>
+                    </button>
+                    
+                    <div class="emotion-header-text">
+                        <h2 class="premium-title">Which feeling shall we explore?</h2>
+                        <p class="premium-subtitle">Pick an emotion character to begin your journey!</p>
+                    </div>
+
+                    <div class="emotion-top-actions">
+                        <button id="btn-emotion-journal" class="btn-icon circle-btn" aria-label="Open Journal" title="Journal" type="button">
+                            <i data-lucide="book-open"></i>
+                        </button>
+                        <button id="btn-emotion-settings" class="btn-icon circle-btn" aria-label="Open Settings" title="Settings" type="button">
+                            <i data-lucide="settings"></i>
+                        </button>
+                    </div>
                 </div>
                 <!-- Mini-game Shortcuts -->
                 <div class="mini-game-shortcuts">
@@ -137,6 +149,16 @@ export function init({ navigate }) {
     document.getElementById('btn-mixer-shortcut').addEventListener('click', () => {
         sounds.click();
         navigate('moodMixer');
+    });
+
+    document.getElementById('btn-emotion-settings').addEventListener('click', () => {
+        sounds.click();
+        navigate('settings');
+    });
+
+    document.getElementById('btn-emotion-journal').addEventListener('click', () => {
+        sounds.click();
+        navigate('journal');
     });
 }
 

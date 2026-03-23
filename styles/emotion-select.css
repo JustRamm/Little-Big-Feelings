@@ -7,40 +7,61 @@
     flex-direction: column;
     align-items: stretch;
     gap: clamp(2rem, 5vh, 4rem);
-    padding: 4.5rem 0 1.5rem;
+    padding: 1.5rem 0;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.emotion-top-actions .circle-btn {
+    background: white;
+    border: 2px solid #F5F5F5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.emotion-top-actions .circle-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--pink);
+    color: var(--pink);
 }
 
 .emotion-header {
     position: relative;
     text-align: center;
-    padding: 0 2rem;
+    padding: 0 2.5rem;
     flex-shrink: 0;
     animation: fadeSlideDown 0.8s var(--ease) both;
+    width: 100%;
 }
 
 .emotion-header .back-arrow {
-    position: absolute;
-    left: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
+    flex-shrink: 0;
     z-index: 10;
 }
 
+.header-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.emotion-top-actions {
+    display: flex;
+    gap: 1rem;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
 .emotion-header-text {
-    padding: 0 5rem;
+    flex: 1;
+    padding: 0;
 }
 
 .premium-title {
-    font-size: clamp(2.2rem, 6vw, 4rem);
-    color: var(--pink-dark);
-    margin-bottom: 0.5rem;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    background: linear-gradient(135deg, var(--pink-dark), var(--orange));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin: 0;
 }
 
 .premium-subtitle {
@@ -176,13 +197,11 @@
 
 /* Mini-Game Shortcuts (Arcade Badge Style) */
 .mini-game-shortcuts {
-    position: absolute;
-    top: 50%;
-    right: 1.5rem;
-    transform: translateY(-50%);
     display: flex;
+    justify-content: center;
     gap: 1.5rem;
-    padding: 0;
+    padding: 0.5rem 0;
+    width: 100%;
 }
 
 .mini-game-badge {
