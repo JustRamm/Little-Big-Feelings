@@ -32,36 +32,36 @@ export function template() {
                 </div>
             </header>
 
-            <div class="mixer-card">
+            <div class="mixer-card fusion-chamber">
                 <div class="mixer-slots">
                     <div class="slot-container">
                         <div id="mixer-slot-1" class="mixer-slot">
-                            <i data-lucide="sparkles" style="opacity: 0.3; color: var(--pink);"></i>
+                            <i data-lucide="beaker" style="opacity: 0.3; color: var(--pink);"></i>
                         </div>
-                        <div id="slot-name-1" class="slot-label">First Feeling</div>
+                        <div id="slot-name-1" class="slot-label">Ingredient 1</div>
                     </div>
 
-                    <span class="plus-symbol">✨</span>
+                    <span class="plus-symbol">⚗️</span>
 
                     <div class="slot-container">
                         <div id="mixer-slot-2" class="mixer-slot">
-                            <i data-lucide="sparkles" style="opacity: 0.3; color: var(--blue);"></i>
+                            <i data-lucide="beaker" style="opacity: 0.3; color: var(--blue);"></i>
                         </div>
-                        <div id="slot-name-2" class="slot-label">Second Feeling</div>
+                        <div id="slot-name-2" class="slot-label">Ingredient 2</div>
                     </div>
                 </div>
 
                 <div id="mixer-controls">
                     <button id="btn-do-fusion" class="btn-primary disabled" disabled>
-                        <i data-lucide="wand-2" style="margin-right: 10px;"></i>
-                        Let's Mix!
+                        <i data-lucide="test-tube-2" style="margin-right: 10px;"></i>
+                        Begin Experiment!
                     </button>
                 </div>
 
                 <div class="journal-divider"></div>
 
                 <div class="mixer-choices-wrap">
-                    <p class="premium-subtitle" style="margin-bottom: 1rem; color: var(--pink-dark);">Tap Two Feelings!</p>
+                    <p class="premium-subtitle" style="margin-bottom: 1rem; color: var(--blue-dark); font-weight: 800;">Select Elements to Mix</p>
                     <div class="mixer-choices">
                         ${choiceBubbles}
                     </div>
@@ -70,7 +70,7 @@ export function template() {
                 <div class="journal-divider"></div>
 
                 <div class="mixer-discovery-section">
-                    <h4 class="discovery-title">✨ Your Magic Discoveries ✨</h4>
+                    <h4 class="discovery-title">🧪 Experiment Records 🧪</h4>
                     <div id="mixer-discovery-grid" class="mixer-discovery-grid">
                         <!-- Discovered emotions slots -->
                     </div>
@@ -256,26 +256,26 @@ function clearMixer() {
     const slot1 = document.getElementById('mixer-slot-1');
     const label1 = document.getElementById('slot-name-1');
     if (slot1) {
-        slot1.innerHTML = `<i data-lucide="sparkles" style="opacity: 0.3; color: var(--pink);"></i>`;
+        slot1.innerHTML = `<i data-lucide="beaker" style="opacity: 0.3; color: var(--pink);"></i>`;
         slot1.classList.remove('occupied');
         slot1.style.borderColor = '';
         slot1.style.backgroundColor = '';
     }
     if (label1) {
-        label1.textContent = 'First Feeling';
+        label1.textContent = 'Ingredient 1';
         label1.style.color = '#9E9E9E';
     }
 
     const slot2 = document.getElementById('mixer-slot-2');
     const label2 = document.getElementById('slot-name-2');
     if (slot2) {
-        slot2.innerHTML = `<i data-lucide="sparkles" style="opacity: 0.3; color: var(--blue);"></i>`;
+        slot2.innerHTML = `<i data-lucide="beaker" style="opacity: 0.3; color: var(--blue);"></i>`;
         slot2.classList.remove('occupied');
         slot2.style.borderColor = '';
         slot2.style.backgroundColor = '';
     }
     if (label2) {
-        label2.textContent = 'Second Feeling';
+        label2.textContent = 'Ingredient 2';
         label2.style.color = '#9E9E9E';
     }
 
