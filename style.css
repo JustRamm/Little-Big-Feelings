@@ -24,6 +24,7 @@
 /* Mini-Games */
 @import './styles/mood-animo.css';
 @import './styles/coping-alphabet.css';
+@import './styles/mood-mixer.css';
 
 /* Responsive Overrides (Should be last) */
 @import './styles/responsive.css';

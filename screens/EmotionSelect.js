@@ -76,6 +76,16 @@ export function template() {
                         </svg>
                         <span>A-Z Arcade</span>
                     </button>
+                    <button id="btn-mixer-shortcut" class="mini-game-badge mixer-badge" title="Feeling Fusion Lab" type="button">
+                        <svg viewBox="0 0 100 100" class="game-badge-svg">
+                            <path d="M30,80 Q50,95 70,80 L65,40 Q65,25 50,15 Q35,25 35,40 Z" fill="#FF80AB" />
+                            <rect x="42" y="10" width="16" height="15" rx="4" fill="#607D8B" />
+                            <circle cx="40" cy="65" r="4" fill="white" opacity="0.6" />
+                            <circle cx="60" cy="55" r="3" fill="white" opacity="0.4" />
+                            <circle cx="50" cy="75" r="5" fill="white" opacity="0.5" />
+                        </svg>
+                        <span>Feeling Fusion</span>
+                    </button>
                 </div>
             </header>
 
@@ -122,6 +132,11 @@ export function init({ navigate }) {
     document.getElementById('btn-az-shortcut').addEventListener('click', () => {
         sounds.click();
         navigate('alphabetGame');
+    });
+
+    document.getElementById('btn-mixer-shortcut').addEventListener('click', () => {
+        sounds.click();
+        navigate('moodMixer');
     });
 }
 

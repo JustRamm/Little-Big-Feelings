@@ -227,3 +227,7 @@
 .az-badge {
     border-bottom: 4px solid var(--blue);
 }
+
+.mixer-badge {
+    border-bottom: 4px solid #B39DDB;
+}

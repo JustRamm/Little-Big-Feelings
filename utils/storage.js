@@ -41,9 +41,12 @@ export function saveScore(level, data) {
 export function loadScores() { return get('scores') || {}; }
 export function resetScores() { set('scores', {}); }
 
-// ── Unlocked Insights ─────────────────────────────────────────
 export function saveUnlockedInsights(ids) { set('insights', ids); }
 export function loadUnlockedInsights() { return get('insights') || []; }
+
+// ── Discovered Feeling Fusions ───────────────────────────────
+export function saveDiscoveredMixes(ids) { set('discoveredMixes', ids); }
+export function loadDiscoveredMixes() { return get('discoveredMixes') || []; }
 
 // ── App settings ─────────────────────────────────────────────
 export function saveSettings(data) { set('settings', data); }

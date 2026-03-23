@@ -30,6 +30,7 @@ export const state = {
     dyslexicFont: false,
     reducedMotion: false,
     unlockedInsights: [], // Array of emotion/action pair IDs
+    discoveredMixes: [],  // Array of result.id from MIXING_RECIPES
     selectedEmotion: null, // e.g., 'anger', 'sadness', 'anxiety', etc.
 };
 

@@ -4,7 +4,8 @@
 import { state } from '../gameState.js';
 import { sounds } from '../utils/sounds.js';
 import { EMOTIONS_DATA } from '../gameData.js';
-import { loadUnlockedInsights } from '../utils/storage.js';
+import { MIXING_RECIPES } from '../moodMixerData.js';
+import { loadUnlockedInsights, loadDiscoveredMixes } from '../utils/storage.js';
 
 export function template() {
     return /* html */`
@@ -60,6 +61,7 @@ export function template() {
 
 export function onShow() {
     state.unlockedInsights = loadUnlockedInsights();
+    state.discoveredMixes = loadDiscoveredMixes();
     renderTabs();
     // Default to first emotion or currently selected
     const firstEmo = Object.keys(EMOTIONS_DATA)[0];
@@ -68,10 +70,14 @@ export function onShow() {
 }
 
 function updateProgress() {
-    const total = Object.values(EMOTIONS_DATA).reduce((sum, emo) => sum + emo.pairs.length, 0);
-    const unlocked = state.unlockedInsights.length;
+    const totalInsights = Object.values(EMOTIONS_DATA).reduce((sum, emo) => sum + emo.pairs.length, 0);
+    const unlockedInsights = state.unlockedInsights.length;
+    
+    const totalFusions = MIXING_RECIPES.length;
+    const unlockedFusions = state.discoveredMixes.length;
+
     const textEl = document.getElementById('journal-progress-text');
-    if (textEl) textEl.textContent = `${unlocked}/${total}`;
+    if (textEl) textEl.textContent = `${unlockedInsights}/${totalInsights} | Fusions: ${unlockedFusions}/${totalFusions}`;
 
     const cert = document.getElementById('mastery-certificate');
     const grid = document.querySelector('.journal-grid-scroll');
@@ -93,11 +99,19 @@ function renderTabs() {
     const tabsContainer = document.getElementById('journal-tabs');
     if (!tabsContainer) return;
 
-    tabsContainer.innerHTML = Object.values(EMOTIONS_DATA).map(emo => `
+    const emotionTabs = Object.values(EMOTIONS_DATA).map(emo => `
         <button class="journal-tab" data-emotion="${emo.id}" style="--tab-color: ${emo.color}">
             ${emo.name}
         </button>
     `).join('');
+
+    const fusionTab = `
+        <button class="journal-tab fusion-tab" data-emotion="fusions" style="--tab-color: #B39DDB">
+            Fusion Lab
+        </button>
+    `;
+
+    tabsContainer.innerHTML = emotionTabs + fusionTab;
 
     const tabs = tabsContainer.querySelectorAll('.journal-tab');
     tabs.forEach(tab => {
@@ -116,6 +130,11 @@ function renderTabs() {
 function renderGrid(emotionId) {
     const grid = document.getElementById('journal-grid');
     if (!grid) return;
+
+    if (emotionId === 'fusions') {
+        renderFusionGrid(grid);
+        return;
+    }
 
     const emo = EMOTIONS_DATA[emotionId];
     if (!emo) return;
@@ -148,6 +167,42 @@ function renderGrid(emotionId) {
                         <div class="journal-card-locked-state">
                             <i data-lucide="lock" class="lock-icon"></i>
                             <p>Discover this feeling<br>to unlock the insight!</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }).join('');
+
+    if (window.lucide) window.lucide.createIcons();
+}
+
+function renderFusionGrid(grid) {
+    grid.innerHTML = MIXING_RECIPES.map(recipe => {
+        const isUnlocked = state.discoveredMixes.includes(recipe.result.id);
+        
+        if (isUnlocked) {
+            return `
+                <div class="journal-card unlocked fusion-card" style="--card-color: ${recipe.result.color}">
+                    <div class="journal-card-inner">
+                        <div class="journal-card-img">
+                            <img src="${recipe.result.icon}" alt="${recipe.result.name}">
+                        </div>
+                        <div class="journal-card-content">
+                            <h3>${recipe.result.name}</h3>
+                            <div class="journal-divider"></div>
+                            <p class="journal-insight">${recipe.result.description}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            return `
+                <div class="journal-card locked">
+                    <div class="journal-card-inner">
+                        <div class="journal-card-locked-state">
+                            <i data-lucide="flask-conical" class="lock-icon"></i>
+                            <p>Mix two feelings in the lab<br>to unlock this discovery!</p>
                         </div>
                     </div>
                 </div>

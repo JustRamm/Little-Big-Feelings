@@ -27,14 +27,21 @@ import * as OverlayWrong from './screens/OverlayWrong.js';
 import * as Journal from './screens/Journal.js';
 import * as MoodAnimo from './screens/MoodAnimo.js';
 import * as CopingAlphabet from './screens/CopingAlphabet.js';
-import { loadSettings } from './utils/storage.js';
+import * as MoodMixer from './screens/MoodMixer.js';
+import { 
+    loadSettings, 
+    loadUnlockedInsights, 
+    loadDiscoveredMixes 
+} from './utils/storage.js';
 import { applyAccessibilitySettings } from './utils/accessibility.js';
 import { state } from './gameState.js';
 
 // ── 0. Initial Settings Load ────────────────────────────────
-const saved = loadSettings();
-Object.assign(state, saved);
-applyAccessibilitySettings();
+const savedSettings = loadSettings();
+Object.assign(state, savedSettings);
+state.unlockedInsights = loadUnlockedInsights();
+state.discoveredMixes = loadDiscoveredMixes();
+applyAccessibilitySettings(state);
 
 // ── 1. Mount all templates into #app ─────────────────────────
 const app = document.getElementById('app');
@@ -61,6 +68,7 @@ app.insertAdjacentHTML('beforeend', /* html */`
     Victory,
     MoodAnimo,
     CopingAlphabet,
+    MoodMixer,
 ].forEach(m => app.insertAdjacentHTML('beforeend', m.template()));
 
 // ── 2. Screen registry ────────────────────────────────────────
@@ -77,6 +85,7 @@ const SCREEN_MAP = {
     victory: document.getElementById('screen-victory'),
     moodAnimo: document.getElementById('screen-mood-battery'),
     alphabetGame: document.getElementById('screen-alphabet-game'),
+    moodMixer: document.getElementById('screen-mood-mixer'),
 };
 
 // Maps logical key → module (for onShow hook)
@@ -88,6 +97,7 @@ const SCREEN_MODULES = {
     journal: Journal,
     moodAnimo: MoodAnimo,
     alphabetGame: CopingAlphabet,
+    moodMixer: MoodMixer,
 };
 
 // ── 3. navigate() ─────────────────────────────────────────────
@@ -158,6 +168,8 @@ Victory.init({ navigate, startGame });
 MoodAnimo.init({ navigate });
 
 CopingAlphabet.init({ navigate });
+
+MoodMixer.init({ navigate });
 
 // ── 6. Orientation Lock ─────────────────────────────────────────
 /**
