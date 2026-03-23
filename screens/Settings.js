@@ -18,6 +18,12 @@ export function template() {
                     </button>
                     <h2>Settings</h2>
                 </div>
+                <div class="settings-header-right">
+                    <button id="btn-about" class="btn-secondary" type="button" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <i data-lucide="info" style="width: 18px; height: 18px; margin-right: 6px;"></i>
+                        About
+                    </button>
+                </div>
             </div>
 
             <div class="settings-grid">
@@ -131,6 +137,48 @@ export function template() {
 
             </div>
         </div>
+
+        <!-- About Modal Overlay -->
+        <div id="about-overlay" class="about-overlay hidden">
+            <div class="about-modal">
+                <button id="btn-close-about" class="btn-icon about-close-btn" aria-label="Close">
+                    <i data-lucide="x"></i>
+                </button>
+                
+                <div class="about-scroll">
+                    <img src="assets/brand/image.png" alt="Mind Empowered Logo" class="about-logo">
+                    
+                    <div class="about-section">
+                        <h3>About Mind Empowered</h3>
+                        <p class="about-text">
+                            Mind Empowered (ME) is a charitable organization in India dedicated to mental health awareness, 
+                            emotional resilience, and youth empowerment. They offer free webinars, workshops, and 
+                            resources for Gen-Z to navigate life's challenges with confidence.
+                        </p>
+                        <p class="about-tagline">"Illuminating minds. Transforming lives."</p>
+                        <a href="https://mind-empowered.org/" target="_blank" class="about-site-link">
+                            Visit Website <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+
+                    <div class="about-divider"></div>
+
+                    <div class="about-section">
+                        <h3>Why "Little Big Feelings"?</h3>
+                        <p class="about-text">
+                            We created this app to bridge the gap between complex psychological concepts and a child's 
+                            everyday world. By bringing the "Recharge Without Charge" curriculum to life through 
+                            interactive play, we provide children with a safe, cozy space to explore their 
+                            Big Feelings and learn healthy coping skills long before they reach a crisis point.
+                        </p>
+                    </div>
+                    
+                    <div class="about-footer">
+                        Made with ❤️ for children everywhere.
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>`;
 }
 
@@ -221,6 +269,32 @@ export function init({ navigate }) {
         state.playerAvatar = 'assets/animo/puppy/baby.svg';
         sounds.setEnabled(true);
         navigate('nameEntry');
+    });
+
+    // About Modal
+    const aboutBtn = document.getElementById('btn-about');
+    const aboutOverlay = document.getElementById('about-overlay');
+    const closeAboutBtn = document.getElementById('btn-close-about');
+
+    if (aboutBtn && aboutOverlay) {
+        aboutBtn.addEventListener('click', () => {
+            sounds.click();
+            aboutOverlay.classList.remove('hidden');
+        });
+    }
+
+    if (closeAboutBtn) {
+        closeAboutBtn.addEventListener('click', () => {
+            sounds.click();
+            aboutOverlay.classList.add('hidden');
+        });
+    }
+
+    // Close on outside click
+    aboutOverlay?.addEventListener('click', (e) => {
+        if (e.target === aboutOverlay) {
+            aboutOverlay.classList.add('hidden');
+        }
     });
 }
 

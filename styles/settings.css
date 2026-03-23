@@ -140,24 +140,36 @@
 
 /* Toggle switch */
 .toggle-btn {
-    width: 58px;
-    height: 30px;
-    border-radius: 15px;
-    background: #CFD8DC;
+    width: 60px;
+    height: 32px;
+    border-radius: 16px;
+    background: #CFD8DC; /* OFF state color */
     border: none;
     cursor: pointer;
     position: relative;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.toggle-btn.toggle-on {
+    background: var(--green); /* ON state color */
 }
 
 .toggle-thumb {
-    top: 3px;
-    left: 3px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
     width: 24px;
     height: 24px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.toggle-btn.toggle-on .toggle-thumb { transform: translateX(28px); }
+.toggle-btn.toggle-on .toggle-thumb {
+    transform: translateX(28px);
+}
 
 /* Danger zone */
 .card-danger {
@@ -197,4 +209,153 @@
     .settings-container { padding: 0 1rem; }
     .settings-card { padding: 1.5rem; }
     .settings-header h2 { font-size: 2.2rem !important; }
+}
+
+/* About Modal Styles */
+.about-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: fadeIn 0.4s ease;
+}
+
+.about-overlay.hidden {
+    display: none !important;
+}
+
+.about-modal {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    border-radius: 30px;
+    position: relative;
+    padding: 3rem 2rem 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    animation: slideUpModal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.about-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: #F5F5F5;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.about-close-btn:hover {
+    background: var(--pink);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.about-scroll {
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.about-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5rem;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.about-section {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.about-section h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+}
+
+.about-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #546E7A;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+}
+
+.about-tagline {
+    font-weight: 800;
+    color: var(--pink);
+    font-style: italic;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+}
+
+.about-divider {
+    width: 50px;
+    height: 4px;
+    background: #ECEFF1;
+    border-radius: 2px;
+    margin: 1.5rem 0;
+}
+
+.about-site-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.5rem;
+    background: var(--blue);
+    color: white;
+    border-radius: 16px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 0 #01579B;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.about-site-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #01579B;
+}
+
+.about-footer {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: #90A4AE;
+    font-weight: 600;
+}
+
+@keyframes slideUpModal {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
