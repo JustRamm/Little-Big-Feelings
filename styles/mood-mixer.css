@@ -188,27 +188,34 @@
 
 .lab-main-area {
     display: grid;
-    grid-template-columns: 1fr 1.8fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas:
         "L F R"
         "L C R";
     align-items: center;
+    justify-items: center;
     width: 100%;
-    gap: 2rem;
-    padding: 0 1rem;
+    gap: 4.5rem;
+    padding: 0 1.5rem;
 }
 
 .side-left {
     grid-area: L;
+    justify-self: end;
 }
 
 .lab-flask-area {
     grid-area: F;
     align-self: end;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3.5rem;
 }
 
 .side-right {
     grid-area: R;
+    justify-self: start;
 }
 
 .lab-controls {
@@ -451,12 +458,7 @@
         gap: 2rem;
     }
 
-    .side-left,
-    .lab-flask-area,
-    .side-right,
-    .lab-controls {
-        width: 100%;
-    }
+    .side-left, .side-right { justify-self: center; }
 
     /* Transformation to 4 columns, 2 rows as requested */
     .choice-grid-2x4 {

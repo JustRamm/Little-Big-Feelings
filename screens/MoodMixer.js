@@ -301,10 +301,6 @@ function showFusionResult(recipeOrResult) {
     resultName.textContent = result.name;
     resultName.style.color = result.color;
     resultDesc.textContent = result.description;
-    if (state.speechEnabled) {
-        window.speechSynthesis?.cancel(); // Clear previous
-        speakText("New discovery! " + result.name + ". " + result.description);
-    }
 
     if (isRecipe) {
         const emo1Name = EMOTIONS_DATA[recipeOrResult.e1]?.name || 'Unknown';

@@ -8,7 +8,8 @@ let currentIndex = 0;
 let score = 0;
 let streak = 0;
 let timer;
-let timeLeft = 10;
+let timeLeft = 60;
+let shuffledAlphabet = []; // Holds the current session's random order
 
 export function template() {
     return /* html */`
@@ -158,6 +159,9 @@ function updateTutorialUI() {
 }
 
 function startGame() {
+    // Generate a fresh shuffle for this session
+    shuffledAlphabet = [...COPING_ALPHABET].sort(() => Math.random() - 0.5);
+    
     currentIndex = 0;
     score = 0;
     streak = 0;
@@ -172,12 +176,13 @@ function startGame() {
 }
 
 function nextRound() {
-    // Round loop: If we reach the end, go back to A to keep playing until time is up
-    if (currentIndex >= COPING_ALPHABET.length) {
+    // Round loop: If we reach the end of the shuffled list, re-shuffle for a fresh round
+    if (currentIndex >= shuffledAlphabet.length) {
+        shuffledAlphabet = [...COPING_ALPHABET].sort(() => Math.random() - 0.5);
         currentIndex = 0; 
     }
 
-    const currentData = COPING_ALPHABET[currentIndex];
+    const currentData = shuffledAlphabet[currentIndex];
     
     // Update UI with a fun random color
     const letterEl = document.getElementById('az-letter');
