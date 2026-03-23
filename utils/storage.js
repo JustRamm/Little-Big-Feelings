@@ -48,7 +48,13 @@ export function loadUnlockedInsights() { return get('insights') || []; }
 // ── App settings ─────────────────────────────────────────────
 export function saveSettings(data) { set('settings', data); }
 export function loadSettings() { 
-    return get('settings') ?? { soundEnabled: true, speechEnabled: true }; 
+    return get('settings') ?? { 
+        soundEnabled: true, 
+        speechEnabled: true,
+        highContrast: false,
+        dyslexicFont: false,
+        reducedMotion: false
+    }; 
 }
 
 // ── Nuclear option ───────────────────────────────────────────

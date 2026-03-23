@@ -26,6 +26,9 @@ export const state = {
     // ── App preferences ───────────────────────────────────────
     soundEnabled: true,
     speechEnabled: true,
+    highContrast: false,
+    dyslexicFont: false,
+    reducedMotion: false,
     unlockedInsights: [], // Array of emotion/action pair IDs
     selectedEmotion: null, // e.g., 'anger', 'sadness', 'anxiety', etc.
 };

@@ -27,6 +27,14 @@ import * as OverlayWrong from './screens/OverlayWrong.js';
 import * as Journal from './screens/Journal.js';
 import * as MoodAnimo from './screens/MoodAnimo.js';
 import * as CopingAlphabet from './screens/CopingAlphabet.js';
+import { loadSettings } from './utils/storage.js';
+import { applyAccessibilitySettings } from './utils/accessibility.js';
+import { state } from './gameState.js';
+
+// ── 0. Initial Settings Load ────────────────────────────────
+const saved = loadSettings();
+Object.assign(state, saved);
+applyAccessibilitySettings();
 
 // ── 1. Mount all templates into #app ─────────────────────────
 const app = document.getElementById('app');

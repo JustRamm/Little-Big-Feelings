@@ -1,0 +1,61 @@
+/* ============================================================ */
+/*  styles/accessibility.css — Global Accessibility Classes      */
+/* ============================================================ */
+
+/* 1. Reduced Motion */
+:root.a11y-reduced-motion *, 
+:root.a11y-reduced-motion *::before, 
+:root.a11y-reduced-motion *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+}
+
+/* 2. Dyslexic Font */
+:root.a11y-dyslexic-font {
+    --font-primary: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+}
+:root.a11y-dyslexic-font * {
+    font-family: var(--font-primary) !important;
+    letter-spacing: 0.05em !important;
+    word-spacing: 0.1em !important;
+}
+
+/* 3. High Contrast */
+:root.a11y-high-contrast {
+    --bg-main: #FFFFFF;
+    --text-main: #000000;
+    --accent-main: #0000FF;
+    filter: contrast(1.2);
+}
+
+:root.a11y-high-contrast .screen {
+    background-image: none !important;
+    background-color: var(--bg-main) !important;
+}
+
+:root.a11y-high-contrast .btn-primary, 
+:root.a11y-high-contrast .btn-secondary, 
+:root.a11y-high-contrast .toggle-btn.toggle-on {
+    background: #000000 !important;
+    color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+}
+
+:root.a11y-high-contrast .card-back {
+    background: #000000 !important;
+    border: 4px solid #000000 !important;
+}
+
+:root.a11y-high-contrast .card-front {
+    border: 4px solid #000000 !important;
+}
+
+:root.a11y-high-contrast .hud-stats {
+    background: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+:root.a11y-high-contrast .stat-value {
+    color: #FFFFFF !important;
+}

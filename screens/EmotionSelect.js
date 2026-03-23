@@ -40,13 +40,29 @@ export function template() {
                 <div class="mini-game-shortcuts">
                     <button id="btn-animo-shortcut" class="mini-game-badge mb-badge" title="Animo Adventure" type="button">
                         <svg viewBox="0 0 100 100" class="game-badge-svg">
+                            <defs>
+                                <radialGradient id="eyeShine" cx="30%" cy="30%" r="50%">
+                                    <stop offset="0%" stop-color="white" />
+                                    <stop offset="100%" stop-color="white" stop-opacity="0" />
+                                </radialGradient>
+                            </defs>
                             <circle cx="50" cy="50" r="48" fill="#FFF9E6" />
-                            <!-- Pet Paw (Kawaii Style) -->
-                            <circle cx="35" cy="40" r="10" fill="#FF80AB" />
-                            <circle cx="65" cy="40" r="10" fill="#FF80AB" />
-                            <circle cx="50" cy="30" r="10" fill="#FF80AB" />
-                            <path d="M50 85 Q20 85 20 60 Q20 45 50 45 Q80 45 80 60 Q80 85 50 85 Z" fill="#FF80AB" />
-                            <circle cx="50" cy="65" r="5" fill="white" /> <!-- Tiny heart center -->
+                            <!-- Puppy Ears -->
+                            <path d="M20,45 Q5,35 15,15 Q30,5 40,25 Z" fill="#D7CCC8" transform="rotate(-10, 30, 30)" />
+                            <path d="M80,45 Q95,35 85,15 Q70,5 60,25 Z" fill="#D7CCC8" transform="rotate(10, 70, 30)" />
+                            <!-- Puppy Face -->
+                            <circle cx="50" cy="55" r="32" fill="#EFEBE9" />
+                            <!-- Eyes -->
+                            <circle cx="38" cy="50" r="6" fill="#3E2723" />
+                            <circle cx="36" cy="48" r="2" fill="white" />
+                            <circle cx="62" cy="50" r="6" fill="#3E2723" />
+                            <circle cx="60" cy="48" r="2" fill="white" />
+                            <!-- Nose & Mouth -->
+                            <circle cx="50" cy="62" r="4" fill="#5D4037" />
+                            <path d="M44,70 Q50,78 56,70" stroke="#5D4037" stroke-width="2" fill="none" stroke-linecap="round" />
+                            <!-- Rosy Cheeks -->
+                            <circle cx="30" cy="62" r="6" fill="#FF80AB" opacity="0.3" />
+                            <circle cx="70" cy="62" r="6" fill="#FF80AB" opacity="0.3" />
                         </svg>
                         <span>Animo Adventure</span>
                     </button>
