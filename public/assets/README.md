@@ -11,8 +11,6 @@ This directory contains all the visual and brand assets for the **Little Big Fee
 | `background/` | Full-screen background environments. |
 | `emotion/` | Illustrations representing specific emotional states (e.g., Angry Monster). |
 | `trigger/` | Visuals for situations that cause emotions (e.g., Broken Robot). |
-| `action_match/` | Positive coping strategy cards (e.g., Breathing, Dancing). |
-| `emotion_match/` | Alternative emotion visualizations for matching pairs. |
 
 ## Source Attribution
 

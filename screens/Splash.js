@@ -49,7 +49,6 @@ export function template() {
             </div>
 
             <div class="splash-footer">
-                <p class="splash-credit">Based on <strong>Recharge Without Charge</strong> by Mind Empowered</p>
                 <div class="brand-dots">
                     <span class="dot pink"></span>
                     <span class="dot blue"></span>
@@ -109,9 +108,6 @@ async function _startPreloading() {
             assets.add(pair.action.img);
         });
     });
-
-    // Extract from LEVELS
-    Object.values(LEVELS).forEach(lvl => assets.add(lvl.icon));
 
     // Preload potential avatars for Wrong overlay
     [8, 9, 10, 11, 12].forEach(num => assets.add(`assets/avatars/avatar_${num}.svg`));

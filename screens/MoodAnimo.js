@@ -287,23 +287,22 @@ function renderTools() {
             if (!isDraggingInitiated && dist > 10) {
                 isDraggingInitiated = true;
                 
+                // Prevent scrolling while dragging
+                originalEl.setPointerCapture(moveEvent.pointerId);
+                
                 // Only clone the icon
                 dragClone = iconEl.cloneNode(true);
-                dragClone.classList.add('dragging-icon');
+                dragClone.className = 'dragging-icon'; // Use class instead of adding one
                 document.body.appendChild(dragClone);
                 
                 const rect = iconEl.getBoundingClientRect();
                 dragX = moveEvent.clientX - rect.left;
                 dragY = moveEvent.clientY - rect.top;
                 
-                dragClone.style.position = 'fixed';
-                dragClone.style.width = '70px';
-                dragClone.style.height = '70px';
+                dragClone.style.width = '80px';
+                dragClone.style.height = '80px';
                 dragClone.style.left = rect.left + 'px';
                 dragClone.style.top = rect.top + 'px';
-                dragClone.style.zIndex = "3000";
-                dragClone.style.pointerEvents = "none";
-                dragClone.style.filter = "drop-shadow(0 15px 30px rgba(0,0,0,0.25))";
                 
                 sounds.click();
             }
@@ -311,13 +310,21 @@ function renderTools() {
 
         function onMove(moveEvent) {
             if (isDraggingInitiated && dragClone) {
-                dragClone.style.left = (moveEvent.clientX - 35) + 'px';
-                dragClone.style.top = (moveEvent.clientY - 35) + 'px';
-                dragClone.style.transform = `scale(1.4) rotate(${Math.sin(moveEvent.clientX * 0.01) * 8}deg)`;
+                // Ensure we get coordinates from pointer events
+                const cx = moveEvent.clientX;
+                const cy = moveEvent.clientY;
+                
+                dragClone.style.left = (cx - 40) + 'px';
+                dragClone.style.top = (cy - 40) + 'px';
+                dragClone.style.transform = `scale(1.5) rotate(${Math.sin(cx * 0.01) * 8}deg)`;
             }
         }
 
         function onUp(upEvent) {
+            if (isDraggingInitiated) {
+                originalEl.releasePointerCapture(upEvent.pointerId);
+            }
+
             document.removeEventListener('pointermove', onInitialMove);
             document.removeEventListener('pointermove', onMove);
             document.removeEventListener('pointerup', onUp);
@@ -326,13 +333,18 @@ function renderTools() {
                 const toolId = originalEl.dataset.id;
                 const toolData = TOOLS.find(t => t.id === toolId);
                 
+                const cx = upEvent.clientX;
+                const cy = upEvent.clientY;
+                
                 // Check if we hit the target
-                const elementsAtPoint = document.elementsFromPoint(upEvent.clientX, upEvent.clientY);
+                const elementsAtPoint = document.elementsFromPoint(cx, cy);
                 const isHit = elementsAtPoint.some(el => 
                     el.id === 'mg-animo-target' || 
                     el.id === 'mg-animo-asset' || 
+                    el.id === 'mg-animo-wrap' ||
                     el.closest('#mg-animo-target')
                 );
+
                 
                 if (isHit) {
                     handleToolUsage(toolData);

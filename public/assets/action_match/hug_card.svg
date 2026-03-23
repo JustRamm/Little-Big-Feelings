@@ -1,9 +1,0 @@
-<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <!-- Card Base -->
-  <rect x="10" y="10" width="180" height="180" rx="30" fill="white" stroke="#FFCDD2" stroke-width="4" />
-  
-  <!-- Hug 🫂 - Arms hugging heart -->
-  <path d="M100 130 Q120 105 140 130 Q160 155 100 180 Q40 155 60 130 Q80 105 100 130 Z" fill="#EF5350" />
-  <path d="M50 80 Q65 150 100 150" stroke="#FFCC80" stroke-width="12" stroke-linecap="round" fill="none" />
-  <path d="M150 80 Q135 150 100 150" stroke="#FFCC80" stroke-width="12" stroke-linecap="round" fill="none" />
-</svg>

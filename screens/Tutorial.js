@@ -13,7 +13,6 @@ export function template() {
                 </button>
                 <div class="tutorial-titles">
                     <h2 class="premium-title">How to Play</h2>
-                    <p class="premium-subtitle">Based on <strong>Recharge Without Charge</strong> by Mind Empowered</p>
                 </div>
             </header>
 

@@ -8,9 +8,9 @@
  * Level configuration 
  */
 export const LEVELS = {
-    1: { pairs: 3, chances: 3, time: 99999, label: 'Beginner', peekDuration: 3000, peekUses: 3, icon: 'assets/action_match/calm_child_card.svg' },
-    2: { pairs: 4, chances: 8, time: 99999, label: 'Intermediate', peekDuration: 2000, peekUses: 2, icon: 'assets/action_match/mindfulness_card.svg' },
-    3: { pairs: 6, chances: 13, time: 99999, label: 'Full Journey', peekDuration: 1000, peekUses: 1, icon: 'assets/action_match/brave_lion_card.svg' },
+    1: { pairs: 3, chances: 3, time: 99999, label: 'Beginner', peekDuration: 3000, peekUses: 3 },
+    2: { pairs: 4, chances: 8, time: 99999, label: 'Intermediate', peekDuration: 2000, peekUses: 2 },
+    3: { pairs: 6, chances: 13, time: 99999, label: 'Full Journey', peekDuration: 1000, peekUses: 1 },
 };
 
 /**
