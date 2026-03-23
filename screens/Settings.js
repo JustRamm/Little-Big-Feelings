@@ -125,7 +125,6 @@ export function template() {
     </section>`;
 }
 
-/** Refresh the displayed values from localStorage — call every time this screen is shown */
 export function onShow() {
     const player = loadPlayer();
 
@@ -154,10 +153,10 @@ export function onShow() {
  * @param {{ navigate: (screen: string) => void }} deps
  */
 export function init({ navigate }) {
-    // Back to Level Select
+    // Back to Previous Screen
     document.getElementById('btn-settings-back').addEventListener('click', () => {
         sounds.click();
-        navigate('levelSelect');
+        navigate(state.previousScreen || 'levelSelect');
     });
 
     // Edit profile → NameEntry

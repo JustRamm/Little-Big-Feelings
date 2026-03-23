@@ -32,6 +32,8 @@ export const state = {
     unlockedInsights: [], // Array of emotion/action pair IDs
     discoveredMixes: [],  // Array of result.id from MIXING_RECIPES
     selectedEmotion: null, // e.g., 'anger', 'sadness', 'anxiety', etc.
+    currentScreen: 'splash',
+    previousScreen: null,
 };
 
 /** Reset all per-round fields. Preserves level, player info, and settings. */

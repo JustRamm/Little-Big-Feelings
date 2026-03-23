@@ -108,6 +108,12 @@ const SCREEN_MODULES = {
  * @param {string} key - must be a key in SCREEN_MAP
  */
 function navigate(key) {
+    // Track screen history
+    if (state.currentScreen !== key) {
+        state.previousScreen = state.currentScreen;
+        state.currentScreen = key;
+    }
+
     Object.values(SCREEN_MAP).forEach(el => el?.classList.remove('active'));
     SCREEN_MAP[key]?.classList.add('active');
 
@@ -180,9 +186,7 @@ MoodMixer.init({ navigate });
 async function lockPortrait() {
     try {
         if (screen.orientation && screen.orientation.lock) {
-            await screen.orientation.lock('portrait').catch(err => {
-                console.warn("Orientation lock suppressed or failed:", err);
-            });
+            await screen.orientation.lock('portrait').catch(() => {});
         }
     } catch (e) {
         console.error("Orientation lock error:", e);

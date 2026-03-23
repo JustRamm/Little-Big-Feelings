@@ -84,11 +84,11 @@ function updateProgress() {
     const nameEl = document.getElementById('cert-player-name');
     const certText = cert?.querySelector('.cert-text');
 
-    if (unlocked >= total && total > 0) {
+    if (unlockedInsights >= totalInsights && totalInsights > 0) {
         if (cert) cert.classList.remove('hidden');
         if (grid) grid.classList.add('hidden');
         if (nameEl) nameEl.textContent = state.playerName || 'Player';
-        if (certText) certText.textContent = `For successfully uncovering ${total} emotional insights and mastering the recharge journey.`;
+        if (certText) certText.textContent = `For successfully uncovering ${totalInsights} emotional insights and mastering the recharge journey.`;
     } else {
         if (cert) cert.classList.add('hidden');
         if (grid) grid.classList.remove('hidden');
@@ -216,6 +216,6 @@ function renderFusionGrid(grid) {
 export function init({ navigate }) {
     document.getElementById('btn-journal-back').addEventListener('click', () => {
         sounds.click();
-        navigate('levelSelect');
+        navigate(state.previousScreen || 'levelSelect');
     });
 }
