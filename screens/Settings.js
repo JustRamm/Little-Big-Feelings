@@ -12,114 +12,123 @@ export function template() {
         
         <div class="settings-container">
             <div class="settings-header">
-                <button id="btn-settings-back" class="btn-icon settings-back-btn" aria-label="Back" type="button">
-                    <i data-lucide="arrow-left"></i>
-                </button>
-                <h2 style="margin: 0;">Settings</h2>
+                <div class="settings-header-left">
+                    <button id="btn-settings-back" class="btn-icon settings-back-btn" aria-label="Back" type="button">
+                        <i data-lucide="arrow-left"></i>
+                    </button>
+                    <h2>Settings</h2>
+                </div>
             </div>
 
-            <!-- Player Profile Card -->
-            <div class="settings-card">
-                <div class="settings-player-preview">
+            <div class="settings-grid">
+                
+                <!-- 1. Profile (Left) -->
+                <div class="settings-card card-profile">
                     <div id="settings-avatar" class="settings-big-avatar"></div>
                     <div id="settings-name"   class="settings-player-name">Player</div>
-                </div>
-                <button id="btn-edit-profile" class="btn-secondary" type="button">
-                    Edit Profile
-                </button>
-            </div>
-
-            <!-- Options Card -->
-            <div class="settings-card">
-                <div class="settings-row">
-                    <div class="settings-label">
-                        <span class="settings-icon">
-                            <i id="sound-icon-preview" data-lucide="volume-2"></i>
-                        </span>
-                        <div class="settings-label-text">
-                            <div class="settings-label-title">Sound Effects</div>
-                            <div class="settings-label-sub">Fun noises and music</div>
-                        </div>
-                    </div>
-                    <button id="btn-sound-toggle" class="toggle-btn" aria-label="Toggle sound">
-                        <div class="toggle-thumb"></div>
+                    <button id="btn-edit-profile" class="btn-secondary" type="button">
+                        Edit Profile
                     </button>
                 </div>
 
-                <div class="settings-row">
-                    <div class="settings-label">
-                        <span class="settings-icon">
-                            <i id="speech-icon-preview" data-lucide="message-square"></i>
-                        </span>
-                        <div class="settings-label-text">
-                            <div class="settings-label-title">Voice Narration</div>
-                            <div class="settings-label-sub">Read matches out loud</div>
-                        </div>
+                <!-- 2. Main Options (Middle) -->
+                <div class="settings-card card-main">
+                    <div class="settings-header-small">
+                        <i data-lucide="settings"></i>
+                        <span>Game Preferences</span>
                     </div>
-                    <button id="btn-speech-toggle" class="toggle-btn" aria-label="Toggle narration">
-                        <div class="toggle-thumb"></div>
-                    </button>
-                </div>
-            </div>
 
-            <!-- Accessibility Card -->
-            <div class="settings-card">
-                <div class="settings-header-small">
-                    <i data-lucide="accessibility"></i>
-                    <span>Accessibility</span>
-                </div>
-                
-                <div class="settings-row">
-                    <div class="settings-label">
-                        <div class="settings-label-text">
-                            <div class="settings-label-title">High Contrast</div>
-                            <div class="settings-label-sub">Better visibility for icons</div>
+                    <div class="settings-row">
+                        <div class="settings-label">
+                            <span class="settings-icon">
+                                <i id="sound-icon-preview" data-lucide="volume-2"></i>
+                            </span>
+                            <div class="settings-label-text">
+                                <div class="settings-label-title">Sound Effects</div>
+                                <div class="settings-label-sub">Fun noises and music</div>
+                            </div>
                         </div>
+                        <button id="btn-sound-toggle" class="toggle-btn" aria-label="Toggle sound" aria-checked="false">
+                            <div class="toggle-thumb"></div>
+                        </button>
                     </div>
-                    <button id="btn-contrast-toggle" class="toggle-btn" aria-label="Toggle high contrast">
-                        <div class="toggle-thumb"></div>
-                    </button>
-                </div>
 
-                <div class="settings-row">
-                    <div class="settings-label">
-                        <div class="settings-label-text">
-                            <div class="settings-label-title">Dyslexic Friendly Font</div>
-                            <div class="settings-label-sub">Easier to read text</div>
+                    <div class="settings-row">
+                        <div class="settings-label">
+                            <span class="settings-icon">
+                                <i id="speech-icon-preview" data-lucide="message-square"></i>
+                            </span>
+                            <div class="settings-label-text">
+                                <div class="settings-label-title">Voice Narration</div>
+                                <div class="settings-label-sub">Read matches out loud</div>
+                            </div>
                         </div>
+                        <button id="btn-speech-toggle" class="toggle-btn" aria-label="Toggle narration" aria-checked="false">
+                            <div class="toggle-thumb"></div>
+                        </button>
                     </div>
-                    <button id="btn-font-toggle" class="toggle-btn" aria-label="Toggle dyslexic font">
-                        <div class="toggle-thumb"></div>
-                    </button>
                 </div>
 
-                <div class="settings-row">
-                    <div class="settings-label">
-                        <div class="settings-label-text">
-                            <div class="settings-label-title">Reduced Motion</div>
-                            <div class="settings-label-sub">Turn off fast animations</div>
-                        </div>
+                <!-- 3. Accessibility (Right) -->
+                <div class="settings-card card-accessibility">
+                    <div class="settings-header-small">
+                        <i data-lucide="accessibility"></i>
+                        <span>Accessibility Suite</span>
                     </div>
-                    <button id="btn-motion-toggle" class="toggle-btn" aria-label="Toggle reduced motion">
-                        <div class="toggle-thumb"></div>
-                    </button>
-                </div>
-            </div>
+                    
+                    <div class="settings-row">
+                        <div class="settings-label">
+                            <div class="settings-label-text">
+                                <div class="settings-label-title">High Contrast</div>
+                                <div class="settings-label-sub">Enhanced visibility</div>
+                            </div>
+                        </div>
+                        <button id="btn-contrast-toggle" class="toggle-btn" aria-label="Toggle high contrast" aria-checked="false">
+                            <div class="toggle-thumb"></div>
+                        </button>
+                    </div>
 
-            <!-- Danger Zone -->
-            <div class="settings-card settings-danger">
-                <div class="settings-row">
-                    <div class="settings-label">
-                        <span class="settings-icon">
-                            <i data-lucide="trash-2" style="color: #EF5350;"></i>
-                        </span>
-                        <div class="settings-label-text">
-                            <div class="settings-label-title">Reset Progress</div>
-                            <div class="settings-label-sub">Delete all scores and profile</div>
+                    <div class="settings-row">
+                        <div class="settings-label">
+                            <div class="settings-label-text">
+                                <div class="settings-label-title">Dyslexic Font</div>
+                                <div class="settings-label-sub">OpenDyslexic style</div>
+                            </div>
                         </div>
+                        <button id="btn-font-toggle" class="toggle-btn" aria-label="Toggle dyslexic font" aria-checked="false">
+                            <div class="toggle-thumb"></div>
+                        </button>
                     </div>
-                    <button id="btn-clear-data" class="btn-danger" type="button">Reset</button>
+
+                    <div class="settings-row">
+                        <div class="settings-label">
+                            <div class="settings-label-text">
+                                <div class="settings-label-title">Reduced Motion</div>
+                                <div class="settings-label-sub">Simplify animations</div>
+                            </div>
+                        </div>
+                        <button id="btn-motion-toggle" class="toggle-btn" aria-label="Toggle reduced motion" aria-checked="false">
+                            <div class="toggle-thumb"></div>
+                        </button>
+                    </div>
                 </div>
+
+                <!-- 4. Danger (Bottom Span) -->
+                <div class="settings-card card-danger settings-danger">
+                    <div class="settings-row">
+                        <div class="settings-label">
+                            <span class="settings-icon">
+                                <i data-lucide="alert-triangle" style="color: #FF5252;"></i>
+                            </span>
+                            <div class="settings-label-text">
+                                <div class="settings-label-title">Reset All Progress</div>
+                                <div class="settings-label-sub">This action cannot be undone.</div>
+                            </div>
+                        </div>
+                        <button id="btn-clear-data" class="btn-danger" type="button">Reset All Data</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>`;

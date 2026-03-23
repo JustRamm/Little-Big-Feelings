@@ -31,7 +31,11 @@ export function template() {
         <div class="emotion-select-container">
             <header class="emotion-header">
                 <div class="header-top-row">
-                    <!-- Back button removed -->
+                    <div class="emotion-left-actions">
+                        <button id="btn-emotion-journal" class="btn-icon circle-btn" aria-label="Open Journal" title="Journal" type="button">
+                            <i data-lucide="book-open"></i>
+                        </button>
+                    </div>
                     
                     <div class="emotion-header-text">
                         <h2 class="premium-title">Which feeling shall we explore?</h2>
@@ -39,9 +43,6 @@ export function template() {
                     </div>
 
                     <div class="emotion-top-actions">
-                        <button id="btn-emotion-journal" class="btn-icon circle-btn" aria-label="Open Journal" title="Journal" type="button">
-                            <i data-lucide="book-open"></i>
-                        </button>
                         <button id="btn-emotion-settings" class="btn-icon circle-btn" aria-label="Open Settings" title="Settings" type="button">
                             <i data-lucide="settings"></i>
                         </button>
@@ -126,13 +127,12 @@ export function init({ navigate }) {
         btn.addEventListener('click', () => {
             sounds.click();
             const emo = EMOTIONS_DATA[btn.dataset.emotion];
-            if (emo) speakText(emo.name);
+            if (emo && state.speechEnabled) speakText(emo.name);
             state.selectedEmotion = btn.dataset.emotion;
             navigate('levelSelect');
         });
     });
 
-    /* Back button listener removed */
 
     document.getElementById('btn-animo-shortcut').addEventListener('click', () => {
         sounds.click();

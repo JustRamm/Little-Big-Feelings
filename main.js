@@ -15,6 +15,25 @@ import { sounds } from './utils/sounds.js';
 
 // Register the PWA service worker with auto-update
 registerSW({ immediate: true });
+
+// ── 0. Screen registry ────────────────────────────────────────
+const SCREENS = [
+    { id: 'splash', mod: Splash },
+    { id: 'nameEntry', mod: NameEntry },
+    { id: 'emotionSelect', mod: EmotionSelect },
+    { id: 'levelSelect', mod: LevelSelect },
+    { id: 'tutorial', mod: Tutorial },
+    { id: 'game', mod: Game },
+    { id: 'settings', mod: Settings },
+    { id: 'journal', mod: Journal },
+    { id: 'victory', mod: Victory },
+    { id: 'moodAnimo', mod: MoodAnimo },
+    { id: 'alphabetGame', mod: CopingAlphabet },
+    { id: 'moodMixer', mod: MoodMixer },
+    { id: 'breathingBuddy', mod: BreathingBuddy },
+    { id: 'match', mod: OverlayMatch },
+    { id: 'wrong', mod: OverlayWrong },
+];
 import * as NameEntry from './screens/NameEntry.js';
 import * as EmotionSelect from './screens/EmotionSelect.js';
 import * as LevelSelect from './screens/LevelSelect.js';
@@ -53,53 +72,7 @@ app.insertAdjacentHTML('beforeend', /* html */`
     </div>
 `);
 
-// Screens in DOM order (overlays last so they layer on top)
-[
-    Splash,
-    NameEntry,
-    EmotionSelect,
-    LevelSelect,
-    Tutorial,
-    Game,
-    Settings,
-    OverlayMatch,
-    OverlayWrong,
-    Journal,
-    BreathingBuddy,
-    Victory,
-    MoodAnimo,
-    CopingAlphabet,
-    MoodMixer,
-].forEach(m => app.insertAdjacentHTML('beforeend', m.template()));
-
-// ── 2. Screen registry ────────────────────────────────────────
-// Maps logical key → DOM element
-const SCREEN_MAP = {
-    splash: document.getElementById('screen-splash'),
-    nameEntry: document.getElementById('screen-name'),
-    emotionSelect: document.getElementById('screen-emotion'),
-    levelSelect: document.getElementById('screen-level'),
-    tutorial: document.getElementById('screen-tutorial'),
-    game: document.getElementById('screen-game'),
-    settings: document.getElementById('screen-settings'),
-    journal: document.getElementById('screen-journal'),
-    victory: document.getElementById('screen-victory'),
-    moodAnimo: document.getElementById('screen-mood-battery'),
-    alphabetGame: document.getElementById('screen-alphabet-game'),
-    moodMixer: document.getElementById('screen-mood-mixer'),
-};
-
-// Maps logical key → module (for onShow hook)
-const SCREEN_MODULES = {
-    nameEntry: NameEntry,
-    emotionSelect: EmotionSelect,
-    levelSelect: LevelSelect,
-    settings: Settings,
-    journal: Journal,
-    moodAnimo: MoodAnimo,
-    alphabetGame: CopingAlphabet,
-    moodMixer: MoodMixer,
-};
+SCREENS.forEach(s => app.insertAdjacentHTML('beforeend', s.mod.template()));
 
 // ── 3. navigate() ─────────────────────────────────────────────
 /**
@@ -108,19 +81,33 @@ const SCREEN_MODULES = {
  * @param {string} key - must be a key in SCREEN_MAP
  */
 function navigate(key) {
-    // Track screen history
     if (state.currentScreen !== key) {
         state.previousScreen = state.currentScreen;
         state.currentScreen = key;
     }
 
-    Object.values(SCREEN_MAP).forEach(el => el?.classList.remove('active'));
-    SCREEN_MAP[key]?.classList.add('active');
+    const target = SCREENS.find(s => s.id === key);
+    if (!target) return;
 
-    // Run screen's onShow() if it exports one
-    SCREEN_MODULES[key]?.onShow?.();
+    // Deactivate all screens
+    SCREENS.forEach(s => {
+        // Find the element by the ID defined in its template
+        const templateId = s.mod.template().match(/id="([^"]+)"/)?.[1];
+        if (templateId) {
+            const el = document.getElementById(templateId);
+            if (el) el.classList.remove('active');
+        }
+    });
 
-    // Re-initialize Lucide icons for the new content
+    // Activate target
+    const targetId = target.mod.template().match(/id="([^"]+)"/)?.[1];
+    if (targetId) {
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) targetEl.classList.add('active');
+    }
+
+    target.mod.onShow?.();
+
     if (window.lucide) {
         window.lucide.createIcons();
     }

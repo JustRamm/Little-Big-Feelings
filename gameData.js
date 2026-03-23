@@ -5,6 +5,24 @@
 // ============================================================
 
 /** 
+ * Avatar assets
+ */
+export const AVATARS = [
+    'assets/avatars/avatar_1.svg',
+    'assets/avatars/avatar_2.svg',
+    'assets/avatars/avatar_3.svg',
+    'assets/avatars/avatar_4.svg',
+    'assets/avatars/avatar_5.svg',
+    'assets/avatars/avatar_6.svg',
+    'assets/avatars/avatar_7.svg',
+    'assets/avatars/avatar_8.svg',
+    'assets/avatars/avatar_9.svg',
+    'assets/avatars/avatar_10.svg',
+    'assets/avatars/avatar_11.svg',
+    'assets/avatars/avatar_12.svg',
+];
+
+/** 
  * Level configuration 
  */
 export const LEVELS = {

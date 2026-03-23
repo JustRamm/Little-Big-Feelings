@@ -227,7 +227,11 @@ export function init({ navigate }) {
             if (card) {
                 const title = card.querySelector('h3')?.textContent || '';
                 const desc = card.querySelector('.journal-insight')?.textContent || '';
-                speakText(title + ". " + desc);
+                
+                if (state.speechEnabled) {
+                    window.speechSynthesis?.cancel(); // Cancel previous
+                    speakText(title + ". " + desc);
+                }
             }
         });
     }

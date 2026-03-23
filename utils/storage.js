@@ -53,7 +53,7 @@ export function saveSettings(data) { set('settings', data); }
 export function loadSettings() { 
     return get('settings') ?? { 
         soundEnabled: true, 
-        speechEnabled: true,
+        speechEnabled: false,
         highContrast: false,
         dyslexicFont: false,
         reducedMotion: false

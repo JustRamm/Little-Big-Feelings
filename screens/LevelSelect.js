@@ -19,9 +19,6 @@ export function template() {
                 <span id="ls-name" class="player-badge-name"></span>
             </div>
             <div class="level-top-right">
-                <button id="btn-journal" class="btn-icon journal-book" aria-label="Open journal" title="Collection" type="button">
-                    <i data-lucide="book-open"></i>
-                </button>
                 <button id="btn-settings" class="btn-icon settings-gear" aria-label="Open settings" type="button">
                     <i data-lucide="settings"></i>
                 </button>
@@ -137,10 +134,6 @@ export function init({ navigate, startGame }) {
         navigate('settings');
     });
 
-    document.getElementById('btn-journal').addEventListener('click', () => {
-        sounds.click();
-        navigate('journal');
-    });
 
     document.getElementById('btn-level-back').addEventListener('click', () => {
         sounds.click();
