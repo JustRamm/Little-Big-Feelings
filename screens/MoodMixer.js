@@ -13,11 +13,14 @@ let selectedSlot2 = null;
 export function template() {
     const basicEmotions = Object.values(EMOTIONS_DATA);
     
-    const choiceBubbles = basicEmotions.map((emo, index) => `
-        <button class="choice-bubble" data-emotion="${emo.id}" title="${emo.name}" type="button" style="--delay: ${index}">
+    const generateChoiceHtml = (side) => basicEmotions.map((emo, index) => `
+        <button class="choice-bubble choice-${side}" data-emotion="${emo.id}" data-side="${side}" title="${emo.name}" type="button" style="--delay: ${index}">
             <img src="${emo.icon}" alt="${emo.name}">
         </button>
     `).join('');
+
+    const leftChoicesHtml = generateChoiceHtml('left');
+    const rightChoicesHtml = generateChoiceHtml('right');
 
     return /* html */`
     <section id="screen-mood-mixer" class="screen" aria-label="Feeling Fusion Lab">
@@ -32,38 +35,50 @@ export function template() {
                 </div>
             </header>
 
-            <div class="mixer-card fusion-chamber">
-                <div class="mixer-slots">
-                    <div class="slot-container">
-                        <div id="mixer-slot-1" class="mixer-slot">
-                            <i data-lucide="beaker" style="opacity: 0.3; color: var(--pink);"></i>
+            <div class="mixer-card fusion-chamber full-screen-lab">
+                <div class="lab-main-area">
+                    <!-- Left Side Elements (Ingredient 1) -->
+                    <div class="lab-side-choices side-left">
+                        <p class="side-label">Element A</p>
+                        <div class="choice-grid-2x4">
+                            ${leftChoicesHtml}
                         </div>
-                        <div id="slot-name-1" class="slot-label">Ingredient 1</div>
                     </div>
 
-                    <span class="plus-symbol">⚗️</span>
+                    <!-- Center Area (Fusion Chamber) -->
+                    <div class="lab-center">
+                        <div class="mixer-slots">
+                            <div class="slot-container">
+                                <div id="mixer-slot-1" class="mixer-slot">
+                                    <i data-lucide="beaker" style="opacity: 0.3; color: var(--pink);"></i>
+                                </div>
+                                <div id="slot-name-1" class="slot-label">Ingredient 1</div>
+                            </div>
 
-                    <div class="slot-container">
-                        <div id="mixer-slot-2" class="mixer-slot">
-                            <i data-lucide="beaker" style="opacity: 0.3; color: var(--blue);"></i>
+                            <span class="plus-symbol">⚗️</span>
+
+                            <div class="slot-container">
+                                <div id="mixer-slot-2" class="mixer-slot">
+                                    <i data-lucide="beaker" style="opacity: 0.3; color: var(--blue);"></i>
+                                </div>
+                                <div id="slot-name-2" class="slot-label">Ingredient 2</div>
+                            </div>
                         </div>
-                        <div id="slot-name-2" class="slot-label">Ingredient 2</div>
+
+                        <div id="mixer-controls">
+                            <button id="btn-do-fusion" class="btn-primary disabled" disabled>
+                                <i data-lucide="test-tube-2" style="margin-right: 10px;"></i>
+                                Begin Experiment!
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <div id="mixer-controls">
-                    <button id="btn-do-fusion" class="btn-primary disabled" disabled>
-                        <i data-lucide="test-tube-2" style="margin-right: 10px;"></i>
-                        Begin Experiment!
-                    </button>
-                </div>
-
-                <div class="journal-divider"></div>
-
-                <div class="mixer-choices-wrap">
-                    <p class="premium-subtitle" style="margin-bottom: 1rem; color: var(--blue-dark); font-weight: 800;">Select Elements to Mix</p>
-                    <div class="mixer-choices">
-                        ${choiceBubbles}
+                    <!-- Right Side Elements (Ingredient 2) -->
+                    <div class="lab-side-choices side-right">
+                        <p class="side-label">Element B</p>
+                        <div class="choice-grid-2x4">
+                            ${rightChoicesHtml}
+                        </div>
                     </div>
                 </div>
 
@@ -108,16 +123,21 @@ export function init({ navigate }) {
     choices.forEach(btn => {
         btn.addEventListener('click', () => {
             const emoId = btn.dataset.emotion;
+            const side = btn.dataset.side;
             const emoData = EMOTIONS_DATA[emoId];
             if (!emoData) return;
 
             sounds.click();
 
-            if (!selectedSlot1) {
+            if (side === 'left') {
+                // Deselect others on the same side
+                document.querySelectorAll('.choice-left').forEach(b => b.classList.remove('selected'));
                 selectedSlot1 = emoData;
                 updateSlotUI(1, emoData);
                 btn.classList.add('selected');
-            } else if (!selectedSlot2 && selectedSlot1.id !== emoId) {
+            } else {
+                // Deselect others on the same side
+                document.querySelectorAll('.choice-right').forEach(b => b.classList.remove('selected'));
                 selectedSlot2 = emoData;
                 updateSlotUI(2, emoData);
                 btn.classList.add('selected');
