@@ -1,47 +1,76 @@
 // ============================================================
-//  screens/MoodAnimo.js (Formerly MoodBattery.js)
-//  Mini-Game: Animo — The Animal Care Simulator
+//  screens/MoodAnimo.js
+//  Mini-Game: Animo — The Emotional Explorer (Ages 6-12)
 // ============================================================
 import { sounds } from '../utils/sounds.js';
 import { state } from '../gameState.js';
+import { EMOTIONS_DATA } from '../gameData.js';
 
-const TOOLS = [
-    { id: 'hug', type: 'good', icon: 'assets/animo/tools/hug.svg', label: 'Warm Hug', lesson: "Warm hugs make your friend feel safe and loved! ❤️" },
-    { id: 'food', type: 'good', icon: 'assets/animo/tools/food.svg', label: 'Tasty Treat', lesson: "Yummy food gives your friend energy to play! 🍖" },
-    { id: 'brush', type: 'good', icon: 'assets/animo/tools/brush.svg', label: 'Pamper', lesson: "Brushing helps your friend feel clean and happy! ✨" },
-    { id: 'play', type: 'good', icon: 'assets/animo/tools/play.svg', label: 'Play Time', lesson: "Bouncing a ball is the best way to have fun together! 🎾" },
-    { id: 'noise', type: 'bad', icon: 'assets/animo/tools/noise.svg', label: 'Scary Noise', lesson: "Loud noises can be scary. Your friend is frightened! ⛈️" },
-    { id: 'ignoring', type: 'bad', icon: 'assets/animo/tools/ignoring.svg', label: 'Ignoring', lesson: "Everyone needs attention. Ignoring someone makes them sad... 👁️‍🗨️" },
-    { id: 'mean', type: 'bad', icon: 'assets/animo/tools/mean.svg', label: 'Mean Words', lesson: "Ouch! Harsh words hurt more than a fall. Be gentle! 🧱" }
-];
-
-const ANIMO_MAP = {
-    'avatar_1.svg': 'lion',
-    'avatar_2.svg': 'elephant',
-    'avatar_3.svg': 'penguin',
-    'avatar_4.svg': 'panda',
-    'avatar_5.svg': 'cat',
-    'avatar_6.svg': 'dog',
-    'avatar_7.svg': 'monkey',
-    'avatar_8.svg': 'rabbit',
-    'avatar_9.svg': 'frog',
-    'avatar_10.svg': 'owl',
-    'avatar_11.svg': 'bee',
-    'avatar_12.svg': 'butterfly'
+/**
+ * Emotion Lines: Representative phrases for each of the 8 core emotions.
+ */
+const EMOTION_LINES = {
+    anger: [
+        "This is so UNFAIR!",
+        "I just want to scream and stomp my feet!",
+        "I can't believe they broke my favorite toy...",
+        "I'm so mad, I feel like I might explode!",
+        "Why do I always have to wait my turn? It's not right!"
+    ],
+    sadness: [
+        "I'm feeling very lonely and quiet right now...",
+        "I wish I could have my old blanket back.",
+        "Nobody seems to want to play with me today.",
+        "It's okay to cry, I'm just feeling a bit blue.",
+        "I really miss my friends so much."
+    ],
+    joy: [
+        "That was the best day ever!",
+        "Look at that beautiful sunshine, it makes me smile!",
+        "I am so happy to see you, let's play!",
+        "Let's jump for joy together! Everything is great!",
+        "I just shared my snacks and it felt so good!"
+    ],
+    fear: [
+        "What was that loud noise?! It was so sudden...",
+        "Is someone hiding in the dark shadows?",
+        "I don't like being in the dark all alone.",
+        "My heart is beating so fast, I'm a bit nervous.",
+        "That creepy crawly bug is moving closer!"
+    ],
+    trust: [
+        "I feel so safe here with you.",
+        "Thank you for listening to my secret and keeping it.",
+        "I know you will always have my back, thank you friend.",
+        "Let's share this snack together, I trust you.",
+        "A warm hug makes me feel so much better."
+    ],
+    disgust: [
+        "Eww, that smells really gross!",
+        "I don't like the texture of this slimy, gooey stuff.",
+        "My room is so messy and yucky, I need to clean up.",
+        "Yuck! That food tastes like it has gone bad.",
+        "Look at all that trash on the floor, it's icky!"
+    ],
+    anticipation: [
+        "I can't wait for my birthday to finally come!",
+        "Is it time for our big trip yet? I'm counting down!",
+        "I am so excited to start school tomorrow!",
+        "Look at that mystery box, I wonder what could be inside!",
+        "I'm waiting for the seeds we planted to finally grow!"
+    ],
+    surprise: [
+        "WOW! A surprise party just for me?!",
+        "I didn't expect to find my lost toy here at all!",
+        "Pop! That balloon gave me a sudden startle!",
+        "Hahaha, what a funny and unexpected face!",
+        "I found a lost treasure under the cushions! Amazing!"
+    ]
 };
 
 function getAnimoFolder() {
-    // Get filename from path: assets/avatars/avatar_1.svg -> avatar_1.svg
-    const avatarFilename = state.playerAvatar.split('/').pop();
-    return ANIMO_MAP[avatarFilename] || 'dog';
+    return state.animoId || 'dog';
 }
-
-let animoStage = 1; // 1 to 4
-let activeTool = null;
-let dragX, dragY;
-let hasRunAway = false;
-let usedToolIds = new Set();
-let randomizedTools = [];
 
 function getAnimoMovementClass(folder) {
     const flyers = ['bee', 'bird', 'butterfly', 'owl'];
@@ -49,83 +78,81 @@ function getAnimoMovementClass(folder) {
     if (flyers.includes(folder)) return 'animo-fly';
     if (hoppers.includes(folder)) return 'animo-hop';
     return 'animo-sway';
-}
+}let animoStage = 1; 
+let currentLine = "";
+let correctEmotionId = "";
+let currentCopingId = ""; // Track the correct action ID
+let quizMode = "emotion"; // 'emotion' or 'coping'
+let gameCount = 0;
 
 export function template() {
     const animoFolder = getAnimoFolder();
     const moveClass = getAnimoMovementClass(animoFolder);
     
-    // We shuffle randomizedTools during onShow, but initially we can just show them
-    const currentTools = randomizedTools.length > 0 ? randomizedTools : TOOLS;
-
-    const toolsHtml = currentTools.map(t => {
-        const isUsed = usedToolIds.has(t.id);
-        return `
-            <div class="mg-tool-wrap ${isUsed ? 'used' : ''}" data-id="${t.id}">
-                <img src="${t.icon}" alt="${t.label}" class="mg-tool-asset" draggable="false" />
-                <span>${t.label}</span>
-            </div>
-        `;
-    }).join('');
-
     return /* html */`
     <section id="screen-mood-battery" class="screen full-animo" aria-label="Animo Care"
-             style="background-image: url('assets/animo/${animoFolder}/bg.svg'); background-size: cover; background-position: center;">
+             style="background-image: url('/assets/animo/${animoFolder}/bg.svg'); background-size: cover; background-position: center;">
         <div id="mood-animo-screen" class="mg-container animo-mode ${moveClass}">
             <header class="mg-header">
                 <button id="btn-mg-back" class="btn-icon" aria-label="Exit">
                     <i data-lucide="log-out"></i>
                 </button>
                 <div class="mg-header-text">
-                    <h1>Nurture Player's Friend</h1>
-                    <p>Show love to help your friend grow big and strong!</p>
+                    <h1>Animo: The Emotional Explorer</h1>
+                    <p>Help your friend identify their feelings and find ways to cope!</p>
                 </div>
                 <div class="header-spacer"></div>
             </header>
+ 
+            <div class="mg-garden-stage quiz-layout">
+                <div class="mg-animal-column">
+                    <!-- Speech Bubble -->
+                    <div class="mg-speech-bubble" id="mg-speech-bubble">
+                        <p id="mg-line-text">${currentLine}</p>
+                    </div>
 
-            <div class="mg-garden-stage">
-                <!-- Action Feedback Bubble -->
-                <div id="mg-lesson-bubble" class="mg-lesson-bubble hidden">
-                    <p id="mg-lesson-text"></p>
-                </div>
-
-                <!-- The Animal Target (Centered) -->
-                <div id="mg-animo-target" class="mg-animo-target stage-1 ${moveClass}">
-                    <div id="mg-animo-wrap" class="mg-animo-wrap">
-                        <img id="mg-animo-asset" src="assets/animo/${animoFolder}/baby.svg" class="mg-animo-asset" alt="Your Friend">
-                        <div id="mg-runaway-msg" class="mg-runaway-msg hidden">
-                            <h3>Oh no! 😢</h3>
-                            <p>Your friend felt too sad and ran away home. Let's send a kind message to call them back!</p>
-                            <button class="btn-primary" id="btn-mg-recall">Call Friend Back</button>
+                    <div id="mg-animo-target" class="mg-animo-target stage-1 ${moveClass}">
+                        <div id="mg-animo-wrap" class="mg-animo-wrap">
+                            <img id="mg-animo-asset" src="/assets/animo/${animoFolder}/baby.svg" class="mg-animo-asset" alt="Your Friend">
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="mg-toolbox-scroll">
-                <div id="mg-tool-dock" class="mg-toolbox-dock">
-                    ${toolsHtml}
+ 
+                <div class="mg-quiz-column">
+                    <h2 id="quiz-question">How is your friend feeling?</h2>
+                    <div class="mg-emotion-grid" id="mg-quiz-options">
+                        <!-- Options injected here -->
+                    </div>
                 </div>
             </div>
-
-            <!-- Result Overlay -->
+ 
+            <!-- Result Overlay (Final Victory) -->
             <div id="mg-result-overlay" class="mg-overlay hidden">
                 <div class="mg-modal celebration-modal">
-                    <div class="mg-modal-icon">❤️</div>
-                    <h2>A Heart Full of Joy!</h2>
-                    <p>Thank you for nurturing me with so much love and kindness! <b>You've just learned how to love and care</b>, and that is the greatest success of all!</p>
-                    <button class="btn-primary" id="btn-mg-exit">Back to Map</button>
+                    <div class="mg-modal-icon">🏆</div>
+                    <h2>You're a True Friend!</h2>
+                    <p>You've helped your friend understand all their feelings. Watching them grow has been a wonderful journey! Keep being kind and listening with your heart.</p>
+                    <button class="btn-primary" id="btn-mg-exit">Return to Map</button>
                 </div>
             </div>
-
-
+ 
+            <!-- Feedback Modal -->
+             <div id="mg-feedback-overlay" class="mg-overlay hidden">
+                <div class="mg-modal feedback-modal">
+                    <div id="feedback-icon" class="fb-icon">😊</div>
+                    <h3 id="feedback-title">Great Job!</h3>
+                    <p id="feedback-desc"></p>
+                    <button class="btn-primary" id="btn-next-round">Next Step</button>
+                </div>
+            </div>
+ 
             <!-- Tutorial -->
             <div id="mg-tutorial" class="mg-overlay">
                 <div class="mg-modal tutorial-modal">
-                    <div class="tutorial-img"><img src="assets/animo/tools/hug.svg" width="60"></div>
-                    <h3>Your New Friend!</h3>
-                    <p>Drag <b>kind actions</b> to your friend to help them grow. Be careful, mean actions might scare them away!</p>
-                    <button class="btn-primary" id="btn-mg-start">Let's Play!</button>
+                    <div class="tutorial-img" id="mg-tutorial-img"></div>
+                    <h3>Understanding Our Feelings</h3>
+                    <p>Your friend is telling you how they feel. First, identify the emotion. Then, pick a coping way to help them grow!</p>
+                    <button class="btn-primary" id="btn-mg-start">Let's Help!</button>
                 </div>
             </div>
         </div>
@@ -136,326 +163,220 @@ export function init({ navigate }) {
     const exitBtn = document.getElementById('btn-mg-exit');
     const startBtn = document.getElementById('btn-mg-start');
     const backBtn = document.getElementById('btn-mg-back');
-    const animoTarget = document.getElementById('mg-animo-target');
+    const nextRoundBtn = document.getElementById('btn-next-round');
 
-    backBtn.addEventListener('click', () => {
-        navigate('emotionSelect');
-    });
+    backBtn.addEventListener('click', () => navigate('emotionSelect'));
     exitBtn.addEventListener('click', () => navigate('emotionSelect'));
     
     startBtn.addEventListener('click', () => {
         sounds.click();
         document.getElementById('mg-tutorial').classList.add('hidden');
+        startNewChallenge();
     });
 
-    function startDrag(e) {
-        if (hasRunAway || e.currentTarget.classList.contains('used')) return;
+    nextRoundBtn.addEventListener('click', () => {
+        sounds.click();
+        document.getElementById('mg-feedback-overlay').classList.add('hidden');
+        if (animoStage >= 4) {
+            document.getElementById('mg-result-overlay').classList.remove('hidden');
+            sounds.victory();
+        } else {
+            startNewChallenge();
+        }
+    });
+}
+
+function startNewChallenge() {
+    quizMode = "emotion";
+    const emotionsIds = Object.keys(EMOTION_LINES);
+    correctEmotionId = emotionsIds[Math.floor(Math.random() * emotionsIds.length)];
+    
+    // Pick a specific pair from EMOTIONS_DATA for this emotion
+    const pairs = EMOTIONS_DATA[correctEmotionId].pairs;
+    const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
+    
+    // Set the line to the emotion's description from the pair
+    currentLine = randomPair.emotion.desc || EMOTION_LINES[correctEmotionId][0];
+    currentCopingId = randomPair.action.id; // Correct coping action ID
+    
+    document.getElementById('mg-line-text').textContent = currentLine;
+    document.getElementById('mg-speech-bubble').classList.add('pop-in');
+    setTimeout(() => document.getElementById('mg-speech-bubble').classList.remove('pop-in'), 500);
+
+    renderChoices();
+}
+
+function renderChoices() {
+    const grid = document.getElementById('mg-quiz-options');
+    const question = document.getElementById('quiz-question');
+    grid.innerHTML = "";
+
+    if (quizMode === "emotion") {
+        question.textContent = "How is your friend feeling?";
+        const emotions = Object.values(EMOTIONS_DATA);
+        emotions.forEach(emo => {
+            const btn = document.createElement('button');
+            btn.className = "btn-emotion-choice";
+            btn.style.setProperty('--emo-color', emo.color);
+            btn.innerHTML = `
+                <div class="emo-choice-icon"><img src="${emo.icon}" alt=""></div>
+                <span>${emo.name}</span>
+            `;
+            btn.onclick = () => handleEmotionChoice(emo.id);
+            grid.appendChild(btn);
+        });
+    } else {
+        question.textContent = "What can help them feel better?";
+        const options = getCopingOptions(correctEmotionId);
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = "btn-emotion-choice";
+            btn.style.setProperty('--emo-color', EMOTIONS_DATA[correctEmotionId].color);
+            btn.innerHTML = `
+                <div class="emo-choice-icon"><img src="${opt.img}" alt=""></div>
+                <span>${opt.name}</span>
+            `;
+            btn.onclick = () => handleCopingChoice(opt.id);
+            grid.appendChild(btn);
+        });
+    }
+}
+
+function getCopingOptions(emotionId) {
+    const emotion = EMOTIONS_DATA[emotionId];
+    // Use the already-stored currentCopingId as the correct one
+    const correctPair = emotion.pairs.find(p => p.action.id === currentCopingId) || emotion.pairs[0];
+    const correctAction = correctPair.action;
+
+    // Others
+    const otherActions = [];
+    Object.keys(EMOTIONS_DATA).forEach(key => {
+        if (key !== emotionId) {
+            EMOTIONS_DATA[key].pairs.forEach(p => otherActions.push(p.action));
+        }
+    });
+
+    const shuffledOthers = otherActions.sort(() => 0.5 - Math.random()).slice(0, 3);
+    const final = [correctAction, ...shuffledOthers].sort(() => 0.5 - Math.random());
+    return final;
+}
+
+function handleEmotionChoice(chosenId) {
+    const overlay = document.getElementById('mg-feedback-overlay');
+    const title = document.getElementById('feedback-title');
+    const desc = document.getElementById('feedback-desc');
+    const icon = document.getElementById('feedback-icon');
+
+    if (chosenId === correctEmotionId) {
+        sounds.match();
+        quizMode = "coping";
+        renderChoices();
+        // No modal yet, just move to phase 2
+    } else {
+        animoStage = Math.max(1, animoStage - 1);
+        sounds.wrong();
         
-        const originalEl = e.currentTarget;
-        const iconEl = originalEl.querySelector('.mg-tool-asset');
-        const startX = e.clientX;
-        const startY = e.clientY;
-        let isDraggingInitiated = false;
-        let dragClone = null;
+        icon.textContent = "💡";
+        title.textContent = "Try Again!";
+        desc.textContent = `Almost! Your friend was actually feeling ${EMOTIONS_DATA[correctEmotionId].name}. They feel a bit smaller, but don't worry, you're learning!`;
+        overlay.classList.remove('hidden');
+        updateAnimoUI();
+    }
+}
 
-        function onInitialMove(moveEvent) {
-            const dist = Math.hypot(moveEvent.clientX - startX, moveEvent.clientY - startY);
-            if (!isDraggingInitiated && dist > 10) {
-                isDraggingInitiated = true;
-                
-                // Only clone the SVG icon, not the full card
-                dragClone = iconEl.cloneNode(true);
-                dragClone.classList.add('dragging-icon');
-                document.body.appendChild(dragClone);
-                
-                const rect = iconEl.getBoundingClientRect();
-                dragX = moveEvent.clientX - rect.left;
-                dragY = moveEvent.clientY - rect.top;
-                
-                dragClone.style.position = 'fixed';
-                dragClone.style.width = '70px'; // Make the icon a bit larger for dragging
-                dragClone.style.height = '70px';
-                dragClone.style.left = rect.left + 'px';
-                dragClone.style.top = rect.top + 'px';
-                dragClone.style.zIndex = "3000";
-                dragClone.style.pointerEvents = "none";
-                dragClone.style.filter = "drop-shadow(0 10px 20px rgba(0,0,0,0.2))";
-                
-                sounds.click();
-            }
-        }
+function handleCopingChoice(chosenId) {
+    const overlay = document.getElementById('mg-feedback-overlay');
+    const title = document.getElementById('feedback-title');
+    const desc = document.getElementById('feedback-desc');
+    const icon = document.getElementById('feedback-icon');
 
-        function onMove(moveEvent) {
-            if (isDraggingInitiated && dragClone) {
-                // Center the icon slightly better
-                dragClone.style.left = (moveEvent.clientX - 35) + 'px';
-                dragClone.style.top = (moveEvent.clientY - 35) + 'px';
-                dragClone.style.transform = `scale(1.3) rotate(${Math.sin(moveEvent.clientX * 0.01) * 5}deg)`;
-            }
-        }
-
-        function onUp(upEvent) {
-            document.removeEventListener('pointermove', onInitialMove);
-            document.removeEventListener('pointermove', onMove);
-            document.removeEventListener('pointerup', onUp);
-
-            if (isDraggingInitiated && dragClone) {
-                const toolId = originalEl.dataset.id;
-                const toolData = TOOLS.find(t => t.id === toolId);
-                
-                // HIGH PRECISION DROP DETECTION:
-                // We use elementFromPoint to see if the user dropped onto the animal area
-                // Since clone is pointer-events: none, it won't interfere.
-                const elementsAtPoint = document.elementsFromPoint(upEvent.clientX, upEvent.clientY);
-                const isHit = elementsAtPoint.some(el => 
-                    el.id === 'mg-animo-target' || 
-                    el.id === 'mg-animo-asset' || 
-                    el.closest('#mg-animo-target')
-                );
-                
-                if (isHit) {
-                    handleToolUsage(toolData);
-                }
-
-                dragClone.remove();
-                dragClone = null;
-            }
-        }
-
-        document.addEventListener('pointermove', onInitialMove);
-        document.addEventListener('pointermove', onMove);
-        document.addEventListener('pointerup', onUp);
+    if (chosenId === currentCopingId) {
+        animoStage = Math.min(4, animoStage + 1);
+        sounds.match();
+        sounds.shimmer();
+        
+        icon.textContent = "🌟";
+        title.textContent = "Perfect! They feel better!";
+        
+        // Find the action name for the text
+        const action = EMOTIONS_DATA[correctEmotionId].pairs.find(p => p.action.id === chosenId).action;
+        desc.textContent = `Yes! By choosing to '${action.name}', you've helped your friend manage their ${EMOTIONS_DATA[correctEmotionId].name}. Look how much they grew!`;
+        
+        triggerGrowthVFX();
+    } else {
+        animoStage = Math.max(1, animoStage - 1);
+        sounds.wrong();
+        
+        // Find correct action name for feedback
+        const correctAction = EMOTIONS_DATA[correctEmotionId].pairs.find(p => p.action.id === currentCopingId).action;
+        
+        icon.textContent = "🌊";
+        title.textContent = "Keep Practicing!";
+        desc.textContent = `That's a good way to help sometimes, but for ${EMOTIONS_DATA[correctEmotionId].name}, choosing to '${correctAction.name}' is what helps your friend grow. Let's try that next time!`;
     }
 
-    // Recall Logic
-    document.body.addEventListener('click', (e) => {
-        if (e.target.id === 'btn-mg-recall') {
-            sounds.match();
-            hasRunAway = false;
-            animoStage = 1;
-            updateAnimoUI();
-        }
-    });
+    overlay.classList.remove('hidden');
+    updateAnimoUI();
 }
 
 export function onShow() {
     animoStage = 1;
-    hasRunAway = false;
-    usedToolIds = new Set();
-    
-    // Mix the tools!
-    randomizedTools = [...TOOLS].sort(() => Math.random() - 0.5);
-    
-    // Start unique background noise for this avatar
-    
-    renderTools();
+    gameCount = 0;
+    quizMode = "emotion";
+    correctEmotionId = "";
+    currentLine = "";
+    currentCopingId = "";
+
     updateAnimoUI();
     document.getElementById('mg-result-overlay').classList.add('hidden');
+    document.getElementById('mg-feedback-overlay').classList.add('hidden');
     document.getElementById('mg-tutorial').classList.remove('hidden');
-    document.getElementById('mg-lesson-bubble').classList.add('hidden');
-}
-
-function renderTools() {
-    const dock = document.getElementById('mg-tool-dock');
-    if (!dock) return;
-    
-    dock.innerHTML = randomizedTools.map(t => {
-        const isUsed = usedToolIds.has(t.id);
-        return `
-            <div class="mg-tool-wrap ${isUsed ? 'used' : ''}" data-id="${t.id}">
-                <img src="${t.icon}" alt="${t.label}" class="mg-tool-asset" draggable="false" />
-                <span>${t.label}</span>
-            </div>
-        `;
-    }).join('');
-    
-    // Re-attach listeners to NEW elements
-    dock.querySelectorAll('.mg-tool-wrap').forEach(el => el.addEventListener('pointerdown', (e) => {
-        if (hasRunAway || e.currentTarget.classList.contains('used')) return;
-        
-        const originalEl = e.currentTarget;
-        const iconEl = originalEl.querySelector('.mg-tool-asset');
-        const startX = e.clientX;
-        const startY = e.clientY;
-        let isDraggingInitiated = false;
-        let dragClone = null;
-
-        function onInitialMove(moveEvent) {
-            const dist = Math.hypot(moveEvent.clientX - startX, moveEvent.clientY - startY);
-            if (!isDraggingInitiated && dist > 10) {
-                isDraggingInitiated = true;
-                
-                // Prevent scrolling while dragging
-                originalEl.setPointerCapture(moveEvent.pointerId);
-                
-                // Only clone the icon
-                dragClone = iconEl.cloneNode(true);
-                dragClone.className = 'dragging-icon'; // Use class instead of adding one
-                document.body.appendChild(dragClone);
-                
-                const rect = iconEl.getBoundingClientRect();
-                dragX = moveEvent.clientX - rect.left;
-                dragY = moveEvent.clientY - rect.top;
-                
-                dragClone.style.width = '80px';
-                dragClone.style.height = '80px';
-                dragClone.style.left = rect.left + 'px';
-                dragClone.style.top = rect.top + 'px';
-                
-                sounds.click();
-            }
-        }
-
-        function onMove(moveEvent) {
-            if (isDraggingInitiated && dragClone) {
-                // Ensure we get coordinates from pointer events
-                const cx = moveEvent.clientX;
-                const cy = moveEvent.clientY;
-                
-                dragClone.style.left = (cx - 40) + 'px';
-                dragClone.style.top = (cy - 40) + 'px';
-                dragClone.style.transform = `scale(1.5) rotate(${Math.sin(cx * 0.01) * 8}deg)`;
-            }
-        }
-
-        function onUp(upEvent) {
-            if (isDraggingInitiated) {
-                originalEl.releasePointerCapture(upEvent.pointerId);
-            }
-
-            document.removeEventListener('pointermove', onInitialMove);
-            document.removeEventListener('pointermove', onMove);
-            document.removeEventListener('pointerup', onUp);
-
-            if (isDraggingInitiated && dragClone) {
-                const toolId = originalEl.dataset.id;
-                const toolData = TOOLS.find(t => t.id === toolId);
-                
-                const cx = upEvent.clientX;
-                const cy = upEvent.clientY;
-                
-                // Check if we hit the target
-                const elementsAtPoint = document.elementsFromPoint(cx, cy);
-                const isHit = elementsAtPoint.some(el => 
-                    el.id === 'mg-animo-target' || 
-                    el.id === 'mg-animo-asset' || 
-                    el.id === 'mg-animo-wrap' ||
-                    el.closest('#mg-animo-target')
-                );
-
-                
-                if (isHit) {
-                    handleToolUsage(toolData);
-                }
-
-                dragClone.remove();
-                dragClone = null;
-            }
-        }
-
-        document.addEventListener('pointermove', onInitialMove);
-        document.addEventListener('pointermove', onMove);
-        document.addEventListener('pointerup', onUp);
-    }));
-}
-
-function handleToolUsage(tool) {
-    if (tool.type === 'good') {
-        const oldStage = animoStage;
-        animoStage = Math.min(4, animoStage + 1);
-        
-        sounds.match();
-        
-        if (animoStage > oldStage) {
-            sounds.shimmer();
-            triggerGrowthVFX();
-        } else {
-            sounds.shimmer();
-        }
-
-        showFeedback(tool.lesson, 'success');
-    } else {
-        animoStage--;
-        sounds.wrong();
-        showFeedback(tool.lesson, 'error');
-        
-        if (animoStage < 1) {
-            hasRunAway = true;
-            sounds.lose || sounds.wrong();
-        }
-    }
-
-    // Mark as used
-    usedToolIds.add(tool.id);
-    renderTools();
-    updateAnimoUI();
-    
-    if (animoStage === 4) {
-        setTimeout(() => {
-            document.getElementById('mg-result-overlay').classList.remove('hidden');
-            sounds.victory();
-        }, 1200);
-    }
-}
-
-function showFeedback(text, type) {
-    const bubble = document.getElementById('mg-lesson-bubble');
-    const textEl = document.getElementById('mg-lesson-text');
-    if (!bubble) return;
-    bubble.classList.remove('hidden', 'success', 'error', 'slide-out');
-    bubble.classList.add(type);
-    textEl.textContent = text;
-
-    setTimeout(() => {
-        bubble.classList.add('slide-out');
-        setTimeout(() => bubble.classList.add('hidden'), 500);
-    }, 3500);
 }
 
 function updateAnimoUI() {
     const animoFolder = getAnimoFolder();
     const asset = document.getElementById('mg-animo-asset');
-    const msg = document.getElementById('mg-runaway-msg');
     const target = document.getElementById('mg-animo-target');
-    const section = document.getElementById('screen-mood-battery');
+    const screen = document.getElementById('screen-mood-battery');
     const container = document.getElementById('mood-animo-screen');
-
-    if (section) {
-        section.style.backgroundImage = `url('assets/animo/${animoFolder}/bg.svg')`;
-        section.style.backgroundSize = 'cover';
-        section.style.backgroundPosition = 'center';
-    }
-    
-    if (container) {
-        // Reset and re-apply movement class while keeping base layout classes
-        container.className = `mg-container animo-mode ${getAnimoMovementClass(animoFolder)}`;
-    }
-
-    if (hasRunAway) {
-        asset.classList.add('hidden');
-        msg.classList.remove('hidden');
-        target.classList.add('runaway');
-        return;
-    }
-
-    asset.classList.remove('hidden');
-    msg.classList.add('hidden');
-    target.classList.remove('runaway');
 
     let stageName = 'baby';
     if (animoStage === 2) stageName = 'teen';
     if (animoStage >= 3) stageName = 'adult';
 
-    asset.src = `assets/animo/${animoFolder}/${stageName}.svg`;
-    target.className = `mg-animo-target stage-${animoStage}`;
-}
-function triggerGrowthVFX() {
-    const container = document.querySelector('.mg-container');
-    if (!container) return;
+    // 1. Force absolute paths for the character asset
+    if (asset) {
+        asset.src = `/assets/animo/${animoFolder}/${stageName}.svg`;
+    }
     
-    container.classList.add('mg-growth-flash');
-    setTimeout(() => container.classList.remove('mg-growth-flash'), 1000);
+    // 2. Update Stage & Movement on Target
+    if (target) {
+        const moveClass = getAnimoMovementClass(animoFolder);
+        target.className = `mg-animo-target stage-${animoStage} ${moveClass}`;
+    }
 
+    // 3. Force absolute paths for the screen background
+    if (screen) {
+        screen.style.backgroundImage = `url('/assets/animo/${animoFolder}/bg.svg')`;
+        screen.style.backgroundSize = 'cover';
+        screen.style.backgroundPosition = 'center';
+    }
+
+    // 4. Update container movement class
+    if (container) {
+        const moveClass = getAnimoMovementClass(animoFolder);
+        container.classList.remove('animo-fly', 'animo-hop', 'animo-sway');
+        container.classList.add(moveClass);
+    }
+
+    // 5. Update tutorial image
+    const tutImg = document.getElementById('mg-tutorial-img');
+    if (tutImg) {
+        tutImg.innerHTML = `<img src="/assets/animo/${animoFolder}/baby.svg" style="width: 80px; height: 80px;">`;
+    }
+}
+
+function triggerGrowthVFX() {
     const asset = document.getElementById('mg-animo-asset');
     if (asset) {
         asset.classList.add('mg-animating');

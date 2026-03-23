@@ -1,8 +1,0 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <!-- Extra Cute Hug Heart -->
-    <path d="M50 85 Q20 70 20 40 Q20 15 50 25 Q80 15 80 40 Q80 70 50 85 Z" fill="#FF80AB" />
-    <!-- Happy Face -->
-    <circle cx="43" cy="45" r="3" fill="white" />
-    <circle cx="57" cy="45" r="3" fill="white" />
-    <path d="M46 55 Q50 60 54 55" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" />
-</svg>

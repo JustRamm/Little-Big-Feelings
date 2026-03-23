@@ -1,5 +1,0 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <!-- Thunder Cloud (Scary Noise) -->
-    <path d="M25 60 Q25 40 40 40 Q40 25 60 25 Q80 25 80 45 Q95 45 95 65 Q95 85 70 85 L35 85 Q15 85 15 65 Z" fill="#78909C" />
-    <path d="M50 75 L40 95 L55 95 L45 115" fill="#FFD600" stroke="#FBC02D" stroke-width="2" transform="translate(0, -15)" />
-</svg>

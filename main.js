@@ -51,14 +51,25 @@ import * as MoodMixer from './screens/MoodMixer.js';
 import { 
     loadSettings, 
     loadUnlockedInsights, 
-    loadDiscoveredMixes 
+    loadDiscoveredMixes,
+    loadPlayer
 } from './utils/storage.js';
 import { applyAccessibilitySettings } from './utils/accessibility.js';
 import { state } from './gameState.js';
+import { ANIMO_MAP } from './gameData.js';
 
-// ── 0. Initial Settings Load ────────────────────────────────
+// ── 0. Initial Settings & Profile Load ────────────────────────
 const savedSettings = loadSettings();
 Object.assign(state, savedSettings);
+
+const player = loadPlayer();
+if (player) {
+    state.playerName = player.name;
+    state.playerAvatar = player.avatar;
+    const fname = player.avatar.split('/').pop();
+    state.animoId = ANIMO_MAP[fname] || 'dog';
+}
+
 state.unlockedInsights = loadUnlockedInsights();
 state.discoveredMixes = loadDiscoveredMixes();
 applyAccessibilitySettings(state);
@@ -81,17 +92,16 @@ SCREENS.forEach(s => app.insertAdjacentHTML('beforeend', s.mod.template()));
  * @param {string} key - must be a key in SCREEN_MAP
  */
 function navigate(key) {
-    if (state.currentScreen !== key) {
-        state.previousScreen = state.currentScreen;
-        state.currentScreen = key;
-    }
+    if (state.currentScreen === key) return;
+    
+    state.previousScreen = state.currentScreen;
+    state.currentScreen = key;
 
     const target = SCREENS.find(s => s.id === key);
     if (!target) return;
 
     // Deactivate all screens
     SCREENS.forEach(s => {
-        // Find the element by the ID defined in its template
         const templateId = s.mod.template().match(/id="([^"]+)"/)?.[1];
         if (templateId) {
             const el = document.getElementById(templateId);
@@ -129,15 +139,10 @@ function onMatchContinue() {
 
 // ── 5. Wire every screen ─────────────────────────────────────
 Splash.init({ navigate });
-
 NameEntry.init({ navigate });
-
 EmotionSelect.init({ navigate });
-
 LevelSelect.init({ navigate, startGame });
-
 Tutorial.init({ navigate, startGame });
-
 Game.init({
     navigate,
     onVictory: () => {
@@ -146,30 +151,17 @@ Game.init({
         navigate('victory');
     },
 });
-
 Settings.init({ navigate });
-
 Journal.init({ navigate });
-
 OverlayMatch.init({ onContinue: onMatchContinue });
-
 OverlayWrong.init();
-
 BreathingBuddy.init();
-
 Victory.init({ navigate, startGame });
-
 MoodAnimo.init({ navigate });
-
 CopingAlphabet.init({ navigate });
-
 MoodMixer.init({ navigate });
 
 // ── 6. Orientation Lock ─────────────────────────────────────────
-/**
- * Forces portrait mode on mobile devices if the Screen Orientation API is available.
- * Usually only works when the PWA is installed and running in standalone/fullscreen.
- */
 async function lockPortrait() {
     try {
         if (screen.orientation && screen.orientation.lock) {
@@ -179,17 +171,10 @@ async function lockPortrait() {
         console.error("Orientation lock error:", e);
     }
 }
-
-// Attempt lock on boot and when user interacts
 lockPortrait();
 window.addEventListener('click', lockPortrait, { once: true });
 
-// ── 7. Boot ───────────────────────────────────────────────────
-// ── 8. Global Visibility Handling ──────────────────────────────
-/**
- * Pauses background music when the app is minimized (mobile background)
- * or the user switches tabs. Resumes only if sound was previously enabled.
- */
+// ── 7. Global Visibility Handling ──────────────────────────────
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
         sounds.pauseBackgroundMusic();

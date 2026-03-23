@@ -20,8 +20,8 @@ export const state = {
 
     // ── Player profile ────────────────────────────────────────
     playerName: 'Player',
-    playerAvatar: 'assets/animo/puppy/baby.svg', // Default Animo Icon
-    animoId: 'puppy', // The chosen animal type
+    playerAvatar: 'assets/avatars/avatar_6.svg', // Default Animo (Dog)
+    animoId: 'dog', // The chosen animal type
 
     // ── App preferences ───────────────────────────────────────
     soundEnabled: true,

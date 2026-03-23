@@ -1,9 +1,0 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <!-- Playful Bouncy Ball -->
-    <circle cx="50" cy="50" r="40" fill="#4B0082" />
-    <path d="M50 10 Q20 50 50 90 Q80 50 50 10" fill="#6A5ACD" />
-    <circle cx="50" cy="50" r="10" fill="white" opacity="0.4" />
-    <!-- Happy Face -->
-    <circle cx="43" cy="45" r="3" fill="white" />
-    <circle cx="57" cy="45" r="3" fill="white" />
-</svg>

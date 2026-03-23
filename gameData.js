@@ -22,6 +22,13 @@ export const AVATARS = [
     'assets/avatars/avatar_12.svg',
 ];
 
+export const ANIMO_MAP = {
+    'avatar_1.svg': 'lion', 'avatar_2.svg': 'elephant', 'avatar_3.svg': 'penguin',
+    'avatar_4.svg': 'panda', 'avatar_5.svg': 'cat', 'avatar_6.svg': 'dog',
+    'avatar_7.svg': 'monkey', 'avatar_8.svg': 'rabbit', 'avatar_9.svg': 'frog',
+    'avatar_10.svg': 'owl', 'avatar_11.svg': 'bee', 'avatar_12.svg': 'butterfly'
+};
+
 /** 
  * Level configuration 
  */

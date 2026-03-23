@@ -189,7 +189,7 @@ export function onShow() {
     const nameEl = document.getElementById('settings-name');
 
     if (avatarEl) {
-        const avatar = player?.avatar || 'assets/animo/puppy/baby.svg';
+        const avatar = player?.avatar || 'assets/avatars/avatar_6.svg';
         avatarEl.innerHTML = `<img src="${avatar}" alt="" style="width: 100%; height: 100%;">`;
     }
     if (nameEl) nameEl.textContent = player?.name ?? 'Player';
@@ -266,7 +266,8 @@ export function init({ navigate }) {
         clearAll();
         resetScores();
         state.playerName = 'Player';
-        state.playerAvatar = 'assets/animo/puppy/baby.svg';
+        state.playerAvatar = 'assets/avatars/avatar_6.svg';
+        state.animoId = 'dog';
         sounds.setEnabled(true);
         navigate('nameEntry');
     });

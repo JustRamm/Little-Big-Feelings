@@ -4,7 +4,7 @@
 import { savePlayer, loadPlayer } from '../utils/storage.js';
 import { state } from '../gameState.js';
 import { sounds } from '../utils/sounds.js';
-import { AVATARS } from '../gameData.js';
+import { AVATARS, ANIMO_MAP } from '../gameData.js';
 
 export function template() {
     return /* html */`
@@ -90,7 +90,8 @@ export function onShow() {
  * @param {{ navigate: (screen: string) => void }} deps
  */
 export function init({ navigate }) {
-    let selectedAvatar = AVATARS[0];
+    const saved = loadPlayer();
+    let selectedAvatar = saved?.avatar || AVATARS[0];
 
     // Avatar selection
     document.getElementById('avatar-grid').addEventListener('click', e => {
@@ -122,10 +123,22 @@ export function init({ navigate }) {
         if (!name) return;
         sounds.click();
 
-        const player = { name, avatar: selectedAvatar };
+        // 1. Get current selection from UI
+        const selectedBtn = document.querySelector('.avatar-btn.selected');
+        const finalAvatar = selectedBtn ? selectedBtn.dataset.avatar : AVATARS[0];
+
+        // 2. Determine animal folder from mapping
+        const avatarFilename = finalAvatar.split('/').pop();
+        const animoId = ANIMO_MAP[avatarFilename] || 'dog';
+
+        // 3. Save to storage & global state
+        const player = { name, avatar: finalAvatar };
         savePlayer(player);
+
         state.playerName = name;
-        state.playerAvatar = selectedAvatar;
+        state.playerAvatar = finalAvatar;
+        state.animoId = animoId;
+
         navigate('emotionSelect');
     });
 
