@@ -3,12 +3,16 @@
 /* ============================================================ */
 
 .mood-mixer-container {
-    padding: 2.5rem 1.5rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
     height: 100%;
+    width: 100%;
+    background: url('/assets/feeling_fusion/fusion_bg.svg') center/cover no-repeat;
+    position: relative;
+    overflow-y: auto;
 }
 
 .mixer-header {
@@ -20,16 +24,20 @@
 }
 
 .mixer-card {
-    background: white;
-    border-radius: 30px;
-    padding: 1.8rem;
-    width: 100%;
-    max-width: 700px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    background: rgba(255, 255, 255, 0.75);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: 50px;
+    padding: 3rem;
+    width: 95%;
+    max-width: 1400px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.06), inset 0 0 0 4px white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2.5rem;
+    flex: 1;
+    border: 2px solid white;
 }
 
 /* Slot area */
@@ -59,70 +67,102 @@
     text-transform: capitalize;
 }
 
+.plus-symbol {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--pink);
+    filter: drop-shadow(0 0 10px rgba(255, 128, 171, 0.4));
+    animation: bouncePop 2s infinite ease-in-out;
+}
+
 .mixer-slot {
-    width: 100px;
-    height: 100px;
-    border: 4px dashed #E0E0E0;
+    width: 140px;
+    height: 140px;
+    border: 5px dashed rgba(0,0,0,0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #FAFAFA;
-    transition: all 0.3s var(--ease);
+    background: white;
+    transition: all 0.4s var(--spring);
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
 }
 
 .mixer-slot.occupied {
     background: white;
     border-style: solid;
-    border-color: var(--pink-light);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-width: 6px;
+    border-color: var(--emo-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transform: scale(1.05);
 }
 
 .mixer-slot img {
-    width: 70%;
-    height: 70%;
+    width: 80%;
+    height: 80%;
     object-fit: contain;
+    animation: floaty 3s ease-in-out infinite;
 }
 
-.plus-symbol {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--pink);
+@keyframes floaty {
+    0%, 100% { transform: translateY(0) scale(1.05) rotate(0); }
+    50% { transform: translateY(-8px) scale(0.95) rotate(-3deg); }
+}
+.mixer-choices-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-/* Choices area */
 .mixer-choices {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.2rem;
     width: 100%;
 }
 
 .choice-bubble {
-    width: 65px;
-    height: 65px;
+    width: 90px;
+    height: 90px;
     background: white;
     border-radius: 50%;
-    padding: 0.6rem;
-    border: 3px solid #F5F5F5;
+    padding: 0.9rem;
+    border: 4px solid #F5F5F5;
     cursor: pointer;
-    transition: all 0.3s var(--spring);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: all 0.4s var(--spring);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+    animation: idleDance 4s ease-in-out infinite;
+    animation-delay: calc(var(--delay, 0) * 0.2s);
+}
+
+@keyframes idleDance {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    25% { transform: translateY(-5px) rotate(2deg); }
+    75% { transform: translateY(5px) rotate(-2deg); }
 }
 
 .choice-bubble:hover {
-    transform: translateY(-5px) scale(1.1);
+    transform: translateY(-12px) scale(1.15);
     border-color: var(--pink);
+    box-shadow: 0 20px 40px rgba(255, 128, 171, 0.25);
+    z-index: 10;
 }
 
 .choice-bubble.selected {
     border-color: var(--pink);
     background: var(--pink-light);
-    transform: scale(0.9);
+    transform: scale(0.9) translateY(5px);
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.choice-bubble img { width: 100%; height: 100%; }
+.choice-bubble img { 
+    width: 100%; 
+    height: 100%; 
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
 
 /* Fusion Result Modal (Inline) */
 .fusion-overlay {
@@ -207,12 +247,12 @@
 
 .mixer-discovery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
-    gap: 0.8rem;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 1.2rem;
     width: 100%;
     max-height: none;
-    padding: 1rem;
-    border-radius: 20px;
+    padding: 2rem;
+    border-radius: 30px;
     background: #f9f9f9;
 }
 
@@ -254,4 +294,38 @@
     color: #CCC;
     width: 20px;
     height: 20px;
+}
+
+/* Victory Banner */
+.fusion-victory-banner {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.victory-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 40px;
+    text-align: center;
+    border: 8px solid var(--yellow);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+    animation: bouncePop 0.8s var(--spring) forwards;
+}
+
+.victory-content h2 {
+    font-size: 3rem;
+    color: var(--pink-dark);
+    margin-bottom: 0.5rem;
+}
+
+.victory-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
 }

@@ -13,8 +13,8 @@ let selectedSlot2 = null;
 export function template() {
     const basicEmotions = Object.values(EMOTIONS_DATA);
     
-    const choiceBubbles = basicEmotions.map(emo => `
-        <button class="choice-bubble" data-emotion="${emo.id}" title="${emo.name}" type="button">
+    const choiceBubbles = basicEmotions.map((emo, index) => `
+        <button class="choice-bubble" data-emotion="${emo.id}" title="${emo.name}" type="button" style="--delay: ${index}">
             <img src="${emo.icon}" alt="${emo.name}">
         </button>
     `).join('');
@@ -36,37 +36,43 @@ export function template() {
                 <div class="mixer-slots">
                     <div class="slot-container">
                         <div id="mixer-slot-1" class="mixer-slot">
-                            <i data-lucide="plus" style="opacity: 0.2;"></i>
+                            <i data-lucide="sparkles" style="opacity: 0.3; color: var(--pink);"></i>
                         </div>
-                        <div id="slot-name-1" class="slot-label">???</div>
+                        <div id="slot-name-1" class="slot-label">First Feeling</div>
                     </div>
 
-                    <span class="plus-symbol">+</span>
+                    <span class="plus-symbol">✨</span>
 
                     <div class="slot-container">
                         <div id="mixer-slot-2" class="mixer-slot">
-                            <i data-lucide="plus" style="opacity: 0.2;"></i>
+                            <i data-lucide="sparkles" style="opacity: 0.3; color: var(--blue);"></i>
                         </div>
-                        <div id="slot-name-2" class="slot-label">???</div>
+                        <div id="slot-name-2" class="slot-label">Second Feeling</div>
                     </div>
                 </div>
 
                 <div id="mixer-controls">
-                    <button id="btn-do-fusion" class="btn-primary disabled" disabled>Mix Them Up!</button>
+                    <button id="btn-do-fusion" class="btn-primary disabled" disabled>
+                        <i data-lucide="wand-2" style="margin-right: 10px;"></i>
+                        Let's Mix!
+                    </button>
                 </div>
 
                 <div class="journal-divider"></div>
 
-                <div class="mixer-choices">
-                    ${choiceBubbles}
+                <div class="mixer-choices-wrap">
+                    <p class="premium-subtitle" style="margin-bottom: 1rem; color: var(--pink-dark);">Tap Two Feelings!</p>
+                    <div class="mixer-choices">
+                        ${choiceBubbles}
+                    </div>
                 </div>
 
                 <div class="journal-divider"></div>
 
                 <div class="mixer-discovery-section">
-                    <h4 class="discovery-title">Your Fusion Discoveries</h4>
+                    <h4 class="discovery-title">✨ Your Magic Discoveries ✨</h4>
                     <div id="mixer-discovery-grid" class="mixer-discovery-grid">
-                        <!-- Discovered emotions will appear here as slots -->
+                        <!-- Discovered emotions slots -->
                     </div>
                 </div>
             </div>
@@ -142,49 +148,64 @@ function renderDiscoveryGrid() {
     const grid = document.getElementById('mixer-discovery-grid');
     if (!grid) return;
 
-    // Filter for UNIQUE discovered emotions only, so we don't have duplicate slots for different recipes
-    const uniqueEmotions = [];
-    const seenIds = new Set();
-    MIXING_RECIPES.forEach(r => {
-        if (!seenIds.has(r.result.id)) {
-            seenIds.add(r.result.id);
-            uniqueEmotions.push(r.result);
-        }
-    });
-
-    // Show all possible unique emotions as slots
-    grid.innerHTML = uniqueEmotions.map(emo => {
-        // Robust check: handle if state.discoveredMixes has objects or IDs
-        const isUnlocked = state.discoveredMixes.some(m => (m === emo.id) || (m && m.id === emo.id));
-        
-        if (isUnlocked) {
-            return `
-                <div class="discovery-slot unlocked" data-recipe-id="${emo.id}" title="${emo.name}" style="--slot-color: ${emo.color}">
-                    <img src="${emo.icon}" alt="${emo.name}" class="discovery-icon">
-                </div>
-            `;
+    // We only show 4 slots total now
+    const totalSlots = 4;
+    
+    // Get the discovered emotions (limit to first 4 or unique ones)
+    const discoveryIds = state.discoveredMixes.slice(0, totalSlots);
+    
+    let html = '';
+    for (let i = 0; i < totalSlots; i++) {
+        const dishId = discoveryIds[i];
+        if (dishId) {
+            // Find the emotion data for this result ID
+            const resultData = MIXING_RECIPES.find(r => r.result.id === dishId)?.result;
+            if (resultData) {
+                html += `
+                    <div class="discovery-slot unlocked" data-recipe-id="${resultData.id}" title="${resultData.name}" style="--slot-color: ${resultData.color}">
+                        <img src="${resultData.icon}" alt="${resultData.name}" class="discovery-icon">
+                    </div>
+                `;
+            }
         } else {
-            return `
-                <div class="discovery-slot locked" title="Combined two feelings to find this!">
+            html += `
+                <div class="discovery-slot locked" title="Discovery more to fill this slot!">
                     <i data-lucide="help-circle"></i>
                 </div>
             `;
         }
-    }).join('');
+    }
 
+    grid.innerHTML = html;
     if (window.lucide) window.lucide.createIcons();
 
     // Add click listeners to UNLOCKED slots to show details
-    const unlockedSlots = grid.querySelectorAll('.discovery-slot.unlocked');
-    unlockedSlots.forEach((slot) => {
+    grid.querySelectorAll('.discovery-slot.unlocked').forEach((slot) => {
         slot.addEventListener('click', () => {
             const recipeId = slot.dataset.recipeId;
-            const originalRecipe = MIXING_RECIPES.find(r => r.result.id === recipeId);
-            if (originalRecipe) {
-                showFusionResult(originalRecipe.result);
-            }
+            const res = MIXING_RECIPES.find(r => r.result.id === recipeId)?.result;
+            if (res) showFusionResult(res);
         });
     });
+
+    // WIN CONDITION: If we have 4 or more, tell them they won!
+    if (state.discoveredMixes.length >= 4) {
+        setTimeout(() => {
+            if (!document.querySelector('.fusion-victory-banner')) {
+                const banner = document.createElement('div');
+                banner.className = 'fusion-victory-banner';
+                banner.innerHTML = `
+                    <div class="victory-content">
+                        <h2>You Found 4 Feelings!</h2>
+                        <p>You're a master of the Fusion Lab!</p>
+                        <button class="btn-primary" onclick="this.parentElement.parentElement.remove()">Keep Mixing!</button>
+                    </div>
+                `;
+                document.body.appendChild(banner);
+                sounds.cheer();
+            }
+        }, 800);
+    }
 }
 
 function showFusionResult(result) {
@@ -232,20 +253,31 @@ function clearMixer() {
     selectedSlot1 = null;
     selectedSlot2 = null;
     
-    [1, 2].forEach(num => {
-        const slot = document.getElementById(`mixer-slot-${num}`);
-        const label = document.getElementById(`slot-name-${num}`);
-        if (slot) {
-            slot.innerHTML = `<i data-lucide="plus" style="opacity: 0.2;"></i>`;
-            slot.classList.remove('occupied');
-            slot.style.borderColor = '';
-            slot.style.backgroundColor = '';
-        }
-        if (label) {
-            label.textContent = '???';
-            label.style.color = '#9E9E9E';
-        }
-    });
+    const slot1 = document.getElementById('mixer-slot-1');
+    const label1 = document.getElementById('slot-name-1');
+    if (slot1) {
+        slot1.innerHTML = `<i data-lucide="sparkles" style="opacity: 0.3; color: var(--pink);"></i>`;
+        slot1.classList.remove('occupied');
+        slot1.style.borderColor = '';
+        slot1.style.backgroundColor = '';
+    }
+    if (label1) {
+        label1.textContent = 'First Feeling';
+        label1.style.color = '#9E9E9E';
+    }
+
+    const slot2 = document.getElementById('mixer-slot-2');
+    const label2 = document.getElementById('slot-name-2');
+    if (slot2) {
+        slot2.innerHTML = `<i data-lucide="sparkles" style="opacity: 0.3; color: var(--blue);"></i>`;
+        slot2.classList.remove('occupied');
+        slot2.style.borderColor = '';
+        slot2.style.backgroundColor = '';
+    }
+    if (label2) {
+        label2.textContent = 'Second Feeling';
+        label2.style.color = '#9E9E9E';
+    }
 
     document.querySelectorAll('.choice-bubble').forEach(b => b.classList.remove('selected'));
 
