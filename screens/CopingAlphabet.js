@@ -15,8 +15,8 @@ export function template() {
     <section id="screen-alphabet-game" class="screen az-screen-fixed" aria-label="Alphabet Coping Game">
         <div class="az-container">
             <header class="az-header">
-                <button id="btn-az-back" class="btn-icon" aria-label="Back">
-                    <i data-lucide="arrow-left"></i>
+                <button id="btn-az-back" class="btn-icon" aria-label="Exit">
+                    <i data-lucide="log-out"></i>
                 </button>
                 <div class="az-time-badge">
                     <span id="az-timer-text">60s</span>

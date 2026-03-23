@@ -23,8 +23,8 @@ export function template() {
     <section id="screen-mood-mixer" class="screen" aria-label="Feeling Fusion Lab">
         <div class="mood-mixer-container">
             <header class="mixer-header">
-                <button id="btn-mixer-back" class="btn-icon circle-btn" aria-label="Back" type="button">
-                    <i data-lucide="arrow-left"></i>
+                <button id="btn-mixer-back" class="btn-icon circle-btn" aria-label="Exit" type="button">
+                    <i data-lucide="log-out"></i>
                 </button>
                 <div class="journal-title-wrap">
                     <h2 class="premium-title">Feeling Fusion Lab</h2>
@@ -53,13 +53,21 @@ export function template() {
 
                 <div id="mixer-controls">
                     <button id="btn-do-fusion" class="btn-primary disabled" disabled>Mix Them Up!</button>
-                    <button id="btn-clear-mixer" class="btn-secondary" style="margin-top: 0.5rem;">Start Over</button>
                 </div>
 
                 <div class="journal-divider"></div>
 
                 <div class="mixer-choices">
                     ${choiceBubbles}
+                </div>
+
+                <div class="journal-divider"></div>
+
+                <div class="mixer-discovery-section">
+                    <h4 class="discovery-title">Your Fusion Discoveries</h4>
+                    <div id="mixer-discovery-grid" class="mixer-discovery-grid">
+                        <!-- Discovered emotions will appear here as slots -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,6 +86,7 @@ export function template() {
 
 export function onShow() {
     clearMixer();
+    renderDiscoveryGrid();
 }
 
 /**
@@ -119,16 +128,77 @@ export function init({ navigate }) {
         performFusion();
     });
 
-    document.getElementById('btn-clear-mixer').addEventListener('click', () => {
-        sounds.click();
-        clearMixer();
-    });
+
 
     document.getElementById('btn-close-fusion').addEventListener('click', () => {
         sounds.click();
         document.getElementById('fusion-overlay').classList.remove('active');
         clearMixer();
+        renderDiscoveryGrid(); // Update gallery after discovery
     });
+}
+
+function renderDiscoveryGrid() {
+    const grid = document.getElementById('mixer-discovery-grid');
+    if (!grid) return;
+
+    // Filter for UNIQUE discovered emotions only, so we don't have duplicate slots for different recipes
+    const uniqueEmotions = [];
+    const seenIds = new Set();
+    MIXING_RECIPES.forEach(r => {
+        if (!seenIds.has(r.result.id)) {
+            seenIds.add(r.result.id);
+            uniqueEmotions.push(r.result);
+        }
+    });
+
+    // Show all possible unique emotions as slots
+    grid.innerHTML = uniqueEmotions.map(emo => {
+        // Robust check: handle if state.discoveredMixes has objects or IDs
+        const isUnlocked = state.discoveredMixes.some(m => (m === emo.id) || (m && m.id === emo.id));
+        
+        if (isUnlocked) {
+            return `
+                <div class="discovery-slot unlocked" data-recipe-id="${emo.id}" title="${emo.name}" style="--slot-color: ${emo.color}">
+                    <img src="${emo.icon}" alt="${emo.name}" class="discovery-icon">
+                </div>
+            `;
+        } else {
+            return `
+                <div class="discovery-slot locked" title="Combined two feelings to find this!">
+                    <i data-lucide="help-circle"></i>
+                </div>
+            `;
+        }
+    }).join('');
+
+    if (window.lucide) window.lucide.createIcons();
+
+    // Add click listeners to UNLOCKED slots to show details
+    const unlockedSlots = grid.querySelectorAll('.discovery-slot.unlocked');
+    unlockedSlots.forEach((slot) => {
+        slot.addEventListener('click', () => {
+            const recipeId = slot.dataset.recipeId;
+            const originalRecipe = MIXING_RECIPES.find(r => r.result.id === recipeId);
+            if (originalRecipe) {
+                showFusionResult(originalRecipe.result);
+            }
+        });
+    });
+}
+
+function showFusionResult(result) {
+    const overlay = document.getElementById('fusion-overlay');
+    const resultImg = document.getElementById('fusion-new-character');
+    const resultName = document.getElementById('fusion-result-name');
+    const resultDesc = document.getElementById('fusion-result-desc');
+
+    resultImg.innerHTML = `<img src="${result.icon}" style="width: 100%; height: 100%;" />`;
+    resultName.textContent = result.name;
+    resultName.style.color = result.color;
+    resultDesc.textContent = result.description;
+
+    overlay.classList.add('active');
 }
 
 function updateSlotUI(slotNum, data) {
@@ -196,24 +266,30 @@ function performFusion() {
 
     if (recipe) {
         // We found a valid mixture!
-        resultImg.innerHTML = `<img src="${recipe.result.icon}" style="width: 100%; height: 100%;" />`;
-        resultName.textContent = recipe.result.name;
-        resultName.style.color = recipe.result.color;
-        resultDesc.textContent = recipe.result.description;
+        showFusionResult(recipe.result);
 
         // Save discovery if new
-        if (!state.discoveredMixes.includes(recipe.result.id)) {
+        if (!state.discoveredMixes.some(m => (m === recipe.result.id) || (m && m.id === recipe.result.id))) {
             state.discoveredMixes.push(recipe.result.id);
             saveDiscoveredMixes(state.discoveredMixes);
+            // Instant update to have it ready behind the overlay
+            renderDiscoveryGrid(); 
         }
     } else {
         // Unknown mixture - default "curious" result
+        const mysteryResult = {
+            icon: '', // handled below
+            name: "Mystery Mix!",
+            description: "We haven't discovered this mix yet! It's a brand new unique feeling of your own.",
+            color: '#9E9E9E'
+        };
+        
         resultImg.innerHTML = `<i data-lucide="help-circle" style="width: 100%; height: 100%; color: #9E9E9E;"></i>`;
-        resultName.textContent = "Mystery Mix!";
-        resultDesc.textContent = "We haven't discovered this mix yet! It's a brand new unique feeling of your own.";
-        resultName.style.color = '#9E9E9E';
+        resultName.textContent = mysteryResult.name;
+        resultDesc.textContent = mysteryResult.description;
+        resultName.style.color = mysteryResult.color;
+        
         if (window.lucide) window.lucide.createIcons();
+        overlay.classList.add('active');
     }
-
-    overlay.classList.add('active');
 }

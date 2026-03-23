@@ -4,13 +4,15 @@
     background: radial-gradient(circle at 50% 50%, #FFF9E6 0%, #FFF0F5 50%, #F0F4FF 100%);
     position: relative;
     transition: background 1s ease;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
 }
 
 .splash-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(1rem, 4vh, 2rem);
+    gap: clamp(0.5rem, 2.5vh, 1.2rem);
     position: relative;
     z-index: 10;
     max-width: 600px;
@@ -118,13 +120,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .logo-burst {
     position: absolute;
-    width: clamp(300px, 80vw, 500px);
-    height: clamp(300px, 80vw, 500px);
+    width: clamp(250px, 70vw, 400px);
+    height: clamp(250px, 70vw, 400px);
     background: radial-gradient(circle, 
         rgba(255, 128, 171, 0.4) 0%, 
         rgba(129, 212, 250, 0.3) 40%, 
@@ -146,7 +148,7 @@
 }
 
 .game-logo {
-    width: clamp(250px, 60vw, 420px);
+    width: clamp(200px, 45vw, 360px);
     filter: drop-shadow(0 20px 40px rgba(186, 104, 200, 0.4));
     animation: bounce-float 4s var(--spring) infinite;
     transition: transform 0.3s var(--spring);
@@ -165,7 +167,7 @@
 }
 
 .game-title {
-    font-size: clamp(4.5rem, 10vw, 7.5rem);
+    font-size: clamp(3.5rem, 8vw, 6rem);
     font-weight: 800;
     line-height: 0.85;
     color: var(--pink);
@@ -236,7 +238,7 @@
 
 /* Footer Credit */
 .splash-footer {
-    margin-top: 1.5rem;
+    margin-top: 0.8rem;
     display: flex;
     flex-direction: column;
     align-items: center;

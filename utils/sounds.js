@@ -85,8 +85,24 @@ export const sounds = {
             _musicAudio.currentTime = 0;
         }
         _musicStarted = false;
-        // Also stop any synth loops if implemented
     },
+
+    pauseBackgroundMusic() {
+        if (_musicAudio && !this.isPaused) {
+            _musicAudio.pause();
+            this.isPaused = true;
+        }
+    },
+
+    resumeBackgroundMusic() {
+        if (_musicAudio && this.isPaused && _enabled) {
+            _musicAudio.play().catch(() => {});
+            this.isPaused = false;
+        }
+    },
+
+    isPaused: false,
+
 
     /** A gentle, airy synthesized background loop (as fallback) */
     _startSynthBGM() {
@@ -228,131 +244,4 @@ export const sounds = {
         osc.stop(t + 0.1);
     },
 
-    /** Ambiance state tracking */
-    _ambianceLoop: null,
-    _ambianceType: null,
-
-    stopAnimalAmbiance() {
-        if (this._ambianceLoop) {
-            clearTimeout(this._ambianceLoop);
-            this._ambianceLoop = null;
-        }
-        this._ambianceType = null;
-    },
-
-    startAnimalAmbiance(type) {
-        this.stopAnimalAmbiance();
-        this._ambianceType = type;
-        
-        const loop = () => {
-            if (this._ambianceType !== type || !_enabled) return;
-            
-            // Lower volume for ambiance
-            const volMod = (type === 'bee') ? 0.03 : 0.08;
-            this.animal(type, volMod);
-            
-            // Beekeepers love constant buzz; lions roar occasionally
-            const delay = (type === 'bee') ? 400 : 5000 + (Math.random() * 3000);
-            this._ambianceLoop = setTimeout(loop, delay);
-        };
-        
-        loop();
-    },
-
-    /** Synthesized Animal Sounds Engine (v1) — No TTS, just raw code textures */
-    animal(type, ambianceVol = null) {
-        if (!_enabled) return;
-        const ac = getCtx();
-        const t = ac.currentTime;
-
-        const p = (f, ty, dur, vol, del = 0, glide = 0) => {
-            const finalVol = ambianceVol || vol;
-            const o = ac.createOscillator();
-            const g = ac.createGain();
-            o.connect(g); g.connect(ac.destination);
-            o.type = ty;
-            o.frequency.setValueAtTime(f, t + del);
-            if (glide) o.frequency.exponentialRampToValueAtTime(f + glide, t + del + dur);
-            g.gain.setValueAtTime(finalVol, t + del);
-            g.gain.exponentialRampToValueAtTime(0.0001, t + del + dur);
-            o.start(t + del); o.stop(t + del + dur + 0.05);
-        };
-
-        switch (type) {
-            case 'lion':
-                // Complex low-freq rumble with noise-like sawtooth
-                for (let i = 0; i < 5; i++) {
-                    p(85 - (i * 10), 'sawtooth', 0.8, 0.18, i * 0.05, -30);
-                    p(95 - (i * 8), 'triangle', 1.0, 0.1, i * 0.08, -20);
-                }
-                break;
-            case 'elephant':
-                // Brassy, raspy trumpet
-                for (let i = 0; i < 3; i++) {
-                    p(440 + (i * 5), 'sawtooth', 0.5, 0.14, i * 0.02, 300);
-                    p(880 - (i * 5), 'sine', 0.4, 0.08, i * 0.03, -150);
-                }
-                break;
-            case 'penguin':
-                // Nasal, rapid honking
-                for (let i = 0; i < 3; i++) {
-                    p(380, 'triangle', 0.12, 0.18, i * 0.18, 50);
-                }
-                break;
-            case 'panda':
-                // High-pitched "chirp-like" squeak
-                p(1200, 'sine', 0.15, 0.1, 0, 400);
-                p(1400, 'sine', 0.1, 0.08, 0.08, 200);
-                break;
-            case 'cat':
-                // Multi-stage meow (rising then falling)
-                p(523, 'sine', 0.4, 0.15, 0, 150);
-                p(659, 'sine', 0.3, 0.12, 0.25, -200);
-                break;
-            case 'dog':
-                // Powerful broad-spectrum bark
-                p(180, 'sawtooth', 0.1, 0.2, 0, -20);
-                p(320, 'square', 0.08, 0.12, 0.02, -50);
-                p(160, 'triangle', 0.15, 0.15, 0.05);
-                break;
-            case 'monkey':
-                // Bouncy hooting loop
-                for (let i = 0; i < 6; i++) {
-                    p(550 + (i % 2 ? 150 : 0), 'sine', 0.08, 0.14, i * 0.12, 80);
-                }
-                break;
-            case 'rabbit':
-                // Fast, soft sniffling (tiny noise blips)
-                for (let i = 0; i < 4; i++) {
-                    p(1500, 'sine', 0.03, 0.08, i * 0.08);
-                }
-                break;
-            case 'frog':
-                // Deep resonant ribbit
-                for (let i = 0; i < 12; i++) {
-                    p(110 + (i * 4), 'sawtooth', 0.015, 0.12, i * 0.025);
-                }
-                break;
-            case 'owl':
-                // Resonant hoot-hoot
-                p(330, 'sine', 0.4, 0.18, 0, -40);
-                p(290, 'sine', 0.5, 0.15, 0.5, -30);
-                break;
-            case 'bee':
-                // Constant high-freq oscillation
-                for (let i = 0; i < 20; i++) {
-                    p(280 + Math.random() * 60, 'sawtooth', 0.012, 0.1, i * 0.008);
-                }
-                break;
-            case 'butterfly':
-                // Extremely soft, shimmering flutters
-                for (let i = 0; i < 10; i++) {
-                    tone({ freq: 2200 + (Math.random() * 500), type: 'sine', dur: 0.1, vol: 0.04, delay: i * 0.06 });
-                }
-                break;
-            default:
-                this.match();
-        }
-
-    }
 };

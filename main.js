@@ -11,6 +11,7 @@
 
 import { registerSW } from 'virtual:pwa-register';
 import * as Splash from './screens/Splash.js';
+import { sounds } from './utils/sounds.js';
 
 // Register the PWA service worker with auto-update
 registerSW({ immediate: true });
@@ -193,4 +194,17 @@ lockPortrait();
 window.addEventListener('click', lockPortrait, { once: true });
 
 // ── 7. Boot ───────────────────────────────────────────────────
+// ── 8. Global Visibility Handling ──────────────────────────────
+/**
+ * Pauses background music when the app is minimized (mobile background)
+ * or the user switches tabs. Resumes only if sound was previously enabled.
+ */
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+        sounds.pauseBackgroundMusic();
+    } else {
+        sounds.resumeBackgroundMusic();
+    }
+});
+
 navigate('splash');

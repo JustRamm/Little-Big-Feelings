@@ -73,8 +73,8 @@ export function template() {
              style="background-image: url('assets/animo/${animoFolder}/bg.svg'); background-size: cover; background-position: center;">
         <div id="mood-animo-screen" class="mg-container animo-mode ${moveClass}">
             <header class="mg-header">
-                <button id="btn-mg-back" class="btn-icon" aria-label="Back">
-                    <i data-lucide="arrow-left"></i>
+                <button id="btn-mg-back" class="btn-icon" aria-label="Exit">
+                    <i data-lucide="log-out"></i>
                 </button>
                 <div class="mg-header-text">
                     <h1>Nurture Player's Friend</h1>
@@ -139,7 +139,6 @@ export function init({ navigate }) {
     const animoTarget = document.getElementById('mg-animo-target');
 
     backBtn.addEventListener('click', () => {
-        sounds.stopAnimalAmbiance();
         navigate('emotionSelect');
     });
     exitBtn.addEventListener('click', () => navigate('emotionSelect'));
@@ -248,7 +247,6 @@ export function onShow() {
     randomizedTools = [...TOOLS].sort(() => Math.random() - 0.5);
     
     // Start unique background noise for this avatar
-    sounds.startAnimalAmbiance(getAnimoFolder());
     
     renderTools();
     updateAnimoUI();
@@ -375,7 +373,6 @@ function handleToolUsage(tool) {
             sounds.shimmer();
         }
 
-        sounds.animal(getAnimoFolder());
         showFeedback(tool.lesson, 'success');
     } else {
         animoStage--;
