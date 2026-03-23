@@ -36,7 +36,7 @@ export function template() {
 let autoDismissTimer = null;
 
 export function show({ d1, d2 }) {
-    sounds.cheer();
+    sounds.congratulate();
 
     // Motivational phrases for correct matches
     const motivations = [

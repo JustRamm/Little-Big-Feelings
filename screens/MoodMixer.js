@@ -109,6 +109,21 @@ export function template() {
                 <button id="btn-close-fusion" class="btn-primary">That's amazing!</button>
             </div>
         </div>
+
+        <!-- Victory Overlay -->
+        <div id="mixer-victory-overlay" class="fusion-overlay" style="display: none; z-index: 2000;">
+            <div class="fusion-content">
+                <div class="victory-icon-wrap" style="margin-bottom: 1rem;">
+                    <i data-lucide="award" style="width: 80px; height: 80px; color: #FFF176;"></i>
+                </div>
+                <h2 class="premium-title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Lab Master!</h2>
+                <p class="premium-subtitle" style="color: #607D8B; font-weight: 800; margin-bottom: 2rem;">You have discovered 4 unique feelings today!</p>
+                <div class="victory-actions" style="display: flex; gap: 1rem; width: 100%;">
+                    <button id="btn-mixer-replay" class="btn-primary" style="flex: 1;">REPLAY</button>
+                    <button id="btn-mixer-exit" class="btn-secondary" style="flex: 1;">EXIT</button>
+                </div>
+            </div>
+        </div>
     </section>`;
 }
 
@@ -130,6 +145,18 @@ export function init({ navigate }) {
     document.getElementById('btn-mixer-settings').addEventListener('click', () => {
         sounds.click();
         navigate('settings');
+    });
+
+    document.getElementById('btn-mixer-replay').addEventListener('click', () => {
+        sounds.click();
+        document.getElementById('mixer-victory-overlay').style.display = 'none';
+        onShow(); // Full reset
+    });
+
+    document.getElementById('btn-mixer-exit').addEventListener('click', () => {
+        sounds.click();
+        document.getElementById('mixer-victory-overlay').style.display = 'none';
+        navigate('emotionSelect');
     });
 
     const choices = document.querySelectorAll('.choice-bubble');
@@ -182,6 +209,17 @@ export function init({ navigate }) {
         document.getElementById('fusion-overlay').classList.remove('active');
         clearMixer();
         renderDiscoveryGrid(); // Update gallery after discovery
+
+        // After closing discovery, check if game is complete (4 slots filled)
+        if (state.discoveredMixes && state.discoveredMixes.length >= 4) {
+            setTimeout(() => {
+                const victoryOverlay = document.getElementById('mixer-victory-overlay');
+                if (victoryOverlay) {
+                    victoryOverlay.style.display = 'flex';
+                    sounds.victory();
+                }
+            }, 600);
+        }
     });
 }
 

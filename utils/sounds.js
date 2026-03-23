@@ -260,4 +260,18 @@ export const sounds = {
         osc.stop(t + 0.1);
     },
 
+    /** Bright, congratulatory 'Ta-da!' arpeggio with applause */
+    congratulate() {
+        if (!_enabled) return;
+        const ac = getCtx();
+        // Ascending major arpeggio
+        [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((f, i) => {
+            tone({ freq: f, type: 'sine', dur: 0.5, vol: 0.14, delay: i * 0.08 });
+        });
+        
+        // Overlay claps
+        for (let j = 0; j < 8; j++) {
+            this.clap(ac.currentTime + 0.3 + Math.random() * 0.5);
+        }
+    }
 };

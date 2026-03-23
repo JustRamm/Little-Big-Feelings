@@ -38,5 +38,6 @@ export const MIXING_RECIPES = [
     { e1: 'sadness', e2: 'anticipation', result: { id: 'pessimism', name: 'Pessimism', description: 'Waiting for things that you think might be sad.', icon: 'assets/feeling_fusion/pessimism.svg', color: '#B0BEC5' } },
     { e1: 'anger', e2: 'disgust', result: { id: 'contempt_2', name: 'Yucky Anger', description: 'Feeling angry at something very gross.', icon: 'assets/feeling_fusion/contempt_2.svg', color: '#827717' } },
     { e1: 'surprise', e2: 'trust', result: { id: 'trusting_surprise', name: 'A Maze', description: 'Finding something new and exciting with someone you trust.', icon: 'assets/feeling_fusion/maze.svg', color: '#4DB6AC' } },
-    { e1: 'joy', e2: 'sadness', result: { id: 'bittersweet', name: 'Bittersweet', description: 'Being happy and sad at the same time. Like growing up!', icon: 'assets/feeling_fusion/bittersweet.svg', color: '#CE93D8' } }
+    { e1: 'joy', e2: 'sadness', result: { id: 'bittersweet', name: 'Bittersweet', description: 'Being happy and sad at the same time. Like growing up!', icon: 'assets/feeling_fusion/bittersweet.svg', color: '#CE93D8' } },
+    { e1: 'anger', e2: 'fear', result: { id: 'panic', name: 'Panic', description: 'When everything feels like it\'s moving too fast and you\'re not sure what to do next. Take a deep breath!', icon: 'assets/feeling_fusion/panic.svg', color: '#D81B60' } }
 ];
