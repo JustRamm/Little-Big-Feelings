@@ -6,7 +6,8 @@
     background: url('/assets/feeling_fusion/fusion_bg.svg') center/cover no-repeat fixed;
     height: 100vh;
     width: 100vw;
-    overflow: hidden; /* STOP THE SCROLL */
+    overflow: hidden;
+    /* STOP THE SCROLL */
 }
 
 .mood-mixer-container {
@@ -14,7 +15,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Center the lab bench vertically */
+    justify-content: center;
+    /* Center the lab bench vertically */
     gap: 0.5rem;
     height: 100%;
     width: 100%;
@@ -30,14 +32,17 @@
 }
 
 .mixer-card {
-    background: #263238; /* Dark Industrial Slate */
+    background: #263238;
+    /* Dark Industrial Slate */
     border-radius: 40px;
     padding: 2rem 3rem;
     width: 95%;
     max-width: 1550px;
-    min-height: 80vh; /* Tighter for no scroll */
-    margin-top: -1rem; /* Pull slightly up */
-    box-shadow: 0 40px 80px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.1);
+    min-height: 80vh;
+    /* Tighter for no scroll */
+    margin-top: -1rem;
+    /* Pull slightly up */
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,7 +50,7 @@
     border: 4px solid #455A64;
     position: relative;
     overflow: hidden;
-    color: white; 
+    color: white;
     transition: all 0.3s ease;
 }
 
@@ -108,18 +113,21 @@
     position: absolute;
     inset: 0;
     clip-path: polygon(44% 0%, 56% 0%, 56% 35%, 100% 100%, 0% 100%, 44% 35%);
-    background: rgba(255, 255, 255, 0.15); /* Subtle glass look on dark */
+    background: rgba(255, 255, 255, 0.15);
+    /* Subtle glass look on dark */
     border: 3px solid rgba(255, 255, 255, 0.2);
     border-radius: 0 0 25px 25px;
     overflow: hidden;
     display: flex;
-    flex-direction: column-reverse; /* Fill from bottom */
-    box-shadow: inset 0 -15px 30px rgba(255,255,255,0.05);
+    flex-direction: column-reverse;
+    /* Fill from bottom */
+    box-shadow: inset 0 -15px 30px rgba(255, 255, 255, 0.05);
 }
 
 .flask-liquid {
     width: 100%;
-    height: 0%; /* Start empty */
+    height: 0%;
+    /* Start empty */
     background: var(--liquid-color, #E0E0E0);
     transition: height 1s var(--spring), background 0.5s ease;
     position: relative;
@@ -141,16 +149,26 @@
 }
 
 @keyframes bubbling {
-    0% { transform: translate(-50%, 20px) scale(0.5); opacity: 0; }
-    50% { opacity: 0.8; }
-    100% { transform: translate(-50%, -60px) scale(1.5); opacity: 0; }
+    0% {
+        transform: translate(-50%, 20px) scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -60px) scale(1.5);
+        opacity: 0;
+    }
 }
 
 .mixer-slot img {
     width: 60px;
     height: 60px;
     z-index: 10;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
     position: absolute;
     bottom: 25px;
     opacity: 0;
@@ -169,20 +187,37 @@
 }
 
 .lab-main-area {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1.8fr 1fr;
+    grid-template-areas:
+        "L F R"
+        "L C R";
     align-items: center;
     width: 100%;
-    gap: 3rem;
+    gap: 2rem;
     padding: 0 1rem;
 }
 
-.lab-center {
-    flex: 1;
+.side-left {
+    grid-area: L;
+}
+
+.lab-flask-area {
+    grid-area: F;
+    align-self: end;
+}
+
+.side-right {
+    grid-area: R;
+}
+
+.lab-controls {
+    grid-area: C;
+    align-self: start;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    width: 100%;
 }
 
 .lab-side-choices {
@@ -191,6 +226,7 @@
     align-items: center;
     gap: 1.2rem;
 }
+
 
 .side-label {
     font-size: 1.2rem;
@@ -208,7 +244,7 @@
 
 /* Override bubble size for side matrix */
 .lab-side-choices .choice-bubble {
-    width: 75px; 
+    width: 75px;
     height: 75px;
     border-radius: 18px;
 }
@@ -219,7 +255,8 @@
 }
 
 .mixer-choices-wrap {
-    display: none; /* Replaced by side choices on desktop */
+    display: none;
+    /* Replaced by side choices on desktop */
 }
 
 
@@ -232,13 +269,13 @@
     border: 3px solid #455A64;
     cursor: pointer;
     transition: all 0.4s var(--spring);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .choice-bubble:hover {
     transform: translateY(-8px) rotate(5deg);
     border-color: var(--blue);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .choice-bubble.selected {
@@ -255,10 +292,10 @@
     box-shadow: none;
 }
 
-.choice-bubble img { 
-    width: 100%; 
-    height: 100%; 
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+.choice-bubble img {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 /* Fusion Result Modal (Inline) */
@@ -287,7 +324,7 @@
     max-width: 450px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
     border: 6px solid #FFF176;
 }
 
@@ -315,15 +352,36 @@
 }
 
 @keyframes pulseMix {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 128, 171, 0.4); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 128, 171, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 128, 171, 0); }
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 128, 171, 0.4);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 15px rgba(255, 128, 171, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 128, 171, 0);
+    }
 }
 
 @keyframes bouncePop {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /* Discovery Gallery */
@@ -343,7 +401,8 @@
 }
 
 .mixer-discovery-grid-small {
-    margin-top: -0.2rem; /* Even closer to the button */
+    margin-top: -0.2rem;
+    /* Even closer to the button */
     width: 100%;
     max-width: 480px;
     z-index: 20;
@@ -360,26 +419,84 @@
     border: 2px dashed #B0BEC5;
 }
 
-.discovery-slot {
-    aspect-ratio: 1;
-    background: #37474F;
-    border-radius: 12px;
-    border: 2px solid #455A64;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.4rem;
-    transition: all 0.3s var(--spring);
+/* ============================================================ */
+/*  MOBILE SPECIFIC LAYOUT (PORTRAIT)                           */
+/* ============================================================ */
+
+@media (max-width: 768px) {
+    #screen-mood-mixer {
+        overflow-y: auto;
+        /* Allow scrolling if screen is very small */
+    }
+
+    .mood-mixer-container {
+        padding: 0.5rem;
+        justify-content: flex-start;
+    }
+
+    .mixer-card {
+        padding: 1.5rem 1rem;
+        min-height: 0;
+        /* Fixed lint warning */
+        gap: 1.5rem;
+    }
+
+    .lab-main-area {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "L"
+            "F"
+            "R"
+            "C";
+        gap: 2rem;
+    }
+
+    .side-left,
+    .lab-flask-area,
+    .side-right,
+    .lab-controls {
+        width: 100%;
+    }
+
+    /* Transformation to 4 columns, 2 rows as requested */
+    .choice-grid-2x4 {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.8rem;
+    }
+
+    .lab-side-choices .choice-bubble {
+        width: 65px;
+        height: 65px;
+    }
+
+    /* Flask Sizing for Mobile */
+    .mixer-slot {
+        width: 120px;
+        height: 150px;
+    }
+
+    .plus-symbol {
+        font-size: 2rem;
+    }
+
+    .mixer-discovery-grid-small {
+        margin-top: 1rem;
+    }
+
+    .discovery-slot {
+        width: 100%;
+    }
 }
+
 
 .discovery-slot.unlocked {
     border-color: var(--slot-color);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .discovery-slot.unlocked:hover {
     transform: translateY(-3px) rotate(5deg);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .discovery-slot.locked {
@@ -405,7 +522,7 @@
     position: fixed;
     inset: 0;
     z-index: 2000;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -418,7 +535,7 @@
     border-radius: 40px;
     text-align: center;
     border: 8px solid var(--yellow);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
     animation: bouncePop 0.8s var(--spring) forwards;
 }
 

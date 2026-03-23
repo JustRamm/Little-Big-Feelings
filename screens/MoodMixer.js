@@ -36,7 +36,7 @@ export function template() {
 
             <div class="mixer-card fusion-chamber full-screen-lab">
                 <div class="lab-main-area">
-                    <!-- Left Side Elements (Ingredient 1) -->
+                    <!-- 1. Selection Left -->
                     <div class="lab-side-choices side-left">
                         <p class="side-label">Element A</p>
                         <div class="choice-grid-2x4">
@@ -44,15 +44,15 @@ export function template() {
                         </div>
                     </div>
 
-                    <!-- Center Area (Fusion Chamber) -->
-                    <div class="lab-center">
+                    <!-- 2. Flasks Container -->
+                    <div class="lab-flask-area">
                         <div class="mixer-slots">
                             <div class="slot-container">
                                 <div id="mixer-slot-1" class="mixer-slot">
                                     <div class="flask-container">
                                         <div id="flask-liquid-1" class="flask-liquid"></div>
                                     </div>
-                                    <i data-lucide="beaker" style="opacity: 0.3; color: var(--pink);"></i>
+                                    <i data-lucide="beaker" style="opacity: 0.2; color: #81D4FA;"></i>
                                 </div>
                                 <div id="slot-name-1" class="slot-label">Ingredient 1</div>
                             </div>
@@ -64,12 +64,23 @@ export function template() {
                                     <div class="flask-container">
                                         <div id="flask-liquid-2" class="flask-liquid"></div>
                                     </div>
-                                    <i data-lucide="beaker" style="opacity: 0.3; color: var(--blue);"></i>
+                                    <i data-lucide="beaker" style="opacity: 0.2; color: #81D4FA;"></i>
                                 </div>
                                 <div id="slot-name-2" class="slot-label">Ingredient 2</div>
                             </div>
                         </div>
+                    </div>
 
+                    <!-- 3. Selection Right -->
+                    <div class="lab-side-choices side-right">
+                        <p class="side-label">Element B</p>
+                        <div class="choice-grid-2x4">
+                            ${rightChoicesHtml}
+                        </div>
+                    </div>
+
+                    <!-- 4. Global Action Controls -->
+                    <div id="mixer-controls-container" class="lab-controls">
                         <div id="mixer-controls">
                             <button id="btn-do-fusion" class="btn-primary disabled" disabled>
                                 <i data-lucide="test-tube-2" style="margin-right: 10px;"></i>
@@ -81,14 +92,6 @@ export function template() {
                             <div id="mixer-discovery-grid" class="mixer-discovery-grid">
                                 <!-- Discovered emotions slots -->
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Side Elements (Ingredient 2) -->
-                    <div class="lab-side-choices side-right">
-                        <p class="side-label">Element B</p>
-                        <div class="choice-grid-2x4">
-                            ${rightChoicesHtml}
                         </div>
                     </div>
                 </div>
