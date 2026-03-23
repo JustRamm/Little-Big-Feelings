@@ -111,12 +111,13 @@ export function template() {
             <!-- Result Overlay -->
             <div id="mg-result-overlay" class="mg-overlay hidden">
                 <div class="mg-modal celebration-modal">
-                    <div class="mg-modal-icon">🏆</div>
-                    <h2>Majestic Bond!</h2>
-                    <p>You have nurtured a lifelong friendship. Your friend is now fully grown and truly happy!</p>
+                    <div class="mg-modal-icon">❤️</div>
+                    <h2>A Heart Full of Joy!</h2>
+                    <p>Thank you for nurturing me with so much love and kindness! <b>You've just learned how to love and care</b>, and that is the greatest success of all!</p>
                     <button class="btn-primary" id="btn-mg-exit">Back to Map</button>
                 </div>
             </div>
+
 
             <!-- Tutorial -->
             <div id="mg-tutorial" class="mg-overlay">

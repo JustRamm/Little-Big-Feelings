@@ -106,6 +106,7 @@
 
 .tutorial-footer {
     animation: fadeSlideUp 0.8s var(--ease) 0.5s both;
+    margin-bottom: 3rem;
 }
 
 /* A-Z Game Tutorial Overlays */

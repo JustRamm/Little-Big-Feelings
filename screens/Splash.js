@@ -16,7 +16,11 @@ export function template() {
             <div class="floating-shape shape-4"><i data-lucide="battery"></i></div>
             <div class="floating-shape shape-5"><i data-lucide="star"></i></div>
             <div class="floating-shape shape-6"><i data-lucide="heart"></i></div>
+            <div class="floating-shape shape-7"><i data-lucide="cloud"></i></div>
+            <div class="floating-shape shape-8"><i data-lucide="sparkles"></i></div>
+            <div class="floating-shape shape-9"><i data-lucide="sun"></i></div>
         </div>
+
 
         <div class="splash-content">
             <div class="logo-wrapper">

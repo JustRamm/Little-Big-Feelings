@@ -1,6 +1,9 @@
 #screen-splash {
     justify-content: center;
     overflow-y: hidden;
+    background: radial-gradient(circle at 50% 50%, #FFF9E6 0%, #FFF0F5 50%, #F0F4FF 100%);
+    position: relative;
+    transition: background 1s ease;
 }
 
 .splash-content {
@@ -84,6 +87,31 @@
     opacity: 0.12;
 }
 
+.shape-7 {
+    bottom: 40%;
+    right: 15%;
+    --duration: 24s;
+    color: var(--blue-dark);
+    opacity: 0.12;
+}
+
+.shape-8 {
+    top: 40%;
+    left: 12%;
+    --duration: 19s;
+    color: var(--pink-dark);
+    opacity: 0.1;
+}
+
+.shape-9 {
+    top: 5%;
+    right: 30%;
+    --duration: 32s;
+    color: var(--yellow);
+    opacity: 0.15;
+}
+
+
 /* Logo Wrapper & Burst */
 .logo-wrapper {
     position: relative;
@@ -95,12 +123,21 @@
 
 .logo-burst {
     position: absolute;
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(255, 128, 171, 0.25) 0%, transparent 70%);
+    width: clamp(300px, 80vw, 500px);
+    height: clamp(300px, 80vw, 500px);
+    background: radial-gradient(circle, 
+        rgba(255, 128, 171, 0.4) 0%, 
+        rgba(129, 212, 250, 0.3) 40%, 
+        transparent 70%);
     border-radius: 50%;
-    animation: pulse-glow 4s ease-in-out infinite;
+    animation: pulse-glow 4s ease-in-out infinite, rotate-glow 20s linear infinite;
     z-index: -1;
+    filter: blur(20px);
+}
+
+@keyframes rotate-glow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .logo-container {
@@ -109,9 +146,14 @@
 }
 
 .game-logo {
-    width: clamp(200px, 45vw, 360px);
-    filter: drop-shadow(0 20px 40px rgba(186, 104, 200, 0.3));
+    width: clamp(250px, 60vw, 420px);
+    filter: drop-shadow(0 20px 40px rgba(186, 104, 200, 0.4));
     animation: bounce-float 4s var(--spring) infinite;
+    transition: transform 0.3s var(--spring);
+}
+
+.game-logo:hover {
+    transform: scale(1.05);
 }
 
 /* Title & Tagline */
@@ -236,3 +278,41 @@
     background-color: var(--yellow);
     animation-delay: 0.6s;
 }
+
+/* Mobile Adjustments for Cuteness */
+@media (max-width: 600px) {
+    #screen-splash {
+        background: radial-gradient(circle at 50% 50%, #FFF9E6 0%, #FFF0F5 70%, #F0F4FF 120%);
+    }
+
+    .floating-shape {
+        font-size: 3.5rem;
+        opacity: 0.25 !important;
+        filter: blur(0.5px);
+    }
+
+    .game-title {
+        font-size: clamp(3.8rem, 15vw, 5.5rem);
+        text-shadow: 
+            3px 3px 0px var(--white),
+            6px 6px 0px rgba(0,0,0,0.05);
+    }
+
+    .logo-burst {
+        width: 100vw;
+        height: 100vw;
+        opacity: 0.4;
+    }
+
+    .game-logo {
+        width: 75vw;
+        max-width: 320px;
+    }
+
+    .tagline {
+        font-size: 1.1rem;
+        padding: 0.4rem 1.2rem;
+        background: rgba(255, 255, 255, 0.7);
+    }
+}
+

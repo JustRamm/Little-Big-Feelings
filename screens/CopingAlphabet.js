@@ -12,7 +12,7 @@ let timeLeft = 10;
 
 export function template() {
     return /* html */`
-    <section id="screen-alphabet-game" class="screen" aria-label="Alphabet Coping Game">
+    <section id="screen-alphabet-game" class="screen az-screen-fixed" aria-label="Alphabet Coping Game">
         <div class="az-container">
             <header class="az-header">
                 <button id="btn-az-back" class="btn-icon" aria-label="Back">

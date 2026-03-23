@@ -280,61 +280,79 @@ export const sounds = {
 
         switch (type) {
             case 'lion':
-                // Deep sawtooth roar
-                for (let i = 0; i < 3; i++) p(120 - i*10, 'sawtooth', 0.6, 0.15, i*0.05, -40);
+                // Complex low-freq rumble with noise-like sawtooth
+                for (let i = 0; i < 5; i++) {
+                    p(85 - (i * 10), 'sawtooth', 0.8, 0.18, i * 0.05, -30);
+                    p(95 - (i * 8), 'triangle', 1.0, 0.1, i * 0.08, -20);
+                }
                 break;
             case 'elephant':
-                // High-freq trumpet blare
-                p(600, 'sawtooth', 0.4, 0.15, 0, 200);
-                p(800, 'sawtooth', 0.3, 0.1, 0.1, -100);
+                // Brassy, raspy trumpet
+                for (let i = 0; i < 3; i++) {
+                    p(440 + (i * 5), 'sawtooth', 0.5, 0.14, i * 0.02, 300);
+                    p(880 - (i * 5), 'sine', 0.4, 0.08, i * 0.03, -150);
+                }
                 break;
             case 'penguin':
-                // Nasal honk
-                p(300, 'triangle', 0.1, 0.2);
-                p(350, 'triangle', 0.15, 0.15, 0.12);
+                // Nasal, rapid honking
+                for (let i = 0; i < 3; i++) {
+                    p(380, 'triangle', 0.12, 0.18, i * 0.18, 50);
+                }
                 break;
             case 'panda':
-                // Soft squeak
-                p(900, 'sine', 0.1, 0.1, 0, 300);
+                // High-pitched "chirp-like" squeak
+                p(1200, 'sine', 0.15, 0.1, 0, 400);
+                p(1400, 'sine', 0.1, 0.08, 0.08, 200);
                 break;
             case 'cat':
-                // Rising-falling meow
-                p(500, 'sine', 0.4, 0.15, 0, 200);
-                p(700, 'sine', 0.2, 0.1, 0.4, -200);
+                // Multi-stage meow (rising then falling)
+                p(523, 'sine', 0.4, 0.15, 0, 150);
+                p(659, 'sine', 0.3, 0.12, 0.25, -200);
                 break;
             case 'dog':
-                // Sharp bark
-                p(200, 'sawtooth', 0.15, 0.15, 0, -50);
-                p(220, 'sawtooth', 0.12, 0.12, 0.1, -40);
+                // Powerful broad-spectrum bark
+                p(180, 'sawtooth', 0.1, 0.2, 0, -20);
+                p(320, 'square', 0.08, 0.12, 0.02, -50);
+                p(160, 'triangle', 0.15, 0.15, 0.05);
                 break;
             case 'monkey':
-                // Repeating "ooh ooh"
-                for (let i = 0; i < 4; i++) p(600 + (i%2 ? 100 : 0), 'sine', 0.15, 0.12, i*0.18, 50);
+                // Bouncy hooting loop
+                for (let i = 0; i < 6; i++) {
+                    p(550 + (i % 2 ? 150 : 0), 'sine', 0.08, 0.14, i * 0.12, 80);
+                }
                 break;
             case 'rabbit':
-                // Soft twitch/sniff (quick sine blips)
-                p(1200, 'sine', 0.05, 0.1, 0);
-                p(1100, 'sine', 0.05, 0.08, 0.06);
+                // Fast, soft sniffling (tiny noise blips)
+                for (let i = 0; i < 4; i++) {
+                    p(1500, 'sine', 0.03, 0.08, i * 0.08);
+                }
                 break;
             case 'frog':
-                // Deep croak pattern
-                for (let i = 0; i < 8; i++) p(150, 'sawtooth', 0.02, 0.1, i*0.03);
+                // Deep resonant ribbit
+                for (let i = 0; i < 12; i++) {
+                    p(110 + (i * 4), 'sawtooth', 0.015, 0.12, i * 0.025);
+                }
                 break;
             case 'owl':
-                // "Hoot hoot" sliding sines
-                p(400, 'sine', 0.3, 0.15, 0, -50);
-                p(380, 'sine', 0.4, 0.12, 0.4, -60);
+                // Resonant hoot-hoot
+                p(330, 'sine', 0.4, 0.18, 0, -40);
+                p(290, 'sine', 0.5, 0.15, 0.5, -30);
                 break;
             case 'bee':
-                // Fast vibrating buzz
-                for (let i = 0; i < 15; i++) p(250 + Math.sin(i)*50, 'sawtooth', 0.02, 0.08, i*0.01);
+                // Constant high-freq oscillation
+                for (let i = 0; i < 20; i++) {
+                    p(280 + Math.random() * 60, 'sawtooth', 0.012, 0.1, i * 0.008);
+                }
                 break;
             case 'butterfly':
-                // Delicate flutter (very quiet sparkles)
-                for (let i = 0; i < 5; i++) p(2000 - i*200, 'sine', 0.1, 0.05, i*0.08);
+                // Extremely soft, shimmering flutters
+                for (let i = 0; i < 10; i++) {
+                    tone({ freq: 2200 + (Math.random() * 500), type: 'sine', dur: 0.1, vol: 0.04, delay: i * 0.06 });
+                }
                 break;
             default:
-                this.match(); // Fallback
+                this.match();
         }
+
     }
 };
