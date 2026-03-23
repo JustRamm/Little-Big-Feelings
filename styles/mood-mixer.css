@@ -2,55 +2,58 @@
 /*  styles/mood-mixer.css — The Feeling Fusion Lab UI           */
 /* ============================================================ */
 
+#screen-mood-mixer {
+    background: url('/assets/feeling_fusion/fusion_bg.svg') center/cover no-repeat fixed;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* STOP THE SCROLL */
+}
+
 .mood-mixer-container {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    justify-content: center; /* Center the lab bench vertically */
+    gap: 0.5rem;
     height: 100%;
     width: 100%;
-    background: url('/assets/feeling_fusion/fusion_bg.svg') center/cover no-repeat;
     position: relative;
-    overflow-y: auto;
 }
 
 .mixer-header {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
 .mixer-card {
-    background: rgba(245, 247, 250, 0.9);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    background: #263238; /* Dark Industrial Slate */
     border-radius: 40px;
-    padding: 3rem;
+    padding: 2rem 3rem;
     width: 95%;
-    max-width: 1400px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.1), inset 0 0 0 4px #CFD8DC;
+    max-width: 1550px;
+    min-height: 80vh; /* Tighter for no scroll */
+    margin-top: -1rem; /* Pull slightly up */
+    box-shadow: 0 40px 80px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2.5rem;
-    flex: 1;
-    border: 3px solid #B0BEC5;
+    border: 4px solid #455A64;
     position: relative;
     overflow: hidden;
+    color: white; 
+    transition: all 0.3s ease;
 }
 
 .mixer-card::after {
     content: '';
     position: absolute;
-    top: 5rem;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 50L100 50M50 0L50 100' stroke='%23B3E5FC' stroke-width='1'/%3E%3C/svg%3E");
-    opacity: 0.15;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 50L100 50M50 0L50 100' stroke='rgba(255,255,255,0.05)' stroke-width='1'/%3E%3C/svg%3E");
     pointer-events: none;
 }
 
@@ -73,7 +76,7 @@
 .slot-label {
     font-size: 1.1rem;
     font-weight: 900;
-    color: #9E9E9E;
+    color: #90A4AE;
     text-align: center;
     width: 100%;
     margin-top: 5px;
@@ -84,41 +87,85 @@
 .plus-symbol {
     font-size: 3rem;
     font-weight: 800;
-    color: var(--pink);
-    filter: drop-shadow(0 0 10px rgba(255, 128, 171, 0.4));
+    color: #81D4FA;
+    filter: drop-shadow(0 0 15px rgba(129, 212, 250, 0.6));
     animation: bouncePop 2s infinite ease-in-out;
 }
 
 .mixer-slot {
-    width: 140px;
-    height: 140px;
-    border: 6px solid #B0BEC5;
-    border-radius: 35px; /* Rounded Square "Pod" style */
+    width: 150px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #FAFAFA;
-    transition: all 0.4s var(--spring);
-    box-shadow: inset 0 4px 15px rgba(0,0,0,0.05), 0 10px 20px rgba(176, 190, 197, 0.2);
     position: relative;
+    background: transparent;
+    transition: all 0.4s var(--spring);
 }
 
-.mixer-slot::before {
-    content: '';
+/* Erlenmeyer Flask Shape using Clip Path */
+.flask-container {
     position: absolute;
-    top: 5%;
-    left: 5%;
-    width: 90%;
-    height: 40%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
-    border-radius: 20px;
+    inset: 0;
+    clip-path: polygon(44% 0%, 56% 0%, 56% 35%, 100% 100%, 0% 100%, 44% 35%);
+    background: rgba(255, 255, 255, 0.15); /* Subtle glass look on dark */
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0 0 25px 25px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse; /* Fill from bottom */
+    box-shadow: inset 0 -15px 30px rgba(255,255,255,0.05);
+}
+
+.flask-liquid {
+    width: 100%;
+    height: 0%; /* Start empty */
+    background: var(--liquid-color, #E0E0E0);
+    transition: height 1s var(--spring), background 0.5s ease;
+    position: relative;
+    opacity: 0.85;
+}
+
+/* Bubbles inside liquid */
+.flask-liquid::before {
+    content: '...';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2rem;
+    letter-spacing: 5px;
+    animation: bubbling 2s infinite ease-in-out;
+    opacity: 0.6;
+}
+
+@keyframes bubbling {
+    0% { transform: translate(-50%, 20px) scale(0.5); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translate(-50%, -60px) scale(1.5); opacity: 0; }
+}
+
+.mixer-slot img {
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    position: absolute;
+    bottom: 25px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.6s var(--spring);
     pointer-events: none;
 }
 
-.mixer-slot.occupied {
-    background: white;
-    border-color: var(--emo-color);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08), 0 0 15px var(--emo-color);
+.mixer-slot.occupied img {
+    opacity: 1;
+    transform: scale(1) translateY(-5px);
+}
+
+.mixer-slot.occupied .flask-liquid {
+    height: 80%;
 }
 
 .lab-main-area {
@@ -148,9 +195,9 @@
 .side-label {
     font-size: 1.2rem;
     font-weight: 800;
-    color: var(--blue-dark);
+    color: #81D4FA;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 .choice-grid-2x4 {
@@ -179,13 +226,13 @@
 .choice-bubble {
     width: 85px;
     height: 85px;
-    background: white;
-    border-radius: 20px; /* Modern scientific button */
+    background: #37474F;
+    border-radius: 20px;
     padding: 0.8rem;
-    border: 4px solid #ECEFF1;
+    border: 3px solid #455A64;
     cursor: pointer;
     transition: all 0.4s var(--spring);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .choice-bubble:hover {
@@ -195,9 +242,17 @@
 }
 
 .choice-bubble.selected {
-    border-color: #64B5F6;
-    background: #E3F2FD;
+    border-color: var(--blue-dark);
+    background: #E1F5FE;
     transform: scale(0.9);
+}
+
+.choice-bubble.disabled-dupe {
+    opacity: 0.15;
+    pointer-events: none;
+    transform: scale(0.8);
+    filter: grayscale(1);
+    box-shadow: none;
 }
 
 .choice-bubble img { 
@@ -287,26 +342,33 @@
     letter-spacing: 1px;
 }
 
+.mixer-discovery-grid-small {
+    margin-top: -0.2rem; /* Even closer to the button */
+    width: 100%;
+    max-width: 480px;
+    z-index: 20;
+}
+
 .mixer-discovery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
     width: 100%;
-    max-height: none;
-    padding: 2rem;
-    border-radius: 30px;
-    background: #f9f9f9;
+    padding: 1.2rem;
+    border-radius: 20px;
+    background: rgba(176, 190, 197, 0.1);
+    border: 2px dashed #B0BEC5;
 }
 
 .discovery-slot {
     aspect-ratio: 1;
-    background: white;
-    border-radius: 15px;
-    border: 2px solid #EEE;
+    background: #37474F;
+    border-radius: 12px;
+    border: 2px solid #455A64;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
+    padding: 0.4rem;
     transition: all 0.3s var(--spring);
 }
 

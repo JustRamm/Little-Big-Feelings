@@ -165,6 +165,22 @@ export const sounds = {
         );
     },
 
+    /** Bright, child-friendly 'Ta-da!' for discoveries */
+    discovery() {
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        notes.forEach((f, i) => {
+            tone({ 
+                freq: f, 
+                type: 'sine', 
+                dur: 0.4, 
+                vol: 0.15, 
+                delay: i * 0.08 
+            });
+        });
+        // Final emphasize note
+        tone({ freq: 1046.50, type: 'sine', dur: 0.6, vol: 0.1, delay: 0.35 });
+    },
+
     /** Subtle click for UI buttons */
     click() {
         tone({ freq: 620, type: 'sine', dur: 0.06, vol: 0.1 });
