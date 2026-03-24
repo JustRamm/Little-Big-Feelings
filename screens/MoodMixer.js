@@ -267,24 +267,7 @@ function renderDiscoveryGrid() {
         });
     });
 
-    // WIN CONDITION: If we have 4 or more, tell them they won!
-    if (state.discoveredMixes.length >= 4) {
-        setTimeout(() => {
-            if (!document.querySelector('.fusion-victory-banner')) {
-                const banner = document.createElement('div');
-                banner.className = 'fusion-victory-banner';
-                banner.innerHTML = `
-                    <div class="victory-content">
-                        <h2>You Found 4 Feelings!</h2>
-                        <p>You're a master of the Fusion Lab!</p>
-                        <button class="btn-primary" onclick="this.parentElement.parentElement.remove()">Keep Mixing!</button>
-                    </div>
-                `;
-                document.body.appendChild(banner);
-                sounds.discovery();
-            }
-        }, 800);
-    }
+
 }
 
 function showFusionResult(recipeOrResult) {
