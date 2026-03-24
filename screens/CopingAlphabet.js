@@ -71,11 +71,28 @@ export function template() {
                     <div class="victory-stars-display" id="az-final-stars"></div>
                     <h3 id="az-final-title">Alphabet Master!</h3>
                     <p id="az-final-score">Final Score: 1250</p>
-                    <button class="btn-primary" id="btn-az-finish">I am a Master!</button>
+                    <div class="az-victory-actions" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                        <button class="btn-primary" id="btn-az-retry">Retry Game</button>
+                        <button class="btn-secondary" id="btn-az-finish">Exit Game</button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>`;
+}
+
+export function onShow() {
+    resetGame();
+    // Ensure we start at the start screen
+    document.getElementById('az-start-screen').classList.remove('hidden');
+    document.getElementById('az-game-play').classList.add('hidden');
+    document.getElementById('az-victory').classList.add('hidden');
+    document.getElementById('az-tutorial-overlay').classList.add('hidden');
+    
+    // Reset HUD
+    document.getElementById('az-skills-count').textContent = '0';
+    document.getElementById('az-timer-text').textContent = '60s';
+    document.getElementById('az-progress-fill').style.width = '100%';
 }
 
 export function init({ navigate }) {
@@ -94,6 +111,11 @@ export function init({ navigate }) {
 
     document.getElementById('btn-az-tut-next').addEventListener('click', () => {
         nextTutorialStep();
+    });
+
+    document.getElementById('btn-az-retry').addEventListener('click', () => {
+        sounds.click();
+        startGame();
     });
 
     document.getElementById('btn-az-finish').addEventListener('click', () => {
