@@ -35,6 +35,7 @@
     overflow-x: auto;
     padding: 0.5rem;
     scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .journal-tabs::-webkit-scrollbar { display: none; }
