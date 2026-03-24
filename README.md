@@ -11,41 +11,41 @@
 
 ---
 
-## 🎮 The Three Pillars of Play
+## <img src="public/assets/avatars/avatar_1.svg" width="28" height="28" valign="middle"> The Three Pillars of Play
 
 The app features three distinct interactive experiences designed to build different emotional skills:
 
-### 1. 🧠 Memory Discovery (The Core Game)
+### 1. <img src="public/assets/avatars/avatar_2.svg" width="28" height="28" valign="middle"> Memory Discovery (The Core Game)
 A classic matching game with a twist! Children connect **Emotional Triggers** to **Coping Actions**.
 - **8 Emotional Themes**: Anger, Sadness, Joy, Fear, Trust, Disgust, Anticipation, and Surprise.
 - **Progressive Difficulty**: From *Beginner* (3 pairs) to the *Full Journey* (10 pairs).
 - **Interactive Popup Insights**: Every card flip provides a bite-sized emotional lesson.
 
-### 2. 🐾 Animo Adventure (Animal Care Sim)
+### 2. <img src="public/assets/avatars/avatar_3.svg" width="28" height="28" valign="middle"> Animo Adventure (Animal Care Sim)
 A digital-pet style mini-game where children learn empathy and the impact of their actions.
 - **12 Unique Buddies**: From the Gentle Lion to the Helpful Penguin.
 - **Action & Reaction**: Use "Warm Hugs" or "Tasty Treats" to see how your friend's mood improves, and learn why "Mean Words" or "Ignoring" hurts.
 
-### 3. 🧪 Feeling Fusion Lab (The Mood Mixer)
+### 3. <img src="public/assets/avatars/avatar_4.svg" width="28" height="28" valign="middle"> Feeling Fusion Lab (The Mood Mixer)
 An experimental laboratory for exploring complex, "blended" emotions.
 - **Merge Emotions**: Combine primary feelings (like Joy + Trust) to discover secondary ones (like Love).
 - **Unlockable Recipes**: Over 15 unique emotional fusions to discover and collect in your Journal.
 
 ---
 
-## 🌟 Premium Features
+## <img src="public/assets/avatars/avatar_5.svg" width="28" height="28" valign="middle"> Premium Features
 
-- **🛡️ Fully Offline (PWA)**: Install the app on any device and play without an internet connection. Perfect for plane rides and car trips.
-- **🔊 Accessibility Suite (A11y)**:
+- **<img src="public/assets/avatars/avatar_6.svg" width="24" height="24" valign="middle"> Fully Offline (PWA)**: Install the app on any device and play without an internet connection. Perfect for plane rides and car trips.
+- **<img src="public/assets/avatars/avatar_7.svg" width="24" height="24" valign="middle"> Accessibility Suite (A11y)**:
     - **Naboo Narrator (TTS)**: Built-in speech synthesis reads emotion names and descriptions aloud for early learners.
     - **Dyslexic-Friendly Mode**: Uses the *OpenDyslexic* typography style for better readability.
     - **High Contrast Mode**: Sharp color schemes for children with visual impairments.
-- **📖 The Knowledge Journal**: A personal scrap-book that saves every emotion discovered, every animal befriended, and every coping skill learned.
-- **🎨 Rich Aesthetics**: Fluid 60fps animations, spring-physics interactions, and high-quality SVG illustrations.
+- **<img src="public/assets/avatars/avatar_8.svg" width="24" height="24" valign="middle"> The Knowledge Journal**: A personal scrap-book that saves every emotion discovered, every animal befriended, and every coping skill learned.
+- **<img src="public/assets/avatars/avatar_9.svg" width="24" height="24" valign="middle"> Rich Aesthetics**: Fluid 60fps animations, spring-physics interactions, and high-quality SVG illustrations.
 
 ---
 
-## 🛠️ Technical Stack
+## <img src="public/assets/avatars/avatar_10.svg" width="28" height="28" valign="middle"> Technical Stack
 
 - **Architect**: Vanilla JavaScript SPA with an ID-based modular screen system.
 - **Styling**: Modern CSS Design Tokens (HSL variables, Glassmorphism).
@@ -55,7 +55,7 @@ An experimental laboratory for exploring complex, "blended" emotions.
 
 ---
 
-## 🚀 Getting Started
+## <img src="public/assets/avatars/avatar_11.svg" width="28" height="28" valign="middle"> Getting Started
 
 1.  **Clone & Enter**
     ```bash
@@ -74,10 +74,10 @@ An experimental laboratory for exploring complex, "blended" emotions.
 
 ---
 
-## 🤝 Attribution
+## <img src="public/assets/avatars/avatar_12.svg" width="28" height="28" valign="middle"> Attribution
 
 Educational content provided by **Mind Empowered**. 
 Visit [mind-empowered.org](https://www.mind-empowered.org) for the original **"Recharge Without Charge"** curriculum.
 
 ---
-*Dedicated to giving every child the tools to feel, understand, and grow.* 💖
+*Dedicated to giving every child the tools to feel, understand, and grow.* <img src="public/assets/avatars/avatar_1.svg" width="22" height="22" valign="middle">
