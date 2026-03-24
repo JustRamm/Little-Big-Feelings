@@ -1,4 +1,4 @@
-# <img src="public/assets/brand/nextlogo.svg" width="48" height="48" valign="middle"> Little Big Feelings — Emotional Intelligence Journey
+# <img src="public/assets/brand/phone-icon.svg" width="48" height="48" valign="middle"> Little Big Feelings — Emotional Intelligence Journey
 
 [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
