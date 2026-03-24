@@ -6,14 +6,30 @@
     <!-- Medium Upright Ears -->
     <ellipse cx="38" cy="40" rx="6" ry="18" fill="#FCE4EC" stroke="#F06292" stroke-width="2" />
     <ellipse cx="62" cy="40" rx="6" ry="18" fill="#FCE4EC" stroke="#F06292" stroke-width="2" />
+    <style>
+        .eye-blink { animation: blink 5s infinite; transform-origin: 50% 60px; }
+        @keyframes blink {
+            0%, 94%, 100% { transform: scaleY(1); }
+            97% { transform: scaleY(0.1); }
+        }
+        .tail-wag { animation: wag 2s infinite ease-in-out; transform-origin: 72px 110px; }
+        @keyframes wag {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+        }
+    </style>
+
     <!-- Head -->
     <circle cx="50" cy="65" r="30" fill="white" stroke="#F8BBD0" stroke-width="2" />
-    <!-- Happy Eyes -->
-    <circle cx="40" cy="60" r="4.5" fill="#212121" />
-    <circle cx="60" cy="60" r="4.5" fill="#212121" />
+    <!-- Eyes (Blinking) -->
+    <g class="eye-blink">
+        <circle cx="40" cy="60" r="4.5" fill="#212121" />
+        <circle cx="60" cy="60" r="4.5" fill="#212121" />
+    </g>
     <!-- Nose Area -->
     <path d="M48 68 L52 68 L50 71 Z" fill="#F06292" />
     <!-- Tiny Fluffy Tail -->
+    <circle class="tail-wag" cx="72" cy="110" r="8" fill="white" stroke="#F8BBD0" stroke-width="1.5" />
     <circle cx="28" cy="110" r="8" fill="white" stroke="#F8BBD0" stroke-width="1.5" />
     <!-- Paws -->
     <circle cx="35" cy="118" r="10" fill="white" stroke="#F8BBD0" stroke-width="2" />

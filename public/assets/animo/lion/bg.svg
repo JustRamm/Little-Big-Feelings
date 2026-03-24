@@ -10,11 +10,34 @@
         </linearGradient>
     </defs>
 
+    <style>
+        .cloud-drift { animation: drift 25s infinite linear alternate; }
+        @keyframes drift {
+            from { transform: translateX(-60px); }
+            to { transform: translateX(60px); }
+        }
+        .tree-sway { animation: sway 8s infinite ease-in-out; transform-origin: center bottom; }
+        @keyframes sway {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1.5deg); }
+        }
+        .grass-sway { animation: grass 4s infinite ease-in-out; transform-origin: center bottom; }
+        @keyframes grass {
+            0%, 100% { transform: skewX(-5deg); }
+            50% { transform: skewX(5deg); }
+        }
+        .water-ripple { animation: ripple 5s infinite alternate ease-in-out; transform-origin: center; }
+        @keyframes ripple {
+            from { transform: scale(1); opacity: 0.3; }
+            to { transform: scale(1.05); opacity: 0.45; }
+        }
+    </style>
+
     <!-- Sky -->
     <rect width="1000" height="1000" fill="url(#sky-grad)" />
 
     <!-- Distance Clouds -->
-    <g opacity="0.4">
+    <g class="cloud-drift" opacity="0.4">
         <circle cx="200" cy="150" r="50" fill="url(#cloud-grad)" />
         <circle cx="250" cy="150" r="40" fill="url(#cloud-grad)" />
         <circle cx="150" cy="150" r="30" fill="url(#cloud-grad)" />
@@ -38,22 +61,24 @@
 
     <!-- Acacia Trees -->
     <!-- Tree 1 (Small) -->
-    <g transform="translate(150, 650) scale(0.5)">
-        <rect x="0" y="0" width="15" height="200" fill="#3E2723" />
-        <ellipse cx="7" cy="0" rx="150" ry="40" fill="#2E7D32" opacity="0.9" />
+    <g class="tree-sway" transform="translate(150, 950) scale(0.5)">
+        <rect x="0" y="-400" width="15" height="400" fill="#3E2723" />
+        <ellipse cx="7" cy="-400" rx="150" ry="40" fill="#2E7D32" opacity="0.9" />
     </g>
     <!-- Tree 2 (Main) -->
-    <g transform="translate(700, 750)">
-        <rect x="0" y="0" width="20" height="250" fill="#3E2723" />
-        <ellipse cx="10" cy="-20" rx="220" ry="50" fill="#1B5E20" opacity="0.95" />
-        <ellipse cx="10" cy="-40" rx="180" ry="40" fill="#2E7D32" opacity="0.8" />
+    <g class="tree-sway" transform="translate(750, 960)">
+        <rect x="0" y="-250" width="20" height="250" fill="#3E2723" />
+        <ellipse cx="10" cy="-270" rx="220" ry="50" fill="#1B5E20" opacity="0.95" />
+        <ellipse cx="10" cy="-290" rx="180" ry="40" fill="#2E7D32" opacity="0.8" />
     </g>
 
     <!-- Grass Tufts -->
-    <path d="M100 950 L110 930 L120 950 M250 960 L260 940 L270 960" stroke="#FFD54F" stroke-width="4" fill="none" opacity="0.7" />
-    <path d="M400 970 L410 950 L420 970 M800 955 L810 935 L820 955" stroke="#FFA000" stroke-width="5" fill="none" opacity="0.8" />
+    <path class="grass-sway" d="M100 950 L110 930 L120 950 M250 960 L260 940 L270 960" stroke="#FFD54F" stroke-width="4" fill="none" opacity="0.7" />
+    <path class="grass-sway" d="M400 970 L410 950 L420 970 M800 955 L810 935 L820 955" stroke="#FFA000" stroke-width="5" fill="none" opacity="0.8" />
 
     <!-- Watering Hole (Deeper Blue) -->
-    <ellipse cx="500" cy="980" rx="450" ry="80" fill="#4FC3F7" opacity="0.4" />
-    <ellipse cx="500" cy="980" rx="400" ry="60" fill="#03A9F4" opacity="0.3" />
+    <g class="water-ripple">
+        <ellipse cx="500" cy="980" rx="450" ry="80" fill="#4FC3F7" />
+        <ellipse cx="500" cy="980" rx="400" ry="60" fill="#03A9F4" />
+    </g>
 </svg>

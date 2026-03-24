@@ -10,6 +10,19 @@
         </linearGradient>
     </defs>
 
+    <style>
+        .window-cloud { animation: drift 12s infinite linear alternate; }
+        @keyframes drift {
+            from { transform: translateX(-40px); }
+            to { transform: translateX(40px); }
+        }
+        .sun-shimmer { animation: shimmer 5s infinite alternate ease-in-out; }
+        @keyframes shimmer {
+            from { opacity: 0.05; }
+            to { opacity: 0.2; }
+        }
+    </style>
+
     <!-- Wall -->
     <rect width="1000" height="1000" fill="url(#room-light)" />
 
@@ -23,12 +36,15 @@
     <!-- Window Cross -->
     <rect x="500" y="110" width="8" height="380" fill="#A1887F" opacity="0.4" />
     <rect x="360" y="300" width="280" height="8" fill="#A1887F" opacity="0.4" />
+    
     <!-- Distant Cloud in window -->
-    <circle cx="580" cy="180" r="25" fill="white" opacity="0.6" />
-    <circle cx="610" cy="190" r="20" fill="white" opacity="0.6" />
+    <g class="window-cloud">
+        <circle cx="580" cy="180" r="25" fill="white" opacity="0.6" />
+        <circle cx="610" cy="190" r="20" fill="white" opacity="0.6" />
+    </g>
 
     <!-- Sun Gleam in window -->
-    <path d="M360 110 L480 110 L360 250 Z" fill="white" opacity="0.1" />
+    <path class="sun-shimmer" d="M360 110 L480 110 L360 250 Z" fill="white" opacity="0.1" />
 
     <!-- Cozy Rug (Centered for focus) -->
     <ellipse cx="500" cy="880" rx="400" ry="120" fill="#F06292" opacity="0.8" />
@@ -46,5 +62,4 @@
     <rect x="50" y="150" width="120" height="150" fill="#F5F5F5" stroke="#795548" stroke-width="6" rx="4" />
     <path d="M70 240 Q110 200 150 240" fill="none" stroke="#795548" stroke-width="3" />
     <circle cx="110" cy="220" r="15" fill="#795548" opacity="0.3" />
-
 </svg>

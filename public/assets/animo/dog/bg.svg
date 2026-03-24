@@ -2,8 +2,21 @@
     <!-- Super Cute Sunny Backyard (Dog Home) -->
     <rect width="1000" height="1000" fill="#E1F5FE" />
     
+    <style>
+        .sunlight-pulse { animation: sunlight-pulse 10s infinite alternate ease-in-out; transform-origin: 500px 350px; }
+        @keyframes sunlight-pulse {
+            from { opacity: 0.1; transform: scale(1); }
+            to { opacity: 0.25; transform: scale(1.1); }
+        }
+        .flower-sway { animation: flower-sway 6s infinite ease-in-out; transform-origin: 200px 1000px; }
+        @keyframes flower-sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+    </style>
+
     <!-- Soft Sunlight Glow -->
-    <circle cx="500" cy="350" r="800" fill="white" opacity="0.1" filter="blur(60px)" />
+    <circle class="sunlight-pulse" cx="500" cy="350" r="800" fill="white" filter="blur(60px)" />
     
     <!-- Distant Green Hills -->
     <path d="M-100 850 Q300 700 600 800 T1100 850" fill="#C8E6C9" opacity="0.8" />
@@ -18,7 +31,9 @@
     <path d="M900 600 Q900 580 920 580 L920 700 L880 700 L880 580 Q880 580 900 600" fill="#D7CCC8" />
     
     <!-- Blooming Pink Flowers -->
-    <circle cx="200" cy="900" r="10" fill="#FF80AB" />
-    <circle cx="215" cy="890" r="10" fill="#FF80AB" />
-    <circle cx="205" cy="910" r="10" fill="#FF80AB" />
+    <g class="flower-sway">
+        <circle cx="200" cy="900" r="10" fill="#FF80AB" />
+        <circle cx="215" cy="890" r="10" fill="#FF80AB" />
+        <circle cx="205" cy="910" r="10" fill="#FF80AB" />
+    </g>
 </svg>

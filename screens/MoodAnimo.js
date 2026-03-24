@@ -75,10 +75,20 @@ function getAnimoFolder() {
 function getAnimoMovementClass(folder) {
     const flyers = ['bee', 'bird', 'butterfly', 'owl'];
     const hoppers = ['frog', 'rabbit'];
-    if (flyers.includes(folder)) return 'animo-fly';
-    if (hoppers.includes(folder)) return 'animo-hop';
+    if (flyers.includes(folder)) {
+        // Special: Baby butterfly is a caterpillar (worm), it shouldn't fly
+        if (folder === 'butterfly' && animoStage === 1) return 'animo-sway';
+        return 'animo-fly';
+    }
+    if (hoppers.includes(folder)) {
+        // Special: Baby frog is a tadpole, it shouldn't hop
+        if (folder === 'frog' && animoStage === 1) return 'animo-sway';
+        return 'animo-hop';
+    }
     return 'animo-sway';
-}let animoStage = 1; 
+}
+
+let animoStage = 1; 
 let currentLine = "";
 let correctEmotionId = "";
 let currentCopingId = ""; // Track the correct action ID

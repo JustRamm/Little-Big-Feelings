@@ -28,16 +28,36 @@
     <!-- Heavy Canopy Shadow -->
     <rect width="1000" height="800" fill="#000" opacity="0.1" />
 
+    <style>
+        .sun-ray { animation: sun-drift 8s infinite alternate ease-in-out; }
+        @keyframes sun-drift {
+            from { transform: translateX(-20px); opacity: 0.1; }
+            to { transform: translateX(20px); opacity: 0.3; }
+        }
+        .mist-float { animation: mist 12s infinite linear alternate; }
+        @keyframes mist {
+            from { transform: translateX(-40px); opacity: 0.03; }
+            to { transform: translateX(40px); opacity: 0.07; }
+        }
+        .fern-sway { animation: sway 6s infinite ease-in-out; transform-origin: center bottom; }
+        @keyframes sway {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+    </style>
+
     <!-- Ferns/Leafy ground plants -->
-    <g fill="#2E7D32" opacity="0.8">
+    <g class="fern-sway" fill="#2E7D32" opacity="0.8">
         <path d="M100 950 Q150 900 200 950 T300 980" />
         <path d="M800 920 Q850 870 900 920 T1000 950" />
         <path d="M400 980 Q450 930 500 980 T600 990" />
     </g>
 
     <!-- Sunlight Rays (Dappled Light) -->
-    <polygon points="100,-100 300,-150 700,1000 500,1050" fill="url(#sun-ray)" />
-    <polygon points="400,-100 500,-120 900,1000 800,1050" fill="url(#sun-ray)" />
+    <g class="sun-ray">
+        <polygon points="100,-100 300,-150 700,1000 500,1050" fill="url(#sun-ray)" />
+        <polygon points="400,-100 500,-120 900,1000 800,1050" fill="url(#sun-ray)" />
+    </g>
     
     <!-- Dappled Lightspots on floor -->
     <ellipse cx="400" cy="900" rx="60" ry="25" fill="#FFF9C4" opacity="0.08" />
@@ -45,5 +65,5 @@
     <ellipse cx="200" cy="850" rx="40" ry="15" fill="#FFF9C4" opacity="0.06" />
 
     <!-- Mist/Dampness atmosphere -->
-    <rect x="0" y="800" width="1000" height="200" fill="#E0F2F1" opacity="0.05" />
+    <rect class="mist-float" x="0" y="800" width="1000" height="200" fill="#E0F2F1" opacity="0.05" />
 </svg>
