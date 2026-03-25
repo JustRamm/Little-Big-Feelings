@@ -31,7 +31,10 @@ export function template() {
             <div class="hud-stats">
                 <div class="stat-item">
                     <span class="stat-label">Feeling</span>
-                    <span id="stat-emotion-name" class="stat-value">Anger</span>
+                    <span id="stat-emotion-wrap" class="stat-value">
+                        <img id="stat-emotion-icon" class="stat-icon" alt="">
+                        <span id="stat-emotion-name">Anger</span>
+                    </span>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-item">
@@ -128,13 +131,18 @@ function updateHUD() {
 
     // Emotion and Level label
     const emoNameEl = document.getElementById('stat-emotion-name');
+    const emoIconEl = document.getElementById('stat-emotion-icon');
     const lvlText = document.getElementById('stat-level-text');
     const lvlIcon = document.getElementById('stat-level-icon');
 
     const emoData = EMOTIONS_DATA[state.selectedEmotion] || EMOTIONS_DATA.anger;
     if (emoNameEl) {
         emoNameEl.textContent = emoData.name;
-        emoNameEl.style.color = emoData.color;
+        emoNameEl.parentElement.style.color = emoData.color;
+    }
+    if (emoIconEl) {
+        emoIconEl.src = emoData.icon;
+        emoIconEl.style.display = 'inline-block';
     }
 
     if (lvlText) lvlText.textContent = LEVELS[state.currentLevel].label;
@@ -143,7 +151,7 @@ function updateHUD() {
         const iconColor = state.currentLevel === 1 ? 'var(--green)' : state.currentLevel === 2 ? 'var(--yellow)' : 'var(--orange)';
         lvlIcon.setAttribute('data-lucide', iconName);
         lvlIcon.style.color = iconColor;
-        // Re-run lucide for just this element if needed, but navigate() handles it
+        if (window.lucide) window.lucide.createIcons();
     }
 
     // Progress bar

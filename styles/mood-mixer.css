@@ -453,19 +453,21 @@
     }
 
     .lab-main-area {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "F"
-            "L"
-            "R"
-            "C";
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         gap: 1.5rem;
         padding: 0 0.5rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     .side-left, .side-right { 
-        justify-self: center; 
-        width: 100%;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .lab-flask-area {
@@ -500,10 +502,13 @@
         font-size: 1.8rem;
     }
 
-    /* Transformation to 4 columns, 2 rows as requested */
+    /* Transformation to 4 columns, 2 rows */
     .choice-grid-2x4 {
+        display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 0.6rem;
+        gap: 0.8rem;
+        margin: 0 auto;
+        width: auto;
     }
 
     .lab-side-choices .choice-bubble {
@@ -524,13 +529,15 @@
 
     .btn-primary#btn-do-fusion {
         width: 100%;
-        padding: 1rem;
-        font-size: 1.1rem;
+        max-width: 320px;
+        padding: 0.8rem;
+        font-size: 1rem;
     }
 
     .mixer-discovery-grid-small {
         margin-top: 1rem;
         padding: 0 0.5rem;
+        width: 100%;
     }
 
     .mixer-discovery-grid {

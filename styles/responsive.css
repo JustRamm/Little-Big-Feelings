@@ -73,24 +73,34 @@
         flex-direction: row;
         justify-content: space-between;
         padding: 0.4rem 0.8rem;
-        border-radius: 15px;
+        border-radius: 20px;
         margin: 0.2rem auto;
         gap: 0.4rem;
         width: 98%;
     }
 
-    .hud-stats { gap: 0.5rem; flex-wrap: nowrap; }
-    .stat-item { min-width: 0; flex: 1; }
-    .stat-label { font-size: 0.5rem; }
-    .stat-value { font-size: 0.8rem; }
+    .hud-stats { gap: 0.3rem; flex: 1; justify-content: space-around; }
+    .stat-item { min-width: 0; flex: 0 1 auto; gap: 0; }
+    .stat-label { display: none; } /* Remove labels to save space */
+    .stat-value { font-size: 0.85rem; gap: 4px; }
     .stat-divider { display: none; }
     
+    #stat-level-text, #stat-emotion-name { display: none; } 
+    /* Keep the status icons but hide the text */
+    #stat-level-wrap, #stat-emotion-wrap { width: auto; min-width: 0; }
+    
     .hud-right-actions { order: 0; width: auto; justify-content: flex-end; gap: 0.3rem; }
-    .btn-icon { width: 36px; height: 36px; font-size: 1rem; }
-    .exit-btn { padding: 0 0.5rem; height: 32px; font-size: 0.7rem; }
+    .btn-icon { width: 34px; height: 34px; font-size: 0.9rem; position: relative; }
+    .btn-badge { width: 14px; height: 14px; font-size: 0.55rem; right: -2px; top: -2px; }
+    .exit-btn { padding: 0 0.4rem; min-width: 36px; height: 34px; justify-content: center; }
+    .btn-text-label { display: none; } /* Hide "EXIT" text */
+    
+    .chance-counter { font-size: 0.9rem !important; }
+    .heart-indicator { width: 16px; height: 16px; }
+    .stat-icon { width: 20px; height: 20px; }
     
     .game-board-container {
-        max-height: calc(100dvh - 140px);
+        max-height: calc(100dvh - 120px);
         padding: 0.2rem;
     }
     

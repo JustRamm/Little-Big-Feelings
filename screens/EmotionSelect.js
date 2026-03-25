@@ -4,7 +4,6 @@
 import { state } from '../gameState.js';
 import { sounds } from '../utils/sounds.js';
 import { EMOTIONS_DATA } from '../gameData.js';
-import { speakText } from '../utils/accessibility.js';
 
 /**
  * Custom SVG Illustrations for each emotion
@@ -106,8 +105,6 @@ export function init({ navigate }) {
 
         btn.addEventListener('click', () => {
             sounds.click();
-            const emo = EMOTIONS_DATA[btn.dataset.emotion];
-            if (emo && state.speechEnabled) speakText(emo.name);
             state.selectedEmotion = btn.dataset.emotion;
             navigate('levelSelect');
         });

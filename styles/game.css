@@ -67,13 +67,24 @@
 }
 
 .stat-value {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: var(--text);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
+}
+
+.stat-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+#stat-level-icon {
+    width: 22px;
+    height: 22px;
 }
 
 .heart-indicator {
