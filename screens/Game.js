@@ -108,6 +108,19 @@ export function template() {
             </div>
         </div>
 
+        <!-- Game Over Overlay -->
+        <div id="overlay-game-over" class="overlay">
+            <div class="overlay-card game-over-card">
+                <div class="game-over-emoji">💔</div>
+                <h3>Oh No! Game Over</h3>
+                <p>You used all your chances! Don't worry — every mistake is a chance to learn!</p>
+                <div class="overlay-actions">
+                    <button id="btn-gameover-retry" class="btn-primary">Try Again 🔄</button>
+                    <button id="btn-gameover-level" class="btn-secondary">Choose Level</button>
+                </div>
+            </div>
+        </div>
+
     </section>`;
 }
 
@@ -338,7 +351,16 @@ function _handleNoMatch(c1, c2) {
         c2.el.classList.remove('shake', 'flipped');
         state.flippedCards = [];
         state.isLocked = false;
-    }, 1500); 
+
+        // Check game over AFTER cards flip back
+        if (state.mistakes >= state.maxMistakes) {
+            state.isLocked = true;
+            setTimeout(() => {
+                const overlay = document.getElementById('overlay-game-over');
+                if (overlay) overlay.classList.add('active');
+            }, 400);
+        }
+    }, 1500);
 }
 
 // ── Hint ─────────────────────────────────────────────────────
@@ -398,8 +420,9 @@ function _peekAll() {
     }, cfg.peekDuration);
 }
 
-// ── Victory callback (injected by main.js) ────────────────────
+// ── Victory / GameOver callbacks (injected by main.js) ───────
 let _onVictory = () => { };
+let _onGameOver = () => { };
 
 // ── Public API ────────────────────────────────────────────────
 
@@ -463,10 +486,11 @@ export function startGame() {
 }
 
 /**
- * @param {{ navigate: (screen: string) => void, onVictory: () => void }} deps
+ * @param {{ navigate: (screen: string) => void, onVictory: () => void, onGameOver: () => void }} deps
  */
-export function init({ navigate, onVictory }) {
+export function init({ navigate, onVictory, onGameOver }) {
     _onVictory = onVictory;
+    _onGameOver = onGameOver ?? (() => {});
 
     const exitBtn = document.getElementById('btn-game-exit');
     const exitOverlay = document.getElementById('overlay-exit');
@@ -499,8 +523,33 @@ export function init({ navigate, onVictory }) {
 
     document.getElementById('btn-reset').addEventListener('click', () => {
         sounds.click();
+        // Close game over overlay if open
+        const goOverlay = document.getElementById('overlay-game-over');
+        if (goOverlay) goOverlay.classList.remove('active');
         startGame();
     });
+
+    // Game Over overlay buttons
+    const gameOverOverlay = document.getElementById('overlay-game-over');
+    const retryBtn = document.getElementById('btn-gameover-retry');
+    const chooseLevelBtn = document.getElementById('btn-gameover-level');
+
+    if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+            sounds.click();
+            if (gameOverOverlay) gameOverOverlay.classList.remove('active');
+            state.isLocked = false;
+            startGame();
+        });
+    }
+    if (chooseLevelBtn) {
+        chooseLevelBtn.addEventListener('click', () => {
+            sounds.click();
+            if (gameOverOverlay) gameOverOverlay.classList.remove('active');
+            state.isLocked = false;
+            navigate('levelSelect');
+        });
+    }
 
     document.getElementById('btn-hint').addEventListener('click', _giveHint);
     document.getElementById('btn-peek').addEventListener('click', _peekAll);

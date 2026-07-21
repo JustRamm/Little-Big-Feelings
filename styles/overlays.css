@@ -22,6 +22,43 @@
     opacity: 1;
 }
 
+/* Game Over Overlay */
+.game-over-card {
+    border-color: var(--pink);
+    background: linear-gradient(160deg, #FFF9E6 0%, #FFF0F5 100%);
+}
+
+.game-over-emoji {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin-bottom: 0.5rem;
+    animation: bounce-float 2s ease-in-out infinite;
+}
+
+.game-over-card h3 {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--pink-dark);
+    margin-bottom: 0.6rem;
+}
+
+.game-over-card p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--text);
+    opacity: 0.85;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+}
+
+.game-over-card .overlay-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+}
+
+.game-over-card .overlay-actions button {
+    width: 100%;
+}
+
 /* Match Overlay */
 .match-badge {
     display: inline-block;
