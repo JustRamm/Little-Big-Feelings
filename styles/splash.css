@@ -4,8 +4,8 @@
     background: radial-gradient(circle at 50% 50%, #FFF9E6 0%, #FFF0F5 50%, #F0F4FF 100%);
     position: relative;
     transition: background 1s ease;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
 }
 
 .splash-content {
@@ -32,7 +32,7 @@
 .floating-shape {
     position: absolute;
     color: rgba(0, 0, 0, 0.08);
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     filter: blur(1px);
     animation: float-around var(--duration, 15s) ease-in-out infinite alternate;
 }
@@ -120,17 +120,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .logo-burst {
     position: absolute;
     width: clamp(250px, 70vw, 400px);
     height: clamp(250px, 70vw, 400px);
-    background: radial-gradient(circle, 
-        rgba(255, 128, 171, 0.4) 0%, 
-        rgba(129, 212, 250, 0.3) 40%, 
-        transparent 70%);
+    background: radial-gradient(circle,
+            rgba(255, 128, 171, 0.4) 0%,
+            rgba(129, 212, 250, 0.3) 40%,
+            transparent 70%);
     border-radius: 50%;
     animation: pulse-glow 4s ease-in-out infinite, rotate-glow 20s linear infinite;
     z-index: -1;
@@ -138,8 +138,13 @@
 }
 
 @keyframes rotate-glow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .logo-container {
@@ -295,9 +300,9 @@
 
     .game-title {
         font-size: clamp(3.8rem, 15vw, 5.5rem);
-        text-shadow: 
+        text-shadow:
             3px 3px 0px var(--white),
-            6px 6px 0px rgba(0,0,0,0.05);
+            6px 6px 0px rgba(0, 0, 0, 0.05);
     }
 
     .logo-burst {
@@ -317,4 +322,3 @@
         background: rgba(255, 255, 255, 0.7);
     }
 }
-
